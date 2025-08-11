@@ -1,0 +1,732 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Star,
+  MapPin,
+  Clock,
+  Phone,
+  Mail,
+  Share2,
+  Heart,
+  ChevronLeft,
+  ChevronRight,
+  Wifi,
+  Car,
+  Coffee,
+  ShowerHead,
+  AirVent,
+  Camera,
+  Shield,
+  Users,
+  CheckCircle,
+  X,
+  Calendar,
+} from "lucide-react";
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import Navbar from "../home/Navbar";
+
+const venue = {
+  id: 1,
+  name: "SBR Badminton",
+  location: "Satellite, Bodakdev Village",
+  fullAddress:
+    "Plot No. 123, Satellite Road, Bodakdev Village, Ahmedabad, Gujarat 380015",
+  rating: 4.5,
+  reviews: 124,
+  price: 450,
+  operatingHours: "7:00 AM - 11:00 PM",
+  phone: "+91 98765 43210",
+  email: "info@sbrbadminton.com",
+  images: [
+    "/assets/modern-badminton-court.png",
+    "/assets/professional-badminton-court.png",
+    "/assets/indoor-tennis-court.png",
+    "/assets/football-turf-ground.png",
+  ],
+  sports: [
+    { name: "Badminton", icon: "🏸", courts: 6 },
+    { name: "Table Tennis", icon: "🏓", courts: 2 },
+    { name: "Squash", icon: "🎾", courts: 1 },
+  ],
+  amenities: [
+    { name: "WiFi", icon: Wifi, available: true },
+    { name: "Parking", icon: Car, available: true },
+    { name: "Cafeteria", icon: Coffee, available: true },
+    { name: "Changing Room", icon: ShowerHead, available: true },
+    { name: "Air Conditioning", icon: AirVent, available: true },
+    { name: "CCTV", icon: Camera, available: true },
+    { name: "Security", icon: Shield, available: true },
+    { name: "Equipment Rental", icon: Users, available: false },
+  ],
+  policies: [
+    "Advance booking required",
+    "Cancellation allowed up to 2 hours before",
+    "Sports shoes mandatory",
+    "Outside food not allowed",
+  ],
+  timeSlots: [
+    { time: "07:00 AM - 08:00 AM", price: 350, available: true },
+    { time: "08:00 AM - 09:00 AM", price: 400, available: true },
+    { time: "09:00 AM - 10:00 AM", price: 450, available: false },
+    { time: "10:00 AM - 11:00 AM", price: 450, available: true },
+    { time: "11:00 AM - 12:00 PM", price: 450, available: true },
+    { time: "12:00 PM - 01:00 PM", price: 400, available: true },
+    { time: "01:00 PM - 02:00 PM", price: 400, available: true },
+    { time: "02:00 PM - 03:00 PM", price: 400, available: true },
+    { time: "03:00 PM - 04:00 PM", price: 450, available: true },
+    { time: "04:00 PM - 05:00 PM", price: 500, available: false },
+    { time: "05:00 PM - 06:00 PM", price: 550, available: true },
+    { time: "06:00 PM - 07:00 PM", price: 600, available: true },
+    { time: "07:00 PM - 08:00 PM", price: 650, available: true },
+    { time: "08:00 PM - 09:00 PM", price: 650, available: false },
+    { time: "09:00 PM - 10:00 PM", price: 600, available: true },
+    { time: "10:00 PM - 11:00 PM", price: 550, available: true },
+  ],
+};
+
+const reviews = [
+  {
+    id: 1,
+    name: "Rajesh Patel",
+    rating: 5,
+    date: "2 days ago",
+    comment:
+      "Excellent facilities and well-maintained courts. The staff is very helpful and professional.",
+    verified: true,
+  },
+  {
+    id: 2,
+    name: "Priya Sharma",
+    rating: 4,
+    date: "1 week ago",
+    comment:
+      "Good venue with clean facilities. Parking can be a bit crowded during peak hours.",
+    verified: true,
+  },
+  {
+    id: 3,
+    name: "Amit Kumar",
+    rating: 5,
+    date: "2 weeks ago",
+    comment:
+      "Best badminton courts in the area. Air conditioning works great and the lighting is perfect.",
+    verified: false,
+  },
+  {
+    id: 4,
+    name: "Sneha Joshi",
+    rating: 4,
+    date: "3 weeks ago",
+    comment: "Nice place to play. Equipment rental would be a great addition.",
+    verified: true,
+  },
+];
+
+interface VenueDetailsProps {
+  id: string;
+}
+export default function VenueDetails({ id }: VenueDetailsProps) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedSport, setSelectedSport] = useState(
+    "Badminton Standard | Synthetic",
+  );
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
+  const [consecutiveHours, setConsecutiveHours] = useState(1);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % venue.images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + venue.images.length) % venue.images.length,
+    );
+  };
+
+  const toggleSlot = (time: string) => {
+    const slotIndex = venue.timeSlots.findIndex((slot) => slot.time === time);
+
+    if (selectedSlots.includes(time)) {
+      // Remove slot and any consecutive slots after it
+      setSelectedSlots((prev) => prev.filter((slot) => slot !== time));
+    } else {
+      // Add consecutive slots starting from the selected time
+      const consecutiveSlots: string[] = [];
+      for (let i = 0; i < consecutiveHours; i++) {
+        const targetSlot = venue.timeSlots[slotIndex + i];
+        if (targetSlot?.available) {
+          consecutiveSlots.push(targetSlot.time);
+        } else {
+          // If any slot in the sequence is unavailable, don't book any
+          return;
+        }
+      }
+      setSelectedSlots(consecutiveSlots);
+    }
+  };
+
+  const isSlotPartOfSelection = (time: string) => {
+    return selectedSlots.includes(time);
+  };
+
+  const canSelectConsecutiveSlots = (startIndex: number, hours: number) => {
+    for (let i = 0; i < hours; i++) {
+      const slot = venue.timeSlots[startIndex + i];
+      if (!slot?.available) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const getTotalPrice = () => {
+    return selectedSlots.reduce((total, slotTime) => {
+      const slot = venue.timeSlots.find((s) => s.time === slotTime);
+      return total + (slot?.price ?? 0);
+    }, 0);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <Navbar />
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {/* Venue Header */}
+        <div className="mb-8">
+          <div className="mb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h1 className="mb-2 text-4xl font-bold text-gray-900">
+                {venue.name}
+              </h1>
+              <div className="flex items-center space-x-4 text-gray-600">
+                <div className="flex items-center space-x-1">
+                  <MapPin className="h-5 w-5" />
+                  <span>{venue.location}</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                  <span className="font-medium">{venue.rating}</span>
+                  <span>({venue.reviews} reviews)</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 flex items-center space-x-3 lg:mt-0">
+              <Button variant="outline" size="sm">
+                <Heart className="mr-2 h-4 w-4" />
+                Save
+              </Button>
+              <Button variant="outline" size="sm">
+                <Share2 className="mr-2 h-4 w-4" />
+                Share
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {/* Image Gallery */}
+          <div className="lg:col-span-2">
+            <Card className="overflow-hidden">
+              <div className="relative h-96 bg-gray-100">
+                <Image
+                  src={venue.images[currentImageIndex] ?? "/placeholder.svg"}
+                  alt={`${venue.name} - Image ${currentImageIndex + 1}`}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/20" />
+
+                {/* Navigation Arrows */}
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="absolute top-1/2 left-4 -translate-y-1/2 transform bg-white/80 hover:bg-white"
+                  onClick={prevImage}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 transform bg-white/80 hover:bg-white"
+                  onClick={nextImage}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+
+                {/* Image Indicators */}
+                <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-2">
+                  {venue.images.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`h-2 w-2 rounded-full transition-colors ${
+                        index === currentImageIndex ? "bg-white" : "bg-white/50"
+                      }`}
+                      onClick={() => setCurrentImageIndex(index)}
+                    />
+                  ))}
+                </div>
+
+                {/* Image Counter */}
+                <div className="absolute top-4 right-4 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+                  {currentImageIndex + 1} / {venue.images.length}
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Booking Panel */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-24">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-3xl font-bold text-emerald-600">
+                      ₹{venue.price}
+                    </div>
+                    <div className="text-sm text-gray-500">per hour</div>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="bg-green-100 text-green-800"
+                  >
+                    Available Now
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Dialog open={isBookingOpen} onOpenChange={setIsBookingOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700">
+                      Book This Venue
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-h-[90vh] min-w-6xl overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-3xl">
+                        Book {venue.name}
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="mb-4 text-lg font-semibold">
+                            Select Date
+                          </h3>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full justify-start text-left font-normal",
+                                  !selectedDate && "text-muted-foreground",
+                                )}
+                              >
+                                <Calendar className="mr-2 h-4 w-4" />
+                                {selectedDate ? (
+                                  format(selectedDate, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                              <CalendarComponent
+                                mode="single"
+                                selected={selectedDate}
+                                onSelect={(date) =>
+                                  date && setSelectedDate(date)
+                                }
+                                disabled={(date) =>
+                                  date <
+                                  new Date(new Date().setHours(0, 0, 0, 0))
+                                }
+                                initialFocus
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        </div>
+
+                        <div>
+                          <h3 className="mb-4 text-lg font-semibold">
+                            Select Sport
+                          </h3>
+                          <Select
+                            value={selectedSport}
+                            onValueChange={setSelectedSport}
+                          >
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Badminton Standard | Synthetic">
+                                Badminton Standard | Synthetic
+                              </SelectItem>
+                              <SelectItem value="Badminton Premium | Wooden">
+                                Badminton Premium | Wooden
+                              </SelectItem>
+                              <SelectItem value="Table Tennis">
+                                Table Tennis
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div>
+                          <h3 className="mb-4 text-lg font-semibold">
+                            Duration (Hours)
+                          </h3>
+                          <Select
+                            value={consecutiveHours.toString()}
+                            onValueChange={(value) => {
+                              setConsecutiveHours(parseInt(value));
+                              setSelectedSlots([]); // Clear selection when duration changes
+                            }}
+                          >
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="1">1 Hour</SelectItem>
+                              <SelectItem value="2">2 Hours</SelectItem>
+                              <SelectItem value="3">3 Hours</SelectItem>
+                              <SelectItem value="4">4 Hours</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="lg:col-span-2">
+                        <h3 className="mb-4 text-lg font-semibold">
+                          Available Time Slots
+                          {consecutiveHours > 1 && (
+                            <span className="ml-2 text-sm font-normal text-gray-600">
+                              (Select start time for {consecutiveHours}{" "}
+                              consecutive hours)
+                            </span>
+                          )}
+                        </h3>
+                        <div className="grid max-h-80 grid-cols-3 gap-3 overflow-y-auto pr-2 md:grid-cols-4">
+                          {venue.timeSlots.map((slot, index) => {
+                            const canSelect = canSelectConsecutiveSlots(
+                              index,
+                              consecutiveHours,
+                            );
+                            const isSelected = isSlotPartOfSelection(slot.time);
+
+                            return (
+                              <Button
+                                key={slot.time}
+                                variant={isSelected ? "default" : "outline"}
+                                size="sm"
+                                disabled={!slot.available || !canSelect}
+                                onClick={() => toggleSlot(slot.time)}
+                                className={`flex h-auto flex-col p-3 text-xs ${
+                                  isSelected
+                                    ? "bg-emerald-600 hover:bg-emerald-700"
+                                    : ""
+                                } ${!canSelect && slot.available ? "opacity-50" : ""}`}
+                              >
+                                <span className="text-center">{slot.time}</span>
+                                <span className="font-bold">₹{slot.price}</span>
+                                {!canSelect && slot.available && (
+                                  <span className="text-xs text-red-500">
+                                    Not enough consecutive slots
+                                  </span>
+                                )}
+                              </Button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {selectedSlots.length > 0 && (
+                      <div className="mt-8 rounded-lg bg-gray-50 p-6">
+                        <div className="mb-4 flex items-center justify-between">
+                          <span className="text-lg font-semibold">
+                            Booking Summary:
+                          </span>
+                          <span className="text-3xl font-bold text-emerald-600">
+                            ₹{getTotalPrice()}
+                          </span>
+                        </div>
+                        <div className="mb-4 space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span className="text-gray-600">Date:</span>
+                            <span className="font-medium">
+                              {format(selectedDate, "PPP")}
+                            </span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-gray-600">Sport:</span>
+                            <span className="font-medium">{selectedSport}</span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-gray-600">Duration:</span>
+                            <span className="font-medium">
+                              {consecutiveHours} hour
+                              {consecutiveHours > 1 ? "s" : ""}
+                            </span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-gray-600">Time Slots:</span>
+                            <span className="font-medium">
+                              {selectedSlots.join(", ")}
+                            </span>
+                          </div>
+                        </div>
+                        <Button className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700">
+                          Confirm Booking - ₹{getTotalPrice()}
+                        </Button>
+                      </div>
+                    )}
+                  </DialogContent>
+                </Dialog>
+
+                <Separator />
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">
+                      Operating Hours
+                    </span>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="h-4 w-4 text-gray-400" />
+                      <span className="text-sm font-medium">
+                        {venue.operatingHours}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <span className="text-sm text-gray-600">Address</span>
+                    <p className="text-sm">{venue.fullAddress}</p>
+                  </div>
+
+                  <div className="flex items-center space-x-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 bg-transparent"
+                    >
+                      <Phone className="mr-2 h-4 w-4" />
+                      Call
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 bg-transparent"
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email
+                    </Button>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="flex h-32 items-center justify-center rounded-lg bg-gray-100">
+                  <span className="text-gray-500">Location Map</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Content Tabs */}
+        <Tabs defaultValue="overview" className="space-y-8">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="amenities">Amenities</TabsTrigger>
+            <TabsTrigger value="policies">Policies</TabsTrigger>
+            <TabsTrigger value="reviews">Reviews</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview" className="space-y-8">
+            {/* Sports Available */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Sports Available</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  {venue.sports.map((sport) => (
+                    <div
+                      key={sport.name}
+                      className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4"
+                    >
+                      <div className="text-3xl">{sport.icon}</div>
+                      <div>
+                        <div className="font-semibold">{sport.name}</div>
+                        <div className="text-sm text-gray-600">
+                          {sport.courts} courts available
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="amenities" className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Amenities</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  {venue.amenities.map((amenity) => (
+                    <div
+                      key={amenity.name}
+                      className={`flex items-center space-x-3 rounded-lg p-3 ${
+                        amenity.available
+                          ? "bg-green-50 text-green-800"
+                          : "bg-gray-50 text-gray-400"
+                      }`}
+                    >
+                      <amenity.icon className="h-5 w-5" />
+                      <span className="text-sm font-medium">
+                        {amenity.name}
+                      </span>
+                      {amenity.available ? (
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <X className="h-4 w-4 text-gray-400" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="policies" className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Venue Policies</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {venue.policies.map((policy, index) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-600" />
+                      <span className="text-gray-700">{policy}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="reviews" className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Player Reviews & Ratings</span>
+                  <div className="flex items-center space-x-2">
+                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    <span className="font-bold">{venue.rating}</span>
+                    <span className="text-gray-500">
+                      ({venue.reviews} reviews)
+                    </span>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {reviews.map((review) => (
+                    <div
+                      key={review.id}
+                      className="border-b border-gray-100 pb-6 last:border-b-0"
+                    >
+                      <div className="mb-3 flex items-start justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
+                            <span className="font-semibold text-emerald-600">
+                              {review.name.charAt(0)}
+                            </span>
+                          </div>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <span className="font-semibold">
+                                {review.name}
+                              </span>
+                              {review.verified && (
+                                <Badge
+                                  variant="secondary"
+                                  className="bg-blue-100 text-xs text-blue-800"
+                                >
+                                  Verified
+                                </Badge>
+                              )}
+                            </div>
+                            <div className="mt-1 flex items-center space-x-2">
+                              <div className="flex">
+                                {[...Array<number>(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className={`h-4 w-4 ${
+                                      i < review.rating
+                                        ? "fill-yellow-400 text-yellow-400"
+                                        : "text-gray-300"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                              <span className="text-sm text-gray-500">
+                                {review.date}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="leading-relaxed text-gray-700">
+                        {review.comment}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 text-center">
+                  <Button variant="outline">Load More Reviews</Button>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+}
