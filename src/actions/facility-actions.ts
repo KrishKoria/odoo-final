@@ -41,7 +41,10 @@ export async function getUserFacilities() {
       select: { id: true, role: true },
     });
 
-    if (!playerProfile || !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)) {
+    if (
+      !playerProfile ||
+      !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)
+    ) {
       throw new Error("Insufficient permissions");
     }
 
@@ -73,7 +76,7 @@ export async function getUserFacilities() {
       },
     });
 
-    return facilities.map(facility => ({
+    return facilities.map((facility) => ({
       id: facility.id,
       name: facility.name,
       description: facility.description,
@@ -116,7 +119,10 @@ export async function getFacilityById(facilityId: string) {
       select: { id: true, role: true },
     });
 
-    if (!playerProfile || !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)) {
+    if (
+      !playerProfile ||
+      !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)
+    ) {
       throw new Error("Insufficient permissions");
     }
 
@@ -183,7 +189,7 @@ export async function getFacilityById(facilityId: string) {
       status: facility.status,
       rating: facility.rating,
       reviewCount: facility.reviewCount,
-      courts: facility.courts.map(court => ({
+      courts: facility.courts.map((court) => ({
         id: court.id,
         name: court.name,
         sportType: court.sportType,
@@ -193,7 +199,7 @@ export async function getFacilityById(facilityId: string) {
         isActive: court.isActive,
         activeBookings: court._count.bookings,
       })),
-      reviews: facility.reviews.map(review => ({
+      reviews: facility.reviews.map((review) => ({
         id: review.id,
         rating: review.rating,
         comment: review.comment,
@@ -227,7 +233,10 @@ export async function createFacility(data: CreateFacilityData) {
       select: { id: true, role: true },
     });
 
-    if (!playerProfile || !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)) {
+    if (
+      !playerProfile ||
+      !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)
+    ) {
       throw new Error("Insufficient permissions");
     }
 
@@ -255,7 +264,7 @@ export async function createFacility(data: CreateFacilityData) {
     });
 
     revalidatePath("/dashboard/facilities");
-    
+
     return {
       id: facility.id,
       name: facility.name,
@@ -285,7 +294,10 @@ export async function updateFacility(data: UpdateFacilityData) {
       select: { id: true, role: true },
     });
 
-    if (!playerProfile || !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)) {
+    if (
+      !playerProfile ||
+      !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)
+    ) {
       throw new Error("Insufficient permissions");
     }
 
@@ -325,7 +337,7 @@ export async function updateFacility(data: UpdateFacilityData) {
 
     revalidatePath("/dashboard/facilities");
     revalidatePath(`/dashboard/facilities/${data.id}`);
-    
+
     return {
       id: facility.id,
       name: facility.name,
@@ -355,7 +367,10 @@ export async function deleteFacility(facilityId: string) {
       select: { id: true, role: true },
     });
 
-    if (!playerProfile || !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)) {
+    if (
+      !playerProfile ||
+      !["FACILITY_OWNER", "ADMIN"].includes(playerProfile.role)
+    ) {
       throw new Error("Insufficient permissions");
     }
 
@@ -395,7 +410,7 @@ export async function deleteFacility(facilityId: string) {
     });
 
     revalidatePath("/dashboard/facilities");
-    
+
     return { success: true };
   } catch (error) {
     console.error("Error deleting facility:", error);

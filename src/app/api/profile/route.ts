@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       playerProfile = await prisma.playerProfile.findUnique({
         where: { userId: session.user.id },
-        select: { 
+        select: {
           id: true,
           role: true,
           phoneNumber: true,
@@ -56,11 +56,11 @@ export async function GET(request: NextRequest) {
       const now = new Date();
       if (playerProfile.bannedUntil && playerProfile.bannedUntil > now) {
         return NextResponse.json(
-          { 
-            error: "Account suspended", 
-            bannedUntil: playerProfile.bannedUntil.toISOString() 
+          {
+            error: "Account suspended",
+            bannedUntil: playerProfile.bannedUntil.toISOString(),
           },
-          { status: 403 }
+          { status: 403 },
         );
       }
     }

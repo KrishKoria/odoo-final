@@ -15,10 +15,19 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CalendarDays, TrendingUp, DollarSign } from "lucide-react";
-import { getBookingTrends, getPeakHoursData } from "@/actions/dashboard-actions";
+import {
+  getBookingTrends,
+  getPeakHoursData,
+} from "@/actions/dashboard-actions";
 
 interface BookingTrend {
   date: string;
@@ -54,17 +63,19 @@ export function DashboardCharts({ facilityId }: DashboardChartsProps) {
       try {
         setLoading(true);
         setError(null);
-        
+
         const [trendsData, peakData] = await Promise.all([
           getBookingTrends(facilityId, timeframe),
           getPeakHoursData(facilityId),
         ]);
-        
+
         setBookingTrends(trendsData);
         setPeakHours(peakData);
       } catch (err) {
         console.error("Failed to fetch chart data:", err);
-        setError(err instanceof Error ? err.message : "Failed to fetch chart data");
+        setError(
+          err instanceof Error ? err.message : "Failed to fetch chart data",
+        );
       } finally {
         setLoading(false);
       }
@@ -88,10 +99,10 @@ export function DashboardCharts({ facilityId }: DashboardChartsProps) {
         {Array.from({ length: 3 }).map((_, i) => (
           <Card key={i} className="animate-pulse">
             <CardHeader>
-              <div className="h-4 w-32 bg-gray-200 rounded"></div>
+              <div className="h-4 w-32 rounded bg-gray-200"></div>
             </CardHeader>
             <CardContent>
-              <div className="h-64 bg-gray-100 rounded"></div>
+              <div className="h-64 rounded bg-gray-100"></div>
             </CardContent>
           </Card>
         ))}
@@ -105,7 +116,7 @@ export function DashboardCharts({ facilityId }: DashboardChartsProps) {
         <CardContent className="pt-6">
           <div className="text-center text-red-600">
             <p className="font-medium">Error loading chart data</p>
-            <p className="text-sm text-gray-500 mt-1">{error}</p>
+            <p className="mt-1 text-sm text-gray-500">{error}</p>
           </div>
         </CardContent>
       </Card>
@@ -150,18 +161,23 @@ export function DashboardCharts({ facilityId }: DashboardChartsProps) {
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={bookingTrends}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="date" 
+                <XAxis
+                  dataKey="date"
                   tickFormatter={formatDate}
                   tick={{ fontSize: 12 }}
                 />
                 <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip 
-                  labelFormatter={(value) => `Date: ${formatDate(value as string)}`}
+                <Tooltip
+                  labelFormatter={(value) =>
+                    `Date: ${formatDate(value as string)}`
+                  }
                   formatter={(value: number, name: string) => [
                     name === "revenue" ? formatCurrency(value) : value,
-                    name === "bookings" ? "Bookings" : 
-                    name === "revenue" ? "Revenue" : "Cancelled"
+                    name === "bookings"
+                      ? "Bookings"
+                      : name === "revenue"
+                        ? "Revenue"
+                        : "Cancelled",
                   ]}
                 />
                 <Legend />
@@ -206,18 +222,23 @@ export function DashboardCharts({ facilityId }: DashboardChartsProps) {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={bookingTrends}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis 
-                    dataKey="date" 
+                  <XAxis
+                    dataKey="date"
                     tickFormatter={formatDate}
                     tick={{ fontSize: 12 }}
                   />
-                  <YAxis 
+                  <YAxis
                     tickFormatter={formatCurrency}
                     tick={{ fontSize: 12 }}
                   />
-                  <Tooltip 
-                    labelFormatter={(value) => `Date: ${formatDate(value as string)}`}
-                    formatter={(value: number) => [formatCurrency(value), "Revenue"]}
+                  <Tooltip
+                    labelFormatter={(value) =>
+                      `Date: ${formatDate(value as string)}`
+                    }
+                    formatter={(value: number) => [
+                      formatCurrency(value),
+                      "Revenue",
+                    ]}
                   />
                   <Line
                     type="monotone"
@@ -247,18 +268,14 @@ export function DashboardCharts({ facilityId }: DashboardChartsProps) {
           <CardContent>
             <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart 
+                <BarChart
                   data={peakHours}
                   margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis 
-                    dataKey="hour" 
-                    tick={{ fontSize: 10 }}
-                    interval={1}
-                  />
+                  <XAxis dataKey="hour" tick={{ fontSize: 10 }} interval={1} />
                   <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip 
+                  <Tooltip
                     formatter={(value: number, name: string) => [value, name]}
                     labelFormatter={(value) => `Time: ${value}`}
                   />

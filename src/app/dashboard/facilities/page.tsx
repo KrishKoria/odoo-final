@@ -28,7 +28,7 @@ export default async function FacilitiesPage() {
         </div>
         <Button asChild>
           <Link href="/dashboard/facilities/new">
-            <Plus className="h-4 w-4 mr-2" />
+            <Plus className="mr-2 h-4 w-4" />
             Add Facility
           </Link>
         </Button>

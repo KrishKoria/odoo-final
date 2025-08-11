@@ -7,7 +7,10 @@ export default function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <SessionGuard requiredRoles={["FACILITY_OWNER", "ADMIN"]} requireEmailVerification={true}>
+    <SessionGuard
+      requiredRoles={["FACILITY_OWNER", "ADMIN"]}
+      requireEmailVerification={true}
+    >
       <SidebarProvider
         style={
           {

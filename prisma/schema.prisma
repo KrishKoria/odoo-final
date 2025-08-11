@@ -15,7 +15,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String
   email         String
   emailVerified Boolean
@@ -24,6 +24,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   playerProfile PlayerProfile?
+  Account       Account[]
 
   @@unique([email])
   @@map("user")
@@ -42,6 +43,25 @@ model Session {
 
   @@unique([token])
   @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
 }
 
 model Verification {
@@ -106,56 +126,56 @@ enum VenueType {
 }
 
 model PlayerProfile {
-  id           String    @id @default(cuid())
-  userId       String    @unique
-  role         UserRole  @default(USER)
-  phoneNumber  String?
-  avatar       String?
-  isActive     Boolean   @default(true)
-  isBanned     Boolean   @default(false)
-  bannedUntil  DateTime?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  role        UserRole  @default(USER)
+  phoneNumber String?
+  avatar      String?
+  isActive    Boolean   @default(true)
+  isBanned    Boolean   @default(false)
+  bannedUntil DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
   // Relations
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bookings     Booking[]
-  ownedFacilities Facility[] @relation("FacilityOwner")
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookings        Booking[]
+  ownedFacilities Facility[]        @relation("FacilityOwner")
   waitlistEntries WaitlistEntry[]
-  notifications NotificationLog[]
+  notifications   NotificationLog[]
   facilityReviews FacilityReview[]
-  
+
   @@map("player_profile")
 }
 
 model Facility {
-  id          String         @id @default(cuid())
-  name        String
-  description String?
-  address     String
-  latitude    Float?
-  longitude   Float?
-  amenities   String[]
-  photos      String[]
-  phone       String?
-  email       String?
-  policies    String[]
-  venueType   VenueType      @default(INDOOR)
-  rating      Float?
-  reviewCount Int            @default(0)
-  ownerId     String
-  status      FacilityStatus @default(PENDING)
-  approvedAt  DateTime?
-  approvedBy  String?
+  id              String         @id @default(cuid())
+  name            String
+  description     String?
+  address         String
+  latitude        Float?
+  longitude       Float?
+  amenities       String[]
+  photos          String[]
+  phone           String?
+  email           String?
+  policies        String[]
+  venueType       VenueType      @default(INDOOR)
+  rating          Float?
+  reviewCount     Int            @default(0)
+  ownerId         String
+  status          FacilityStatus @default(PENDING)
+  approvedAt      DateTime?
+  approvedBy      String?
   rejectionReason String?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
   // Relations
-  owner       PlayerProfile  @relation("FacilityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  courts      Court[]
-  reviews     FacilityReview[]
-  
+  owner   PlayerProfile    @relation("FacilityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  courts  Court[]
+  reviews FacilityReview[]
+
   @@index([status])
   @@index([ownerId])
   @@index([rating])
@@ -163,18 +183,18 @@ model Facility {
 }
 
 model FacilityReview {
-  id          String   @id @default(cuid())
-  facilityId  String
-  playerId    String
-  rating      Int      // 1-5 stars
-  comment     String?
-  verified    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  facilityId String
+  playerId   String
+  rating     Int // 1-5 stars
+  comment    String?
+  verified   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   // Relations
-  facility    Facility      @relation(fields: [facilityId], references: [id], onDelete: Cascade)
-  player      PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  facility Facility      @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
   @@unique([facilityId, playerId]) // One review per player per facility
   @@index([facilityId])
@@ -184,44 +204,44 @@ model FacilityReview {
 }
 
 model Court {
-  id           String    @id @default(cuid())
-  name         String
-  facilityId   String
-  sportType    SportType
-  pricePerHour Float
-  operatingStartHour Int  // 0-23 (24h format)
-  operatingEndHour   Int  // 0-23 (24h format)
-  isActive     Boolean   @default(true)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  
+  id                 String    @id @default(cuid())
+  name               String
+  facilityId         String
+  sportType          SportType
+  pricePerHour       Float
+  operatingStartHour Int // 0-23 (24h format)
+  operatingEndHour   Int // 0-23 (24h format)
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
   // Relations
-  facility     Facility   @relation(fields: [facilityId], references: [id], onDelete: Cascade)
-  timeSlots    TimeSlot[]
-  bookings     Booking[]
+  facility       Facility         @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  timeSlots      TimeSlot[]
+  bookings       Booking[]
   occupancyStats OccupancyStats[]
-  
+
   @@index([facilityId])
   @@index([sportType])
   @@map("court")
 }
 
 model TimeSlot {
-  id             String    @id @default(cuid())
-  courtId        String
-  startTime      DateTime
-  endTime        DateTime
-  isMaintenanceBlocked Boolean @default(false)
-  maintenanceReason String?
-  version        Int       @default(0) // For optimistic locking
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  
+  id                   String   @id @default(cuid())
+  courtId              String
+  startTime            DateTime
+  endTime              DateTime
+  isMaintenanceBlocked Boolean  @default(false)
+  maintenanceReason    String?
+  version              Int      @default(0) // For optimistic locking
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
   // Relations
-  court          Court     @relation(fields: [courtId], references: [id], onDelete: Cascade)
-  booking        Booking?
+  court           Court           @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  booking         Booking?
   waitlistEntries WaitlistEntry[]
-  
+
   @@unique([courtId, startTime])
   @@index([startTime])
   @@index([courtId])
@@ -229,26 +249,26 @@ model TimeSlot {
 }
 
 model Booking {
-  id             String        @id @default(cuid())
-  timeSlotId     String        @unique
-  courtId        String
-  playerId       String
-  totalPrice     Float
-  status         BookingStatus @default(CONFIRMED)
-  paymentSimulated Boolean     @default(false)
-  bookingNotes   String?
-  cancelledAt    DateTime?
+  id                 String        @id @default(cuid())
+  timeSlotId         String        @unique
+  courtId            String
+  playerId           String
+  totalPrice         Float
+  status             BookingStatus @default(CONFIRMED)
+  paymentSimulated   Boolean       @default(false)
+  bookingNotes       String?
+  cancelledAt        DateTime?
   cancellationReason String?
-  version        Int           @default(0) // For optimistic locking
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  
+  version            Int           @default(0) // For optimistic locking
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
   // Relations
-  timeSlot       TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
-  court          Court         @relation(fields: [courtId], references: [id], onDelete: Cascade)
-  player         PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  match          Match?
-  
+  timeSlot TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  court    Court         @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  match    Match?
+
   @@index([playerId])
   @@index([courtId])
   @@index([status])
@@ -257,22 +277,22 @@ model Booking {
 }
 
 model Match {
-  id             String      @id @default(cuid())
-  bookingId      String      @unique
-  title          String?
-  description    String?
-  maxPlayers     Int         @default(4)
-  sportType      SportType
-  skillLevel     String?     // e.g., "Beginner", "Intermediate", "Advanced"
-  status         MatchStatus @default(OPEN)
-  startTime      DateTime
-  endTime        DateTime
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  
+  id          String      @id @default(cuid())
+  bookingId   String      @unique
+  title       String?
+  description String?
+  maxPlayers  Int         @default(4)
+  sportType   SportType
+  skillLevel  String? // e.g., "Beginner", "Intermediate", "Advanced"
+  status      MatchStatus @default(OPEN)
+  startTime   DateTime
+  endTime     DateTime
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
   // Relations
-  booking        Booking     @relation(fields: [bookingId], references: [id], onDelete: Cascade)
-  
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
   @@index([status])
   @@index([sportType])
   @@index([startTime])
@@ -280,20 +300,20 @@ model Match {
 }
 
 model WaitlistEntry {
-  id         String        @id @default(cuid())
+  id         String         @id @default(cuid())
   timeSlotId String
   playerId   String
-  priority   Int           @default(0) // Lower number = higher priority
+  priority   Int            @default(0) // Lower number = higher priority
   status     WaitlistStatus @default(WAITING)
   notifiedAt DateTime?
   expiresAt  DateTime
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime      @updatedAt
-  
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
   // Relations
-  timeSlot   TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
-  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  
+  timeSlot TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
   @@unique([timeSlotId, playerId])
   @@index([timeSlotId, priority])
   @@index([status])
@@ -301,32 +321,32 @@ model WaitlistEntry {
 }
 
 model OccupancyStats {
-  id         String    @id @default(cuid())
-  courtId    String
-  hourOfWeek Int       // 0-167 (24*7, represents hour of week)
-  avgOccupancy Float   @default(0.0) // 0.0 to 1.0
-  sampleCount Int      @default(0)
-  lastUpdated DateTime @default(now())
-  
+  id           String   @id @default(cuid())
+  courtId      String
+  hourOfWeek   Int // 0-167 (24*7, represents hour of week)
+  avgOccupancy Float    @default(0.0) // 0.0 to 1.0
+  sampleCount  Int      @default(0)
+  lastUpdated  DateTime @default(now())
+
   // Relations
-  court      Court     @relation(fields: [courtId], references: [id], onDelete: Cascade)
-  
+  court Court @relation(fields: [courtId], references: [id], onDelete: Cascade)
+
   @@unique([courtId, hourOfWeek])
   @@map("occupancy_stats")
 }
 
 model NotificationLog {
-  id         String    @id @default(cuid())
-  playerId   String
-  type       String    // "waitlist_promotion", "booking_reminder", etc.
-  title      String
-  message    String
-  sentAt     DateTime  @default(now())
-  readAt     DateTime?
-  
+  id       String    @id @default(cuid())
+  playerId String
+  type     String // "waitlist_promotion", "booking_reminder", etc.
+  title    String
+  message  String
+  sentAt   DateTime  @default(now())
+  readAt   DateTime?
+
   // Relations
-  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  
+  player PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
   @@index([playerId])
   @@index([sentAt])
   @@map("notification_log")

@@ -1,6 +1,12 @@
 import { DashboardKPIs } from "@/components/dashboard/dashboard-kpis";
 import { DashboardCharts } from "@/components/dashboard/dashboard-charts";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Settings, Users, Building2 } from "lucide-react";
 import Link from "next/link";
@@ -8,7 +14,6 @@ import Link from "next/link";
 export default function Page() {
   return (
     <div className="space-y-6 px-4 lg:px-6">
-      {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
@@ -19,13 +24,13 @@ export default function Page() {
         <div className="flex items-center gap-2">
           <Button asChild variant="outline">
             <Link href="/dashboard/facilities">
-              <Building2 className="h-4 w-4 mr-2" />
+              <Building2 className="mr-2 h-4 w-4" />
               Manage Facilities
             </Link>
           </Button>
           <Button asChild>
             <Link href="/dashboard/facilities/new">
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="mr-2 h-4 w-4" />
               Add Facility
             </Link>
           </Button>
@@ -66,9 +71,7 @@ export default function Page() {
               <Users className="h-5 w-5" />
               Bookings
             </CardTitle>
-            <CardDescription>
-              View and manage customer bookings
-            </CardDescription>
+            <CardDescription>View and manage customer bookings</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <Button asChild variant="outline" size="sm" className="w-full">
