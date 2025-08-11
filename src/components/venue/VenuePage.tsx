@@ -109,9 +109,13 @@ export default function VenuesPage() {
 
   // State for data and loading
   const [venues, setVenues] = useState<VenueListItem[]>([]);
+  const [totalVenues, setTotalVenues] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Pagination constants
+  const itemsPerPage = 6;
 
   // Sync price range with URL state
   useEffect(() => {
@@ -157,11 +161,13 @@ export default function VenuesPage() {
             | "price-high"
             | "name"
             | "availability",
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
         };
 
-        const fetchedVenues = await getVenues(filters);
-        setVenues(fetchedVenues);
-        void setCurrentPage(1); // Reset to first page when filters change
+        const result = await getVenues(filters);
+        setVenues(result.venues);
+        setTotalVenues(result.total);
       } catch (err) {
         console.error("Error fetching venues:", err);
         setError("Failed to load venues. Please try again.");
@@ -179,7 +185,8 @@ export default function VenuesPage() {
       maxPrice,
       minRating,
       sortBy,
-      setCurrentPage,
+      currentPage,
+      itemsPerPage,
     ],
   );
 
@@ -187,6 +194,21 @@ export default function VenuesPage() {
   useEffect(() => {
     void fetchVenues();
   }, [fetchVenues]);
+
+  // Reset to page 1 when filters change (but not pagination)
+  useEffect(() => {
+    void setCurrentPage(1);
+  }, [
+    location,
+    searchQuery,
+    selectedSport,
+    selectedVenueType,
+    minPrice,
+    maxPrice,
+    minRating,
+    sortBy,
+    setCurrentPage,
+  ]);
 
   // Refetch when filters change (with debounce for search)
   useEffect(() => {
@@ -203,17 +225,10 @@ export default function VenuesPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchVenues, searchQuery]);
 
-  // Client-side filtering is now handled by the server action
-  // We'll use the venues directly from the state
-  const sortedVenues = venues;
-
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(sortedVenues.length / itemsPerPage);
+  // Server-side pagination and filtering is handled by the backend
+  const totalPages = Math.ceil(totalVenues / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedVenues = sortedVenues.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  );
+  const paginatedVenues = venues; // Already paginated from server
 
   const FilterContent = () => (
     <div className="space-y-6">
@@ -297,9 +312,9 @@ export default function VenuesPage() {
     <ErrorBoundary fallback={VenueErrorFallback}>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         <Navbar />
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-full px-6 py-6 sm:px-8 lg:px-12">
           {/* Hero Section */}
-          <div className="mb-8 text-center">
+          <div className="mb-6 text-center">
             <h1 className="mb-2 text-4xl font-bold text-gray-900">
               Sports Venues{location ? " in " : ""}
               {location && <span className="text-emerald-600">{location}</span>}
@@ -310,7 +325,7 @@ export default function VenuesPage() {
           </div>
 
           {/* Search and Filter Bar */}
-          <div className="mb-8 rounded-xl border bg-white p-6 shadow-sm">
+          <div className="mb-6 rounded-xl border bg-white p-5 shadow-sm">
             <div className="flex flex-col gap-4 lg:flex-row">
               <div className="relative flex-1">
                 <Search className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
@@ -380,11 +395,11 @@ export default function VenuesPage() {
             </div>
           </div>
 
-          <div className="flex gap-8">
+          <div className="flex gap-5 xl:gap-6 2xl:gap-8">
             {/* Desktop Sidebar Filters */}
-            <div className="hidden w-80 lg:block">
+            <div className="hidden w-72 shrink-0 lg:block xl:w-80 2xl:w-84">
               <Card className="sticky top-4">
-                <CardContent className="p-6">
+                <CardContent className="p-5">
                   <h2 className="mb-4 flex items-center text-lg font-semibold">
                     <Filter className="mr-2 h-5 w-5" />
                     Filters
@@ -395,17 +410,17 @@ export default function VenuesPage() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               {/* Results Header */}
-              <div className="mb-6 flex items-center justify-between">
+              <div className="mb-5 flex items-center justify-between">
                 {isLoading ? (
                   <Skeleton className="h-5 w-48" />
                 ) : (
                   <div className="flex items-center gap-2">
                     <p className="text-gray-600">
                       Showing {startIndex + 1}-
-                      {Math.min(startIndex + itemsPerPage, sortedVenues.length)}{" "}
-                      of {sortedVenues.length} venues
+                      {Math.min(startIndex + itemsPerPage, totalVenues)} of{" "}
+                      {totalVenues} venues
                     </p>
                     {isRefreshing && (
                       <RefreshCw className="h-4 w-4 animate-spin text-gray-400" />
@@ -472,8 +487,8 @@ export default function VenuesPage() {
 
               {/* Loading State */}
               {isLoading && (
-                <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {Array.from({ length: 6 }).map((_, index) => (
+                <div className="mb-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                  {Array.from({ length: 8 }).map((_, index) => (
                     <Card key={index} className="overflow-hidden">
                       <Skeleton className="h-48 w-full" />
                       <CardContent className="p-4">
@@ -498,7 +513,7 @@ export default function VenuesPage() {
               )}
 
               {/* Empty State */}
-              {!isLoading && !error && sortedVenues.length === 0 && (
+              {!isLoading && !error && totalVenues === 0 && (
                 <div className="mb-8 rounded-lg border border-gray-200 bg-gray-50 p-12 text-center">
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-200">
                     <MapPin className="h-8 w-8 text-gray-400" />
@@ -539,12 +554,12 @@ export default function VenuesPage() {
               )}
 
               {/* Venue Grid */}
-              {!isLoading && !error && sortedVenues.length > 0 && (
+              {!isLoading && !error && totalVenues > 0 && (
                 <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                   {paginatedVenues.map((venue) => (
                     <Card
                       key={venue.id}
-                      className="group overflow-hidden transition-all duration-300 hover:shadow-lg"
+                      className="group overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100/50"
                     >
                       <div className="relative">
                         <Image
@@ -552,7 +567,7 @@ export default function VenuesPage() {
                           alt={venue.name}
                           width={300}
                           height={200}
-                          className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="h-44 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         <div className="absolute top-3 right-3 flex space-x-2">
                           <Button
@@ -651,7 +666,7 @@ export default function VenuesPage() {
 
               {/* Pagination */}
               {!isLoading && !error && totalPages > 1 && (
-                <div className="flex items-center justify-center space-x-2">
+                <div className="mt-8 flex items-center justify-center space-x-2">
                   <Button
                     variant="outline"
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}

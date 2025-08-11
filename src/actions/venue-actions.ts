@@ -22,7 +22,7 @@ export async function getVenues(
     limit?: number;
     offset?: number;
   },
-): Promise<VenueListItem[]> {
+): Promise<{ venues: VenueListItem[]; total: number }> {
   try {
     // Build where clause based on filters
     const whereClause: any = {
@@ -83,33 +83,8 @@ export async function getVenues(
       };
     }
 
-    // Build orderBy clause
-    let orderBy: any = { createdAt: "desc" }; // Default sort
-
-    if (filters?.sortBy) {
-      switch (filters.sortBy) {
-        case "rating":
-          orderBy = { rating: "desc" };
-          break;
-        case "price-low":
-          // This is complex as we need to sort by minimum court price
-          // For now, we'll sort by name and handle price sorting in memory
-          orderBy = { name: "asc" };
-          break;
-        case "price-high":
-          orderBy = { name: "asc" };
-          break;
-        case "name":
-          orderBy = { name: "asc" };
-          break;
-        case "availability":
-          orderBy = { rating: "desc" }; // Fallback to rating
-          break;
-      }
-    }
-
-    // Query facilities with related data
-    const facilities = await prisma.facility.findMany({
+    // First, get all facilities that match the filters (for total count and price filtering)
+    const allFacilities = await prisma.facility.findMany({
       where: whereClause,
       include: {
         courts: {
@@ -130,29 +105,26 @@ export async function getVenues(
           },
         },
       },
-      orderBy,
-      take: filters?.limit,
-      skip: filters?.offset,
     });
 
-    // Transform to venue list items
-    let venues = facilities.map(transformFacilityToVenueListItem);
+    // Transform to venue list items and apply price filters
+    let allVenues = allFacilities.map(transformFacilityToVenueListItem);
 
     // Apply price filters in memory (since we need to calculate min price from courts)
     if (filters?.minPrice !== undefined) {
-      venues = venues.filter((venue) => venue.price >= filters.minPrice);
+      allVenues = allVenues.filter((venue) => venue.price >= filters.minPrice);
     }
     if (filters?.maxPrice !== undefined) {
-      venues = venues.filter((venue) => venue.price <= filters.maxPrice);
+      allVenues = allVenues.filter((venue) => venue.price <= filters.maxPrice);
     }
 
-    // Apply price sorting in memory
+    // Apply sorting
     if (filters?.sortBy === "price-low") {
-      venues.sort((a, b) => a.price - b.price);
+      allVenues.sort((a, b) => a.price - b.price);
     } else if (filters?.sortBy === "price-high") {
-      venues.sort((a, b) => b.price - a.price);
+      allVenues.sort((a, b) => b.price - a.price);
     } else if (filters?.sortBy === "availability") {
-      venues.sort((a, b) => {
+      allVenues.sort((a, b) => {
         if (
           a.availability === "Available Now" &&
           b.availability !== "Available Now"
@@ -167,9 +139,21 @@ export async function getVenues(
         }
         return b.rating - a.rating;
       });
+    } else if (filters?.sortBy === "rating") {
+      allVenues.sort((a, b) => b.rating - a.rating);
+    } else if (filters?.sortBy === "name") {
+      allVenues.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    return venues;
+    // Get total count after filtering
+    const total = allVenues.length;
+
+    // Apply pagination
+    const offset = filters?.offset || 0;
+    const limit = filters?.limit || total;
+    const venues = allVenues.slice(offset, offset + limit);
+
+    return { venues, total };
   } catch (error) {
     console.error("Error fetching venues:", error);
     throw new Error("Failed to fetch venues");
@@ -364,22 +348,24 @@ export async function getVenuesBySport(
   sportType: SportType,
   limit?: number,
 ): Promise<VenueListItem[]> {
-  return getVenues({
+  const result = await getVenues({
     sportType,
     limit,
     sortBy: "rating",
   });
+  return result.venues;
 }
 
 /**
  * Get popular venues (helper function)
  */
 export async function getPopularVenues(limit = 10): Promise<VenueListItem[]> {
-  return getVenues({
+  const result = await getVenues({
     minRating: 4.0,
     limit,
     sortBy: "rating",
   });
+  return result.venues;
 }
 
 /**
@@ -389,11 +375,12 @@ export async function searchVenues(
   query: string,
   limit?: number,
 ): Promise<VenueListItem[]> {
-  return getVenues({
+  const result = await getVenues({
     searchQuery: query,
     limit,
     sortBy: "rating",
   });
+  return result.venues;
 }
 
 /**
