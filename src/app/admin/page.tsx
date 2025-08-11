@@ -14,14 +14,12 @@ import {
   Users,
   Building2,
   AlertTriangle,
-  Settings,
   Star,
   Flag,
 } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminPage() {
-  // Fetch all data in parallel for better performance
   const [
     stats,
     bookingActivity,
@@ -221,42 +219,6 @@ export default async function AdminPage() {
                   Approved Facilities
                 </Link>
               </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5" />
-              System Health
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-muted-foreground text-sm">
-              Monitor system performance and issues
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Database Status</span>
-                <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800">
-                  Healthy
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">API Response</span>
-                <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800">
-                  Fast
-                </span>
-              </div>
-              {stats.pendingFacilities > 5 && (
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Approval Queue</span>
-                  <span className="rounded-full bg-orange-100 px-2 py-1 text-xs text-orange-800">
-                    High Volume
-                  </span>
-                </div>
-              )}
             </div>
           </CardContent>
         </Card>

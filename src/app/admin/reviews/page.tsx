@@ -11,7 +11,7 @@ import {
 import { Shield } from "lucide-react";
 
 interface AdminReviewsDataProps {
-  searchParams?: { filter?: string };
+  searchParams: Promise<{ filter?: string }>;
 }
 
 async function AdminReviewsData({ searchParams }: AdminReviewsDataProps) {
@@ -32,8 +32,9 @@ async function AdminReviewsData({ searchParams }: AdminReviewsDataProps) {
 
   // Apply initial filter based on query params
   let initialRatingFilter = "ALL";
+  const resolvedSearchParams = await searchParams;
 
-  if (searchParams?.filter === "low-rating") {
+  if (resolvedSearchParams?.filter === "low-rating") {
     initialRatingFilter = "2";
   }
 
@@ -82,7 +83,7 @@ function LoadingReviews() {
 export default function AdminReviewsPage({
   searchParams,
 }: {
-  searchParams?: { filter?: string };
+  searchParams: Promise<{ filter?: string }>;
 }) {
   return (
     <div className="container mx-auto py-8">
