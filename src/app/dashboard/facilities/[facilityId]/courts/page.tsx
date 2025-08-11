@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Plus, MoreHorizontal, Edit, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Plus,
+  MoreHorizontal,
+  Edit,
+  Trash2,
+  Clock,
+} from "lucide-react";
 import Link from "next/link";
 import { getFacilityCourts } from "@/actions/court-actions";
 import { getFacilityById } from "@/actions/facility-actions";
@@ -127,6 +134,14 @@ export default async function CourtsPage({ params }: CourtsPageProps) {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem asChild>
                         <Link
+                          href={`/dashboard/facilities/${facilityId}/courts/${court.id}/time-slots`}
+                        >
+                          <Clock className="mr-2 h-4 w-4" />
+                          Manage Time Slots
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link
                           href={`/dashboard/facilities/${facilityId}/courts/${court.id}/edit`}
                         >
                           <Edit className="mr-2 h-4 w-4" />
@@ -171,10 +186,15 @@ export default async function CourtsPage({ params }: CourtsPageProps) {
                     <div className="font-medium">{court._count.bookings}</div>
                     <div className="text-muted-foreground">Bookings</div>
                   </div>
-                  <div className="text-center">
-                    <div className="font-medium">{court._count.timeSlots}</div>
+                  <Link
+                    href={`/dashboard/facilities/${facilityId}/courts/${court.id}/time-slots`}
+                    className="hover:bg-muted rounded-md p-2 text-center transition-colors"
+                  >
+                    <div className="font-medium text-blue-600">
+                      {court._count.timeSlots}
+                    </div>
                     <div className="text-muted-foreground">Time Slots</div>
-                  </div>
+                  </Link>
                 </div>
               </CardContent>
             </Card>

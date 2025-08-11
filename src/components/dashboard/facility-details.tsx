@@ -1,21 +1,27 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Star, 
-  Users, 
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Star,
+  Users,
   Clock,
   Activity,
   CheckCircle,
   XCircle,
   AlertCircle,
   Plus,
-  Edit
+  Edit,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -70,7 +76,10 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
       case "APPROVED":
         return { icon: CheckCircle, className: "text-green-600 bg-green-100" };
       case "PENDING":
-        return { icon: AlertCircle, className: "text-yellow-600 bg-yellow-100" };
+        return {
+          icon: AlertCircle,
+          className: "text-yellow-600 bg-yellow-100",
+        };
       case "REJECTED":
         return { icon: XCircle, className: "text-red-600 bg-red-100" };
       default:
@@ -79,7 +88,13 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
   };
 
   const formatTime = (hour: number) => {
-    return hour === 0 ? "12:00 AM" : hour < 12 ? `${hour}:00 AM` : hour === 12 ? "12:00 PM" : `${hour - 12}:00 PM`;
+    return hour === 0
+      ? "12:00 AM"
+      : hour < 12
+        ? `${hour}:00 AM`
+        : hour === 12
+          ? "12:00 PM"
+          : `${hour - 12}:00 PM`;
   };
 
   const formatDate = (dateString: string) => {
@@ -113,12 +128,12 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Courts</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <Activity className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{facility.courts.length}</div>
-            <p className="text-xs text-muted-foreground">
-              {facility.courts.filter(c => c.isActive).length} active
+            <p className="text-muted-foreground text-xs">
+              {facility.courts.filter((c) => c.isActive).length} active
             </p>
           </CardContent>
         </Card>
@@ -126,14 +141,16 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Rating</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
+            <Star className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold flex items-center gap-1">
+            <div className="flex items-center gap-1 text-2xl font-bold">
               {facility.rating ? facility.rating.toFixed(1) : "N/A"}
-              {facility.rating && <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />}
+              {facility.rating && (
+                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              )}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               {facility.reviewCount} reviews
             </p>
           </CardContent>
@@ -142,11 +159,11 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Type</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{facility.venueType}</div>
-            <p className="text-xs text-muted-foreground">Venue type</p>
+            <p className="text-muted-foreground text-xs">Venue type</p>
           </CardContent>
         </Card>
       </div>
@@ -160,14 +177,16 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
           <CardContent className="space-y-4">
             {facility.description && (
               <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Description</h4>
+                <h4 className="mb-2 text-sm font-medium text-gray-900">
+                  Description
+                </h4>
                 <p className="text-sm text-gray-600">{facility.description}</p>
               </div>
             )}
 
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
+                <MapPin className="mt-0.5 h-4 w-4 text-gray-400" />
                 <div>
                   <p className="text-sm font-medium">Address</p>
                   <p className="text-sm text-gray-600">{facility.address}</p>
@@ -198,7 +217,9 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
                 <Clock className="h-4 w-4 text-gray-400" />
                 <div>
                   <p className="text-sm font-medium">Created</p>
-                  <p className="text-sm text-gray-600">{formatDate(facility.createdAt)}</p>
+                  <p className="text-sm text-gray-600">
+                    {formatDate(facility.createdAt)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -213,10 +234,16 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
           <CardContent className="space-y-4">
             {facility.amenities.length > 0 && (
               <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Amenities</h4>
+                <h4 className="mb-2 text-sm font-medium text-gray-900">
+                  Amenities
+                </h4>
                 <div className="flex flex-wrap gap-2">
                   {facility.amenities.map((amenity) => (
-                    <Badge key={amenity} variant="secondary" className="text-xs">
+                    <Badge
+                      key={amenity}
+                      variant="secondary"
+                      className="text-xs"
+                    >
                       {amenity}
                     </Badge>
                   ))}
@@ -226,11 +253,16 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
 
             {facility.policies.length > 0 && (
               <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Policies</h4>
+                <h4 className="mb-2 text-sm font-medium text-gray-900">
+                  Policies
+                </h4>
                 <div className="space-y-1">
                   {facility.policies.map((policy, index) => (
-                    <p key={index} className="text-xs text-gray-600 flex items-start gap-2">
-                      <CheckCircle className="h-3 w-3 text-green-500 mt-0.5 flex-shrink-0" />
+                    <p
+                      key={index}
+                      className="flex items-start gap-2 text-xs text-gray-600"
+                    >
+                      <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-500" />
                       {policy}
                     </p>
                   ))}
@@ -253,7 +285,7 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
             </div>
             <Button asChild>
               <Link href={`/dashboard/facilities/${facility.id}/courts/new`}>
-                <Plus className="h-4 w-4 mr-2" />
+                <Plus className="mr-2 h-4 w-4" />
                 Add Court
               </Link>
             </Button>
@@ -261,13 +293,17 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
         </CardHeader>
         <CardContent>
           {facility.courts.length === 0 ? (
-            <div className="text-center py-8">
-              <Activity className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No courts yet</h3>
-              <p className="text-gray-500 mb-4">Add courts to start accepting bookings.</p>
+            <div className="py-8 text-center">
+              <Activity className="mx-auto mb-4 h-12 w-12 text-gray-400" />
+              <h3 className="mb-2 text-lg font-medium text-gray-900">
+                No courts yet
+              </h3>
+              <p className="mb-4 text-gray-500">
+                Add courts to start accepting bookings.
+              </p>
               <Button asChild>
                 <Link href={`/dashboard/facilities/${facility.id}/courts/new`}>
-                  <Plus className="h-4 w-4 mr-2" />
+                  <Plus className="mr-2 h-4 w-4" />
                   Add First Court
                 </Link>
               </Button>
@@ -285,11 +321,22 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
                         </Badge>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Badge variant={court.isActive ? "default" : "secondary"}>
+                        <Badge
+                          variant={court.isActive ? "default" : "secondary"}
+                        >
                           {court.isActive ? "Active" : "Inactive"}
                         </Badge>
                         <Button variant="ghost" size="sm" asChild>
-                          <Link href={`/dashboard/facilities/${facility.id}/courts/${court.id}/edit`}>
+                          <Link
+                            href={`/dashboard/facilities/${facility.id}/courts/${court.id}/time-slots`}
+                          >
+                            <Clock className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link
+                            href={`/dashboard/facilities/${facility.id}/courts/${court.id}/edit`}
+                          >
                             <Edit className="h-4 w-4" />
                           </Link>
                         </Button>
@@ -298,18 +345,27 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Price per hour</span>
+                      <span className="text-sm text-gray-600">
+                        Price per hour
+                      </span>
                       <span className="font-medium">${court.pricePerHour}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Operating hours</span>
-                      <span className="font-medium text-sm">
-                        {formatTime(court.operatingStartHour)} - {formatTime(court.operatingEndHour)}
+                      <span className="text-sm text-gray-600">
+                        Operating hours
+                      </span>
+                      <span className="text-sm font-medium">
+                        {formatTime(court.operatingStartHour)} -{" "}
+                        {formatTime(court.operatingEndHour)}
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Active bookings</span>
-                      <span className="font-medium">{court.activeBookings}</span>
+                      <span className="text-sm text-gray-600">
+                        Active bookings
+                      </span>
+                      <span className="font-medium">
+                        {court.activeBookings}
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -324,17 +380,20 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
         <Card>
           <CardHeader>
             <CardTitle>Recent Reviews</CardTitle>
-            <CardDescription>
-              Latest customer feedback
-            </CardDescription>
+            <CardDescription>Latest customer feedback</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {facility.reviews.map((review) => (
-                <div key={review.id} className="border-b border-gray-200 pb-4 last:border-b-0">
-                  <div className="flex items-start justify-between mb-2">
+                <div
+                  key={review.id}
+                  className="border-b border-gray-200 pb-4 last:border-b-0"
+                >
+                  <div className="mb-2 flex items-start justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-sm">{review.playerName}</span>
+                      <span className="text-sm font-medium">
+                        {review.playerName}
+                      </span>
                       <div className="flex items-center gap-1">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star

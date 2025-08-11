@@ -1,7 +1,7 @@
 import { getFacilityById } from "@/actions/facility-actions";
 import { FacilityDetails } from "@/components/dashboard/facility-details";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Edit } from "lucide-react";
+import { ArrowLeft, Edit, Building2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -43,12 +43,20 @@ export default async function FacilityPage({ params }: FacilityPageProps) {
             <p className="text-muted-foreground">{facility.address}</p>
           </div>
         </div>
-        <Button asChild>
-          <Link href={`/dashboard/facilities/${facilityId}/edit`}>
-            <Edit className="mr-2 h-4 w-4" />
-            Edit Facility
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <Link href={`/dashboard/facilities/${facilityId}/courts`}>
+              <Building2 className="mr-2 h-4 w-4" />
+              Manage Courts
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href={`/dashboard/facilities/${facilityId}/edit`}>
+              <Edit className="mr-2 h-4 w-4" />
+              Edit Facility
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* Facility Details */}
