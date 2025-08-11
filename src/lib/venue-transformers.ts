@@ -1,4 +1,8 @@
-import type { SportType, VenueType } from "@/types/venue";
+import type { VenueType } from "@/types/venue";
+import type {
+  VenueType as PrismaVenueType,
+  SportType as PrismaSportType,
+} from "@/generated/prisma";
 import { transformAmenities as transformAmenitiesUtil } from "./amenity-utils";
 
 // Types for the transformed venue data that matches UI expectations
@@ -58,22 +62,22 @@ export interface TimeSlot {
 export interface FacilityWithCourts {
   id: string;
   name: string;
-  description?: string;
+  description: string | null;
   address: string;
-  latitude?: number;
-  longitude?: number;
+  latitude: number | null;
+  longitude: number | null;
   amenities: string[];
   photos: string[];
-  phone?: string;
-  email?: string;
+  phone: string | null;
+  email: string | null;
   policies: string[];
-  venueType: VenueType;
-  rating?: number;
+  venueType: PrismaVenueType;
+  rating: number | null;
   reviewCount: number;
   courts: Array<{
     id: string;
     name: string;
-    sportType: SportType;
+    sportType: PrismaSportType;
     pricePerHour: number;
     operatingStartHour: number;
     operatingEndHour: number;
@@ -88,7 +92,7 @@ export interface FacilityWithDetails extends FacilityWithCourts {
   courts: Array<{
     id: string;
     name: string;
-    sportType: SportType;
+    sportType: PrismaSportType;
     pricePerHour: number;
     operatingStartHour: number;
     operatingEndHour: number;
@@ -98,7 +102,7 @@ export interface FacilityWithDetails extends FacilityWithCourts {
       startTime: Date;
       endTime: Date;
       isMaintenanceBlocked: boolean;
-      maintenanceReason?: string;
+      maintenanceReason: string | null;
       booking?: {
         id: string;
         status: string;
@@ -108,7 +112,7 @@ export interface FacilityWithDetails extends FacilityWithCourts {
   reviews: Array<{
     id: string;
     rating: number;
-    comment?: string;
+    comment: string | null;
     verified: boolean;
     createdAt: Date;
     player: {
@@ -120,7 +124,7 @@ export interface FacilityWithDetails extends FacilityWithCourts {
 }
 
 // Sport type mappings
-const SPORT_ICONS: Record<SportType, string> = {
+const SPORT_ICONS: Record<PrismaSportType, string> = {
   BADMINTON: "🏸",
   TENNIS: "🎾",
   SQUASH: "🎾",
@@ -131,7 +135,7 @@ const SPORT_ICONS: Record<SportType, string> = {
   VOLLEYBALL: "🏐",
 };
 
-const SPORT_NAMES: Record<SportType, string> = {
+const SPORT_NAMES: Record<PrismaSportType, string> = {
   BADMINTON: "Badminton",
   TENNIS: "Tennis",
   SQUASH: "Squash",
@@ -143,7 +147,10 @@ const SPORT_NAMES: Record<SportType, string> = {
 };
 
 // Venue type mappings
-const VENUE_TYPE_MAPPING: Record<VenueType, "Indoor" | "Outdoor" | "Mixed"> = {
+const VENUE_TYPE_MAPPING: Record<
+  PrismaVenueType,
+  "Indoor" | "Outdoor" | "Mixed"
+> = {
   INDOOR: "Indoor",
   OUTDOOR: "Outdoor",
   MIXED: "Mixed",
@@ -224,8 +231,8 @@ export function transformFacilityToVenueDetails(
     reviews: facility.reviewCount,
     price: minPrice,
     operatingHours,
-    phone: facility.phone,
-    email: facility.email,
+    phone: facility.phone ?? "",
+    email: facility.email ?? "",
     images:
       facility.photos.length > 0
         ? facility.photos
@@ -242,7 +249,7 @@ export function transformFacilityToVenueDetails(
  */
 export function aggregateCourtData(
   courts: Array<{
-    sportType: SportType;
+    sportType: PrismaSportType;
     isActive: boolean;
   }>,
 ): Array<{ name: string; icon: string; courts: number }> {
@@ -586,7 +593,7 @@ export function calculateVenueAvailability(
  */
 export interface VenueFilters {
   searchQuery?: string;
-  sportType?: SportType | "ALL";
+  sportType?: PrismaSportType | "ALL";
   venueType?: VenueType | "ALL";
   minPrice?: number;
   maxPrice?: number;
@@ -623,7 +630,8 @@ export function filterVenues(
 
     // Venue type filter
     if (filters.venueType && filters.venueType !== "ALL") {
-      const venueTypeName = VENUE_TYPE_MAPPING[filters.venueType];
+      const venueTypeName =
+        VENUE_TYPE_MAPPING[filters.venueType as PrismaVenueType];
       if (venue.type !== venueTypeName) {
         return false;
       }
