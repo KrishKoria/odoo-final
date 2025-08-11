@@ -115,6 +115,23 @@ enum WaitlistStatus {
   EXPIRED
 }
 
+enum ReportType {
+  FACILITY_INAPPROPRIATE_CONTENT
+  FACILITY_FALSE_INFORMATION
+  FACILITY_SAFETY_CONCERN
+  USER_HARASSMENT
+  USER_INAPPROPRIATE_BEHAVIOR
+  USER_SPAM
+  OTHER
+}
+
+enum ReportStatus {
+  PENDING
+  UNDER_REVIEW
+  RESOLVED
+  DISMISSED
+}
+
 enum SportType {
   BADMINTON
   TENNIS
@@ -151,6 +168,8 @@ model PlayerProfile {
   waitlistEntries WaitlistEntry[]
   notifications   NotificationLog[]
   facilityReviews FacilityReview[]
+  submittedReports Report[] @relation("ReportSubmitter")
+  receivedReports  Report[] @relation("ReportTarget")
 
   @@map("player_profile")
 }
@@ -182,6 +201,7 @@ model Facility {
   owner   PlayerProfile    @relation("FacilityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   courts  Court[]
   reviews FacilityReview[]
+  reports Report[] @relation("ReportedFacility")
 
   @@index([status])
   @@index([ownerId])
@@ -358,4 +378,40 @@ model NotificationLog {
   @@index([playerId])
   @@index([sentAt])
   @@map("notification_log")
+}
+
+model Report {
+  id           String       @id @default(cuid())
+  type         ReportType
+  status       ReportStatus @default(PENDING)
+  reason       String
+  description  String?
+  evidence     String[] // URLs to screenshots or files
+  
+  // Who submitted the report
+  reporterId   String
+  reporter     PlayerProfile @relation("ReportSubmitter", fields: [reporterId], references: [id], onDelete: Cascade)
+  
+  // What/who is being reported (nullable - only one should be set)
+  targetUserId   String?
+  targetUser     PlayerProfile? @relation("ReportTarget", fields: [targetUserId], references: [id], onDelete: Cascade)
+  
+  targetFacilityId String?
+  targetFacility   Facility? @relation("ReportedFacility", fields: [targetFacilityId], references: [id], onDelete: Cascade)
+  
+  // Admin actions
+  reviewedById   String?
+  reviewedAt     DateTime?
+  reviewNotes    String?
+  actionTaken    String? // Description of what action was taken
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@index([status])
+  @@index([type])
+  @@index([reporterId])
+  @@index([targetUserId])
+  @@index([targetFacilityId])
+  @@map("report")
 }

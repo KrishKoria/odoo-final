@@ -16,6 +16,7 @@ import {
   AlertTriangle,
   Settings,
   Star,
+  Flag,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -50,6 +51,12 @@ export default async function AdminPage() {
         </div>
         <div className="flex items-center gap-2">
           <Button asChild variant="outline">
+            <Link href="/admin/reports">
+              <Flag className="mr-2 h-4 w-4" />
+              Reports
+            </Link>
+          </Button>
+          <Button asChild variant="outline">
             <Link href="/admin/reviews">
               <Star className="mr-2 h-4 w-4" />
               Review Management
@@ -70,6 +77,12 @@ export default async function AdminPage() {
                   {stats.pendingFacilities}
                 </span>
               )}
+            </Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/admin/profile">
+              <Shield className="mr-2 h-4 w-4" />
+              Profile
             </Link>
           </Button>
         </div>
@@ -113,6 +126,30 @@ export default async function AdminPage() {
 
       {/* Quick Actions */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Flag className="h-5 w-5" />
+              Report Management
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-muted-foreground text-sm">
+              Monitor and manage user reports
+            </p>
+            <div className="space-y-2">
+              <Button asChild variant="outline" size="sm" className="w-full">
+                <Link href="/admin/reports">All Reports</Link>
+              </Button>
+              <Button asChild variant="outline" size="sm" className="w-full">
+                <Link href="/admin/reports?status=PENDING">
+                  Pending Reports
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">

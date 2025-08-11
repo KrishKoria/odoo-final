@@ -16,7 +16,6 @@ interface AdminReviewsDataProps {
 
 async function AdminReviewsData({ searchParams }: AdminReviewsDataProps) {
   const result = await getAllReviews();
-
   if (!result.success) {
     return (
       <Card>

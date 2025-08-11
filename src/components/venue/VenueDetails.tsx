@@ -68,6 +68,7 @@ import type {
 import VenueReviews, { type VenueReview } from "./VenueReviews";
 import RatingDisplay from "./RatingDisplay";
 import ReviewForm from "./ReviewForm";
+import { ReportForm } from "@/components/forms/report-form";
 import { canReviewVenue } from "@/actions/venue-actions";
 
 interface VenueDetailsProps {
@@ -381,6 +382,11 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                 <Share2 className="mr-2 h-4 w-4" />
                 Share
               </Button>
+              <ReportForm
+                targetType="facility"
+                targetId={venue.id}
+                targetName={venue.name}
+              />
             </div>
           </div>
         </div>
