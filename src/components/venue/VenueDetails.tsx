@@ -16,6 +16,15 @@ import {
   Calendar,
   Loader2,
   AlertCircle,
+  Wifi,
+  Car,
+  Coffee,
+  ShowerHead,
+  AirVent,
+  Camera,
+  Shield,
+  Users,
+  Zap,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -47,11 +56,7 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import Navbar from "../home/Navbar";
-import {
-  getVenueById,
-  getVenueTimeSlots,
-  checkSlotAvailability,
-} from "@/actions/venue-actions";
+import { getVenueById, getVenueTimeSlots } from "@/actions/venue-actions";
 import type {
   VenueDetails as VenueDetailsType,
   TimeSlot,
@@ -87,6 +92,24 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const [consecutiveHours, setConsecutiveHours] = useState(1);
+
+  // Icon resolver function
+  const getIconComponent = (iconName: string) => {
+    const iconMap: Record<string, any> = {
+      Wifi,
+      Car,
+      Coffee,
+      ShowerHead,
+      AirVent,
+      Camera,
+      Shield,
+      Users,
+      Zap,
+      CheckCircle,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return iconMap[iconName] ?? CheckCircle;
+  };
 
   // Load venue data on component mount
   useEffect(() => {
@@ -696,26 +719,29 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                  {venue.amenities.map((amenity) => (
-                    <div
-                      key={amenity.name}
-                      className={`flex items-center space-x-3 rounded-lg p-3 ${
-                        amenity.available
-                          ? "bg-green-50 text-green-800"
-                          : "bg-gray-50 text-gray-400"
-                      }`}
-                    >
-                      <amenity.icon className="h-5 w-5" />
-                      <span className="text-sm font-medium">
-                        {amenity.name}
-                      </span>
-                      {amenity.available ? (
-                        <CheckCircle className="h-4 w-4 text-green-600" />
-                      ) : (
-                        <X className="h-4 w-4 text-gray-400" />
-                      )}
-                    </div>
-                  ))}
+                  {venue.amenities.map((amenity) => {
+                    const IconComponent = getIconComponent(amenity.iconName);
+                    return (
+                      <div
+                        key={amenity.name}
+                        className={`flex items-center space-x-3 rounded-lg p-3 ${
+                          amenity.available
+                            ? "bg-green-50 text-green-800"
+                            : "bg-gray-50 text-gray-400"
+                        }`}
+                      >
+                        <IconComponent className="h-5 w-5" />
+                        <span className="text-sm font-medium">
+                          {amenity.name}
+                        </span>
+                        {amenity.available ? (
+                          <CheckCircle className="h-4 w-4 text-green-600" />
+                        ) : (
+                          <X className="h-4 w-4 text-gray-400" />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>

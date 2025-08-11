@@ -39,7 +39,7 @@ export interface VenueDetails {
   }>;
   amenities: Array<{
     name: string;
-    icon: any;
+    iconName: string;
     available: boolean;
   }>;
   policies: string[];
@@ -410,20 +410,39 @@ function calculateAvailabilityStatus(courtCount: number): string {
 
 /**
  * Transform amenities array to match UI expectations with availability status
+ * Returns icon names instead of React components to avoid serialization issues
  */
 function transformAmenities(amenities: string[]): Array<{
   name: string;
-  icon: any;
+  iconName: string;
   available: boolean;
 }> {
-  const transformedAmenities = transformAmenitiesUtil(amenities);
+  return amenities.map((amenity) => {
+    // Map amenity names to icon names for client-side resolution
+    const iconMapping: Record<string, string> = {
+      WiFi: "Wifi",
+      Parking: "Car",
+      Cafeteria: "Coffee",
+      "Changing Room": "ShowerHead",
+      "Air Conditioning": "AirVent",
+      AC: "AirVent",
+      CCTV: "Camera",
+      Security: "Shield",
+      "Equipment Rental": "Users",
+      "Pro Shop": "Users",
+      Coaching: "Users",
+      Floodlights: "Zap",
+      "Water Cooler": "Coffee",
+      Pavilion: "Users",
+      Scoreboard: "Users",
+    };
 
-  // Convert to the format expected by the UI
-  return transformedAmenities.map((amenity) => ({
-    name: amenity.name,
-    icon: amenity.icon,
-    available: amenity.available,
-  }));
+    return {
+      name: amenity,
+      iconName: iconMapping[amenity] ?? "CheckCircle",
+      available: true,
+    };
+  });
 }
 
 /**

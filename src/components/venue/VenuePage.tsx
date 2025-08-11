@@ -73,8 +73,7 @@ const venueTypes = [
 export default function VenuesPage() {
   const router = useRouter();
 
-  // State for filters and UI using nuqs for URL state management
-  const [location, setLocation] = useQueryState("location", {
+  const [location] = useQueryState("location", {
     defaultValue: "",
   });
   const [searchQuery, setSearchQuery] = useQueryState("search", {
@@ -92,7 +91,7 @@ export default function VenuesPage() {
   );
   const [maxPrice, setMaxPrice] = useQueryState(
     "maxPrice",
-    parseAsInteger.withDefault(1500),
+    parseAsInteger.withDefault(2000),
   );
   const [minRating, setMinRating] = useQueryState(
     "minRating",
