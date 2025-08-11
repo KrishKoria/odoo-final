@@ -49,3 +49,5 @@ yarn-error.log*
 /generated/prisma
 
 .github/
+
+public/uploads/

@@ -34,6 +34,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X, Plus, MapPin } from "lucide-react";
+import { ImageUpload } from "@/components/ui/image-upload";
 import {
   createFacility,
   updateFacility,
@@ -197,7 +198,11 @@ export function FacilityForm({
                   <FormItem>
                     <FormLabel>Facility Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter facility name" {...field} />
+                      <Input
+                        value={field.value || ""}
+                        placeholder="Enter facility name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -252,6 +257,34 @@ export function FacilityForm({
             </CardContent>
           </Card>
 
+          {/* Facility Photos */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Facility Photos</CardTitle>
+              <CardDescription>
+                Upload up to {5} photos. JPEG, PNG, or WebP. Max 5MB each.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <FormField
+                control={form.control}
+                name="photos"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <ImageUpload
+                        onImagesChange={field.onChange}
+                        initialImages={field.value}
+                        maxImages={5}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+          </Card>
+
           {/* Location & Contact */}
           <Card>
             <CardHeader>
@@ -292,6 +325,7 @@ export function FacilityForm({
                           type="number"
                           step="any"
                           placeholder="0.000000"
+                          value={field.value ?? ""}
                           {...field}
                           onChange={(e) =>
                             field.onChange(
@@ -318,6 +352,7 @@ export function FacilityForm({
                           type="number"
                           step="any"
                           placeholder="0.000000"
+                          value={field.value ?? ""}
                           {...field}
                           onChange={(e) =>
                             field.onChange(
@@ -341,7 +376,11 @@ export function FacilityForm({
                   <FormItem>
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="+1 (555) 123-4567" {...field} />
+                      <Input
+                        placeholder="+1 (555) 123-4567"
+                        {...field}
+                        value={field.value || ""}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -355,7 +394,11 @@ export function FacilityForm({
                   <FormItem>
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="facility@example.com" {...field} />
+                      <Input
+                        placeholder="facility@example.com"
+                        {...field}
+                        value={field.value || ""}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
