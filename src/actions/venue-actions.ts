@@ -682,3 +682,179 @@ export async function getPlatformStats(): Promise<{
     throw new Error("Failed to get platform statistics");
   }
 }
+
+/**
+ * Get venue reviews with pagination
+ */
+export async function getVenueReviews(
+  venueId: string,
+  page = 1,
+  limit = 10,
+): Promise<{
+  reviews: Array<{
+    id: string;
+    rating: number;
+    comment: string | null;
+    verified: boolean;
+    createdAt: Date;
+    player: {
+      user: {
+        name: string;
+      };
+    };
+  }>;
+  totalReviews: number;
+  averageRating: number;
+  hasMore: boolean;
+}> {
+  try {
+    const offset = (page - 1) * limit;
+
+    // Get reviews with pagination
+    const [reviews, totalReviews, ratingStats] = await Promise.all([
+      prisma.facilityReview.findMany({
+        where: {
+          facilityId: venueId,
+        },
+        include: {
+          player: {
+            select: {
+              user: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip: offset,
+        take: limit,
+      }),
+      prisma.facilityReview.count({
+        where: {
+          facilityId: venueId,
+        },
+      }),
+      prisma.facilityReview.aggregate({
+        where: {
+          facilityId: venueId,
+        },
+        _avg: {
+          rating: true,
+        },
+      }),
+    ]);
+
+    const hasMore = offset + reviews.length < totalReviews;
+    const averageRating = ratingStats._avg.rating ?? 0;
+
+    return {
+      reviews,
+      totalReviews,
+      averageRating,
+      hasMore,
+    };
+  } catch (error) {
+    console.error("Error fetching venue reviews:", error);
+    throw new Error("Failed to fetch venue reviews");
+  }
+}
+
+/**
+ * Calculate and update venue rating
+ */
+export async function updateVenueRating(venueId: string): Promise<void> {
+  try {
+    // Calculate new rating and review count
+    const [ratingStats, reviewCount] = await Promise.all([
+      prisma.facilityReview.aggregate({
+        where: {
+          facilityId: venueId,
+        },
+        _avg: {
+          rating: true,
+        },
+      }),
+      prisma.facilityReview.count({
+        where: {
+          facilityId: venueId,
+        },
+      }),
+    ]);
+
+    const averageRating = ratingStats._avg.rating ?? 0;
+
+    // Update facility with new rating and review count
+    await prisma.facility.update({
+      where: {
+        id: venueId,
+      },
+      data: {
+        rating: averageRating,
+        reviewCount,
+      },
+    });
+  } catch (error) {
+    console.error("Error updating venue rating:", error);
+    throw new Error("Failed to update venue rating");
+  }
+}
+
+/**
+ * Get venue rating summary
+ */
+export async function getVenueRatingSummary(venueId: string): Promise<{
+  averageRating: number;
+  totalReviews: number;
+  ratingDistribution: Array<{
+    rating: number;
+    count: number;
+    percentage: number;
+  }>;
+}> {
+  try {
+    const [reviews, ratingStats] = await Promise.all([
+      prisma.facilityReview.findMany({
+        where: {
+          facilityId: venueId,
+        },
+        select: {
+          rating: true,
+        },
+      }),
+      prisma.facilityReview.aggregate({
+        where: {
+          facilityId: venueId,
+        },
+        _avg: {
+          rating: true,
+        },
+        _count: {
+          id: true,
+        },
+      }),
+    ]);
+
+    const averageRating = ratingStats._avg.rating ?? 0;
+    const totalReviews = ratingStats._count.id;
+
+    // Calculate rating distribution
+    const ratingDistribution = [5, 4, 3, 2, 1].map((rating) => {
+      const count = reviews.filter((review) => review.rating === rating).length;
+      const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
+      return { rating, count, percentage };
+    });
+
+    return {
+      averageRating,
+      totalReviews,
+      ratingDistribution,
+    };
+  } catch (error) {
+    console.error("Error fetching venue rating summary:", error);
+    throw new Error("Failed to fetch venue rating summary");
+  }
+}

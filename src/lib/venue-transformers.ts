@@ -3,7 +3,6 @@ import type {
   VenueType as PrismaVenueType,
   SportType as PrismaSportType,
 } from "@/generated/prisma";
-import { transformAmenities as transformAmenitiesUtil } from "./amenity-utils";
 
 // Types for the transformed venue data that matches UI expectations
 export interface VenueListItem {
@@ -731,6 +730,54 @@ export function sortVenues(
     default:
       return sortedVenues;
   }
+}
+
+/**
+ * Rating calculation utilities
+ */
+export interface RatingStats {
+  averageRating: number;
+  totalReviews: number;
+  ratingDistribution: Array<{
+    rating: number;
+    count: number;
+    percentage: number;
+  }>;
+}
+
+export function calculateRatingStats(
+  reviews: Array<{ rating: number }>,
+): RatingStats {
+  const totalReviews = reviews.length;
+
+  if (totalReviews === 0) {
+    return {
+      averageRating: 0,
+      totalReviews: 0,
+      ratingDistribution: [5, 4, 3, 2, 1].map((rating) => ({
+        rating,
+        count: 0,
+        percentage: 0,
+      })),
+    };
+  }
+
+  // Calculate average rating
+  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+  const averageRating = totalRating / totalReviews;
+
+  // Calculate rating distribution
+  const ratingDistribution = [5, 4, 3, 2, 1].map((rating) => {
+    const count = reviews.filter((review) => review.rating === rating).length;
+    const percentage = (count / totalReviews) * 100;
+    return { rating, count, percentage };
+  });
+
+  return {
+    averageRating,
+    totalReviews,
+    ratingDistribution,
+  };
 }
 
 /**

@@ -6,7 +6,6 @@ import { useQueryState, parseAsInteger } from "nuqs";
 import {
   Search,
   MapPin,
-  Star,
   Filter,
   Heart,
   Share2,
@@ -48,6 +47,7 @@ import {
 } from "@/components/ui/error-boundary";
 import { getVenues } from "@/actions/venue-actions";
 import type { VenueListItem } from "@/lib/venue-transformers";
+import RatingDisplay from "./RatingDisplay";
 import type { SportType, VenueType } from "@/types/venue";
 
 // Sport types mapping from database enum to display names
@@ -283,15 +283,7 @@ export default function VenuesPage() {
                 htmlFor={`rating-${rating}`}
                 className="flex items-center space-x-1"
               >
-                <span>{rating}</span>
-                <div className="flex">
-                  {[...Array<number>(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-3 w-3 ${i < Math.floor(rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                    />
-                  ))}
-                </div>
+                <RatingDisplay rating={rating} showNumber={true} size="xs" />
                 <span className="text-muted-foreground text-sm">& up</span>
               </Label>
             </div>
@@ -604,13 +596,14 @@ export default function VenuesPage() {
                           <h3 className="text-lg font-semibold transition-colors group-hover:text-emerald-600">
                             {venue.name}
                           </h3>
-                          <div className="flex items-center space-x-1 text-sm">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="font-medium">{venue.rating}</span>
-                            <span className="text-gray-500">
-                              ({venue.reviews})
-                            </span>
-                          </div>
+                          <RatingDisplay
+                            rating={venue.rating}
+                            showNumber={true}
+                            showTotal={true}
+                            totalReviews={venue.reviews}
+                            size="sm"
+                            className="text-sm"
+                          />
                         </div>
 
                         <div className="mb-3 flex items-center text-gray-600">

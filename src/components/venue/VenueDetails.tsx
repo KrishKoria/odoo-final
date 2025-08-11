@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import {
-  Star,
   MapPin,
   Clock,
   Phone,
@@ -56,21 +55,17 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import Navbar from "../home/Navbar";
-import { getVenueById, getVenueTimeSlots } from "@/actions/venue-actions";
+import {
+  getVenueById,
+  getVenueTimeSlots,
+  getVenueReviews,
+} from "@/actions/venue-actions";
 import type {
   VenueDetails as VenueDetailsType,
   TimeSlot,
 } from "@/lib/venue-transformers";
-
-// Reviews interface for type safety
-interface Review {
-  id: string;
-  name: string;
-  rating: number;
-  date: string;
-  comment: string;
-  verified: boolean;
-}
+import VenueReviews, { type VenueReview } from "./VenueReviews";
+import RatingDisplay from "./RatingDisplay";
 
 interface VenueDetailsProps {
   id: string;
@@ -80,7 +75,12 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
   // State for venue data
   const [venue, setVenue] = useState<VenueDetailsType | null>(null);
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<VenueReview[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
+  const [reviewsPage, setReviewsPage] = useState(1);
+  const [hasMoreReviews, setHasMoreReviews] = useState(false);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [timeSlotsLoading, setTimeSlotsLoading] = useState(false);
@@ -131,9 +131,8 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
           setSelectedSport(venueData.sports[0].name);
         }
 
-        // Transform reviews data (if available from venue data)
-        // For now, we'll use empty array since reviews are handled separately
-        setReviews([]);
+        // Load initial reviews
+        await loadReviews(id, 1);
       } catch (err) {
         console.error("Error loading venue data:", err);
         setError("Failed to load venue data");
@@ -181,6 +180,35 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
     } finally {
       setTimeSlotsLoading(false);
     }
+  };
+
+  // Load reviews for the venue
+  const loadReviews = async (venueId: string, page: number) => {
+    try {
+      setReviewsLoading(true);
+      const reviewData = await getVenueReviews(venueId, page, 10);
+
+      if (page === 1) {
+        setReviews(reviewData.reviews);
+      } else {
+        setReviews((prev) => [...prev, ...reviewData.reviews]);
+      }
+
+      setTotalReviews(reviewData.totalReviews);
+      setAverageRating(reviewData.averageRating);
+      setHasMoreReviews(reviewData.hasMore);
+      setReviewsPage(page);
+    } catch (err) {
+      console.error("Error loading reviews:", err);
+    } finally {
+      setReviewsLoading(false);
+    }
+  };
+
+  // Load more reviews
+  const loadMoreReviews = async () => {
+    if (!venue || reviewsLoading || !hasMoreReviews) return;
+    await loadReviews(venue.id, reviewsPage + 1);
   };
 
   const nextImage = () => {
@@ -299,11 +327,13 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                   <MapPin className="h-5 w-5" />
                   <span>{venue.location}</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                  <span className="font-medium">{venue.rating}</span>
-                  <span>({venue.reviews} reviews)</span>
-                </div>
+                <RatingDisplay
+                  rating={averageRating || venue.rating}
+                  showNumber={true}
+                  showTotal={true}
+                  totalReviews={totalReviews || venue.reviews}
+                  size="md"
+                />
               </div>
             </div>
             <div className="mt-4 flex items-center space-x-3 lg:mt-0">
@@ -766,91 +796,15 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
           </TabsContent>
 
           <TabsContent value="reviews" className="space-y-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <span>Player Reviews & Ratings</span>
-                  <div className="flex items-center space-x-2">
-                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    <span className="font-bold">{venue.rating}</span>
-                    <span className="text-gray-500">
-                      ({venue.reviews} reviews)
-                    </span>
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {reviews.length === 0 ? (
-                  <div className="py-8 text-center">
-                    <Star className="mx-auto mb-4 h-8 w-8 text-gray-300" />
-                    <p className="text-gray-600">No reviews yet</p>
-                    <p className="mt-1 text-sm text-gray-500">
-                      Be the first to review this venue!
-                    </p>
-                  </div>
-                ) : (
-                  <>
-                    <div className="space-y-6">
-                      {reviews.map((review) => (
-                        <div
-                          key={review.id}
-                          className="border-b border-gray-100 pb-6 last:border-b-0"
-                        >
-                          <div className="mb-3 flex items-start justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
-                                <span className="font-semibold text-emerald-600">
-                                  {review.name.charAt(0)}
-                                </span>
-                              </div>
-                              <div>
-                                <div className="flex items-center space-x-2">
-                                  <span className="font-semibold">
-                                    {review.name}
-                                  </span>
-                                  {review.verified && (
-                                    <Badge
-                                      variant="secondary"
-                                      className="bg-blue-100 text-xs text-blue-800"
-                                    >
-                                      Verified
-                                    </Badge>
-                                  )}
-                                </div>
-                                <div className="mt-1 flex items-center space-x-2">
-                                  <div className="flex">
-                                    {[...Array<number>(5)].map((_, i) => (
-                                      <Star
-                                        key={i}
-                                        className={`h-4 w-4 ${
-                                          i < review.rating
-                                            ? "fill-yellow-400 text-yellow-400"
-                                            : "text-gray-300"
-                                        }`}
-                                      />
-                                    ))}
-                                  </div>
-                                  <span className="text-sm text-gray-500">
-                                    {review.date}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <p className="leading-relaxed text-gray-700">
-                            {review.comment}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-6 text-center">
-                      <Button variant="outline">Load More Reviews</Button>
-                    </div>
-                  </>
-                )}
-              </CardContent>
-            </Card>
+            <VenueReviews
+              venueId={venue.id}
+              reviews={reviews}
+              averageRating={averageRating || venue.rating}
+              totalReviews={totalReviews || venue.reviews}
+              loading={reviewsLoading}
+              onLoadMore={loadMoreReviews}
+              hasMore={hasMoreReviews}
+            />
           </TabsContent>
         </Tabs>
       </div>

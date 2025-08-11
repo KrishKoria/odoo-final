@@ -3,20 +3,25 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import type { UserRole } from "@/generated/prisma";
 
 interface SessionGuardProps {
   children: React.ReactNode;
-  requiredRoles?: ("USER" | "FACILITY_OWNER" | "ADMIN")[];
+  requiredRoles?: UserRole[];
   requireEmailVerification?: boolean;
+  redirectTo?: string;
 }
 
 export function SessionGuard({
   children,
   requiredRoles = ["USER"],
   requireEmailVerification = false,
+  redirectTo = "/auth/login",
 }: SessionGuardProps) {
   const [isValidating, setIsValidating] = useState(true);
   const [isAuthorized, setIsAuthorized] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userRole, setUserRole] = useState<UserRole | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,7 +36,7 @@ export function SessionGuard({
 
         if (error || !session?.user) {
           console.log("SessionGuard - No valid session, redirecting to login");
-          router.replace("/auth/login");
+          router.replace(redirectTo);
           return;
         }
 
@@ -44,23 +49,59 @@ export function SessionGuard({
           return;
         }
 
-        // For now, assume all users have USER role
-        // In a real implementation, you'd check session.user.role
-        const userRole: "USER" | "FACILITY_OWNER" | "ADMIN" = "USER";
+        // Fetch user profile to get role
+        try {
+          const response = await fetch("/api/profile", {
+            method: "GET",
+            credentials: "include",
+          });
 
-        if (!requiredRoles.includes(userRole)) {
-          console.log(
-            "SessionGuard - Insufficient permissions, redirecting to dashboard",
-          );
-          router.replace("/dashboard");
-          return;
+          if (!response.ok) {
+            throw new Error("Failed to fetch user profile");
+          }
+
+          const profile = await response.json();
+          const currentUserRole: UserRole = profile.role || "USER";
+
+          if (!isMounted) return;
+
+          setUserRole(currentUserRole);
+
+          // Check if user has required role
+          if (!requiredRoles.includes(currentUserRole)) {
+            console.log(
+              `SessionGuard - Insufficient permissions. User role: ${currentUserRole}, Required: ${requiredRoles.join(", ")}`,
+            );
+
+            // Redirect based on user role
+            if (
+              currentUserRole === "FACILITY_OWNER" ||
+              currentUserRole === "ADMIN"
+            ) {
+              router.replace("/dashboard");
+            } else {
+              router.replace("/");
+            }
+            return;
+          }
+
+          setIsAuthorized(true);
+        } catch (profileError) {
+          console.error("SessionGuard - Profile fetch error:", profileError);
+          // If we can't get the profile, assume USER role
+          const fallbackRole: UserRole = "USER";
+          setUserRole(fallbackRole);
+
+          if (requiredRoles.includes(fallbackRole)) {
+            setIsAuthorized(true);
+          } else {
+            router.replace("/");
+          }
         }
-
-        setIsAuthorized(true);
       } catch (error) {
         console.error("SessionGuard - Session validation error:", error);
         if (isMounted) {
-          router.replace("/auth/login");
+          router.replace(redirectTo);
         }
       } finally {
         if (isMounted) {
@@ -74,7 +115,7 @@ export function SessionGuard({
     return () => {
       isMounted = false;
     };
-  }, [router, requiredRoles, requireEmailVerification]);
+  }, [router, requiredRoles, requireEmailVerification, redirectTo]);
 
   if (isValidating) {
     return (

@@ -28,22 +28,58 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Fetch the user's phone number from PlayerProfile
+    // Fetch the user's player profile with role information
     let playerProfile;
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       playerProfile = await prisma.playerProfile.findUnique({
         where: { userId: session.user.id },
-        select: { phoneNumber: true },
+        select: { 
+          id: true,
+          role: true,
+          phoneNumber: true,
+          avatar: true,
+          isActive: true,
+          isBanned: true,
+          bannedUntil: true,
+          createdAt: true,
+          updatedAt: true,
+        },
       });
     } catch (error) {
       console.error("Error fetching player profile:", error);
       playerProfile = null;
     }
 
+    // Check if user is banned
+    if (playerProfile?.isBanned) {
+      const now = new Date();
+      if (playerProfile.bannedUntil && playerProfile.bannedUntil > now) {
+        return NextResponse.json(
+          { 
+            error: "Account suspended", 
+            bannedUntil: playerProfile.bannedUntil.toISOString() 
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     return NextResponse.json({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      id: playerProfile?.id ?? null,
+      role: playerProfile?.role ?? "USER",
       phoneNumber: playerProfile?.phoneNumber ?? null,
+      avatar: playerProfile?.avatar ?? null,
+      isActive: playerProfile?.isActive ?? true,
+      user: {
+        id: session.user.id,
+        name: session.user.name,
+        email: session.user.email,
+        emailVerified: session.user.emailVerified,
+        image: session.user.image,
+      },
+      createdAt: playerProfile?.createdAt?.toISOString() ?? null,
+      updatedAt: playerProfile?.updatedAt?.toISOString() ?? null,
     });
   } catch (error) {
     console.error("Profile fetch error:", error);
