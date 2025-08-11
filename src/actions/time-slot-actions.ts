@@ -6,6 +6,30 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
+// Helper function to check if user owns a facility
+async function checkFacilityOwnership(
+  userId: string,
+  facilityId: string,
+): Promise<boolean> {
+  const playerProfile = await prisma.playerProfile.findUnique({
+    where: { userId },
+    select: { id: true },
+  });
+
+  if (!playerProfile) {
+    return false;
+  }
+
+  const facility = await prisma.facility.findUnique({
+    where: {
+      id: facilityId,
+      ownerId: playerProfile.id,
+    },
+  });
+
+  return !!facility;
+}
+
 export interface CreateTimeSlotData {
   courtId: string;
   startTime: Date;
@@ -142,6 +166,7 @@ export async function createTimeSlot(data: CreateTimeSlotData) {
       include: {
         facility: {
           select: {
+            id: true,
             ownerId: true,
           },
         },
@@ -154,7 +179,10 @@ export async function createTimeSlot(data: CreateTimeSlotData) {
 
     // Check authorization (facility owner or admin)
     const userRole = session.user.role;
-    const isOwner = court.facility.ownerId === session.user.id;
+    const isOwner = await checkFacilityOwnership(
+      session.user.id,
+      court.facility.id,
+    );
     const isAdmin = userRole === "ADMIN";
 
     if (!isOwner && !isAdmin) {
@@ -259,7 +287,10 @@ export async function generateTimeSlots(
 
     // Check authorization
     const userRole = session.user.role;
-    const isOwner = court.facility.ownerId === session.user.id;
+    const isOwner = await checkFacilityOwnership(
+      session.user.id,
+      court.facility.id,
+    );
     const isAdmin = userRole === "ADMIN";
 
     if (!isOwner && !isAdmin) {
@@ -389,7 +420,10 @@ export async function updateTimeSlot(data: UpdateTimeSlotData) {
 
     // Check authorization
     const userRole = session.user.role;
-    const isOwner = existingTimeSlot.court.facility.ownerId === session.user.id;
+    const isOwner = await checkFacilityOwnership(
+      session.user.id,
+      existingTimeSlot.court.facility.id,
+    );
     const isAdmin = userRole === "ADMIN";
 
     if (!isOwner && !isAdmin) {
@@ -509,7 +543,10 @@ export async function deleteTimeSlot(timeSlotId: string) {
 
     // Check authorization
     const userRole = session.user.role;
-    const isOwner = timeSlot.court.facility.ownerId === session.user.id;
+    const isOwner = await checkFacilityOwnership(
+      session.user.id,
+      timeSlot.court.facility.id,
+    );
     const isAdmin = userRole === "ADMIN";
 
     if (!isOwner && !isAdmin) {
@@ -641,7 +678,10 @@ export async function generateTimeSlotsAdvanced(data: GenerateTimeSlotsData) {
 
     // Check authorization
     const userRole = session.user.role;
-    const isOwner = court.facility.ownerId === session.user.id;
+    const isOwner = await checkFacilityOwnership(
+      session.user.id,
+      court.facility.id,
+    );
     const isAdmin = userRole === "ADMIN";
 
     if (!isOwner && !isAdmin) {

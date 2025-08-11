@@ -5,13 +5,15 @@ import { redirect, notFound } from "next/navigation";
 import { TimeSlotForm } from "@/components/dashboard/time-slot-form";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     facilityId: string;
     courtId: string;
-  };
+  }>;
 }
 
 export default async function NewTimeSlotPage({ params }: PageProps) {
+  const { facilityId, courtId } = await params;
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -22,7 +24,7 @@ export default async function NewTimeSlotPage({ params }: PageProps) {
 
   // Get the court and verify access
   const court = await prisma.court.findUnique({
-    where: { id: params.courtId },
+    where: { id: courtId },
     include: {
       facility: {
         select: {
@@ -34,7 +36,7 @@ export default async function NewTimeSlotPage({ params }: PageProps) {
     },
   });
 
-  if (!court || court.facilityId !== params.facilityId) {
+  if (!court || court.facilityId !== facilityId) {
     notFound();
   }
 
@@ -57,8 +59,8 @@ export default async function NewTimeSlotPage({ params }: PageProps) {
       </div>
 
       <TimeSlotForm
-        courtId={params.courtId}
-        facilityId={params.facilityId}
+        courtId={courtId}
+        facilityId={facilityId}
         isEditing={false}
       />
     </div>

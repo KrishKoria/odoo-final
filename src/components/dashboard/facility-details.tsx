@@ -348,7 +348,7 @@ export function FacilityDetails({ facility }: FacilityDetailsProps) {
                       <span className="text-sm text-gray-600">
                         Price per hour
                       </span>
-                      <span className="font-medium">${court.pricePerHour}</span>
+                      <span className="font-medium">₹{court.pricePerHour}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600">

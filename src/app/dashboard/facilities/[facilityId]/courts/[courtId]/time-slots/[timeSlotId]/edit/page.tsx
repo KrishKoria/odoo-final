@@ -5,14 +5,16 @@ import { getTimeSlotById } from "@/actions/time-slot-actions";
 import { TimeSlotForm } from "@/components/dashboard/time-slot-form";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     facilityId: string;
     courtId: string;
     timeSlotId: string;
-  };
+  }>;
 }
 
 export default async function EditTimeSlotPage({ params }: PageProps) {
+  const { facilityId, courtId, timeSlotId } = await params;
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -22,12 +24,12 @@ export default async function EditTimeSlotPage({ params }: PageProps) {
   }
 
   try {
-    const timeSlot = await getTimeSlotById(params.timeSlotId);
+    const timeSlot = await getTimeSlotById(timeSlotId);
 
     // Verify the time slot belongs to the correct court and facility
     if (
-      timeSlot.courtId !== params.courtId ||
-      timeSlot.court.facility.id !== params.facilityId
+      timeSlot.courtId !== courtId ||
+      timeSlot.court.facility.id !== facilityId
     ) {
       notFound();
     }
@@ -43,8 +45,8 @@ export default async function EditTimeSlotPage({ params }: PageProps) {
         </div>
 
         <TimeSlotForm
-          courtId={params.courtId}
-          facilityId={params.facilityId}
+          courtId={courtId}
+          facilityId={facilityId}
           initialData={{
             id: timeSlot.id,
             date: timeSlot.startTime.toISOString().split("T")[0],

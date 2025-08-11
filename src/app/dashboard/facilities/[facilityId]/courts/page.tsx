@@ -1,12 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  Plus,
-  MoreHorizontal,
-  Edit,
-  Trash2,
-  Clock,
-} from "lucide-react";
+import { ArrowLeft, Plus, MoreHorizontal, Edit, Clock } from "lucide-react";
 import Link from "next/link";
 import { getFacilityCourts } from "@/actions/court-actions";
 import { getFacilityById } from "@/actions/facility-actions";
@@ -25,6 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DeleteCourtDialog } from "@/components/dashboard/delete-court-dialog";
 
 interface CourtsPageProps {
   params: Promise<{
@@ -148,10 +142,11 @@ export default async function CourtsPage({ params }: CourtsPageProps) {
                           Edit Court
                         </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem className="text-red-600">
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        Delete Court
-                      </DropdownMenuItem>
+                      <DeleteCourtDialog
+                        courtId={court.id}
+                        courtName={court.name}
+                        facilityId={facilityId}
+                      />
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
