@@ -38,17 +38,23 @@ export const emailSchema = z
   .max(100, "Email cannot exceed 100 characters");
 
 // Signup form schema
-export const signupSchema = z.object({
-  email: emailSchema,
-  password: passwordSchema,
-  fullName: z
-    .string()
-    .min(2, "Full name must be at least 2 characters")
-    .max(50, "Full name cannot exceed 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "Full name can only contain letters and spaces"),
-  avatar: avatarFileSchema,
-  role: roleSchema,
-});
+export const signupSchema = z
+  .object({
+    email: emailSchema,
+    password: passwordSchema,
+    confirmPassword: z.string().min(1, "Please confirm your password"),
+    fullName: z
+      .string()
+      .min(2, "Full name must be at least 2 characters")
+      .max(50, "Full name cannot exceed 50 characters")
+      .regex(/^[a-zA-Z\s]+$/, "Full name can only contain letters and spaces"),
+    avatar: avatarFileSchema,
+    role: roleSchema,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 // Login form schema
 export const loginSchema = z.object({

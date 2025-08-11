@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Image from "next/image";
 
 export default function DashboardPage() {
   const { data: session, isPending } = authClient.useSession();
@@ -54,10 +55,12 @@ export default function DashboardPage() {
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 {session.user.image ? (
-                  <img
+                  <Image
                     src={session.user.image}
                     alt="Avatar"
                     className="h-12 w-12 rounded-full border object-cover"
+                    width={48}
+                    height={48}
                   />
                 ) : (
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-200">

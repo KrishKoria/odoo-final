@@ -137,11 +137,9 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
               <p className="text-sm text-green-600">{success}</p>
             </div>
           )}
-
           {/* Current Form */}
           {renderCurrentStep()}
-
-          {/* Step Navigation */}
+          {/* Step Navigation
           {currentStep !== "verify-email" &&
             currentStep !== "forgot-password" && (
               <div className="text-center">
@@ -156,8 +154,7 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
                     : "Already have an account? Sign in"}
                 </button>
               </div>
-            )}
-
+            )} */}
           {/* Footer */}
           <p className="text-muted-foreground px-8 text-center text-sm">
             By clicking continue, you agree to our{" "}
