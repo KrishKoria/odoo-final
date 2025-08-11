@@ -24,7 +24,10 @@ export const auth = betterAuth({
   },
   plugins: [
     emailOTP({
+      overrideDefaultEmailVerification: true, // This replaces the default email verification
       async sendVerificationOTP({ email, otp, type }) {
+        console.log(`Sending OTP to ${email}: ${otp} (type: ${type})`);
+
         let subject: string;
         let html: string;
 
@@ -70,14 +73,21 @@ export const auth = betterAuth({
         }
 
         try {
-          await resend.emails.send({
+          console.log(`Attempting to send email via Resend to: ${email}`);
+          const result = await resend.emails.send({
             from: "QuickCourt <noreply@krishkoria.com>",
             to: [email],
             subject,
             html,
           });
+          console.log("Email sent successfully:", result);
         } catch (error) {
           console.error("Failed to send OTP email:", error);
+          // Log the full error details for debugging
+          if (error instanceof Error) {
+            console.error("Error message:", error.message);
+            console.error("Error stack:", error.stack);
+          }
           throw new Error("Failed to send verification email");
         }
       },

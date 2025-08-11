@@ -6,6 +6,7 @@ import { LoginForm } from "@/components/forms/login-form";
 import { OtpVerification } from "@/components/forms/otp-verification";
 import { useOAuthCallback } from "@/hooks/use-oauth-callback";
 import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
 
 type AuthStep = "login" | "signup" | "verify-email" | "forgot-password";
 
@@ -58,9 +59,20 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
   const handleResendOTP = async () => {
     // Implement OTP resend logic
     try {
-      // This would call the better-auth resend OTP endpoint
+      if (!verificationEmail) {
+        handleError("No email address found");
+        return;
+      }
+
+      // Call the emailOTP plugin's sendVerificationOtp method
+      await authClient.emailOtp.sendVerificationOtp({
+        email: verificationEmail,
+        type: "email-verification",
+      });
+
       setSuccess("Verification code sent!");
-    } catch {
+    } catch (error) {
+      console.error("Resend OTP error:", error);
       handleError("Failed to resend verification code");
     }
   };
@@ -114,16 +126,12 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/auth-background.jpg"
+            src="/image-auth.png"
             alt="Sports court background"
             className="h-full w-full object-cover"
             fill
           />
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
-        <div className="relative z-20 flex items-center text-lg font-medium">
-          <div className="mr-2 h-6 w-6 rounded-full bg-white" />
-          QuickCourt
+          <div className="absolute inset-0" />
         </div>
       </div>
 
