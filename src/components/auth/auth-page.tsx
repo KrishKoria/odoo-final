@@ -36,7 +36,7 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
     setError("");
     setSuccess("Login successful!");
     // Redirect to dashboard or desired page
-    window.location.href = "/dashboard";
+    window.location.href = "/";
   };
 
   const handleVerificationSuccess = () => {
