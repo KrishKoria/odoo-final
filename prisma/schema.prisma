@@ -269,7 +269,7 @@ model TimeSlot {
 
   // Relations
   court           Court           @relation(fields: [courtId], references: [id], onDelete: Cascade)
-  booking         Booking?
+  bookings        Booking[]
   waitlistEntries WaitlistEntry[]
 
   @@unique([courtId, startTime])
@@ -280,7 +280,7 @@ model TimeSlot {
 
 model Booking {
   id                 String        @id @default(cuid())
-  timeSlotId         String        @unique
+  timeSlotId         String
   courtId            String
   playerId           String
   totalPrice         Float
@@ -301,6 +301,7 @@ model Booking {
   paymentOrder PaymentOrder? @relation(fields: [paymentOrderId], references: [id], onDelete: SetNull)
   match    Match?
 
+  @@index([timeSlotId])
   @@index([playerId])
   @@index([courtId])
   @@index([status])

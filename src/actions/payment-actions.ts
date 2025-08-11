@@ -303,23 +303,19 @@ export async function verifyPayment(
             throw new Error(`Time slot ${timeSlotId} not found`);
           }
 
-          // Check for existing cancelled bookings and delete them to free up the unique constraint
-          await tx.booking.deleteMany({
+          // Check if there's already a confirmed booking for this time slot
+          const existingConfirmedBooking = await tx.booking.findFirst({
             where: {
               timeSlotId,
-              status: "CANCELLED",
+              status: "CONFIRMED",
             },
           });
 
-          // Check if there's already a confirmed booking (shouldn't happen due to earlier check)
-          const existingBooking = await tx.booking.findUnique({
-            where: { timeSlotId },
-          });
-
-          if (existingBooking && existingBooking.status !== "CANCELLED") {
+          if (existingConfirmedBooking) {
             throw new Error(`Time slot ${timeSlotId} is already booked`);
           }
 
+          // Create new booking (allows multiple bookings per slot, keeping cancelled ones as history)
           return tx.booking.create({
             data: {
               timeSlotId,

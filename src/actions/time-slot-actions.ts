@@ -103,7 +103,7 @@ export async function getCourtTimeSlots(
             pricePerHour: true,
           },
         },
-        booking: {
+        bookings: {
           select: {
             id: true,
             status: true,
@@ -401,7 +401,7 @@ export async function updateTimeSlot(data: UpdateTimeSlotData) {
             },
           },
         },
-        booking: true,
+        bookings: true,
       },
     });
 
@@ -423,8 +423,9 @@ export async function updateTimeSlot(data: UpdateTimeSlotData) {
 
     // Check if time slot has a booking and prevent certain updates
     if (
-      existingTimeSlot.booking &&
-      existingTimeSlot.booking.status === "CONFIRMED"
+      existingTimeSlot.bookings?.some(
+        (booking) => booking.status === "CONFIRMED",
+      )
     ) {
       // For booked slots, only allow maintenance blocking/unblocking
       if (
@@ -525,7 +526,7 @@ export async function deleteTimeSlot(timeSlotId: string) {
             },
           },
         },
-        booking: true,
+        bookings: true,
       },
     });
 
@@ -545,9 +546,9 @@ export async function deleteTimeSlot(timeSlotId: string) {
       throw new Error("Unauthorized to delete this time slot");
     }
 
-    // Check if time slot has a confirmed booking
-    if (timeSlot.booking && timeSlot.booking.status === "CONFIRMED") {
-      throw new Error("Cannot delete a time slot with a confirmed booking");
+    // Check if time slot has a confirmed bookings
+    if (timeSlot.bookings?.some((booking) => booking.status === "CONFIRMED")) {
+      throw new Error("Cannot delete a time slot with a confirmed bookings");
     }
 
     // Delete the time slot
@@ -596,7 +597,7 @@ export async function getTimeSlotById(timeSlotId: string) {
             },
           },
         },
-        booking: {
+        bookings: {
           include: {
             player: {
               include: {

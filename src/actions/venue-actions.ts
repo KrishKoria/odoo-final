@@ -234,7 +234,7 @@ export async function getVenueById(id: string): Promise<VenueDetails | null> {
                 },
               },
               include: {
-                booking: {
+                bookings: {
                   select: {
                     id: true,
                     status: true,
@@ -311,7 +311,7 @@ export async function getVenueTimeSlots(
                 },
               },
               include: {
-                booking: {
+                bookings: {
                   select: {
                     id: true,
                     status: true,
@@ -352,7 +352,7 @@ export async function checkSlotAvailability(
         startTime,
       },
       include: {
-        booking: {
+        bookings: {
           select: {
             status: true,
           },
@@ -460,7 +460,7 @@ export async function getVenueAvailabilitySummary(
                 },
               },
               include: {
-                booking: {
+                bookings: {
                   select: {
                     status: true,
                   },
@@ -487,7 +487,9 @@ export async function getVenueAvailabilitySummary(
 
         if (slot.isMaintenanceBlocked) {
           maintenanceSlots++;
-        } else if (slot.booking && slot.booking.status === "CONFIRMED") {
+        } else if (
+          slot.bookings.some((booking) => booking.status === "CONFIRMED")
+        ) {
           bookedSlots++;
         } else {
           availableSlots++;

@@ -322,10 +322,10 @@ export function transformTimeSlots(
       endTime: Date;
       price: number | null;
       isMaintenanceBlocked: boolean;
-      booking?: {
+      bookings?: Array<{
         id: string;
         status: string;
-      } | null;
+      }>;
     }>;
   }>,
   selectedDate: Date,
@@ -340,8 +340,10 @@ export function transformTimeSlots(
         continue;
       }
 
-      // Determine availability
-      const isBooked = slot.booking && slot.booking.status === "CONFIRMED";
+      // Determine availability - check if there are any confirmed bookings
+      const isBooked =
+        slot.bookings?.some((booking) => booking.status === "CONFIRMED") ??
+        false;
       const isBlocked = slot.isMaintenanceBlocked;
       const available = !isBooked && !isBlocked;
 
@@ -380,11 +382,13 @@ export function transformTimeSlots(
  */
 export function checkSlotAvailability(timeSlot: {
   isMaintenanceBlocked: boolean;
-  booking?: {
+  bookings?: Array<{
     status: string;
-  } | null;
+  }>;
 }): boolean {
-  const isBooked = timeSlot.booking && timeSlot.booking.status === "CONFIRMED";
+  const isBooked =
+    timeSlot.bookings?.some((booking) => booking.status === "CONFIRMED") ??
+    false;
   const isBlocked = timeSlot.isMaintenanceBlocked;
   return !isBooked && !isBlocked;
 }

@@ -290,8 +290,10 @@ export async function getPeakHoursData(facilityId?: string) {
           include: {
             timeSlots: {
               where: {
-                booking: {
-                  status: "COMPLETED",
+                bookings: {
+                  some: {
+                    status: "COMPLETED",
+                  },
                 },
                 startTime: {
                   gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
