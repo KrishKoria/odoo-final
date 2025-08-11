@@ -91,7 +91,7 @@ const Navbar = () => {
                 </DropdownMenu>
               ) : (
                 <Link
-                  className={buttonVariants({ variant: "hero", size: "lg" })}
+                  className={buttonVariants({ variant: "outline", size: "lg" })}
                   href="/auth/login"
                 >
                   <LogIn className="h-5 w-5" />

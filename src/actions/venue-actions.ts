@@ -470,3 +470,215 @@ export async function getVenueAvailabilitySummary(
     throw new Error("Failed to get availability summary");
   }
 }
+
+/**
+ * Get top-rated venues for home page by location
+ */
+export async function getTopVenuesByLocation(
+  location?: string,
+  limit = 4,
+): Promise<VenueListItem[]> {
+  try {
+    // Build where clause for location filtering
+    const whereClause: any = {
+      status: "APPROVED", // Only show approved facilities
+    };
+
+    // Location filter - search in address for city/area name
+    if (location && location.trim() !== "") {
+      whereClause.address = {
+        contains: location,
+        mode: "insensitive", // Case-insensitive search
+      };
+    }
+
+    // Fetch venues with courts and reviews
+    const facilities = await prisma.facility.findMany({
+      where: whereClause,
+      include: {
+        courts: {
+          where: {
+            isActive: true,
+          },
+          select: {
+            id: true,
+            name: true,
+            sportType: true,
+            pricePerHour: true,
+            operatingStartHour: true,
+            operatingEndHour: true,
+            isActive: true,
+          },
+        },
+        reviews: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+      orderBy: [
+        { rating: "desc" }, // Order by rating first
+        { reviewCount: "desc" }, // Then by review count
+        { createdAt: "desc" }, // Finally by creation date
+      ],
+      take: limit * 2, // Get more than needed to account for filtering
+    });
+
+    // Transform to VenueListItem format
+    const venueItems = facilities
+      .map((facility) => {
+        try {
+          return transformFacilityToVenueListItem(facility);
+        } catch (error) {
+          console.error(`Error transforming facility ${facility.id}:`, error);
+          return null;
+        }
+      })
+      .filter((item): item is VenueListItem => item !== null)
+      .slice(0, limit); // Take only the requested number
+
+    return venueItems;
+  } catch (error) {
+    console.error("Error getting top venues by location:", error);
+    throw new Error("Failed to get top venues");
+  }
+}
+
+/**
+ * Get sports categories with venue counts
+ */
+export async function getSportsCategories(): Promise<
+  Array<{
+    name: string;
+    image: string;
+    venues: number;
+    sportType: SportType;
+  }>
+> {
+  try {
+    // Get count of venues for each sport type
+    const sportCounts = await prisma.court.groupBy({
+      by: ["sportType"],
+      where: {
+        isActive: true,
+        facility: {
+          status: "APPROVED",
+        },
+      },
+      _count: {
+        facilityId: true,
+      },
+    });
+
+    // Sport type to display name and image mapping
+    const sportMapping: Record<SportType, { name: string; image: string }> = {
+      BADMINTON: {
+        name: "Badminton",
+        image: "/assets/professional-badminton-court.png",
+      },
+      FOOTBALL: {
+        name: "Football",
+        image: "/assets/football-turf-ground.png",
+      },
+      CRICKET: {
+        name: "Cricket",
+        image: "/assets/cricket-ground-pavilion.png",
+      },
+      TENNIS: {
+        name: "Tennis",
+        image: "/assets/indoor-tennis-court.png",
+      },
+      BASKETBALL: {
+        name: "Basketball",
+        image: "/assets/outdoor-basketball-court.png",
+      },
+      VOLLEYBALL: {
+        name: "Volleyball",
+        image: "/assets/outdoor-basketball-court.png",
+      },
+      SQUASH: {
+        name: "Squash",
+        image: "/assets/indoor-tennis-court.png",
+      },
+      TABLE_TENNIS: {
+        name: "Table Tennis",
+        image: "/assets/professional-badminton-court.png",
+      },
+    };
+
+    // Transform the data
+    const categories = sportCounts
+      .map((count) => {
+        const mapping = sportMapping[count.sportType];
+        if (!mapping) return null;
+
+        return {
+          name: mapping.name,
+          image: mapping.image,
+          venues: count._count.facilityId,
+          sportType: count.sportType,
+        };
+      })
+      .filter(
+        (category): category is NonNullable<typeof category> =>
+          category !== null,
+      )
+      .sort((a, b) => b.venues - a.venues); // Sort by venue count descending
+
+    return categories;
+  } catch (error) {
+    console.error("Error getting sports categories:", error);
+    throw new Error("Failed to get sports categories");
+  }
+}
+
+/**
+ * Get platform statistics for home page
+ */
+export async function getPlatformStats(): Promise<{
+  venues: number;
+  players: number;
+  sports: number;
+}> {
+  try {
+    // Get venue count (approved facilities)
+    const venueCount = await prisma.facility.count({
+      where: {
+        status: "APPROVED",
+      },
+    });
+
+    // Get player count (active player profiles)
+    const playerCount = await prisma.playerProfile.count({
+      where: {
+        isActive: true,
+        isBanned: false,
+      },
+    });
+
+    // Get sports count (unique sport types with active courts)
+    const sportsResult = await prisma.court.findMany({
+      where: {
+        isActive: true,
+        facility: {
+          status: "APPROVED",
+        },
+      },
+      select: {
+        sportType: true,
+      },
+      distinct: ["sportType"],
+    });
+
+    const sportsCount = sportsResult.length;
+
+    return {
+      venues: venueCount,
+      players: playerCount,
+      sports: sportsCount,
+    };
+  } catch (error) {
+    console.error("Error getting platform stats:", error);
+    throw new Error("Failed to get platform statistics");
+  }
+}

@@ -1,109 +1,112 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
+import { Separator } from "../ui/separator";
+import { Shield } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="mt-24 border-t">
-      <div className="container py-16">
-        <div className="grid gap-12 md:grid-cols-3">
-          <div>
-            <Link href="/" className="flex items-center gap-3">
-              <div
-                className="h-10 w-10 rounded-md bg-[hsl(var(--brand))]"
-                aria-hidden
-              />
-              <span className="text-xl font-extrabold tracking-tight">
-                QUICKCOURT
-              </span>
-            </Link>
-            <p className="text-muted-foreground mt-4 max-w-sm text-base leading-relaxed">
-              Book top-rated sports venues and connect with players near you.
+    <footer className="bg-gray-900 text-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div className="space-y-4">
+            <div className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-2xl font-bold text-transparent">
+              QuickCourt
+            </div>
+            <p className="text-gray-400">
+              Your ultimate platform for booking sports venues and connecting
+              with fellow sports enthusiasts.
             </p>
-            <div className="text-muted-foreground mt-4 inline-flex items-center gap-3 text-base">
-              <MapPin size={20} /> India — multiple cities
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-8">
-            <div>
-              <div className="text-lg font-semibold">Explore</div>
-              <ul className="mt-4 space-y-3 text-base">
-                <li>
-                  <a className="story-link" href="#venues">
-                    Venues
-                  </a>
-                </li>
-                <li>
-                  <a className="story-link" href="#sports">
-                    Sports
-                  </a>
-                </li>
-                <li>
-                  <a className="story-link" href="#">
-                    How it works
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div className="text-lg font-semibold">Company</div>
-              <ul className="mt-4 space-y-3 text-base">
-                <li>
-                  <a className="story-link" href="#">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a className="story-link" href="#">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a className="story-link" href="#">
-                    Contact
-                  </a>
-                </li>
-              </ul>
+            <div className="flex space-x-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
+                <span className="text-sm font-bold">f</span>
+              </div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
+                <span className="text-sm font-bold">t</span>
+              </div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
+                <span className="text-sm font-bold">in</span>
+              </div>
             </div>
           </div>
 
           <div>
-            <div className="text-lg font-semibold">Stay in the loop</div>
-            <p className="text-muted-foreground mt-3 text-base leading-relaxed">
-              Get updates on new venues and offers.
-            </p>
-            <form className="mt-5 flex gap-3">
-              <Input
-                type="email"
-                placeholder="Your email"
-                className="h-12 flex-1 text-base"
-              />
-              <Button variant="hero" className="h-12 px-8 text-base">
-                Subscribe <ArrowRight className="h-5 w-5" />
-              </Button>
-            </form>
-            <p className="text-muted-foreground mt-3 text-sm">
-              No spam. Unsubscribe anytime.
-            </p>
+            <h3 className="mb-4 font-semibold">Quick Links</h3>
+            <div className="space-y-2">
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Find Venues
+              </Link>
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Sports Categories
+              </Link>
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                How it Works
+              </Link>
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Pricing
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold">Support</h3>
+            <div className="space-y-2">
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Help Center
+              </Link>
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Contact Us
+              </Link>
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Terms of Service
+              </Link>
+              <Link
+                href="#"
+                className="block text-gray-400 transition-colors hover:text-emerald-400"
+              >
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold">Contact Info</h3>
+            <div className="space-y-2 text-gray-400">
+              <p>📧 hello@quickcourt.com</p>
+              <p>📞 +91 98765 43210</p>
+              <p>📍 Ahmedabad, Gujarat</p>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t pt-8 md:flex-row">
-          <p className="text-muted-foreground text-base">
-            © {new Date().getFullYear()} QuickCourt. All rights reserved.
+        <Separator className="my-8 bg-gray-800" />
+
+        <div className="flex flex-col items-center justify-between md:flex-row">
+          <p className="text-gray-400">
+            © 2024 QuickCourt. All rights reserved.
           </p>
-          <div className="flex gap-8 text-base">
-            <a href="#" className="story-link">
-              Privacy
-            </a>
-            <a href="#" className="story-link">
-              Terms
-            </a>
-            <a href="#" className="story-link">
-              Support
-            </a>
+          <div className="mt-4 flex items-center space-x-4 md:mt-0">
+            <Shield className="h-5 w-5 text-emerald-400" />
+            <span className="text-gray-400">Secure & Trusted Platform</span>
           </div>
         </div>
       </div>
