@@ -33,8 +33,14 @@ import {
   CheckCircle,
   AlertTriangle,
   RefreshCw,
+  Shield,
+  ShieldCheck,
 } from "lucide-react";
-import { deleteVenueReview, getAllReviews } from "@/actions/venue-actions";
+import {
+  deleteVenueReview,
+  getAllReviews,
+  toggleReviewVerification,
+} from "@/actions/venue-actions";
 import { toast } from "sonner";
 
 interface AdminReview {
@@ -74,6 +80,9 @@ export function AdminReviews({
   const [verifiedFilter, setVerifiedFilter] = useState("ALL");
   const [deletingReview, setDeletingReview] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [togglingVerification, setTogglingVerification] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     filterReviews();
@@ -149,6 +158,33 @@ export function AdminReviews({
       toast.error("Failed to delete review");
     } finally {
       setDeletingReview(null);
+    }
+  };
+
+  const handleToggleVerification = async (reviewId: string) => {
+    try {
+      setTogglingVerification(reviewId);
+      const result = await toggleReviewVerification(reviewId);
+
+      if (result.success) {
+        setReviews((prevReviews) =>
+          prevReviews.map((review) =>
+            review.id === reviewId
+              ? { ...review, verified: result.verified ?? review.verified }
+              : review,
+          ),
+        );
+        toast.success(
+          `Review ${result.verified ? "verified" : "unverified"} successfully`,
+        );
+      } else {
+        toast.error(result.error || "Failed to toggle verification");
+      }
+    } catch (error) {
+      console.error("Error toggling verification:", error);
+      toast.error("Failed to toggle verification");
+    } finally {
+      setTogglingVerification(null);
     }
   };
 
@@ -405,7 +441,32 @@ export function AdminReviews({
                   </div>
 
                   {/* Actions */}
-                  <div className="ml-4">
+                  <div className="ml-4 flex flex-col gap-2">
+                    {/* Toggle Verification Button */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleToggleVerification(review.id)}
+                      disabled={togglingVerification === review.id}
+                      title={
+                        review.verified
+                          ? "Click to remove verification"
+                          : "Click to manually verify this review"
+                      }
+                      className={`${
+                        review.verified
+                          ? "text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                          : "text-orange-600 hover:bg-orange-50 hover:text-orange-700"
+                      }`}
+                    >
+                      {review.verified ? (
+                        <ShieldCheck className="h-4 w-4" />
+                      ) : (
+                        <Shield className="h-4 w-4" />
+                      )}
+                    </Button>
+
+                    {/* Delete Button */}
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button

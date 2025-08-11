@@ -1145,6 +1145,62 @@ export async function deleteVenueReview(reviewId: string): Promise<{
 }
 
 /**
+ * Toggle review verification status (Admin only)
+ */
+export async function toggleReviewVerification(reviewId: string): Promise<{
+  success: boolean;
+  verified?: boolean;
+  error?: string;
+}> {
+  try {
+    // Get current user session
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    // Check if user has admin role
+    const userProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+      select: { role: true },
+    });
+
+    if (!userProfile || userProfile.role !== UserRole.ADMIN) {
+      return { success: false, error: "Admin access required" };
+    }
+
+    // Get the current review
+    const existingReview = await prisma.facilityReview.findUnique({
+      where: { id: reviewId },
+      select: { id: true, verified: true },
+    });
+
+    if (!existingReview) {
+      return { success: false, error: "Review not found" };
+    }
+
+    // Toggle the verification status
+    const updatedReview = await prisma.facilityReview.update({
+      where: { id: reviewId },
+      data: {
+        verified: !existingReview.verified,
+      },
+    });
+
+    return {
+      success: true,
+      verified: updatedReview.verified,
+    };
+  } catch (error) {
+    console.error("Error toggling review verification:", error);
+    return { success: false, error: "Failed to toggle verification" };
+  }
+}
+
+/**
  * Check if current user can review a venue
  */
 export async function canReviewVenue(venueId: string): Promise<{
