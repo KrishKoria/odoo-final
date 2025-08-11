@@ -1,12 +1,20 @@
 "use client";
 
-import { LogIn, User, LogOut, Calendar } from "lucide-react";
+import {
+  LogIn,
+  User,
+  LogOut,
+  Calendar,
+  BarChart3,
+  Settings,
+} from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
@@ -22,27 +30,45 @@ const Navbar = () => {
     router.push("/");
   };
 
+  // Get user role from session
+  const userRole = session?.user?.role || "USER";
+
+  // Determine what navigation links to show based on role
+  const canAccessDashboard =
+    userRole === "FACILITY_OWNER" || userRole === "ADMIN";
+  const canAccessAdmin = userRole === "ADMIN";
+
   return (
     <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/80 shadow-sm backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-8">
             <div className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-2xl font-bold text-transparent">
-              QuickCourt
+              <Link href={"/"}>QuickCourt</Link>
             </div>
             <nav className="hidden space-x-6 md:flex">
-              <Link
-                href="/"
-                className="font-medium text-gray-700 transition-colors hover:text-emerald-600"
-              >
-                Home
-              </Link>
               <Link
                 href="/venues"
                 className="text-gray-600 transition-colors hover:text-emerald-600"
               >
                 Venues
               </Link>
+              {canAccessDashboard && (
+                <Link
+                  href="/dashboard"
+                  className="text-gray-600 transition-colors hover:text-emerald-600"
+                >
+                  Dashboard
+                </Link>
+              )}
+              {canAccessAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-gray-600 transition-colors hover:text-emerald-600"
+                >
+                  Admin
+                </Link>
+              )}
             </nav>
           </div>
 
@@ -83,6 +109,29 @@ const Navbar = () => {
                         <span className="text-base">Profile</span>
                       </Link>
                     </DropdownMenuItem>
+                    {canAccessDashboard && (
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/dashboard"
+                          className="flex items-center gap-3 py-3"
+                        >
+                          <BarChart3 className="h-5 w-5" />
+                          <span className="text-base">Dashboard</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    )}
+                    {canAccessAdmin && (
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/admin"
+                          className="flex items-center gap-3 py-3"
+                        >
+                          <Settings className="h-5 w-5" />
+                          <span className="text-base">Admin Panel</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    )}
+                    <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={handleLogout}
                       className="flex items-center gap-3 py-3 text-red-600"

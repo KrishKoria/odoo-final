@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { env } from "@/env";
-import { emailOTP } from "better-auth/plugins";
+import { emailOTP, customSession } from "better-auth/plugins";
 import { Resend } from "resend";
 import { createPlayerProfile } from "./utils";
 import { createAuthMiddleware } from "better-auth/api";
@@ -87,6 +87,21 @@ export const auth = betterAuth({
     },
   },
   plugins: [
+    customSession(async ({ user, session }) => {
+      // Fetch the PlayerProfile to include role in session
+      const playerProfile = await prisma.playerProfile.findUnique({
+        where: { userId: user.id },
+        select: { role: true },
+      });
+
+      return {
+        user: {
+          ...user,
+          role: playerProfile?.role || "USER",
+        },
+        session,
+      };
+    }),
     emailOTP({
       overrideDefaultEmailVerification: true, // This replaces the default email verification
       async sendVerificationOTP({ email, otp, type }) {
