@@ -24,6 +24,7 @@ import {
   Shield,
   Users,
   Zap,
+  Star,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -66,6 +67,8 @@ import type {
 } from "@/lib/venue-transformers";
 import VenueReviews, { type VenueReview } from "./VenueReviews";
 import RatingDisplay from "./RatingDisplay";
+import ReviewForm from "./ReviewForm";
+import { canReviewVenue } from "@/actions/venue-actions";
 
 interface VenueDetailsProps {
   id: string;
@@ -84,6 +87,15 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [timeSlotsLoading, setTimeSlotsLoading] = useState(false);
+
+  // Review form state
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [canReview, setCanReview] = useState(false);
+  const [reviewEligibility, setReviewEligibility] = useState<{
+    canReview: boolean;
+    reason?: string;
+    existingReview?: { id: string; rating: number; comment: string | null };
+  }>({ canReview: false });
 
   // UI state
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -107,7 +119,6 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
       Zap,
       CheckCircle,
     };
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return iconMap[iconName] ?? CheckCircle;
   };
 
@@ -133,6 +144,9 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
 
         // Load initial reviews
         await loadReviews(id, 1);
+
+        // Check review eligibility
+        await checkReviewEligibility(id);
       } catch (err) {
         console.error("Error loading venue data:", err);
         setError("Failed to load venue data");
@@ -209,6 +223,28 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
   const loadMoreReviews = async () => {
     if (!venue || reviewsLoading || !hasMoreReviews) return;
     await loadReviews(venue.id, reviewsPage + 1);
+  };
+
+  // Check if user can review this venue
+  const checkReviewEligibility = async (venueId: string) => {
+    try {
+      const eligibility = await canReviewVenue(venueId);
+      setReviewEligibility(eligibility);
+      setCanReview(eligibility.canReview);
+    } catch (err) {
+      console.error("Error checking review eligibility:", err);
+      setCanReview(false);
+    }
+  };
+
+  // Handle review submission success
+  const handleReviewSubmitted = async () => {
+    setShowReviewForm(false);
+    // Reload reviews to show the new review
+    if (venue) {
+      await loadReviews(venue.id, 1);
+      await checkReviewEligibility(venue.id);
+    }
   };
 
   const nextImage = () => {
@@ -796,6 +832,74 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
           </TabsContent>
 
           <TabsContent value="reviews" className="space-y-8">
+            {/* Review Form Section */}
+            {showReviewForm ? (
+              <ReviewForm
+                venueId={venue.id}
+                venueName={venue.name}
+                existingReview={reviewEligibility.existingReview}
+                onReviewSubmitted={handleReviewSubmitted}
+                onCancel={() => setShowReviewForm(false)}
+              />
+            ) : (
+              canReview && (
+                <Card>
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-semibold">Share Your Experience</h3>
+                        <p className="text-sm text-gray-600">
+                          Help others by writing a review for this venue
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() => setShowReviewForm(true)}
+                        className="bg-emerald-600 hover:bg-emerald-700"
+                      >
+                        <Star className="mr-2 h-4 w-4" />
+                        Write Review
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            )}
+
+            {/* Existing Review Notice */}
+            {reviewEligibility.existingReview && !showReviewForm && (
+              <Card className="border-blue-200 bg-blue-50">
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-5 w-5 text-blue-600" />
+                      <div>
+                        <h3 className="font-semibold text-blue-900">
+                          You&apos;ve already reviewed this venue
+                        </h3>
+                        <div className="mt-1 flex items-center space-x-2">
+                          <RatingDisplay
+                            rating={reviewEligibility.existingReview.rating}
+                            size="sm"
+                            showNumber={false}
+                          />
+                          <span className="text-sm text-blue-700">
+                            {reviewEligibility.existingReview.rating}/5
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowReviewForm(true)}
+                      className="border-blue-300 text-blue-700 hover:bg-blue-100"
+                    >
+                      Edit Review
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             <VenueReviews
               venueId={venue.id}
               reviews={reviews}

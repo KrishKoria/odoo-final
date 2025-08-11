@@ -15,6 +15,7 @@ import {
   Building2,
   AlertTriangle,
   Settings,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -48,6 +49,12 @@ export default async function AdminPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button asChild variant="outline">
+            <Link href="/admin/reviews">
+              <Star className="mr-2 h-4 w-4" />
+              Review Management
+            </Link>
+          </Button>
           <Button asChild variant="outline">
             <Link href="/admin/users">
               <Users className="mr-2 h-4 w-4" />
@@ -105,7 +112,29 @@ export default async function AdminPage() {
       />
 
       {/* Quick Actions */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Star className="h-5 w-5" />
+              Review Management
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-muted-foreground text-sm">
+              Monitor and moderate venue reviews
+            </p>
+            <div className="space-y-2">
+              <Button asChild variant="outline" size="sm" className="w-full">
+                <Link href="/admin/reviews">All Reviews</Link>
+              </Button>
+              <Button asChild variant="outline" size="sm" className="w-full">
+                <Link href="/admin/reviews?filter=low-rating">Low Ratings</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">

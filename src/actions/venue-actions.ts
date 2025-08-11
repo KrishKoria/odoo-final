@@ -1,6 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import {
   transformFacilityToVenueListItem,
   transformFacilityToVenueDetails,
@@ -12,8 +14,59 @@ import {
   type VenueFilters,
 } from "@/lib/venue-transformers";
 import { type SportType } from "@/generated/prisma";
+import { UserRole } from "@/types/venue";
 
-/**
+// Get all reviews for admin panel
+export async function getAllReviews() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    // Check if user has admin role
+    const userProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+      select: { role: true },
+    });
+
+    if (!userProfile || userProfile.role !== UserRole.ADMIN) {
+      return { success: false, error: "Admin access required" };
+    }
+
+    const reviews = await prisma.facilityReview.findMany({
+      include: {
+        player: {
+          include: {
+            user: {
+              select: {
+                name: true,
+                email: true,
+              },
+            },
+          },
+        },
+        facility: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return { success: true, data: reviews };
+  } catch (error) {
+    console.error("Error fetching all reviews:", error);
+    return { success: false, error: "Failed to fetch reviews" };
+  }
+} /**
  * Get venues with filtering and sorting support
  */
 export async function getVenues(
@@ -843,5 +896,318 @@ export async function getVenueRatingSummary(venueId: string): Promise<{
   } catch (error) {
     console.error("Error fetching venue rating summary:", error);
     throw new Error("Failed to fetch venue rating summary");
+  }
+}
+
+/**
+ * Submit a review for a venue
+ */
+export async function submitVenueReview(
+  venueId: string,
+  rating: number,
+  comment?: string,
+): Promise<{
+  success: boolean;
+  review?: {
+    id: string;
+    rating: number;
+    comment: string | null;
+    verified: boolean;
+    createdAt: Date;
+  };
+  error?: string;
+}> {
+  try {
+    // Get current user session
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    // Get player profile
+    const playerProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+      select: { id: true },
+    });
+
+    if (!playerProfile) {
+      return { success: false, error: "Player profile not found" };
+    }
+
+    // Check if venue exists and is approved
+    const venue = await prisma.facility.findUnique({
+      where: { id: venueId, status: "APPROVED" },
+      select: { id: true },
+    });
+
+    if (!venue) {
+      return { success: false, error: "Venue not found or not approved" };
+    }
+
+    // Check if user already has a review for this venue
+    const existingReview = await prisma.facilityReview.findUnique({
+      where: {
+        facilityId_playerId: {
+          facilityId: venueId,
+          playerId: playerProfile.id,
+        },
+      },
+    });
+
+    if (existingReview) {
+      return { success: false, error: "You have already reviewed this venue" };
+    }
+
+    // Check if user has made any bookings at this venue (for verification)
+    const hasBookings = await prisma.booking.findFirst({
+      where: {
+        playerId: playerProfile.id,
+        court: {
+          facilityId: venueId,
+        },
+        status: "COMPLETED",
+      },
+    });
+
+    const verified = hasBookings !== null;
+
+    // Create the review
+    const review = await prisma.facilityReview.create({
+      data: {
+        facilityId: venueId,
+        playerId: playerProfile.id,
+        rating,
+        comment: comment || null,
+        verified,
+      },
+    });
+
+    // Update venue rating
+    await updateVenueRating(venueId);
+
+    return {
+      success: true,
+      review: {
+        id: review.id,
+        rating: review.rating,
+        comment: review.comment,
+        verified: review.verified,
+        createdAt: review.createdAt,
+      },
+    };
+  } catch (error) {
+    console.error("Error submitting venue review:", error);
+    return { success: false, error: "Failed to submit review" };
+  }
+}
+
+/**
+ * Update an existing venue review
+ */
+export async function updateVenueReview(
+  reviewId: string,
+  rating: number,
+  comment?: string,
+): Promise<{
+  success: boolean;
+  review?: {
+    id: string;
+    rating: number;
+    comment: string | null;
+    verified: boolean;
+    updatedAt: Date;
+  };
+  error?: string;
+}> {
+  try {
+    // Get current user session
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    // Get player profile
+    const playerProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+      select: { id: true },
+    });
+
+    if (!playerProfile) {
+      return { success: false, error: "Player profile not found" };
+    }
+
+    // Get the existing review and check ownership
+    const existingReview = await prisma.facilityReview.findUnique({
+      where: { id: reviewId },
+      select: { id: true, playerId: true, facilityId: true },
+    });
+
+    if (!existingReview) {
+      return { success: false, error: "Review not found" };
+    }
+
+    if (existingReview.playerId !== playerProfile.id) {
+      return { success: false, error: "Not authorized to update this review" };
+    }
+
+    // Update the review
+    const updatedReview = await prisma.facilityReview.update({
+      where: { id: reviewId },
+      data: {
+        rating,
+        comment: comment || null,
+      },
+    });
+
+    // Update venue rating
+    await updateVenueRating(existingReview.facilityId);
+
+    return {
+      success: true,
+      review: {
+        id: updatedReview.id,
+        rating: updatedReview.rating,
+        comment: updatedReview.comment,
+        verified: updatedReview.verified,
+        updatedAt: updatedReview.updatedAt,
+      },
+    };
+  } catch (error) {
+    console.error("Error updating venue review:", error);
+    return { success: false, error: "Failed to update review" };
+  }
+}
+
+/**
+ * Delete a venue review
+ */
+export async function deleteVenueReview(reviewId: string): Promise<{
+  success: boolean;
+  error?: string;
+}> {
+  try {
+    // Get current user session
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    // Get player profile
+    const playerProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+      select: { id: true, role: true },
+    });
+
+    if (!playerProfile) {
+      return { success: false, error: "Player profile not found" };
+    }
+
+    // Get the existing review and check ownership
+    const existingReview = await prisma.facilityReview.findUnique({
+      where: { id: reviewId },
+      select: { id: true, playerId: true, facilityId: true },
+    });
+
+    if (!existingReview) {
+      return { success: false, error: "Review not found" };
+    }
+
+    // Check if user owns the review or is an admin
+    if (
+      existingReview.playerId !== playerProfile.id &&
+      playerProfile.role !== "ADMIN"
+    ) {
+      return { success: false, error: "Not authorized to delete this review" };
+    }
+
+    // Delete the review
+    await prisma.facilityReview.delete({
+      where: { id: reviewId },
+    });
+
+    // Update venue rating
+    await updateVenueRating(existingReview.facilityId);
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting venue review:", error);
+    return { success: false, error: "Failed to delete review" };
+  }
+}
+
+/**
+ * Check if current user can review a venue
+ */
+export async function canReviewVenue(venueId: string): Promise<{
+  canReview: boolean;
+  reason?: string;
+  existingReview?: {
+    id: string;
+    rating: number;
+    comment: string | null;
+  };
+}> {
+  try {
+    // Get current user session
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { canReview: false, reason: "Authentication required" };
+    }
+
+    // Get player profile
+    const playerProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+      select: { id: true },
+    });
+
+    if (!playerProfile) {
+      return { canReview: false, reason: "Player profile not found" };
+    }
+
+    // Check if venue exists and is approved
+    const venue = await prisma.facility.findUnique({
+      where: { id: venueId, status: "APPROVED" },
+      select: { id: true },
+    });
+
+    if (!venue) {
+      return { canReview: false, reason: "Venue not found or not approved" };
+    }
+
+    // Check if user already has a review for this venue
+    const existingReview = await prisma.facilityReview.findUnique({
+      where: {
+        facilityId_playerId: {
+          facilityId: venueId,
+          playerId: playerProfile.id,
+        },
+      },
+      select: { id: true, rating: true, comment: true },
+    });
+
+    if (existingReview) {
+      return {
+        canReview: false,
+        reason: "Already reviewed",
+        existingReview,
+      };
+    }
+
+    return { canReview: true };
+  } catch (error) {
+    console.error("Error checking review eligibility:", error);
+    return { canReview: false, reason: "Error checking eligibility" };
   }
 }
