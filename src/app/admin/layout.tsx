@@ -2,12 +2,12 @@ import { SessionGuard } from "@/components/auth/session-guard";
 import Navbar from "@/components/home/Navbar";
 import { UserRole } from "@/types/venue";
 
-export default function DashboardLayout({
+export default function AdminLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <SessionGuard
-      requiredRoles={[UserRole.FACILITY_OWNER, UserRole.ADMIN]}
+      requiredRoles={[UserRole.ADMIN]}
       requireEmailVerification={true}
     >
       <Navbar />

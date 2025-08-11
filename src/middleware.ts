@@ -7,6 +7,8 @@ type Role = "USER" | "FACILITY_OWNER" | "ADMIN";
 const protectedRoutes: Record<string, Role[]> = {
   "/dashboard": ["USER", "FACILITY_OWNER", "ADMIN"],
   "/admin": ["ADMIN"],
+  "/admin/users": ["ADMIN"],
+  "/admin/facilities": ["ADMIN"],
   "/facility": ["FACILITY_OWNER", "ADMIN"],
   "/profile": ["USER", "FACILITY_OWNER", "ADMIN"],
   "/bookings": ["USER", "FACILITY_OWNER", "ADMIN"],
@@ -26,12 +28,21 @@ export async function middleware(request: NextRequest) {
 
   const sessionCookie = request.cookies.get("better-auth.session_token");
 
+  console.log(
+    "Middleware - Checking route:",
+    pathname,
+    "Session cookie:",
+    !!sessionCookie?.value,
+  );
+
   if (!sessionCookie?.value) {
     console.log("Middleware - No session cookie, redirecting to login");
     const loginUrl = new URL("/auth/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
+
+  console.log("Middleware - Session cookie found, allowing access");
   return NextResponse.next();
 }
 
