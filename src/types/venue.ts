@@ -1,0 +1,50 @@
+// Venue and sport type definitions
+// These match the Prisma schema but are maintained separately for better control
+
+export enum SportType {
+  BADMINTON = "BADMINTON",
+  TENNIS = "TENNIS",
+  SQUASH = "SQUASH",
+  BASKETBALL = "BASKETBALL",
+  FOOTBALL = "FOOTBALL",
+  CRICKET = "CRICKET",
+  TABLE_TENNIS = "TABLE_TENNIS",
+  VOLLEYBALL = "VOLLEYBALL",
+}
+
+export enum VenueType {
+  INDOOR = "INDOOR",
+  OUTDOOR = "OUTDOOR",
+  MIXED = "MIXED",
+}
+
+export enum BookingStatus {
+  CONFIRMED = "CONFIRMED",
+  CANCELLED = "CANCELLED",
+  COMPLETED = "COMPLETED",
+}
+
+export enum MatchStatus {
+  OPEN = "OPEN",
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED",
+  CANCELLED = "CANCELLED",
+}
+
+export enum FacilityStatus {
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+}
+
+export enum UserRole {
+  USER = "USER",
+  FACILITY_OWNER = "FACILITY_OWNER",
+  ADMIN = "ADMIN",
+}
+
+export enum WaitlistStatus {
+  WAITING = "WAITING",
+  PROMOTED = "PROMOTED",
+  EXPIRED = "EXPIRED",
+}

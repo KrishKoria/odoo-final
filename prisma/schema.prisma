@@ -119,6 +119,12 @@ enum SportType {
   VOLLEYBALL
 }
 
+enum VenueType {
+  INDOOR
+  OUTDOOR
+  MIXED
+}
+
 model PlayerProfile {
   id           String    @id @default(cuid())
   userId       String    @unique
@@ -139,6 +145,7 @@ model PlayerProfile {
   matchPlayers MatchPlayer[]
   waitlistEntries WaitlistEntry[]
   notifications NotificationLog[]
+  facilityReviews FacilityReview[]
   
   @@map("player_profile")
 }
@@ -152,6 +159,12 @@ model Facility {
   longitude   Float?
   amenities   String[]
   photos      String[]
+  phone       String?
+  email       String?
+  policies    String[]
+  venueType   VenueType      @default(INDOOR)
+  rating      Float?
+  reviewCount Int            @default(0)
   ownerId     String
   status      FacilityStatus @default(PENDING)
   approvedAt  DateTime?
@@ -163,10 +176,33 @@ model Facility {
   // Relations
   owner       PlayerProfile  @relation("FacilityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   courts      Court[]
+  reviews     FacilityReview[]
   
   @@index([status])
   @@index([ownerId])
+  @@index([rating])
   @@map("facility")
+}
+
+model FacilityReview {
+  id          String   @id @default(cuid())
+  facilityId  String
+  playerId    String
+  rating      Int      // 1-5 stars
+  comment     String?
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  facility    Facility      @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  player      PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([facilityId, playerId]) // One review per player per facility
+  @@index([facilityId])
+  @@index([playerId])
+  @@index([rating])
+  @@map("facility_review")
 }
 
 model Court {
