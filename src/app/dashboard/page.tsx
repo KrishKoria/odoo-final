@@ -78,7 +78,7 @@ export default function Page() {
               <Link href="/dashboard/bookings">View All Bookings</Link>
             </Button>
             <Button asChild size="sm" className="w-full">
-              <Link href="/dashboard/time-slots">Manage Time Slots</Link>
+              <Link href="/dashboard/facilities">Manage Time Slots</Link>
             </Button>
           </CardContent>
         </Card>
@@ -87,18 +87,20 @@ export default function Page() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Settings className="h-5 w-5" />
-              Settings
+              Profile
             </CardTitle>
             <CardDescription>
               Update your profile and preferences
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <Button asChild variant="outline" size="sm" className="w-full">
+          <CardContent className="flex h-16 flex-col justify-center">
+            <Button
+              asChild
+              variant="default"
+              size="lg"
+              className="w-full text-lg font-semibold"
+            >
               <Link href="/dashboard/profile">Edit Profile</Link>
-            </Button>
-            <Button asChild size="sm" className="w-full">
-              <Link href="/dashboard/settings">Account Settings</Link>
             </Button>
           </CardContent>
         </Card>
