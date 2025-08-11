@@ -2,8 +2,9 @@
 
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import type { SportType, VenueType, FacilityStatus } from "@/generated/prisma";
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
+import type { FacilityStatus, VenueType } from "@/types/venue";
 
 export interface CreateFacilityData {
   name: string;
@@ -29,7 +30,7 @@ export interface UpdateFacilityData extends CreateFacilityData {
 export async function getUserFacilities() {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -107,7 +108,7 @@ export async function getUserFacilities() {
 export async function getFacilityById(facilityId: string) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -221,7 +222,7 @@ export async function getFacilityById(facilityId: string) {
 export async function createFacility(data: CreateFacilityData) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -282,7 +283,7 @@ export async function createFacility(data: CreateFacilityData) {
 export async function updateFacility(data: UpdateFacilityData) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -355,7 +356,7 @@ export async function updateFacility(data: UpdateFacilityData) {
 export async function deleteFacility(facilityId: string) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {

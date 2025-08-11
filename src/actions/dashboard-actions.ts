@@ -2,7 +2,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import type { SportType } from "@/generated/prisma";
+import { headers } from "next/headers";
+import type { SportType } from "@/types/venue";
 
 /**
  * Get dashboard statistics for a facility owner
@@ -10,7 +11,7 @@ import type { SportType } from "@/generated/prisma";
 export async function getFacilityOwnerStats(facilityId?: string) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -152,7 +153,7 @@ export async function getFacilityOwnerStats(facilityId?: string) {
 export async function getBookingTrends(facilityId?: string, days = 30) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -255,7 +256,7 @@ export async function getBookingTrends(facilityId?: string, days = 30) {
 export async function getPeakHoursData(facilityId?: string) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
@@ -360,7 +361,7 @@ export async function getPeakHoursData(facilityId?: string) {
 export async function getRecentBookings(facilityId?: string, limit = 10) {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
 
     if (!session?.user) {
