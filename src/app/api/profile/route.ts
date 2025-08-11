@@ -10,6 +10,13 @@ const updateProfileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").optional(),
   email: z.string().email("Invalid email address").optional(),
   phoneNumber: z.string().optional(),
+  bio: z.string().optional(),
+  address: z.string().optional(),
+  dateOfBirth: z.string().optional(),
+  gender: z.string().optional(),
+  website: z.string().url().optional().or(z.literal("")),
+  linkedIn: z.string().optional(),
+  twitter: z.string().optional(),
   oldPassword: z.string().optional(),
   newPassword: z
     .string()
@@ -26,6 +33,31 @@ export async function GET(request: NextRequest) {
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Fetch the user's complete profile data
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        emailVerified: true,
+        image: true,
+        bio: true,
+        address: true,
+        dateOfBirth: true,
+        gender: true,
+        website: true,
+        linkedIn: true,
+        twitter: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     // Fetch the user's player profile with role information
@@ -65,20 +97,24 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json({
-      id: playerProfile?.id ?? null,
-      role: playerProfile?.role ?? "USER",
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      image: user.image,
+      bio: user.bio,
+      address: user.address,
+      dateOfBirth: user.dateOfBirth?.toISOString(),
+      gender: user.gender,
+      website: user.website,
+      linkedIn: user.linkedIn,
+      twitter: user.twitter,
       phoneNumber: playerProfile?.phoneNumber ?? null,
+      role: playerProfile?.role ?? "USER",
       avatar: playerProfile?.avatar ?? null,
       isActive: playerProfile?.isActive ?? true,
-      user: {
-        id: session.user.id,
-        name: session.user.name,
-        email: session.user.email,
-        emailVerified: session.user.emailVerified,
-        image: session.user.image,
-      },
-      createdAt: playerProfile?.createdAt?.toISOString() ?? null,
-      updatedAt: playerProfile?.updatedAt?.toISOString() ?? null,
+      createdAt: user.createdAt.toISOString(),
+      updatedAt: user.updatedAt.toISOString(),
     });
   } catch (error) {
     console.error("Profile fetch error:", error);
@@ -119,6 +155,13 @@ export async function PATCH(request: NextRequest) {
         name: (formData.get("name") as string) || undefined,
         email: (formData.get("email") as string) || undefined,
         phoneNumber: (formData.get("phoneNumber") as string) || undefined,
+        bio: (formData.get("bio") as string) || undefined,
+        address: (formData.get("address") as string) || undefined,
+        dateOfBirth: (formData.get("dateOfBirth") as string) || undefined,
+        gender: (formData.get("gender") as string) || undefined,
+        website: (formData.get("website") as string) || undefined,
+        linkedIn: (formData.get("linkedIn") as string) || undefined,
+        twitter: (formData.get("twitter") as string) || undefined,
         oldPassword: (formData.get("oldPassword") as string) || undefined,
         newPassword: (formData.get("newPassword") as string) || undefined,
       };
@@ -138,7 +181,18 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Start building the update object
-    const updateData: { name?: string; email?: string; image?: string } = {};
+    const updateData: {
+      name?: string;
+      email?: string;
+      image?: string;
+      bio?: string;
+      address?: string;
+      dateOfBirth?: Date;
+      gender?: string;
+      website?: string;
+      linkedIn?: string;
+      twitter?: string;
+    } = {};
 
     // Handle avatar upload
     if (avatarFile) {
@@ -168,6 +222,36 @@ export async function PATCH(request: NextRequest) {
 
     if (validatedData.email) {
       updateData.email = validatedData.email;
+    }
+
+    if (validatedData.bio !== undefined) {
+      updateData.bio = validatedData.bio;
+    }
+
+    if (validatedData.address !== undefined) {
+      updateData.address = validatedData.address;
+    }
+
+    if (validatedData.dateOfBirth !== undefined) {
+      updateData.dateOfBirth = validatedData.dateOfBirth
+        ? new Date(validatedData.dateOfBirth)
+        : null;
+    }
+
+    if (validatedData.gender !== undefined) {
+      updateData.gender = validatedData.gender;
+    }
+
+    if (validatedData.website !== undefined) {
+      updateData.website = validatedData.website || null;
+    }
+
+    if (validatedData.linkedIn !== undefined) {
+      updateData.linkedIn = validatedData.linkedIn;
+    }
+
+    if (validatedData.twitter !== undefined) {
+      updateData.twitter = validatedData.twitter;
     }
 
     // Handle password change
@@ -204,6 +288,13 @@ export async function PATCH(request: NextRequest) {
         name: updatedUser.name,
         email: updatedUser.email,
         image: updatedUser.image,
+        bio: updatedUser.bio,
+        address: updatedUser.address,
+        dateOfBirth: updatedUser.dateOfBirth?.toISOString(),
+        gender: updatedUser.gender,
+        website: updatedUser.website,
+        linkedIn: updatedUser.linkedIn,
+        twitter: updatedUser.twitter,
       },
     });
   } catch (error) {
