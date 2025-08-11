@@ -68,6 +68,31 @@ export default async function AdminPage() {
         </div>
       </div>
 
+      {/* System Alerts - Action Required */}
+      {stats.pendingFacilities > 0 && (
+        <Card className="border-orange-200 bg-orange-50/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-orange-800">
+              <AlertTriangle className="h-5 w-5" />
+              Action Required
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-3 text-orange-700">
+              {stats.pendingFacilities} facilities are awaiting approval. Review
+              them to keep the platform running smoothly.
+            </p>
+            <Button
+              asChild
+              size="sm"
+              className="bg-orange-600 hover:bg-orange-700"
+            >
+              <Link href="/admin/facilities">Review Pending Facilities</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
       {/* KPI Cards */}
       <AdminKPIs stats={stats} />
 
@@ -170,31 +195,6 @@ export default async function AdminPage() {
           </CardContent>
         </Card>
       </div>
-
-      {/* System Alerts */}
-      {stats.pendingFacilities > 0 && (
-        <Card className="border-orange-200 bg-orange-50/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-orange-800">
-              <AlertTriangle className="h-5 w-5" />
-              Action Required
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="mb-3 text-orange-700">
-              {stats.pendingFacilities} facilities are awaiting approval. Review
-              them to keep the platform running smoothly.
-            </p>
-            <Button
-              asChild
-              size="sm"
-              className="bg-orange-600 hover:bg-orange-700"
-            >
-              <Link href="/admin/facilities">Review Pending Facilities</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

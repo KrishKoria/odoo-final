@@ -28,11 +28,31 @@ async function requireAdmin() {
   return session.user;
 }
 
+// Helper function to calculate percentage change
+function calculatePercentageChange(current: number, previous: number): string {
+  if (previous === 0) {
+    return current > 0 ? "+100%" : "No change";
+  }
+  const change = ((current - previous) / previous) * 100;
+  const formatted = Math.abs(change).toFixed(1);
+  if (change > 0) {
+    return `+${formatted}%`;
+  } else if (change < 0) {
+    return `-${formatted}%`;
+  } else {
+    return "No change";
+  }
+}
+
 // Global Stats Functions
 export async function getGlobalStats() {
   await requireAdmin();
 
   try {
+    const now = new Date();
+    const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    // Get current totals
     const [
       totalUsers,
       totalFacilityOwners,
@@ -53,12 +73,56 @@ export async function getGlobalStats() {
       }),
     ]);
 
+    // Get last month's totals for trend calculation
+    const [
+      lastMonthUsers,
+      lastMonthFacilityOwners,
+      lastMonthBookings,
+      lastMonthCourts,
+    ] = await Promise.all([
+      prisma.user.count({
+        where: { createdAt: { lt: startOfCurrentMonth } },
+      }),
+      prisma.playerProfile.count({
+        where: {
+          role: "FACILITY_OWNER",
+          createdAt: { lt: startOfCurrentMonth },
+        },
+      }),
+      prisma.booking.count({
+        where: { createdAt: { lt: startOfCurrentMonth } },
+      }),
+      prisma.court.count({
+        where: {
+          isActive: true,
+          createdAt: { lt: startOfCurrentMonth },
+        },
+      }),
+    ]);
+
     return {
       totalUsers,
       totalFacilityOwners,
       totalBookings,
       totalActiveCourts,
       pendingFacilities,
+      trends: {
+        usersTrend: calculatePercentageChange(totalUsers, lastMonthUsers),
+        facilityOwnersTrend: calculatePercentageChange(
+          totalFacilityOwners,
+          lastMonthFacilityOwners,
+        ),
+        bookingsTrend: calculatePercentageChange(
+          totalBookings,
+          lastMonthBookings,
+        ),
+        courtsTrend: calculatePercentageChange(
+          totalActiveCourts,
+          lastMonthCourts,
+        ),
+        pendingTrend:
+          pendingFacilities > 0 ? "Requires attention" : "All caught up!",
+      },
     };
   } catch (error) {
     console.error("Error fetching global stats:", error);

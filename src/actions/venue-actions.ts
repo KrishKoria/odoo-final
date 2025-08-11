@@ -265,14 +265,6 @@ export async function getVenueTimeSlots(
                   },
                 },
               },
-              select: {
-                id: true,
-                startTime: true,
-                endTime: true,
-                price: true,
-                isMaintenanceBlocked: true,
-                booking: true,
-              },
               orderBy: {
                 startTime: "asc",
               },

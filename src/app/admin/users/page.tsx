@@ -327,7 +327,11 @@ export default function UserManagementPage() {
         ) : (
           <div className="grid gap-4">
             {filteredUsers.map((user) => (
-              <UserManagementCard key={user.id} user={user} />
+              <UserManagementCard
+                key={user.id}
+                user={user}
+                onUserUpdated={loadUsers}
+              />
             ))}
           </div>
         )}

@@ -62,9 +62,13 @@ interface UserManagementCardProps {
       };
     } | null;
   };
+  onUserUpdated?: () => void;
 }
 
-export function UserManagementCard({ user }: UserManagementCardProps) {
+export function UserManagementCard({
+  user,
+  onUserUpdated,
+}: UserManagementCardProps) {
   const [isBanning, setIsBanning] = useState(false);
   const [isUnbanning, setIsUnbanning] = useState(false);
   const [showBookings, setShowBookings] = useState(false);
@@ -80,6 +84,7 @@ export function UserManagementCard({ user }: UserManagementCardProps) {
       setIsBanning(true);
       await banUser(user.id);
       toast.success(`${user.name} has been banned`);
+      onUserUpdated?.(); // Refresh the user list
     } catch (error) {
       toast.error("Failed to ban user");
       console.error(error);
@@ -93,6 +98,7 @@ export function UserManagementCard({ user }: UserManagementCardProps) {
       setIsUnbanning(true);
       await unbanUser(user.id);
       toast.success(`${user.name} has been unbanned`);
+      onUserUpdated?.(); // Refresh the user list
     } catch (error) {
       toast.error("Failed to unban user");
       console.error(error);

@@ -14,6 +14,13 @@ interface AdminKPIsProps {
     totalBookings: number;
     totalActiveCourts: number;
     pendingFacilities: number;
+    trends: {
+      usersTrend: string;
+      facilityOwnersTrend: string;
+      bookingsTrend: string;
+      courtsTrend: string;
+      pendingTrend: string;
+    };
   };
 }
 
@@ -24,37 +31,46 @@ export function AdminKPIs({ stats }: AdminKPIsProps) {
       value: stats.totalUsers.toLocaleString(),
       icon: Users,
       description: "Registered users",
-      trend: "+12% from last month",
+      trend: `${stats.trends.usersTrend} from last month`,
+      isPositive: stats.trends.usersTrend.startsWith("+"),
+      isNegative: stats.trends.usersTrend.startsWith("-"),
     },
     {
       title: "Facility Owners",
       value: stats.totalFacilityOwners.toLocaleString(),
       icon: Building2,
       description: "Active facility owners",
-      trend: "+8% from last month",
+      trend: `${stats.trends.facilityOwnersTrend} from last month`,
+      isPositive: stats.trends.facilityOwnersTrend.startsWith("+"),
+      isNegative: stats.trends.facilityOwnersTrend.startsWith("-"),
     },
     {
       title: "Total Bookings",
       value: stats.totalBookings.toLocaleString(),
       icon: Calendar,
       description: "All-time bookings",
-      trend: "+23% from last month",
+      trend: `${stats.trends.bookingsTrend} from last month`,
+      isPositive: stats.trends.bookingsTrend.startsWith("+"),
+      isNegative: stats.trends.bookingsTrend.startsWith("-"),
     },
     {
       title: "Active Courts",
       value: stats.totalActiveCourts.toLocaleString(),
       icon: Activity,
       description: "Available courts",
-      trend: "+5% from last month",
+      trend: `${stats.trends.courtsTrend} from last month`,
+      isPositive: stats.trends.courtsTrend.startsWith("+"),
+      isNegative: stats.trends.courtsTrend.startsWith("-"),
     },
     {
       title: "Pending Approvals",
       value: stats.pendingFacilities.toLocaleString(),
       icon: AlertTriangle,
       description: "Facilities awaiting approval",
-      trend:
-        stats.pendingFacilities > 0 ? "Requires attention" : "All caught up!",
+      trend: stats.trends.pendingTrend,
       urgent: stats.pendingFacilities > 0,
+      isPositive: false,
+      isNegative: false,
     },
   ];
 
@@ -76,7 +92,15 @@ export function AdminKPIs({ stats }: AdminKPIsProps) {
             </div>
             <p className="text-muted-foreground text-xs">{kpi.description}</p>
             <p
-              className={`mt-1 text-xs ${kpi.urgent ? "text-orange-600" : "text-green-600"}`}
+              className={`mt-1 text-xs ${
+                kpi.urgent
+                  ? "text-orange-600"
+                  : kpi.isPositive
+                    ? "text-green-600"
+                    : kpi.isNegative
+                      ? "text-red-600"
+                      : "text-muted-foreground"
+              }`}
             >
               {kpi.trend}
             </p>
