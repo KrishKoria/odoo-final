@@ -36,7 +36,7 @@ const Navbar = () => {
         </Link>
         <nav className="hidden items-center gap-8 text-base md:flex">
           <Link
-            href="#venues"
+            href="/venues"
             className="font-medium transition-colors hover:text-[hsl(var(--brand))]"
           >
             Book

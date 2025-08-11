@@ -141,6 +141,7 @@ export default function VenuesPage() {
   const [minRating, setMinRating] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [sortBy, setSortBy] = useState("rating");
 
   const filteredVenues = venues.filter((venue) => {
     const matchesSearch =
@@ -166,10 +167,25 @@ export default function VenuesPage() {
     );
   });
 
+  const sortedVenues = [...filteredVenues].sort((a, b) => {
+    switch (sortBy) {
+      case "rating":
+        return b.rating - a.rating; // Highest rating first
+      case "price-low":
+        return a.price - b.price; // Lowest price first
+      case "price-high":
+        return b.price - a.price; // Highest price first
+      case "name":
+        return a.name.localeCompare(b.name); // Alphabetical order
+      default:
+        return 0;
+    }
+  });
+
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(filteredVenues.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedVenues.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedVenues = filteredVenues.slice(
+  const paginatedVenues = sortedVenues.slice(
     startIndex,
     startIndex + itemsPerPage,
   );
@@ -362,10 +378,10 @@ export default function VenuesPage() {
             <div className="mb-6 flex items-center justify-between">
               <p className="text-gray-600">
                 Showing {startIndex + 1}-
-                {Math.min(startIndex + itemsPerPage, filteredVenues.length)} of{" "}
-                {filteredVenues.length} venues
+                {Math.min(startIndex + itemsPerPage, sortedVenues.length)} of{" "}
+                {sortedVenues.length} venues
               </p>
-              <Select defaultValue="rating">
+              <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-40">
                   <SelectValue />
                 </SelectTrigger>
