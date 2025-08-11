@@ -4,6 +4,8 @@ import { useState } from "react";
 import { SignUpForm } from "@/components/forms/signup-form";
 import { LoginForm } from "@/components/forms/login-form";
 import { OtpVerification } from "@/components/forms/otp-verification";
+import { useOAuthCallback } from "@/hooks/use-oauth-callback";
+import Image from "next/image";
 
 type AuthStep = "login" | "signup" | "verify-email" | "forgot-password";
 
@@ -16,6 +18,9 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
   const [verificationEmail, setVerificationEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
+
+  // Handle OAuth callbacks to create player profiles
+  useOAuthCallback();
 
   const handleSignupSuccess = (email: string) => {
     setVerificationEmail(email);
@@ -106,20 +111,19 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
     <div className="relative container grid min-h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
       {/* Left side - Branding */}
       <div className="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700" />
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/auth-background.jpg"
+            alt="Sports court background"
+            className="h-full w-full object-cover"
+            fill
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
         <div className="relative z-20 flex items-center text-lg font-medium">
           <div className="mr-2 h-6 w-6 rounded-full bg-white" />
           QuickCourt
-        </div>
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              &ldquo;QuickCourt has revolutionized how we manage our sports
-              facility bookings. The platform is intuitive and our members love
-              the seamless experience.&rdquo;
-            </p>
-            <footer className="text-sm">Sports Center Manager</footer>
-          </blockquote>
         </div>
       </div>
 

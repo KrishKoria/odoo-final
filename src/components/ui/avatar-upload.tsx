@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface AvatarUploadProps {
   onFileChange: (file: File | null) => void;
@@ -57,10 +58,12 @@ export function AvatarUpload({
         {/* Avatar Preview */}
         <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-gray-50">
           {preview ? (
-            <img
+            <Image
               src={preview}
               alt="Avatar preview"
               className="h-full w-full rounded-full object-cover"
+              width={64}
+              height={64}
             />
           ) : (
             <div className="text-center text-xs text-gray-400">No Image</div>
