@@ -160,6 +160,7 @@ export default function ProfilePage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [currentPhoneNumber, setCurrentPhoneNumber] = useState<string>("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -241,35 +242,64 @@ export default function ProfilePage() {
   }, [bookings, statusFilter, dateFilter, searchQuery]);
 
   const onSubmit = async (data: ProfileFormValues) => {
+    setIsSaving(true);
     try {
       console.log("Form data being submitted:", data);
 
-      // Prepare the data for API call (excluding avatar for now)
-      const updateData = {
-        name: data.name,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        oldPassword: data.oldPassword,
-        newPassword: data.newPassword,
-      };
+      // Determine if we need to send form data (for file uploads) or JSON
+      const hasAvatar = data.avatar && data.avatar instanceof File;
 
-      // Remove empty fields
-      Object.keys(updateData).forEach((key) => {
-        if (!updateData[key as keyof typeof updateData]) {
-          delete updateData[key as keyof typeof updateData];
+      let response;
+
+      if (hasAvatar) {
+        // Use FormData for file uploads
+        const formData = new FormData();
+
+        // Add avatar file (we know it exists because hasAvatar is true)
+        if (data.avatar) {
+          formData.append("avatar", data.avatar);
         }
-      });
 
-      console.log("Data being sent to API:", updateData);
+        // Add other form fields
+        if (data.name) formData.append("name", data.name);
+        if (data.email) formData.append("email", data.email);
+        if (data.phoneNumber) formData.append("phoneNumber", data.phoneNumber);
+        if (data.oldPassword) formData.append("oldPassword", data.oldPassword);
+        if (data.newPassword) formData.append("newPassword", data.newPassword);
 
-      // Make API call
-      const response = await fetch("/api/profile", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateData),
-      });
+        console.log("Sending form data with avatar");
+
+        response = await fetch("/api/profile", {
+          method: "PATCH",
+          body: formData, // No Content-Type header - browser will set it automatically for FormData
+        });
+      } else {
+        // Use JSON for regular updates
+        const updateData = {
+          name: data.name,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          oldPassword: data.oldPassword,
+          newPassword: data.newPassword,
+        };
+
+        // Remove empty fields
+        Object.keys(updateData).forEach((key) => {
+          if (!updateData[key as keyof typeof updateData]) {
+            delete updateData[key as keyof typeof updateData];
+          }
+        });
+
+        console.log("Sending JSON data:", updateData);
+
+        response = await fetch("/api/profile", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateData),
+        });
+      }
 
       console.log("API response status:", response.status);
 
@@ -286,21 +316,15 @@ export default function ProfilePage() {
       };
       console.log("Profile updated successfully:", result);
 
+      alert("Profile updated successfully!");
+
       // Refresh the page to show updated data
       window.location.reload();
-
-      setIsEditing(false);
-      setAvatarPreview(null);
-
-      // Reset password fields
-      form.setValue("oldPassword", "");
-      form.setValue("newPassword", "");
-      form.setValue("confirmPassword", "");
-
-      alert("Profile updated successfully!");
     } catch (error) {
       console.error("Profile update error:", error);
       alert("An error occurred while updating your profile. Please try again.");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -755,9 +779,13 @@ export default function ProfilePage() {
                           </div>
                         </div>
 
-                        <Button type="submit" className="h-10 px-8 font-medium">
+                        <Button
+                          type="submit"
+                          className="h-10 px-8 font-medium"
+                          disabled={isSaving}
+                        >
                           <Save className="mr-2 h-4 w-4" />
-                          Save Changes
+                          {isSaving ? "Saving..." : "Save Changes"}
                         </Button>
                       </form>
                     </Form>

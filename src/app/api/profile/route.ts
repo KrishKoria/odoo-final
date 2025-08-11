@@ -65,11 +65,71 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = (await request.json()) as unknown;
-    const validatedData = updateProfileSchema.parse(body);
+    const contentType = request.headers.get("content-type");
+    let validatedData;
+    let avatarFile: File | null = null;
+
+    if (contentType?.includes("multipart/form-data")) {
+      // Handle file upload
+      const formData = await request.formData();
+
+      // Extract avatar file if present
+      const avatar = formData.get("avatar") as File | null;
+      if (avatar && avatar.size > 0) {
+        avatarFile = avatar;
+      }
+
+      // Extract other form fields
+      const profileData = {
+        name: (formData.get("name") as string) || undefined,
+        email: (formData.get("email") as string) || undefined,
+        phoneNumber: (formData.get("phoneNumber") as string) || undefined,
+        oldPassword: (formData.get("oldPassword") as string) || undefined,
+        newPassword: (formData.get("newPassword") as string) || undefined,
+      };
+
+      // Remove empty fields
+      Object.keys(profileData).forEach((key) => {
+        if (!profileData[key as keyof typeof profileData]) {
+          delete profileData[key as keyof typeof profileData];
+        }
+      });
+
+      validatedData = updateProfileSchema.parse(profileData);
+    } else {
+      // Handle JSON data (existing flow)
+      const body = (await request.json()) as unknown;
+      validatedData = updateProfileSchema.parse(body);
+    }
 
     // Start building the update object
-    const updateData: { name?: string; email?: string } = {};
+    const updateData: { name?: string; email?: string; image?: string } = {};
+
+    // Handle avatar upload
+    if (avatarFile) {
+      try {
+        // Check file size (5MB limit)
+        if (avatarFile.size > 5 * 1024 * 1024) {
+          return NextResponse.json(
+            { error: "Avatar image must be less than 5MB" },
+            { status: 400 },
+          );
+        }
+
+        // Convert file to base64 for simple storage (in production, use cloud storage)
+        const arrayBuffer = await avatarFile.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const base64Image = `data:${avatarFile.type};base64,${buffer.toString("base64")}`;
+
+        updateData.image = base64Image;
+      } catch (error) {
+        console.error("Error processing avatar:", error);
+        return NextResponse.json(
+          { error: "Failed to process avatar image" },
+          { status: 400 },
+        );
+      }
+    }
 
     // Handle basic profile fields
     if (validatedData.name) {
