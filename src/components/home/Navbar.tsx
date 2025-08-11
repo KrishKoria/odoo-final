@@ -1,7 +1,7 @@
 "use client";
 
 import { LogIn, User, LogOut, Calendar } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,13 +47,16 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              className="hidden items-center space-x-2 text-emerald-600 sm:flex"
+            <Link
+              href="/venues"
+              className={buttonVariants({
+                variant: "ghost",
+                class: "hidden items-center space-x-2 text-emerald-600 sm:flex",
+              })}
             >
               <Calendar className="h-4 w-4" />
               <span>Book</span>
-            </Button>
+            </Link>
             <div className="flex items-center gap-3">
               {isPending ? (
                 <div className="h-10 w-10 animate-pulse rounded-full bg-gray-200" />
