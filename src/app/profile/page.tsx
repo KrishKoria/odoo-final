@@ -45,10 +45,12 @@ import {
   Upload,
   Eye,
   EyeOff,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDropzone } from "react-dropzone";
 import { useCallback } from "react";
+import { toast } from "sonner";
 
 const profileFormSchema = z
   .object({
@@ -85,53 +87,48 @@ const profileFormSchema = z
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
-// Mock data for bookings (in a real app, this would come from API)
-const mockBookings = [
-  {
-    id: "1",
-    venue: "Elite Sports Complex",
-    sport: "Badminton",
-    court: "Court A",
-    date: new Date("2024-01-20"),
-    startTime: "10:00 AM",
-    endTime: "11:00 AM",
-    status: "CONFIRMED" as const,
-    price: 50,
-  },
-  {
-    id: "2",
-    venue: "City Tennis Club",
-    sport: "Tennis",
-    court: "Court 2",
-    date: new Date("2024-01-22"),
-    startTime: "02:00 PM",
-    endTime: "03:00 PM",
-    status: "CONFIRMED" as const,
-    price: 75,
-  },
-  {
-    id: "3",
-    venue: "Basketball Arena",
-    sport: "Basketball",
-    court: "Court B",
-    date: new Date("2024-01-15"),
-    startTime: "06:00 PM",
-    endTime: "07:00 PM",
-    status: "COMPLETED" as const,
-    price: 40,
-  },
-  {
-    id: "4",
-    venue: "Swimming Complex",
-    sport: "Swimming",
-    court: "Pool 1",
-    date: new Date("2024-01-10"),
-    startTime: "08:00 AM",
-    endTime: "09:00 AM",
-    status: "CANCELLED" as const,
-    price: 30,
-  },
-];
+// Types for real data from database
+interface BookingData {
+  id: string;
+  venue: string;
+  sport: string;
+  court: string;
+  date: Date;
+  startTime: string;
+  endTime: string;
+  status: "CONFIRMED" | "COMPLETED" | "CANCELLED" | "PENDING";
+  price: number;
+  createdAt: Date;
+  bookingDate: Date;
+  timeSlotId: string;
+  courtId: string;
+  facilityId: string;
+}
+
+interface BookingsResponse {
+  bookings: BookingData[];
+  totalBookings: number;
+  totalSpent: number;
+  completedBookings: number;
+  activeBookings: number;
+}
+
+interface ProfileData {
+  id: string | null;
+  role: string;
+  phoneNumber: string | null;
+  avatar: string | null;
+  isActive: boolean;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    emailVerified: boolean;
+    image: string | null;
+  };
+  createdAt: string | null;
+  updatedAt: string | null;
+}
 
 function getStatusColor(status: string) {
   switch (status) {
@@ -150,8 +147,8 @@ export default function ProfilePage() {
   const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-  const [bookings, setBookings] = useState(mockBookings);
-  const [filteredBookings, setFilteredBookings] = useState(mockBookings);
+  const [bookings, setBookings] = useState<BookingData[]>([]);
+  const [filteredBookings, setFilteredBookings] = useState<BookingData[]>([]);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [dateFilter, setDateFilter] = useState<Date | undefined>();
   const [searchQuery, setSearchQuery] = useState("");
@@ -161,6 +158,16 @@ export default function ProfilePage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [currentPhoneNumber, setCurrentPhoneNumber] = useState<string>("");
   const [isSaving, setIsSaving] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [bookingsStats, setBookingsStats] = useState({
+    totalBookings: 0,
+    totalSpent: 0,
+    completedBookings: 0,
+    activeBookings: 0,
+  });
+  const [isLoadingProfile, setIsLoadingProfile] = useState(true);
+  const [isLoadingBookings, setIsLoadingBookings] = useState(true);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -174,21 +181,64 @@ export default function ProfilePage() {
     },
   });
 
-  // Fetch current phone number from the database
-  const fetchPhoneNumber = useCallback(async () => {
+  // Fetch profile data from the database
+  const fetchProfileData = useCallback(async () => {
     if (session?.user?.id) {
       try {
-        const response = await fetch(`/api/profile?userId=${session.user.id}`);
+        setIsLoadingProfile(true);
+        const response = await fetch(`/api/profile`);
         if (response.ok) {
-          const data = (await response.json()) as { phoneNumber?: string };
+          const data = (await response.json()) as ProfileData;
+          setProfileData(data);
           setCurrentPhoneNumber(data.phoneNumber ?? "");
           form.setValue("phoneNumber", data.phoneNumber ?? "");
+        } else {
+          console.error("Failed to fetch profile data");
+          toast.error("Failed to load profile data");
         }
       } catch (error) {
-        console.error("Failed to fetch phone number:", error);
+        console.error("Failed to fetch profile data:", error);
+        toast.error("Failed to load profile data");
+      } finally {
+        setIsLoadingProfile(false);
       }
     }
   }, [session?.user?.id, form]);
+
+  // Fetch bookings data from the database
+  const fetchBookingsData = useCallback(async () => {
+    if (session?.user?.id) {
+      try {
+        setIsLoadingBookings(true);
+        const response = await fetch(`/api/profile/bookings`);
+        if (response.ok) {
+          const data = (await response.json()) as BookingsResponse;
+          // Transform the date strings back to Date objects
+          const transformedBookings = data.bookings.map((booking) => ({
+            ...booking,
+            date: new Date(booking.date),
+            createdAt: new Date(booking.createdAt),
+            bookingDate: new Date(booking.bookingDate),
+          }));
+          setBookings(transformedBookings);
+          setBookingsStats({
+            totalBookings: data.totalBookings,
+            totalSpent: data.totalSpent,
+            completedBookings: data.completedBookings,
+            activeBookings: data.activeBookings,
+          });
+        } else {
+          console.error("Failed to fetch bookings data");
+          toast.error("Failed to load bookings data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch bookings data:", error);
+        toast.error("Failed to load bookings data");
+      } finally {
+        setIsLoadingBookings(false);
+      }
+    }
+  }, [session?.user?.id]);
 
   useEffect(() => {
     if (!isPending && !session) {
@@ -198,9 +248,10 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (session) {
-      void fetchPhoneNumber();
+      void fetchProfileData();
+      void fetchBookingsData();
     }
-  }, [session, fetchPhoneNumber]);
+  }, [session, fetchProfileData, fetchBookingsData]);
 
   useEffect(() => {
     if (session) {
@@ -306,7 +357,7 @@ export default function ProfilePage() {
       if (!response.ok) {
         const error = (await response.json()) as { error: string };
         console.error("Profile update failed:", error);
-        alert(`Error: ${error.error || "Failed to update profile"}`);
+        toast.error(`Error: ${error.error || "Failed to update profile"}`);
         return;
       }
 
@@ -316,13 +367,16 @@ export default function ProfilePage() {
       };
       console.log("Profile updated successfully:", result);
 
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
 
-      // Refresh the page to show updated data
-      window.location.reload();
+      // Refresh the data instead of reloading the page
+      await fetchProfileData();
+      setIsEditing(false);
     } catch (error) {
       console.error("Profile update error:", error);
-      alert("An error occurred while updating your profile. Please try again.");
+      toast.error(
+        "An error occurred while updating your profile. Please try again.",
+      );
     } finally {
       setIsSaving(false);
     }
@@ -350,20 +404,39 @@ export default function ProfilePage() {
     maxSize: 5 * 1024 * 1024, // 5MB
   });
 
-  const handleCancelBooking = (bookingId: string) => {
-    setBookings((prev) =>
-      prev.map((booking) =>
-        booking.id === bookingId
-          ? { ...booking, status: "CANCELLED" as const }
-          : booking,
-      ),
-    );
+  const handleCancelBooking = async (bookingId: string) => {
+    try {
+      // In a real app, you'd call an API to cancel the booking
+      const response = await fetch(`/api/bookings/${bookingId}/cancel`, {
+        method: "PATCH",
+      });
+
+      if (response.ok) {
+        setBookings((prev) =>
+          prev.map((booking) =>
+            booking.id === bookingId
+              ? { ...booking, status: "CANCELLED" as const }
+              : booking,
+          ),
+        );
+        toast.success("Booking cancelled successfully");
+      } else {
+        const error = (await response.json()) as { error: string };
+        toast.error(error.error || "Failed to cancel booking");
+      }
+    } catch (error) {
+      console.error("Failed to cancel booking:", error);
+      toast.error("Failed to cancel booking. Please try again.");
+    }
   };
 
-  if (isPending) {
+  if (isPending || isLoadingProfile) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="flex items-center gap-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <div className="text-lg">Loading profile...</div>
+        </div>
       </div>
     );
   }
@@ -803,10 +876,7 @@ export default function ProfilePage() {
                 <CardContent className="space-y-6 pt-0">
                   <div className="space-y-1 text-center">
                     <div className="text-primary text-3xl font-bold">
-                      {
-                        filteredBookings.filter((b) => b.status === "COMPLETED")
-                          .length
-                      }
+                      {bookingsStats.completedBookings}
                     </div>
                     <p className="text-muted-foreground text-sm font-medium">
                       Completed Bookings
@@ -815,10 +885,7 @@ export default function ProfilePage() {
 
                   <div className="space-y-1 text-center">
                     <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
-                      {
-                        filteredBookings.filter((b) => b.status === "CONFIRMED")
-                          .length
-                      }
+                      {bookingsStats.activeBookings}
                     </div>
                     <p className="text-muted-foreground text-sm font-medium">
                       Active Bookings
@@ -827,10 +894,7 @@ export default function ProfilePage() {
 
                   <div className="space-y-1 text-center">
                     <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      $
-                      {filteredBookings
-                        .filter((b) => b.status === "COMPLETED")
-                        .reduce((sum, b) => sum + b.price, 0)}
+                      ₹{bookingsStats.totalSpent}
                     </div>
                     <p className="text-muted-foreground text-sm font-medium">
                       Total Spent
@@ -930,7 +994,14 @@ export default function ProfilePage() {
 
                 {/* Bookings List */}
                 <div className="space-y-4">
-                  {filteredBookings.length === 0 ? (
+                  {isLoadingBookings ? (
+                    <div className="flex items-center justify-center py-16">
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="h-6 w-6 animate-spin" />
+                        <div className="text-lg">Loading bookings...</div>
+                      </div>
+                    </div>
+                  ) : filteredBookings.length === 0 ? (
                     <div className="py-16 text-center">
                       <div className="text-muted-foreground text-lg font-medium">
                         No bookings found
@@ -987,7 +1058,7 @@ export default function ProfilePage() {
                                     Price:
                                   </span>
                                   <span className="text-muted-foreground font-semibold">
-                                    ${booking.price}
+                                    ₹{booking.price}
                                   </span>
                                 </div>
                               </div>

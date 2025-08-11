@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { uploadAvatar, validateAvatarFile } from "@/lib/avatar-upload";
 
 // Validation schema for profile updates
 const updateProfileSchema = z.object({
@@ -31,7 +31,6 @@ export async function GET(request: NextRequest) {
     // Fetch the user's player profile with role information
     let playerProfile;
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       playerProfile = await prisma.playerProfile.findUnique({
         where: { userId: session.user.id },
         select: {
@@ -144,20 +143,15 @@ export async function PATCH(request: NextRequest) {
     // Handle avatar upload
     if (avatarFile) {
       try {
-        // Check file size (5MB limit)
-        if (avatarFile.size > 5 * 1024 * 1024) {
-          return NextResponse.json(
-            { error: "Avatar image must be less than 5MB" },
-            { status: 400 },
-          );
+        // Validate the avatar file
+        const validationError = validateAvatarFile(avatarFile);
+        if (validationError) {
+          return NextResponse.json({ error: validationError }, { status: 400 });
         }
 
-        // Convert file to base64 for simple storage (in production, use cloud storage)
-        const arrayBuffer = await avatarFile.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        const base64Image = `data:${avatarFile.type};base64,${buffer.toString("base64")}`;
-
-        updateData.image = base64Image;
+        // Upload the avatar
+        const uploadedFile = await uploadAvatar(avatarFile);
+        updateData.image = uploadedFile.url;
       } catch (error) {
         console.error("Error processing avatar:", error);
         return NextResponse.json(
