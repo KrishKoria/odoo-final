@@ -5,35 +5,21 @@ import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { checkUserFacilityOwnership } from "@/lib/auth-utils";
 
 // Helper function to check if user owns a facility
 async function checkFacilityOwnership(
   userId: string,
   facilityId: string,
 ): Promise<boolean> {
-  const playerProfile = await prisma.playerProfile.findUnique({
-    where: { userId },
-    select: { id: true },
-  });
-
-  if (!playerProfile) {
-    return false;
-  }
-
-  const facility = await prisma.facility.findUnique({
-    where: {
-      id: facilityId,
-      ownerId: playerProfile.id,
-    },
-  });
-
-  return !!facility;
+  return await checkUserFacilityOwnership(userId, facilityId);
 }
 
 export interface CreateTimeSlotData {
   courtId: string;
   startTime: Date;
   endTime: Date;
+  price?: number; // Optional custom price
   isMaintenanceBlocked?: boolean;
   maintenanceReason?: string;
 }
@@ -56,6 +42,9 @@ export interface GenerateTimeSlotsData {
   endTime: string; // HH:mm format
   slotDuration: number; // in minutes
   daysOfWeek: number[]; // 0-6 where 0 is Sunday
+  useCustomPricing?: boolean;
+  weekdayPrice?: number;
+  weekendPrice?: number;
 }
 
 // Get time slots for a specific court
@@ -226,6 +215,7 @@ export async function createTimeSlot(data: CreateTimeSlotData) {
         courtId: data.courtId,
         startTime: data.startTime,
         endTime: data.endTime,
+        price: data.price, // Will be null if not provided, falling back to court's default price
         isMaintenanceBlocked: data.isMaintenanceBlocked || false,
         maintenanceReason: data.maintenanceReason,
       },
@@ -319,6 +309,7 @@ export async function generateTimeSlots(
             courtId,
             startTime: new Date(slotStart),
             endTime: new Date(slotEnd),
+            price: null, // Use court's default price
             isMaintenanceBlocked: false,
           });
         }
@@ -487,6 +478,7 @@ export async function updateTimeSlot(data: UpdateTimeSlotData) {
       data: {
         startTime: data.startTime,
         endTime: data.endTime,
+        price: data.price,
         isMaintenanceBlocked: data.isMaintenanceBlocked,
         maintenanceReason: data.maintenanceReason,
       },
@@ -632,7 +624,10 @@ export async function getTimeSlotById(timeSlotId: string) {
 
     // Check authorization
     const userRole = session.user.role;
-    const isOwner = timeSlot.court.facility.ownerId === session.user.id;
+    const isOwner = await checkUserFacilityOwnership(
+      session.user.id,
+      timeSlot.court.facility.id,
+    );
     const isAdmin = userRole === "ADMIN";
 
     if (!isOwner && !isAdmin) {
@@ -714,10 +709,19 @@ export async function generateTimeSlotsAdvanced(data: GenerateTimeSlotsData) {
 
           // Don't create slot if it goes beyond end time
           if (slotEnd <= dayEnd) {
+            // Determine price based on day of week if custom pricing is enabled
+            let slotPrice: number | undefined;
+            if (data.useCustomPricing) {
+              const isWeekend =
+                currentDate.getDay() === 0 || currentDate.getDay() === 6; // Sunday or Saturday
+              slotPrice = isWeekend ? data.weekendPrice : data.weekdayPrice;
+            }
+
             timeSlotsToCreate.push({
               courtId: data.courtId,
               startTime: new Date(currentTime),
               endTime: new Date(slotEnd),
+              price: slotPrice,
               isMaintenanceBlocked: false,
             });
           }

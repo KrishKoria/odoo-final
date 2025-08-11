@@ -38,6 +38,7 @@ const timeSlotSchema = z
     date: z.string().min(1, "Date is required"),
     startTime: z.string().min(1, "Start time is required"),
     endTime: z.string().min(1, "End time is required"),
+    price: z.coerce.number().positive("Price must be positive").optional(),
     isMaintenanceBlocked: z.boolean().default(false),
     maintenanceReason: z.string().optional(),
   })
@@ -100,6 +101,7 @@ export function TimeSlotForm({
       date: getInitialDate(),
       startTime: getInitialStartTime(),
       endTime: getInitialEndTime(),
+      price: initialData?.price,
       isMaintenanceBlocked: initialData?.isMaintenanceBlocked || false,
       maintenanceReason: initialData?.maintenanceReason || "",
     },
@@ -121,6 +123,7 @@ export function TimeSlotForm({
           courtId,
           startTime,
           endTime,
+          price: data.price,
           isMaintenanceBlocked: data.isMaintenanceBlocked,
           maintenanceReason: data.isMaintenanceBlocked
             ? data.maintenanceReason
@@ -132,6 +135,7 @@ export function TimeSlotForm({
           courtId,
           startTime,
           endTime,
+          price: data.price,
           isMaintenanceBlocked: data.isMaintenanceBlocked,
           maintenanceReason: data.isMaintenanceBlocked
             ? data.maintenanceReason
@@ -233,6 +237,39 @@ export function TimeSlotForm({
                   )}
                 />
               </div>
+
+              {/* Price Field */}
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Custom Price (Optional)
+                      <span className="text-muted-foreground ml-2 text-sm font-normal">
+                        Leave empty to use court&apos;s default price
+                      </span>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2">
+                          ₹
+                        </span>
+                        <Input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          placeholder="e.g. 150.00"
+                          className="pl-8"
+                          {...field}
+                          value={field.value || ""}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               {/* Duration Display */}
               <div className="bg-muted rounded-lg p-3 text-sm">

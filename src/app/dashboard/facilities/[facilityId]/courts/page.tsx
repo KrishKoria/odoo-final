@@ -161,7 +161,7 @@ export default async function CourtsPage({ params }: CourtsPageProps) {
 
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground text-sm">
-                    Price/Hour
+                    Default Price/Hour
                   </span>
                   <span className="font-medium">₹{court.pricePerHour}</span>
                 </div>

@@ -41,6 +41,15 @@ const generateTimeSlotsSchema = z
       .min(15, "Minimum slot duration is 15 minutes")
       .max(480, "Maximum slot duration is 8 hours"),
     daysOfWeek: z.array(z.number()).min(1, "Select at least one day"),
+    useCustomPricing: z.boolean().default(false),
+    weekdayPrice: z.coerce
+      .number()
+      .positive("Weekday price must be positive")
+      .optional(),
+    weekendPrice: z.coerce
+      .number()
+      .positive("Weekend price must be positive")
+      .optional(),
   })
   .refine(
     (data) => {
@@ -64,6 +73,19 @@ const generateTimeSlotsSchema = z
     {
       message: "End time must be after start time",
       path: ["endTime"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.useCustomPricing) {
+        return data.weekdayPrice && data.weekendPrice;
+      }
+      return true;
+    },
+    {
+      message:
+        "Both weekday and weekend prices are required when using custom pricing",
+      path: ["weekdayPrice"],
     },
   );
 
@@ -111,6 +133,7 @@ export function GenerateTimeSlotsForm({
       endTime: "18:00",
       slotDuration: 60,
       daysOfWeek: [1, 2, 3, 4, 5], // Monday to Friday
+      useCustomPricing: false,
     },
   });
 
@@ -126,6 +149,9 @@ export function GenerateTimeSlotsForm({
         endTime: data.endTime,
         slotDuration: data.slotDuration,
         daysOfWeek: data.daysOfWeek,
+        useCustomPricing: data.useCustomPricing,
+        weekdayPrice: data.weekdayPrice,
+        weekendPrice: data.weekendPrice,
       });
 
       toast.success(
@@ -288,6 +314,85 @@ export function GenerateTimeSlotsForm({
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="useCustomPricing"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-y-0 space-x-3">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>Enable custom pricing</FormLabel>
+                <p className="text-muted-foreground text-sm">
+                  Set different prices for weekdays and weekends
+                </p>
+              </div>
+            </FormItem>
+          )}
+        />
+
+        {form.watch("useCustomPricing") && (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="weekdayPrice"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Weekday Price (₹)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Enter weekday price"
+                      step="0.01"
+                      min="0"
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        field.onChange(
+                          value === "" ? undefined : Number(value),
+                        );
+                      }}
+                      value={field.value ?? ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="weekendPrice"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Weekend Price (₹)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Enter weekend price"
+                      step="0.01"
+                      min="0"
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        field.onChange(
+                          value === "" ? undefined : Number(value),
+                        );
+                      }}
+                      value={field.value ?? ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        )}
 
         <div className="flex justify-end space-x-4">
           <Button

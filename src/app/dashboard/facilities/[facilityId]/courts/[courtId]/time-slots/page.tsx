@@ -248,7 +248,7 @@ export default async function TimeSlotsPage({
                           Price
                         </span>
                         <span className="font-medium">
-                          ₹{slot.court.pricePerHour}/hour
+                          ₹{slot.price ?? slot.court.pricePerHour}/hour
                         </span>
                       </div>
 

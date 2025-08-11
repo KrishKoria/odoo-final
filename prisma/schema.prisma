@@ -231,6 +231,7 @@ model TimeSlot {
   courtId              String
   startTime            DateTime
   endTime              DateTime
+  price                Float?   // Optional custom price, defaults to court's pricePerHour
   isMaintenanceBlocked Boolean  @default(false)
   maintenanceReason    String?
   version              Int      @default(0) // For optimistic locking

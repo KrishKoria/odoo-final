@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { TimeSlotForm } from "@/components/dashboard/time-slot-form";
+import { checkCourtAccess } from "@/lib/auth-utils";
 
 interface PageProps {
   params: Promise<{
@@ -42,10 +43,9 @@ export default async function NewTimeSlotPage({ params }: PageProps) {
 
   // Check authorization
   const userRole = session.user.role;
-  const isOwner = court.facility.ownerId === session.user.id;
-  const isAdmin = userRole === "ADMIN";
+  const hasAccess = await checkCourtAccess(session.user.id, userRole, courtId);
 
-  if (!isOwner && !isAdmin) {
+  if (!hasAccess) {
     redirect("/dashboard");
   }
 

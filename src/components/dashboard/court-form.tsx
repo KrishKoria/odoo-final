@@ -31,7 +31,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Clock, DollarSign, IndianRupee, Trophy } from "lucide-react";
+import { Clock, IndianRupee, Trophy } from "lucide-react";
 import {
   createCourt,
   updateCourt,
@@ -247,7 +247,7 @@ export function CourtForm({
                   <FormItem>
                     <FormLabel className="flex items-center gap-2">
                       <IndianRupee className="h-4 w-4" />
-                      Price per Hour
+                      Default Price per Hour
                     </FormLabel>
                     <FormControl>
                       <Input

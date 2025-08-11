@@ -52,6 +52,7 @@ export default async function EditTimeSlotPage({ params }: PageProps) {
             date: timeSlot.startTime.toISOString().split("T")[0],
             startTime: timeSlot.startTime.toTimeString().substring(0, 5),
             endTime: timeSlot.endTime.toTimeString().substring(0, 5),
+            price: timeSlot.price || undefined,
             isMaintenanceBlocked: timeSlot.isMaintenanceBlocked,
             maintenanceReason: timeSlot.maintenanceReason || "",
           }}

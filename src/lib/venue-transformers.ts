@@ -320,6 +320,7 @@ export function transformTimeSlots(
       id: string;
       startTime: Date;
       endTime: Date;
+      price: number | null;
       isMaintenanceBlocked: boolean;
       booking?: {
         id: string;
@@ -358,7 +359,7 @@ export function transformTimeSlots(
 
       timeSlots.push({
         time: `${startTime} - ${endTime}`,
-        price: court.pricePerHour,
+        price: slot.price ?? court.pricePerHour,
         available,
         courtId: court.id,
         timeSlotId: slot.id,

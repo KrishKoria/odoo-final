@@ -140,10 +140,10 @@ export async function getVenues(
 
     // Apply price filters in memory (since we need to calculate min price from courts)
     if (filters?.minPrice !== undefined) {
-      venues = venues.filter((venue) => venue.price >= filters.minPrice!);
+      venues = venues.filter((venue) => venue.price >= filters.minPrice);
     }
     if (filters?.maxPrice !== undefined) {
-      venues = venues.filter((venue) => venue.price <= filters.maxPrice!);
+      venues = venues.filter((venue) => venue.price <= filters.maxPrice);
     }
 
     // Apply price sorting in memory
@@ -280,6 +280,14 @@ export async function getVenueTimeSlots(
                     status: true,
                   },
                 },
+              },
+              select: {
+                id: true,
+                startTime: true,
+                endTime: true,
+                price: true,
+                isMaintenanceBlocked: true,
+                booking: true,
               },
               orderBy: {
                 startTime: "asc",

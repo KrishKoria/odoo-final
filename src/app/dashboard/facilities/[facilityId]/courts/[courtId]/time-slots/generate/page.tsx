@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
 import { redirect, notFound } from "next/navigation";
+import { checkCourtAccess } from "@/lib/auth-utils";
 
 interface PageProps {
   params: Promise<{
@@ -41,10 +42,9 @@ export default async function GenerateTimeSlotsPage({ params }: PageProps) {
 
   // Check authorization
   const userRole = session.user.role;
-  const isOwner = court.facility.ownerId === session.user.id;
-  const isAdmin = userRole === "ADMIN";
+  const hasAccess = await checkCourtAccess(session.user.id, userRole, courtId);
 
-  if (!isOwner && !isAdmin) {
+  if (!hasAccess) {
     redirect("/dashboard");
   }
 
