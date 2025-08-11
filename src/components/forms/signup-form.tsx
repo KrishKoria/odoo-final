@@ -69,8 +69,11 @@ export function SignUpForm({ className, onSuccess, onError }: SignUpFormProps) {
         password: data.password,
         name: data.fullName,
         image: avatarUrl,
-        // Add custom fields for role - this might need to be handled differently
-        // depending on how better-auth handles custom user fields
+        fetchOptions: {
+          headers: {
+            "X-Signup-Role": data.role, // Pass role in custom header
+          },
+        },
       });
 
       if (result.error) {

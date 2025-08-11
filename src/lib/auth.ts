@@ -4,9 +4,15 @@ import { prisma } from "./prisma";
 import { env } from "@/env";
 import { emailOTP } from "better-auth/plugins";
 import { Resend } from "resend";
+import { createPlayerProfile } from "./utils";
+import { createAuthMiddleware } from "better-auth/api";
+import type { UserRole } from "@/types/venue";
 
 // Initialize Resend client
 const resend = new Resend(env.RESEND_API_KEY);
+
+// Store role data temporarily during signup process
+const signupRoleData = new Map<string, UserRole>();
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -18,6 +24,67 @@ export const auth = betterAuth({
   },
   emailVerification: {
     autoSignInAfterVerification: true,
+  },
+  // Add request middleware to capture role data from signup
+  hooks: {
+    before: createAuthMiddleware(async (ctx) => {
+      // Capture role data from email/password signup requests
+      if (ctx.path === "/sign-up/email") {
+        const role =
+          ctx.headers?.get?.("x-signup-role") || ctx.headers?.["x-signup-role"];
+        const body = ctx.body as any;
+
+        if (role && body?.email) {
+          // Store the role temporarily using email as key
+          signupRoleData.set(body.email, role as UserRole);
+          console.log(`Stored role ${role} for email ${body.email}`);
+        }
+      }
+    }),
+  },
+  // Add database hooks for PlayerProfile creation
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          console.log(`Creating PlayerProfile for new user: ${user.id}`);
+          try {
+            // Check for stored role data using email
+            const selectedRole = signupRoleData.get(user.email) || "USER";
+
+            // Clean up the temporary role data
+            signupRoleData.delete(user.email);
+
+            console.log(`Using role ${selectedRole} for user ${user.email}`);
+
+            const result = await createPlayerProfile(
+              user.id,
+              {
+                image: user.image,
+                name: user.name,
+              },
+              selectedRole,
+            );
+
+            if (!result.success) {
+              console.error(
+                `Failed to create PlayerProfile for user ${user.id}:`,
+                result.error,
+              );
+            } else {
+              console.log(
+                `PlayerProfile created successfully for user: ${user.id} with role: ${selectedRole}`,
+              );
+            }
+          } catch (error) {
+            console.error(
+              `Error creating PlayerProfile for user ${user.id}:`,
+              error,
+            );
+          }
+        },
+      },
+    },
   },
   plugins: [
     emailOTP({
