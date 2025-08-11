@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Star,
   MapPin,
@@ -11,17 +11,11 @@ import {
   Heart,
   ChevronLeft,
   ChevronRight,
-  Wifi,
-  Car,
-  Coffee,
-  ShowerHead,
-  AirVent,
-  Camera,
-  Shield,
-  Users,
   CheckCircle,
   X,
   Calendar,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -53,129 +47,135 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import Navbar from "../home/Navbar";
+import {
+  getVenueById,
+  getVenueTimeSlots,
+  checkSlotAvailability,
+} from "@/actions/venue-actions";
+import type {
+  VenueDetails as VenueDetailsType,
+  TimeSlot,
+} from "@/lib/venue-transformers";
 
-const venue = {
-  id: 1,
-  name: "SBR Badminton",
-  location: "Satellite, Bodakdev Village",
-  fullAddress:
-    "Plot No. 123, Satellite Road, Bodakdev Village, Ahmedabad, Gujarat 380015",
-  rating: 4.5,
-  reviews: 124,
-  price: 450,
-  operatingHours: "7:00 AM - 11:00 PM",
-  phone: "+91 98765 43210",
-  email: "info@sbrbadminton.com",
-  images: [
-    "/assets/modern-badminton-court.png",
-    "/assets/professional-badminton-court.png",
-    "/assets/indoor-tennis-court.png",
-    "/assets/football-turf-ground.png",
-  ],
-  sports: [
-    { name: "Badminton", icon: "🏸", courts: 6 },
-    { name: "Table Tennis", icon: "🏓", courts: 2 },
-    { name: "Squash", icon: "🎾", courts: 1 },
-  ],
-  amenities: [
-    { name: "WiFi", icon: Wifi, available: true },
-    { name: "Parking", icon: Car, available: true },
-    { name: "Cafeteria", icon: Coffee, available: true },
-    { name: "Changing Room", icon: ShowerHead, available: true },
-    { name: "Air Conditioning", icon: AirVent, available: true },
-    { name: "CCTV", icon: Camera, available: true },
-    { name: "Security", icon: Shield, available: true },
-    { name: "Equipment Rental", icon: Users, available: false },
-  ],
-  policies: [
-    "Advance booking required",
-    "Cancellation allowed up to 2 hours before",
-    "Sports shoes mandatory",
-    "Outside food not allowed",
-  ],
-  timeSlots: [
-    { time: "07:00 AM - 08:00 AM", price: 350, available: true },
-    { time: "08:00 AM - 09:00 AM", price: 400, available: true },
-    { time: "09:00 AM - 10:00 AM", price: 450, available: false },
-    { time: "10:00 AM - 11:00 AM", price: 450, available: true },
-    { time: "11:00 AM - 12:00 PM", price: 450, available: true },
-    { time: "12:00 PM - 01:00 PM", price: 400, available: true },
-    { time: "01:00 PM - 02:00 PM", price: 400, available: true },
-    { time: "02:00 PM - 03:00 PM", price: 400, available: true },
-    { time: "03:00 PM - 04:00 PM", price: 450, available: true },
-    { time: "04:00 PM - 05:00 PM", price: 500, available: false },
-    { time: "05:00 PM - 06:00 PM", price: 550, available: true },
-    { time: "06:00 PM - 07:00 PM", price: 600, available: true },
-    { time: "07:00 PM - 08:00 PM", price: 650, available: true },
-    { time: "08:00 PM - 09:00 PM", price: 650, available: false },
-    { time: "09:00 PM - 10:00 PM", price: 600, available: true },
-    { time: "10:00 PM - 11:00 PM", price: 550, available: true },
-  ],
-};
-
-const reviews = [
-  {
-    id: 1,
-    name: "Rajesh Patel",
-    rating: 5,
-    date: "2 days ago",
-    comment:
-      "Excellent facilities and well-maintained courts. The staff is very helpful and professional.",
-    verified: true,
-  },
-  {
-    id: 2,
-    name: "Priya Sharma",
-    rating: 4,
-    date: "1 week ago",
-    comment:
-      "Good venue with clean facilities. Parking can be a bit crowded during peak hours.",
-    verified: true,
-  },
-  {
-    id: 3,
-    name: "Amit Kumar",
-    rating: 5,
-    date: "2 weeks ago",
-    comment:
-      "Best badminton courts in the area. Air conditioning works great and the lighting is perfect.",
-    verified: false,
-  },
-  {
-    id: 4,
-    name: "Sneha Joshi",
-    rating: 4,
-    date: "3 weeks ago",
-    comment: "Nice place to play. Equipment rental would be a great addition.",
-    verified: true,
-  },
-];
+// Reviews interface for type safety
+interface Review {
+  id: string;
+  name: string;
+  rating: number;
+  date: string;
+  comment: string;
+  verified: boolean;
+}
 
 interface VenueDetailsProps {
   id: string;
 }
+
 export default function VenueDetails({ id }: VenueDetailsProps) {
+  // State for venue data
+  const [venue, setVenue] = useState<VenueDetailsType | null>(null);
+  const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [timeSlotsLoading, setTimeSlotsLoading] = useState(false);
+
+  // UI state
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [selectedSport, setSelectedSport] = useState(
-    "Badminton Standard | Synthetic",
-  );
+  const [selectedSport, setSelectedSport] = useState("");
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const [consecutiveHours, setConsecutiveHours] = useState(1);
 
+  // Load venue data on component mount
+  useEffect(() => {
+    const loadVenueData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const venueData = await getVenueById(id);
+        if (!venueData) {
+          setError("Venue not found");
+          return;
+        }
+
+        setVenue(venueData);
+
+        // Set default sport selection
+        if (venueData.sports.length > 0) {
+          setSelectedSport(venueData.sports[0].name);
+        }
+
+        // Transform reviews data (if available from venue data)
+        // For now, we'll use empty array since reviews are handled separately
+        setReviews([]);
+      } catch (err) {
+        console.error("Error loading venue data:", err);
+        setError("Failed to load venue data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      void loadVenueData();
+    }
+  }, [id]);
+
+  // Load time slots when date or venue changes
+  useEffect(() => {
+    const loadTimeSlots = async () => {
+      if (!venue) return;
+
+      try {
+        setTimeSlotsLoading(true);
+        const slots = await getVenueTimeSlots(venue.id, selectedDate);
+        setTimeSlots(slots);
+        // Clear selected slots when date changes
+        setSelectedSlots([]);
+      } catch (err) {
+        console.error("Error loading time slots:", err);
+        setTimeSlots([]);
+      } finally {
+        setTimeSlotsLoading(false);
+      }
+    };
+
+    void loadTimeSlots();
+  }, [venue, selectedDate]);
+
+  // Refresh time slots (can be called when booking dialog opens)
+  const refreshTimeSlots = async () => {
+    try {
+      setTimeSlotsLoading(true);
+      const slots = await getVenueTimeSlots(venue.id, selectedDate);
+      setTimeSlots(slots);
+      setSelectedSlots([]); // Clear selections on refresh
+    } catch (err) {
+      console.error("Error refreshing time slots:", err);
+    } finally {
+      setTimeSlotsLoading(false);
+    }
+  };
+
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % venue.images.length);
+    if (venue?.images) {
+      setCurrentImageIndex((prev) => (prev + 1) % venue.images.length);
+    }
   };
 
   const prevImage = () => {
-    setCurrentImageIndex(
-      (prev) => (prev - 1 + venue.images.length) % venue.images.length,
-    );
+    if (venue?.images) {
+      setCurrentImageIndex(
+        (prev) => (prev - 1 + venue.images.length) % venue.images.length,
+      );
+    }
   };
 
   const toggleSlot = (time: string) => {
-    const slotIndex = venue.timeSlots.findIndex((slot) => slot.time === time);
+    const slotIndex = timeSlots.findIndex((slot) => slot.time === time);
 
     if (selectedSlots.includes(time)) {
       // Remove slot and any consecutive slots after it
@@ -184,7 +184,7 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
       // Add consecutive slots starting from the selected time
       const consecutiveSlots: string[] = [];
       for (let i = 0; i < consecutiveHours; i++) {
-        const targetSlot = venue.timeSlots[slotIndex + i];
+        const targetSlot = timeSlots[slotIndex + i];
         if (targetSlot?.available) {
           consecutiveSlots.push(targetSlot.time);
         } else {
@@ -202,7 +202,7 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
 
   const canSelectConsecutiveSlots = (startIndex: number, hours: number) => {
     for (let i = 0; i < hours; i++) {
-      const slot = venue.timeSlots[startIndex + i];
+      const slot = timeSlots[startIndex + i];
       if (!slot?.available) {
         return false;
       }
@@ -212,10 +212,53 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
 
   const getTotalPrice = () => {
     return selectedSlots.reduce((total, slotTime) => {
-      const slot = venue.timeSlots.find((s) => s.time === slotTime);
+      const slot = timeSlots.find((s) => s.time === slotTime);
       return total + (slot?.price ?? 0);
     }, 0);
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+        <Navbar />
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="text-center">
+              <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-emerald-600" />
+              <p className="text-gray-600">Loading venue details...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !venue) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+        <Navbar />
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="text-center">
+              <AlertCircle className="mx-auto mb-4 h-8 w-8 text-red-500" />
+              <h2 className="mb-2 text-xl font-semibold text-gray-900">
+                {error && "Venue not found"}
+              </h2>
+              <p className="mb-4 text-gray-600">
+                The venue you&apos;re looking for doesn&apos;t exist or
+                couldn&apos;t be loaded.
+              </p>
+              <Button onClick={() => window.history.back()} variant="outline">
+                Go Back
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -266,41 +309,47 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                 />
                 <div className="absolute inset-0 bg-black/20" />
 
-                {/* Navigation Arrows */}
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="absolute top-1/2 left-4 -translate-y-1/2 transform bg-white/80 hover:bg-white"
-                  onClick={prevImage}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="absolute top-1/2 right-4 -translate-y-1/2 transform bg-white/80 hover:bg-white"
-                  onClick={nextImage}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
+                {/* Navigation Arrows - only show if multiple images */}
+                {venue.images.length > 1 && (
+                  <>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="absolute top-1/2 left-4 -translate-y-1/2 transform bg-white/80 hover:bg-white"
+                      onClick={prevImage}
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="absolute top-1/2 right-4 -translate-y-1/2 transform bg-white/80 hover:bg-white"
+                      onClick={nextImage}
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
 
-                {/* Image Indicators */}
-                <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-2">
-                  {venue.images.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`h-2 w-2 rounded-full transition-colors ${
-                        index === currentImageIndex ? "bg-white" : "bg-white/50"
-                      }`}
-                      onClick={() => setCurrentImageIndex(index)}
-                    />
-                  ))}
-                </div>
+                    {/* Image Indicators */}
+                    <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-2">
+                      {venue.images.map((_, index) => (
+                        <button
+                          key={index}
+                          className={`h-2 w-2 rounded-full transition-colors ${
+                            index === currentImageIndex
+                              ? "bg-white"
+                              : "bg-white/50"
+                          }`}
+                          onClick={() => setCurrentImageIndex(index)}
+                        />
+                      ))}
+                    </div>
 
-                {/* Image Counter */}
-                <div className="absolute top-4 right-4 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
-                  {currentImageIndex + 1} / {venue.images.length}
-                </div>
+                    {/* Image Counter */}
+                    <div className="absolute top-4 right-4 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+                      {currentImageIndex + 1} / {venue.images.length}
+                    </div>
+                  </>
+                )}
               </div>
             </Card>
           </div>
@@ -325,7 +374,16 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Dialog open={isBookingOpen} onOpenChange={setIsBookingOpen}>
+                <Dialog
+                  open={isBookingOpen}
+                  onOpenChange={(open) => {
+                    setIsBookingOpen(open);
+                    if (open) {
+                      // Refresh time slots when dialog opens for real-time data
+                      void refreshTimeSlots();
+                    }
+                  }}
+                >
                   <DialogTrigger asChild>
                     <Button className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700">
                       Book This Venue
@@ -386,18 +444,15 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                             onValueChange={setSelectedSport}
                           >
                             <SelectTrigger>
-                              <SelectValue />
+                              <SelectValue placeholder="Select a sport" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="Badminton Standard | Synthetic">
-                                Badminton Standard | Synthetic
-                              </SelectItem>
-                              <SelectItem value="Badminton Premium | Wooden">
-                                Badminton Premium | Wooden
-                              </SelectItem>
-                              <SelectItem value="Table Tennis">
-                                Table Tennis
-                              </SelectItem>
+                              {venue.sports.map((sport) => (
+                                <SelectItem key={sport.name} value={sport.name}>
+                                  {sport.icon} {sport.name} ({sport.courts}{" "}
+                                  courts)
+                                </SelectItem>
+                              ))}
                             </SelectContent>
                           </Select>
                         </div>
@@ -436,38 +491,64 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                             </span>
                           )}
                         </h3>
-                        <div className="grid max-h-80 grid-cols-3 gap-3 overflow-y-auto pr-2 md:grid-cols-4">
-                          {venue.timeSlots.map((slot, index) => {
-                            const canSelect = canSelectConsecutiveSlots(
-                              index,
-                              consecutiveHours,
-                            );
-                            const isSelected = isSlotPartOfSelection(slot.time);
+                        {timeSlotsLoading ? (
+                          <div className="flex h-40 items-center justify-center">
+                            <div className="text-center">
+                              <Loader2 className="mx-auto mb-2 h-6 w-6 animate-spin text-emerald-600" />
+                              <p className="text-sm text-gray-600">
+                                Loading time slots...
+                              </p>
+                            </div>
+                          </div>
+                        ) : timeSlots.length === 0 ? (
+                          <div className="flex h-40 items-center justify-center">
+                            <div className="text-center">
+                              <AlertCircle className="mx-auto mb-2 h-6 w-6 text-gray-400" />
+                              <p className="text-sm text-gray-600">
+                                No time slots available for this date
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="grid max-h-80 grid-cols-3 gap-3 overflow-y-auto pr-2 md:grid-cols-4">
+                            {timeSlots.map((slot, index) => {
+                              const canSelect = canSelectConsecutiveSlots(
+                                index,
+                                consecutiveHours,
+                              );
+                              const isSelected = isSlotPartOfSelection(
+                                slot.time,
+                              );
 
-                            return (
-                              <Button
-                                key={slot.time}
-                                variant={isSelected ? "default" : "outline"}
-                                size="sm"
-                                disabled={!slot.available || !canSelect}
-                                onClick={() => toggleSlot(slot.time)}
-                                className={`flex h-auto flex-col p-3 text-xs ${
-                                  isSelected
-                                    ? "bg-emerald-600 hover:bg-emerald-700"
-                                    : ""
-                                } ${!canSelect && slot.available ? "opacity-50" : ""}`}
-                              >
-                                <span className="text-center">{slot.time}</span>
-                                <span className="font-bold">₹{slot.price}</span>
-                                {!canSelect && slot.available && (
-                                  <span className="text-xs text-red-500">
-                                    Not enough consecutive slots
+                              return (
+                                <Button
+                                  key={`${slot.timeSlotId}-${slot.time}`}
+                                  variant={isSelected ? "default" : "outline"}
+                                  size="sm"
+                                  disabled={!slot.available || !canSelect}
+                                  onClick={() => toggleSlot(slot.time)}
+                                  className={`flex h-auto flex-col p-3 text-xs ${
+                                    isSelected
+                                      ? "bg-emerald-600 hover:bg-emerald-700"
+                                      : ""
+                                  } ${!canSelect && slot.available ? "opacity-50" : ""}`}
+                                >
+                                  <span className="text-center">
+                                    {slot.time}
                                   </span>
-                                )}
-                              </Button>
-                            );
-                          })}
-                        </div>
+                                  <span className="font-bold">
+                                    ₹{slot.price}
+                                  </span>
+                                  {!canSelect && slot.available && (
+                                    <span className="text-xs text-red-500">
+                                      Not enough consecutive slots
+                                    </span>
+                                  )}
+                                </Button>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -534,24 +615,32 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                     <p className="text-sm">{venue.fullAddress}</p>
                   </div>
 
-                  <div className="flex items-center space-x-4">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 bg-transparent"
-                    >
-                      <Phone className="mr-2 h-4 w-4" />
-                      Call
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 bg-transparent"
-                    >
-                      <Mail className="mr-2 h-4 w-4" />
-                      Email
-                    </Button>
-                  </div>
+                  {(venue.phone ?? venue.email) && (
+                    <div className="flex items-center space-x-4">
+                      {venue.phone && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 bg-transparent"
+                          onClick={() => window.open(`tel:${venue.phone}`)}
+                        >
+                          <Phone className="mr-2 h-4 w-4" />
+                          Call
+                        </Button>
+                      )}
+                      {venue.email && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 bg-transparent"
+                          onClick={() => window.open(`mailto:${venue.email}`)}
+                        >
+                          <Mail className="mr-2 h-4 w-4" />
+                          Email
+                        </Button>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <Separator />
@@ -665,63 +754,75 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
-                  {reviews.map((review) => (
-                    <div
-                      key={review.id}
-                      className="border-b border-gray-100 pb-6 last:border-b-0"
-                    >
-                      <div className="mb-3 flex items-start justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
-                            <span className="font-semibold text-emerald-600">
-                              {review.name.charAt(0)}
-                            </span>
-                          </div>
-                          <div>
-                            <div className="flex items-center space-x-2">
-                              <span className="font-semibold">
-                                {review.name}
-                              </span>
-                              {review.verified && (
-                                <Badge
-                                  variant="secondary"
-                                  className="bg-blue-100 text-xs text-blue-800"
-                                >
-                                  Verified
-                                </Badge>
-                              )}
-                            </div>
-                            <div className="mt-1 flex items-center space-x-2">
-                              <div className="flex">
-                                {[...Array<number>(5)].map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className={`h-4 w-4 ${
-                                      i < review.rating
-                                        ? "fill-yellow-400 text-yellow-400"
-                                        : "text-gray-300"
-                                    }`}
-                                  />
-                                ))}
+                {reviews.length === 0 ? (
+                  <div className="py-8 text-center">
+                    <Star className="mx-auto mb-4 h-8 w-8 text-gray-300" />
+                    <p className="text-gray-600">No reviews yet</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Be the first to review this venue!
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="space-y-6">
+                      {reviews.map((review) => (
+                        <div
+                          key={review.id}
+                          className="border-b border-gray-100 pb-6 last:border-b-0"
+                        >
+                          <div className="mb-3 flex items-start justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
+                                <span className="font-semibold text-emerald-600">
+                                  {review.name.charAt(0)}
+                                </span>
                               </div>
-                              <span className="text-sm text-gray-500">
-                                {review.date}
-                              </span>
+                              <div>
+                                <div className="flex items-center space-x-2">
+                                  <span className="font-semibold">
+                                    {review.name}
+                                  </span>
+                                  {review.verified && (
+                                    <Badge
+                                      variant="secondary"
+                                      className="bg-blue-100 text-xs text-blue-800"
+                                    >
+                                      Verified
+                                    </Badge>
+                                  )}
+                                </div>
+                                <div className="mt-1 flex items-center space-x-2">
+                                  <div className="flex">
+                                    {[...Array<number>(5)].map((_, i) => (
+                                      <Star
+                                        key={i}
+                                        className={`h-4 w-4 ${
+                                          i < review.rating
+                                            ? "fill-yellow-400 text-yellow-400"
+                                            : "text-gray-300"
+                                        }`}
+                                      />
+                                    ))}
+                                  </div>
+                                  <span className="text-sm text-gray-500">
+                                    {review.date}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </div>
+                          <p className="leading-relaxed text-gray-700">
+                            {review.comment}
+                          </p>
                         </div>
-                      </div>
-                      <p className="leading-relaxed text-gray-700">
-                        {review.comment}
-                      </p>
+                      ))}
                     </div>
-                  ))}
-                </div>
 
-                <div className="mt-6 text-center">
-                  <Button variant="outline">Load More Reviews</Button>
-                </div>
+                    <div className="mt-6 text-center">
+                      <Button variant="outline">Load More Reviews</Button>
+                    </div>
+                  </>
+                )}
               </CardContent>
             </Card>
           </TabsContent>

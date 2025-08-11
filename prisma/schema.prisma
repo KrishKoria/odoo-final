@@ -23,7 +23,6 @@ model User {
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]
-  accounts      Account[]
   playerProfile PlayerProfile?
 
   @@unique([email])
@@ -43,25 +42,6 @@ model Session {
 
   @@unique([token])
   @@map("session")
-}
-
-model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime
-  updatedAt             DateTime
-
-  @@map("account")
 }
 
 model Verification {
@@ -141,8 +121,6 @@ model PlayerProfile {
   user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookings     Booking[]
   ownedFacilities Facility[] @relation("FacilityOwner")
-  ratings      PlayerRating[]
-  matchPlayers MatchPlayer[]
   waitlistEntries WaitlistEntry[]
   notifications NotificationLog[]
   facilityReviews FacilityReview[]
@@ -294,67 +272,11 @@ model Match {
   
   // Relations
   booking        Booking     @relation(fields: [bookingId], references: [id], onDelete: Cascade)
-  players        MatchPlayer[]
   
   @@index([status])
   @@index([sportType])
   @@index([startTime])
   @@map("match")
-}
-
-model MatchPlayer {
-  id         String    @id @default(cuid())
-  matchId    String
-  playerId   String
-  joinedAt   DateTime  @default(now())
-  result     String?   // "win", "lose", "draw" - set after match completion
-  
-  // Relations
-  match      Match         @relation(fields: [matchId], references: [id], onDelete: Cascade)
-  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  
-  @@unique([matchId, playerId])
-  @@map("match_player")
-}
-
-model PlayerRating {
-  id         String    @id @default(cuid())
-  playerId   String
-  sportType  SportType
-  rating     Float     @default(1200.0) // Starting ELO rating
-  gamesPlayed Int      @default(0)
-  wins       Int       @default(0)
-  losses     Int       @default(0)
-  draws      Int       @default(0)
-  lastMatchAt DateTime?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  
-  // Relations
-  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  history    RatingHistory[]
-  
-  @@unique([playerId, sportType])
-  @@index([sportType, rating])
-  @@map("player_rating")
-}
-
-model RatingHistory {
-  id           String    @id @default(cuid())
-  ratingId     String
-  oldRating    Float
-  newRating    Float
-  ratingChange Float
-  opponentRating Float?
-  matchResult  String    // "win", "lose", "draw"
-  createdAt    DateTime  @default(now())
-  
-  // Relations
-  rating       PlayerRating @relation(fields: [ratingId], references: [id], onDelete: Cascade)
-  
-  @@index([ratingId])
-  @@index([createdAt])
-  @@map("rating_history")
 }
 
 model WaitlistEntry {

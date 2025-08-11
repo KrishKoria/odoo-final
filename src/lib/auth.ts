@@ -6,7 +6,7 @@ import { emailOTP } from "better-auth/plugins";
 import { Resend } from "resend";
 
 // Initialize Resend client
-const resend = new Resend(env.RESEND_API_KEY as string);
+const resend = new Resend(env.RESEND_API_KEY);
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -18,12 +18,6 @@ export const auth = betterAuth({
   },
   emailVerification: {
     autoSignInAfterVerification: true,
-  },
-  socialProviders: {
-    github: {
-      clientId: env.GITHUB_CLIENT_ID as string,
-      clientSecret: env.GITHUB_CLIENT_SECRET as string,
-    },
   },
   plugins: [
     emailOTP({
