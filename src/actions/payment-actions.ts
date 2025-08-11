@@ -196,28 +196,52 @@ export async function verifyPayment(
       if (paymentOrder.status === "SUCCESSFUL") {
         // Payment already processed successfully, find the booking
         const existingBooking = await tx.booking.findFirst({
-          where: { paymentOrderId: paymentOrder.id },
+          where: {
+            paymentOrderId: paymentOrder.id,
+            status: "CONFIRMED", // Only look for confirmed bookings
+          },
         });
 
         if (existingBooking) {
           return existingBooking.id;
+        } else {
+          // Check if webhook is still processing - look for any booking with this payment order
+          const anyBooking = await tx.booking.findFirst({
+            where: { paymentOrderId: paymentOrder.id },
+          });
+
+          if (anyBooking) {
+            // Booking exists but might be in different state
+            return anyBooking.id;
+          } else {
+            // This is a legitimate race condition - webhook might not have completed yet
+            // Instead of throwing error, let's try to create the booking ourselves
+            console.log(
+              "Payment successful but no booking found, attempting to create booking",
+            );
+            // Fall through to normal booking creation process
+          }
         }
       }
 
+      // Allow SUCCESSFUL status to fall through for race condition handling
       if (
         paymentOrder.status !== "PENDING" &&
-        paymentOrder.status !== "PROCESSING"
+        paymentOrder.status !== "PROCESSING" &&
+        paymentOrder.status !== "SUCCESSFUL"
       ) {
         throw new Error(
           `Payment order status is ${paymentOrder.status}, cannot verify`,
         );
       }
 
-      // Update status to PROCESSING to prevent race conditions
-      await tx.paymentOrder.update({
-        where: { id: paymentOrder.id },
-        data: { status: "PROCESSING" },
-      });
+      // Update status to PROCESSING to prevent race conditions (unless already SUCCESSFUL)
+      if (paymentOrder.status !== "SUCCESSFUL") {
+        await tx.paymentOrder.update({
+          where: { id: paymentOrder.id },
+          data: { status: "PROCESSING" },
+        });
+      }
 
       if (paymentOrder.playerId !== playerProfile.id) {
         throw new Error("Unauthorized payment verification");
@@ -277,6 +301,23 @@ export async function verifyPayment(
 
           if (!timeSlot) {
             throw new Error(`Time slot ${timeSlotId} not found`);
+          }
+
+          // Check for existing cancelled bookings and delete them to free up the unique constraint
+          await tx.booking.deleteMany({
+            where: {
+              timeSlotId,
+              status: "CANCELLED",
+            },
+          });
+
+          // Check if there's already a confirmed booking (shouldn't happen due to earlier check)
+          const existingBooking = await tx.booking.findUnique({
+            where: { timeSlotId },
+          });
+
+          if (existingBooking && existingBooking.status !== "CANCELLED") {
+            throw new Error(`Time slot ${timeSlotId} is already booked`);
           }
 
           return tx.booking.create({

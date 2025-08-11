@@ -125,6 +125,14 @@ async function handlePaymentCaptured(payment: any) {
                 throw new Error(`Time slot ${timeSlotId} not found`);
               }
 
+              // Delete any existing cancelled bookings for this time slot
+              await tx.booking.deleteMany({
+                where: {
+                  timeSlotId,
+                  status: "CANCELLED",
+                },
+              });
+
               // Check if booking already exists
               const existingBooking = await tx.booking.findUnique({
                 where: { timeSlotId },
@@ -142,6 +150,9 @@ async function handlePaymentCaptured(payment: any) {
                     paymentOrderId: paymentOrder.id,
                   },
                 });
+              } else if (existingBooking.status === "CONFIRMED") {
+                // Booking already exists and is confirmed, skip
+                console.log(`Booking already exists for slot ${timeSlotId}`);
               }
             }),
           );

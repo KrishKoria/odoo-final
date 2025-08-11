@@ -344,21 +344,36 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
     } catch (error) {
       console.error("Payment verification error:", error);
 
-      // Only show error if it's not about already processed payment
+      // Check if this is a payment already processed error
       const errorMessage =
         error instanceof Error ? error.message : "Payment verification failed";
-      if (
-        !errorMessage.includes("already processed") &&
-        !errorMessage.includes("already verified") &&
-        !errorMessage.includes("SUCCESSFUL") &&
-        !errorMessage.includes("PROCESSING")
-      ) {
+
+      const isPaymentAlreadyProcessed =
+        errorMessage.includes("already processed") ||
+        errorMessage.includes("already verified") ||
+        errorMessage.includes("SUCCESSFUL") ||
+        errorMessage.includes("PROCESSING") ||
+        errorMessage.includes("already confirmed");
+
+      const isBookingPending =
+        errorMessage.includes("booking still pending") ||
+        errorMessage.includes("no booking found");
+
+      if (!isPaymentAlreadyProcessed && !isBookingPending) {
         setPaymentError(errorMessage);
         toast.error("Payment verification failed. Please contact support.");
         // Reopen booking dialog for genuine errors
         setIsBookingOpen(true);
+      } else if (isBookingPending) {
+        // Payment processed but booking creation is still pending
+        toast.success(
+          "Payment successful! Your booking is being confirmed. Redirecting to your bookings...",
+        );
+        setTimeout(() => {
+          router.push("/profile?tab=bookings");
+        }, 3000);
       } else {
-        // Payment was already processed, redirect to profile
+        // Payment was already processed completely
         toast.success(
           "Payment already confirmed! Redirecting to your bookings...",
         );

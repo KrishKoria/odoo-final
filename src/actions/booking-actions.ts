@@ -430,6 +430,8 @@ export async function cancelPlayerBooking(bookingId: string): Promise<{
       where: { id: bookingId },
       data: {
         status: "CANCELLED",
+        cancelledAt: new Date(),
+        cancellationReason: "Cancelled by player",
         updatedAt: new Date(),
       },
     });
