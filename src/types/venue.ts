@@ -48,3 +48,19 @@ export enum WaitlistStatus {
   PROMOTED = "PROMOTED",
   EXPIRED = "EXPIRED",
 }
+
+export enum PaymentStatus {
+  PENDING = "PENDING",
+  PROCESSING = "PROCESSING",
+  SUCCESSFUL = "SUCCESSFUL",
+  FAILED = "FAILED",
+  REFUNDED = "REFUNDED",
+  CANCELLED = "CANCELLED",
+}
+
+export enum BookingReservationStatus {
+  RESERVED = "RESERVED",
+  CONFIRMED = "CONFIRMED",
+  EXPIRED = "EXPIRED",
+  CANCELLED = "CANCELLED",
+}

@@ -170,6 +170,8 @@ model PlayerProfile {
   facilityReviews FacilityReview[]
   submittedReports Report[] @relation("ReportSubmitter")
   receivedReports  Report[] @relation("ReportTarget")
+  paymentOrders   PaymentOrder[]
+  bookingReservations BookingReservation[]
 
   @@map("player_profile")
 }
@@ -284,6 +286,7 @@ model Booking {
   totalPrice         Float
   status             BookingStatus @default(CONFIRMED)
   paymentSimulated   Boolean       @default(false)
+  paymentOrderId     String?       // Reference to payment order
   bookingNotes       String?
   cancelledAt        DateTime?
   cancellationReason String?
@@ -295,12 +298,14 @@ model Booking {
   timeSlot TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
   court    Court         @relation(fields: [courtId], references: [id], onDelete: Cascade)
   player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  paymentOrder PaymentOrder? @relation(fields: [paymentOrderId], references: [id], onDelete: SetNull)
   match    Match?
 
   @@index([playerId])
   @@index([courtId])
   @@index([status])
   @@index([createdAt])
+  @@index([paymentOrderId])
   @@map("booking")
 }
 
@@ -414,4 +419,116 @@ model Report {
   @@index([targetUserId])
   @@index([targetFacilityId])
   @@map("report")
+}
+
+// Payment and Booking Enhancement Models
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCESSFUL
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum BookingReservationStatus {
+  RESERVED
+  CONFIRMED
+  EXPIRED
+  CANCELLED
+}
+
+model PaymentOrder {
+  id                String        @id @default(cuid())
+  razorpayOrderId   String        @unique
+  amount            Float         // Amount in INR (paise)
+  currency          String        @default("INR")
+  receipt           String        // Unique receipt identifier
+  status            PaymentStatus @default(PENDING)
+  attempts          Int           @default(0)
+  
+  // Booking context
+  playerId          String
+  timeSlotIds       String[]      // Array of time slot IDs being booked
+  totalPrice        Float         // Total booking price
+  
+  // Razorpay response data
+  razorpayResponse  Json?         // Store complete Razorpay response
+  
+  // Relations
+  player            PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  payments          Payment[]
+  bookingReservation BookingReservation?
+  bookings          Booking[]
+  
+  // Timestamps
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  expiresAt         DateTime      // Payment expiry time
+  
+  @@index([razorpayOrderId])
+  @@index([playerId])
+  @@index([status])
+  @@index([expiresAt])
+  @@map("payment_order")
+}
+
+model Payment {
+  id                  String        @id @default(cuid())
+  paymentOrderId      String
+  razorpayPaymentId   String        @unique
+  razorpaySignature   String?       // For payment verification
+  amount              Float         // Amount in paise
+  currency            String        @default("INR")
+  status              PaymentStatus @default(PENDING)
+  method              String?       // Payment method used (card, upi, etc.)
+  
+  // Payment details from Razorpay
+  razorpayResponse    Json?         // Complete payment response
+  failureReason       String?       // Failure reason if payment failed
+  
+  // Verification
+  isSignatureVerified Boolean       @default(false)
+  verifiedAt          DateTime?
+  
+  // Relations
+  paymentOrder        PaymentOrder  @relation(fields: [paymentOrderId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  
+  @@index([razorpayPaymentId])
+  @@index([paymentOrderId])
+  @@index([status])
+  @@map("payment")
+}
+
+model BookingReservation {
+  id              String                   @id @default(cuid())
+  paymentOrderId  String                   @unique
+  timeSlotIds     String[]                 // Time slots being reserved
+  playerId        String
+  status          BookingReservationStatus @default(RESERVED)
+  totalPrice      Float
+  
+  // Reservation details
+  reservedAt      DateTime                 @default(now())
+  expiresAt       DateTime                 // Reservation expiry (usually 15 minutes)
+  confirmedAt     DateTime?                // When booking was confirmed after payment
+  
+  // Relations
+  paymentOrder    PaymentOrder             @relation(fields: [paymentOrderId], references: [id], onDelete: Cascade)
+  player          PlayerProfile            @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+  
+  @@index([timeSlotIds])
+  @@index([playerId])
+  @@index([status])
+  @@index([expiresAt])
+  @@map("booking_reservation")
 }

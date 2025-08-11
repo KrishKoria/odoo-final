@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   MapPin,
   Clock,
@@ -61,6 +62,11 @@ import {
   getVenueTimeSlots,
   getVenueReviews,
 } from "@/actions/venue-actions";
+import {
+  createPaymentOrder,
+  verifyPayment,
+  handlePaymentFailure,
+} from "@/actions/payment-actions";
 import type {
   VenueDetails as VenueDetailsType,
   TimeSlot,
@@ -70,12 +76,16 @@ import RatingDisplay from "./RatingDisplay";
 import ReviewForm from "./ReviewForm";
 import { ReportForm } from "@/components/forms/report-form";
 import { canReviewVenue } from "@/actions/venue-actions";
+import { env } from "@/env";
+import { toast } from "sonner";
 
 interface VenueDetailsProps {
   id: string;
 }
 
 export default function VenueDetails({ id }: VenueDetailsProps) {
+  const router = useRouter();
+
   // State for venue data
   const [venue, setVenue] = useState<VenueDetailsType | null>(null);
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
@@ -105,6 +115,10 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const [consecutiveHours, setConsecutiveHours] = useState(1);
+
+  // Payment state
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
 
   // Icon resolver function
   const getIconComponent = (iconName: string) => {
@@ -286,6 +300,187 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
 
   const isSlotPartOfSelection = (time: string) => {
     return selectedSlots.includes(time);
+  };
+
+  // Payment handlers
+  const handlePaymentSuccess = async (
+    razorpayOrderId: string,
+    razorpayPaymentId: string,
+    razorpaySignature: string,
+  ) => {
+    // Prevent duplicate processing
+    if (isProcessingPayment) {
+      console.log("Payment already being processed, skipping...");
+      return;
+    }
+
+    try {
+      setIsProcessingPayment(true);
+      setPaymentError(null);
+
+      const result = await verifyPayment(
+        razorpayOrderId,
+        razorpayPaymentId,
+        razorpaySignature,
+      );
+
+      if (result.success) {
+        toast.success(
+          "Payment successful! Your booking has been confirmed. Redirecting to your bookings...",
+        );
+        setIsBookingOpen(false);
+        setSelectedSlots([]);
+
+        // Small delay to let user see the success message, then redirect
+        setTimeout(() => {
+          router.push("/profile?tab=bookings");
+        }, 1000);
+
+        // Refresh time slots to show updated availability
+        await refreshTimeSlots();
+      } else {
+        throw new Error(result.error || "Payment verification failed");
+      }
+    } catch (error) {
+      console.error("Payment verification error:", error);
+
+      // Only show error if it's not about already processed payment
+      const errorMessage =
+        error instanceof Error ? error.message : "Payment verification failed";
+      if (
+        !errorMessage.includes("already processed") &&
+        !errorMessage.includes("already verified") &&
+        !errorMessage.includes("SUCCESSFUL") &&
+        !errorMessage.includes("PROCESSING")
+      ) {
+        setPaymentError(errorMessage);
+        toast.error("Payment verification failed. Please contact support.");
+        // Reopen booking dialog for genuine errors
+        setIsBookingOpen(true);
+      } else {
+        // Payment was already processed, redirect to profile
+        toast.success(
+          "Payment already confirmed! Redirecting to your bookings...",
+        );
+        setTimeout(() => {
+          router.push("/profile?tab=bookings");
+        }, 1000);
+      }
+    } finally {
+      setIsProcessingPayment(false);
+    }
+  };
+
+  const initializeRazorpayPayment = async () => {
+    try {
+      setIsProcessingPayment(true);
+      setPaymentError(null);
+
+      if (!venue) throw new Error("Venue not found");
+      if (selectedSlots.length === 0) throw new Error("No slots selected");
+
+      // Get the first selected court (assumes all slots are from same court)
+      const firstSlot = timeSlots.find((slot) =>
+        selectedSlots.includes(slot.time),
+      );
+      if (!firstSlot) throw new Error("Selected slot not found");
+
+      const courtId = firstSlot.courtId;
+      const totalAmount = getTotalPrice();
+
+      // Create booking slots data
+      const bookingSlots = selectedSlots.map((timeSlot) => {
+        const slot = timeSlots.find((s) => s.time === timeSlot);
+        return {
+          timeSlotId: slot?.timeSlotId || "",
+          startTime: slot?.time || "",
+          endTime: slot?.time || "", // You might want to calculate end time properly
+          date: format(selectedDate, "yyyy-MM-dd"),
+        };
+      });
+
+      // Create payment order
+      const orderResult = await createPaymentOrder(
+        venue.id,
+        courtId,
+        bookingSlots,
+        totalAmount,
+      );
+
+      if (!orderResult.success || !orderResult.razorpayOrderId) {
+        throw new Error(orderResult.error || "Failed to create payment order");
+      }
+
+      // Close the booking dialog before opening payment gateway
+      setIsBookingOpen(false);
+
+      // Load Razorpay script dynamically
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => {
+        const options = {
+          key: env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+          amount: Math.round(totalAmount * 100), // Convert to paise
+          currency: "INR",
+          name: "QuickCourt",
+          description: `Booking for ${venue.name}`,
+          order_id: orderResult.razorpayOrderId,
+          handler: async function (response: any) {
+            await handlePaymentSuccess(
+              response.razorpay_order_id,
+              response.razorpay_payment_id,
+              response.razorpay_signature,
+            );
+          },
+          prefill: {
+            name: "User", // You can get this from user session
+            email: "user@example.com", // You can get this from user session
+            contact: "9999999999", // You can get this from user session
+          },
+          notes: {
+            venue_id: venue.id,
+            court_id: courtId,
+            date: format(selectedDate, "yyyy-MM-dd"),
+            slots: selectedSlots.join(", "),
+          },
+          theme: {
+            color: "#059669", // Emerald color to match your theme
+          },
+          modal: {
+            ondismiss: function () {
+              setIsProcessingPayment(false);
+              // Reopen booking dialog if payment was cancelled/dismissed
+              setIsBookingOpen(true);
+              // Handle payment failure/cancellation
+              if (orderResult.razorpayOrderId) {
+                // Call handlePaymentFailure but don't await to avoid blocking
+                handlePaymentFailure(orderResult.razorpayOrderId).catch(
+                  (error) => {
+                    console.error("Error handling payment failure:", error);
+                  },
+                );
+              }
+            },
+          },
+        };
+
+        const razorpay = new (window as any).Razorpay(options);
+        razorpay.open();
+      };
+
+      script.onerror = () => {
+        throw new Error("Failed to load payment gateway");
+      };
+
+      document.body.appendChild(script);
+    } catch (error) {
+      console.error("Payment initialization error:", error);
+      setPaymentError(
+        error instanceof Error ? error.message : "Failed to initialize payment",
+      );
+      toast.error("Failed to initialize payment. Please try again.");
+      setIsProcessingPayment(false);
+    }
   };
 
   const canSelectConsecutiveSlots = (startIndex: number, hours: number) => {
@@ -682,8 +877,24 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                             </span>
                           </div>
                         </div>
-                        <Button className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700">
-                          Confirm Booking - ₹{getTotalPrice()}
+                        {paymentError && (
+                          <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">
+                            {paymentError}
+                          </div>
+                        )}
+                        <Button
+                          className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700 disabled:opacity-50"
+                          onClick={initializeRazorpayPayment}
+                          disabled={isProcessingPayment}
+                        >
+                          {isProcessingPayment ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Processing Payment...
+                            </>
+                          ) : (
+                            `Confirm Booking - ₹${getTotalPrice()}`
+                          )}
                         </Button>
                       </div>
                     )}

@@ -30,7 +30,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -147,6 +147,12 @@ function getStatusColor(status: string) {
 export default function ProfilePage() {
   const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Get initial tab from URL params or default to "profile"
+  const initialTab = searchParams.get("tab") ?? "profile";
+  const [activeTab, setActiveTab] = useState(initialTab);
+
   const [isEditing, setIsEditing] = useState(false);
   const [bookings, setBookings] = useState<BookingData[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<BookingData[]>([]);
@@ -293,6 +299,14 @@ export default function ProfilePage() {
     setFilteredBookings(filtered);
   }, [bookings, statusFilter, dateFilter, searchQuery]);
 
+  // Handle URL tab parameter changes
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam && (tabParam === "profile" || tabParam === "bookings")) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
+
   const onSubmit = async (data: ProfileFormValues) => {
     setIsSaving(true);
     try {
@@ -407,23 +421,38 @@ export default function ProfilePage() {
 
   const handleCancelBooking = async (bookingId: string) => {
     try {
-      // In a real app, you'd call an API to cancel the booking
       const response = await fetch(`/api/bookings/${bookingId}/cancel`, {
         method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (response.ok) {
-        setBookings((prev) =>
-          prev.map((booking) =>
-            booking.id === bookingId
-              ? { ...booking, status: "CANCELLED" as const }
-              : booking,
-          ),
-        );
-        toast.success("Booking cancelled successfully");
+        const result = await response.json();
+        if (result.success) {
+          setBookings((prev) =>
+            prev.map((booking) =>
+              booking.id === bookingId
+                ? { ...booking, status: "CANCELLED" as const }
+                : booking,
+            ),
+          );
+          toast.success("Booking cancelled successfully");
+        } else {
+          toast.error(result.error || "Failed to cancel booking");
+        }
       } else {
-        const error = (await response.json()) as { error: string };
-        toast.error(error.error || "Failed to cancel booking");
+        // Handle non-JSON responses (like 404 HTML pages)
+        let errorMessage = "Failed to cancel booking";
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // If JSON parsing fails, use status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error("Failed to cancel booking:", error);
@@ -460,7 +489,11 @@ export default function ProfilePage() {
             </p>
           </div>
 
-          <Tabs defaultValue="profile" className="w-full space-y-6">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full space-y-6"
+          >
             <TabsList className="grid h-11 w-full grid-cols-2 lg:w-[400px]">
               <TabsTrigger value="profile" className="text-sm font-medium">
                 Profile Details

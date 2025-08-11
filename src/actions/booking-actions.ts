@@ -352,3 +352,94 @@ export async function updateBookingStatus(
     throw new Error("Failed to update booking status");
   }
 }
+
+/**
+ * Cancel a booking (for players)
+ */
+export async function cancelPlayerBooking(bookingId: string): Promise<{
+  success: boolean;
+  error?: string;
+}> {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    // Get player profile
+    const playerProfile = await prisma.playerProfile.findUnique({
+      where: { userId: session.user.id },
+    });
+
+    if (!playerProfile) {
+      return { success: false, error: "Player profile not found" };
+    }
+
+    // Find the booking and verify ownership
+    const booking = await prisma.booking.findFirst({
+      where: {
+        id: bookingId,
+        playerId: playerProfile.id,
+      },
+      include: {
+        timeSlot: {
+          include: {
+            court: {
+              include: {
+                facility: true,
+              },
+            },
+          },
+        },
+        paymentOrder: true,
+      },
+    });
+
+    if (!booking) {
+      return { success: false, error: "Booking not found" };
+    }
+
+    // Check if booking can be cancelled (not already cancelled or completed)
+    if (booking.status === "CANCELLED") {
+      return { success: false, error: "Booking is already cancelled" };
+    }
+
+    if (booking.status === "COMPLETED") {
+      return { success: false, error: "Cannot cancel completed booking" };
+    }
+
+    // Check if booking is in the future (optional cancellation policy)
+    const bookingDateTime = new Date(booking.timeSlot.startTime);
+    const now = new Date();
+    const hoursDifference =
+      (bookingDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+
+    // Allow cancellation up to 2 hours before the booking
+    if (hoursDifference < 2) {
+      return {
+        success: false,
+        error: "Cannot cancel booking less than 2 hours before start time",
+      };
+    }
+
+    // Update booking status to cancelled
+    await prisma.booking.update({
+      where: { id: bookingId },
+      data: {
+        status: "CANCELLED",
+        updatedAt: new Date(),
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error cancelling booking:", error);
+    return {
+      success: false,
+      error: "Failed to cancel booking. Please try again.",
+    };
+  }
+}
