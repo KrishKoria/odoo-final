@@ -16,6 +16,9 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
   },
+  emailVerification: {
+    autoSignInAfterVerification: true,
+  },
   socialProviders: {
     github: {
       clientId: env.GITHUB_CLIENT_ID as string,
@@ -100,34 +103,3 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24, // 24 hours
   },
 });
-
-// Utility function to create player profile for new users
-export async function createPlayerProfile(
-  userId: string,
-  userData?: { image?: string | null; name?: string },
-) {
-  try {
-    // Check if player profile already exists
-    const existingProfile = await prisma.playerProfile.findUnique({
-      where: { userId },
-    });
-
-    if (!existingProfile) {
-      await prisma.playerProfile.create({
-        data: {
-          userId,
-          role: "USER",
-          avatar: userData?.image ?? null,
-          isActive: true,
-          isBanned: false,
-        },
-      });
-      console.log(`Created player profile for user: ${userId}`);
-      return true;
-    }
-    return false;
-  } catch (error) {
-    console.error("Failed to create player profile:", error);
-    throw error;
-  }
-}

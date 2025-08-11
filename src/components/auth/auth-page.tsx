@@ -42,7 +42,8 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
   const handleVerificationSuccess = () => {
     setError("");
     setSuccess("Email verified successfully!");
-    setCurrentStep("login");
+    // Check if user is now signed in automatically
+    window.location.href = "/dashboard";
   };
 
   const handleError = (errorMessage: string) => {
