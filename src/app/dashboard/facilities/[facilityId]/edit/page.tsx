@@ -6,18 +6,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface EditFacilityPageProps {
-  params: {
+  params: Promise<{
     facilityId: string;
-  };
+  }>;
 }
 
 export default async function EditFacilityPage({
   params,
 }: EditFacilityPageProps) {
   let facility;
-
+  const { facilityId } = await params;
   try {
-    facility = await getFacilityById(params.facilityId);
+    facility = await getFacilityById(facilityId);
   } catch (error) {
     console.error("Failed to fetch facility for editing:", error);
     notFound();
@@ -33,7 +33,7 @@ export default async function EditFacilityPage({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="sm" asChild>
-            <Link href={`/dashboard/facilities/${params.facilityId}`}>
+            <Link href={`/dashboard/facilities/${facilityId}`}>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Facility
             </Link>

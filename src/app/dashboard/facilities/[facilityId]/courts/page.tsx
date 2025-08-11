@@ -3,19 +3,20 @@ import { ArrowLeft, Plus } from "lucide-react";
 import Link from "next/link";
 
 interface CourtsPageProps {
-  params: {
+  params: Promise<{
     facilityId: string;
-  };
+  }>;
 }
 
-export default function CourtsPage({ params }: CourtsPageProps) {
+export default async function CourtsPage({ params }: CourtsPageProps) {
+  const { facilityId } = await params;
   return (
     <div className="space-y-6 px-4 lg:px-6">
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="sm" asChild>
-            <Link href={`/dashboard/facilities/${params.facilityId}`}>
+            <Link href={`/dashboard/facilities/${facilityId}`}>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Facility
             </Link>
@@ -30,7 +31,7 @@ export default function CourtsPage({ params }: CourtsPageProps) {
           </div>
         </div>
         <Button asChild>
-          <Link href={`/dashboard/facilities/${params.facilityId}/courts/new`}>
+          <Link href={`/dashboard/facilities/${facilityId}/courts/new`}>
             <Plus className="mr-2 h-4 w-4" />
             Add Court
           </Link>

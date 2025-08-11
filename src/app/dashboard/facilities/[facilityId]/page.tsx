@@ -6,16 +6,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface FacilityPageProps {
-  params: {
+  params: Promise<{
     facilityId: string;
-  };
+  }>;
 }
 
 export default async function FacilityPage({ params }: FacilityPageProps) {
   let facility;
-
+  const { facilityId } = await params;
   try {
-    facility = await getFacilityById(params.facilityId);
+    facility = await getFacilityById(facilityId);
   } catch (error) {
     console.error("Failed to fetch facility:", error);
     notFound();
@@ -44,7 +44,7 @@ export default async function FacilityPage({ params }: FacilityPageProps) {
           </div>
         </div>
         <Button asChild>
-          <Link href={`/dashboard/facilities/${params.facilityId}/edit`}>
+          <Link href={`/dashboard/facilities/${facilityId}/edit`}>
             <Edit className="mr-2 h-4 w-4" />
             Edit Facility
           </Link>
