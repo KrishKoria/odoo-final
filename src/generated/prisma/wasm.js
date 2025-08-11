@@ -120,12 +120,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.TestScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email'
-};
-
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -172,6 +166,157 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PlayerProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  role: 'role',
+  phoneNumber: 'phoneNumber',
+  avatar: 'avatar',
+  isActive: 'isActive',
+  isBanned: 'isBanned',
+  bannedUntil: 'bannedUntil',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FacilityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  amenities: 'amenities',
+  photos: 'photos',
+  ownerId: 'ownerId',
+  status: 'status',
+  approvedAt: 'approvedAt',
+  approvedBy: 'approvedBy',
+  rejectionReason: 'rejectionReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourtScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  facilityId: 'facilityId',
+  sportType: 'sportType',
+  pricePerHour: 'pricePerHour',
+  operatingStartHour: 'operatingStartHour',
+  operatingEndHour: 'operatingEndHour',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TimeSlotScalarFieldEnum = {
+  id: 'id',
+  courtId: 'courtId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  isMaintenanceBlocked: 'isMaintenanceBlocked',
+  maintenanceReason: 'maintenanceReason',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id',
+  timeSlotId: 'timeSlotId',
+  courtId: 'courtId',
+  playerId: 'playerId',
+  totalPrice: 'totalPrice',
+  status: 'status',
+  paymentSimulated: 'paymentSimulated',
+  bookingNotes: 'bookingNotes',
+  cancelledAt: 'cancelledAt',
+  cancellationReason: 'cancellationReason',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MatchScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  title: 'title',
+  description: 'description',
+  maxPlayers: 'maxPlayers',
+  sportType: 'sportType',
+  skillLevel: 'skillLevel',
+  status: 'status',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MatchPlayerScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  playerId: 'playerId',
+  joinedAt: 'joinedAt',
+  result: 'result'
+};
+
+exports.Prisma.PlayerRatingScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  sportType: 'sportType',
+  rating: 'rating',
+  gamesPlayed: 'gamesPlayed',
+  wins: 'wins',
+  losses: 'losses',
+  draws: 'draws',
+  lastMatchAt: 'lastMatchAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RatingHistoryScalarFieldEnum = {
+  id: 'id',
+  ratingId: 'ratingId',
+  oldRating: 'oldRating',
+  newRating: 'newRating',
+  ratingChange: 'ratingChange',
+  opponentRating: 'opponentRating',
+  matchResult: 'matchResult',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WaitlistEntryScalarFieldEnum = {
+  id: 'id',
+  timeSlotId: 'timeSlotId',
+  playerId: 'playerId',
+  priority: 'priority',
+  status: 'status',
+  notifiedAt: 'notifiedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OccupancyStatsScalarFieldEnum = {
+  id: 'id',
+  courtId: 'courtId',
+  hourOfWeek: 'hourOfWeek',
+  avgOccupancy: 'avgOccupancy',
+  sampleCount: 'sampleCount',
+  lastUpdated: 'lastUpdated'
+};
+
+exports.Prisma.NotificationLogScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  sentAt: 'sentAt',
+  readAt: 'readAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -186,14 +331,65 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserRole = exports.$Enums.UserRole = {
+  USER: 'USER',
+  FACILITY_OWNER: 'FACILITY_OWNER',
+  ADMIN: 'ADMIN'
+};
 
+exports.FacilityStatus = exports.$Enums.FacilityStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+exports.SportType = exports.$Enums.SportType = {
+  BADMINTON: 'BADMINTON',
+  TENNIS: 'TENNIS',
+  SQUASH: 'SQUASH',
+  BASKETBALL: 'BASKETBALL',
+  FOOTBALL: 'FOOTBALL',
+  CRICKET: 'CRICKET',
+  TABLE_TENNIS: 'TABLE_TENNIS',
+  VOLLEYBALL: 'VOLLEYBALL'
+};
+
+exports.BookingStatus = exports.$Enums.BookingStatus = {
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+};
+
+exports.MatchStatus = exports.$Enums.MatchStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.WaitlistStatus = exports.$Enums.WaitlistStatus = {
+  WAITING: 'WAITING',
+  PROMOTED: 'PROMOTED',
+  EXPIRED: 'EXPIRED'
+};
 
 exports.Prisma.ModelName = {
-  Test: 'Test',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  PlayerProfile: 'PlayerProfile',
+  Facility: 'Facility',
+  Court: 'Court',
+  TimeSlot: 'TimeSlot',
+  Booking: 'Booking',
+  Match: 'Match',
+  MatchPlayer: 'MatchPlayer',
+  PlayerRating: 'PlayerRating',
+  RatingHistory: 'RatingHistory',
+  WaitlistEntry: 'WaitlistEntry',
+  OccupancyStats: 'OccupancyStats',
+  NotificationLog: 'NotificationLog'
 };
 
 /**

@@ -14,12 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test {
-  id    String @id @default(cuid())
-  name  String
-  email String @unique
-}
-
 model User {
   id            String    @id
   name          String
@@ -30,6 +24,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  playerProfile PlayerProfile?
 
   @@unique([email])
   @@map("user")
@@ -78,4 +73,303 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+// QuickCourt Business Models
+
+enum UserRole {
+  USER
+  FACILITY_OWNER
+  ADMIN
+}
+
+enum FacilityStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum MatchStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum WaitlistStatus {
+  WAITING
+  PROMOTED
+  EXPIRED
+}
+
+enum SportType {
+  BADMINTON
+  TENNIS
+  SQUASH
+  BASKETBALL
+  FOOTBALL
+  CRICKET
+  TABLE_TENNIS
+  VOLLEYBALL
+}
+
+model PlayerProfile {
+  id           String    @id @default(cuid())
+  userId       String    @unique
+  role         UserRole  @default(USER)
+  phoneNumber  String?
+  avatar       String?
+  isActive     Boolean   @default(true)
+  isBanned     Boolean   @default(false)
+  bannedUntil  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // Relations
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookings     Booking[]
+  ownedFacilities Facility[] @relation("FacilityOwner")
+  ratings      PlayerRating[]
+  matchPlayers MatchPlayer[]
+  waitlistEntries WaitlistEntry[]
+  notifications NotificationLog[]
+  
+  @@map("player_profile")
+}
+
+model Facility {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  address     String
+  latitude    Float?
+  longitude   Float?
+  amenities   String[]
+  photos      String[]
+  ownerId     String
+  status      FacilityStatus @default(PENDING)
+  approvedAt  DateTime?
+  approvedBy  String?
+  rejectionReason String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  
+  // Relations
+  owner       PlayerProfile  @relation("FacilityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  courts      Court[]
+  
+  @@index([status])
+  @@index([ownerId])
+  @@map("facility")
+}
+
+model Court {
+  id           String    @id @default(cuid())
+  name         String
+  facilityId   String
+  sportType    SportType
+  pricePerHour Float
+  operatingStartHour Int  // 0-23 (24h format)
+  operatingEndHour   Int  // 0-23 (24h format)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // Relations
+  facility     Facility   @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  timeSlots    TimeSlot[]
+  bookings     Booking[]
+  occupancyStats OccupancyStats[]
+  
+  @@index([facilityId])
+  @@index([sportType])
+  @@map("court")
+}
+
+model TimeSlot {
+  id             String    @id @default(cuid())
+  courtId        String
+  startTime      DateTime
+  endTime        DateTime
+  isMaintenanceBlocked Boolean @default(false)
+  maintenanceReason String?
+  version        Int       @default(0) // For optimistic locking
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  
+  // Relations
+  court          Court     @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  booking        Booking?
+  waitlistEntries WaitlistEntry[]
+  
+  @@unique([courtId, startTime])
+  @@index([startTime])
+  @@index([courtId])
+  @@map("time_slot")
+}
+
+model Booking {
+  id             String        @id @default(cuid())
+  timeSlotId     String        @unique
+  courtId        String
+  playerId       String
+  totalPrice     Float
+  status         BookingStatus @default(CONFIRMED)
+  paymentSimulated Boolean     @default(false)
+  bookingNotes   String?
+  cancelledAt    DateTime?
+  cancellationReason String?
+  version        Int           @default(0) // For optimistic locking
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  
+  // Relations
+  timeSlot       TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  court          Court         @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  player         PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  match          Match?
+  
+  @@index([playerId])
+  @@index([courtId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("booking")
+}
+
+model Match {
+  id             String      @id @default(cuid())
+  bookingId      String      @unique
+  title          String?
+  description    String?
+  maxPlayers     Int         @default(4)
+  sportType      SportType
+  skillLevel     String?     // e.g., "Beginner", "Intermediate", "Advanced"
+  status         MatchStatus @default(OPEN)
+  startTime      DateTime
+  endTime        DateTime
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  
+  // Relations
+  booking        Booking     @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  players        MatchPlayer[]
+  
+  @@index([status])
+  @@index([sportType])
+  @@index([startTime])
+  @@map("match")
+}
+
+model MatchPlayer {
+  id         String    @id @default(cuid())
+  matchId    String
+  playerId   String
+  joinedAt   DateTime  @default(now())
+  result     String?   // "win", "lose", "draw" - set after match completion
+  
+  // Relations
+  match      Match         @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  @@unique([matchId, playerId])
+  @@map("match_player")
+}
+
+model PlayerRating {
+  id         String    @id @default(cuid())
+  playerId   String
+  sportType  SportType
+  rating     Float     @default(1200.0) // Starting ELO rating
+  gamesPlayed Int      @default(0)
+  wins       Int       @default(0)
+  losses     Int       @default(0)
+  draws      Int       @default(0)
+  lastMatchAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  
+  // Relations
+  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  history    RatingHistory[]
+  
+  @@unique([playerId, sportType])
+  @@index([sportType, rating])
+  @@map("player_rating")
+}
+
+model RatingHistory {
+  id           String    @id @default(cuid())
+  ratingId     String
+  oldRating    Float
+  newRating    Float
+  ratingChange Float
+  opponentRating Float?
+  matchResult  String    // "win", "lose", "draw"
+  createdAt    DateTime  @default(now())
+  
+  // Relations
+  rating       PlayerRating @relation(fields: [ratingId], references: [id], onDelete: Cascade)
+  
+  @@index([ratingId])
+  @@index([createdAt])
+  @@map("rating_history")
+}
+
+model WaitlistEntry {
+  id         String        @id @default(cuid())
+  timeSlotId String
+  playerId   String
+  priority   Int           @default(0) // Lower number = higher priority
+  status     WaitlistStatus @default(WAITING)
+  notifiedAt DateTime?
+  expiresAt  DateTime
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  
+  // Relations
+  timeSlot   TimeSlot      @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  @@unique([timeSlotId, playerId])
+  @@index([timeSlotId, priority])
+  @@index([status])
+  @@map("waitlist_entry")
+}
+
+model OccupancyStats {
+  id         String    @id @default(cuid())
+  courtId    String
+  hourOfWeek Int       // 0-167 (24*7, represents hour of week)
+  avgOccupancy Float   @default(0.0) // 0.0 to 1.0
+  sampleCount Int      @default(0)
+  lastUpdated DateTime @default(now())
+  
+  // Relations
+  court      Court     @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  
+  @@unique([courtId, hourOfWeek])
+  @@map("occupancy_stats")
+}
+
+model NotificationLog {
+  id         String    @id @default(cuid())
+  playerId   String
+  type       String    // "waitlist_promotion", "booking_reminder", etc.
+  title      String
+  message    String
+  sentAt     DateTime  @default(now())
+  readAt     DateTime?
+  
+  // Relations
+  player     PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  @@index([playerId])
+  @@index([sentAt])
+  @@map("notification_log")
 }

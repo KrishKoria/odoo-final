@@ -8,11 +8,12 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
-    BETTER_AUTH_SECRET: z.string().min(32).max(128),
+    BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string().url(),
     DATABASE_URL: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
     GITHUB_CLIENT_ID: z.string(),
+    RESEND_API_KEY: z.string(),
   },
 
   /**
@@ -35,6 +36,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

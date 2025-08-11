@@ -14,11 +14,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Test
- * 
- */
-export type Test = $Result.DefaultSelection<Prisma.$TestPayload>
-/**
  * Model User
  * 
  */
@@ -38,6 +33,155 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+/**
+ * Model PlayerProfile
+ * 
+ */
+export type PlayerProfile = $Result.DefaultSelection<Prisma.$PlayerProfilePayload>
+/**
+ * Model Facility
+ * 
+ */
+export type Facility = $Result.DefaultSelection<Prisma.$FacilityPayload>
+/**
+ * Model Court
+ * 
+ */
+export type Court = $Result.DefaultSelection<Prisma.$CourtPayload>
+/**
+ * Model TimeSlot
+ * 
+ */
+export type TimeSlot = $Result.DefaultSelection<Prisma.$TimeSlotPayload>
+/**
+ * Model Booking
+ * 
+ */
+export type Booking = $Result.DefaultSelection<Prisma.$BookingPayload>
+/**
+ * Model Match
+ * 
+ */
+export type Match = $Result.DefaultSelection<Prisma.$MatchPayload>
+/**
+ * Model MatchPlayer
+ * 
+ */
+export type MatchPlayer = $Result.DefaultSelection<Prisma.$MatchPlayerPayload>
+/**
+ * Model PlayerRating
+ * 
+ */
+export type PlayerRating = $Result.DefaultSelection<Prisma.$PlayerRatingPayload>
+/**
+ * Model RatingHistory
+ * 
+ */
+export type RatingHistory = $Result.DefaultSelection<Prisma.$RatingHistoryPayload>
+/**
+ * Model WaitlistEntry
+ * 
+ */
+export type WaitlistEntry = $Result.DefaultSelection<Prisma.$WaitlistEntryPayload>
+/**
+ * Model OccupancyStats
+ * 
+ */
+export type OccupancyStats = $Result.DefaultSelection<Prisma.$OccupancyStatsPayload>
+/**
+ * Model NotificationLog
+ * 
+ */
+export type NotificationLog = $Result.DefaultSelection<Prisma.$NotificationLogPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserRole: {
+  USER: 'USER',
+  FACILITY_OWNER: 'FACILITY_OWNER',
+  ADMIN: 'ADMIN'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const FacilityStatus: {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+export type FacilityStatus = (typeof FacilityStatus)[keyof typeof FacilityStatus]
+
+
+export const BookingStatus: {
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+};
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
+
+
+export const MatchStatus: {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type MatchStatus = (typeof MatchStatus)[keyof typeof MatchStatus]
+
+
+export const WaitlistStatus: {
+  WAITING: 'WAITING',
+  PROMOTED: 'PROMOTED',
+  EXPIRED: 'EXPIRED'
+};
+
+export type WaitlistStatus = (typeof WaitlistStatus)[keyof typeof WaitlistStatus]
+
+
+export const SportType: {
+  BADMINTON: 'BADMINTON',
+  TENNIS: 'TENNIS',
+  SQUASH: 'SQUASH',
+  BASKETBALL: 'BASKETBALL',
+  FOOTBALL: 'FOOTBALL',
+  CRICKET: 'CRICKET',
+  TABLE_TENNIS: 'TABLE_TENNIS',
+  VOLLEYBALL: 'VOLLEYBALL'
+};
+
+export type SportType = (typeof SportType)[keyof typeof SportType]
+
+}
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
+
+export type FacilityStatus = $Enums.FacilityStatus
+
+export const FacilityStatus: typeof $Enums.FacilityStatus
+
+export type BookingStatus = $Enums.BookingStatus
+
+export const BookingStatus: typeof $Enums.BookingStatus
+
+export type MatchStatus = $Enums.MatchStatus
+
+export const MatchStatus: typeof $Enums.MatchStatus
+
+export type WaitlistStatus = $Enums.WaitlistStatus
+
+export const WaitlistStatus: typeof $Enums.WaitlistStatus
+
+export type SportType = $Enums.SportType
+
+export const SportType: typeof $Enums.SportType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -46,8 +190,8 @@ export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Tests
- * const tests = await prisma.test.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  *
@@ -67,8 +211,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Tests
-   * const tests = await prisma.test.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    *
@@ -165,16 +309,6 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.test`: Exposes CRUD operations for the **Test** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Tests
-    * const tests = await prisma.test.findMany()
-    * ```
-    */
-  get test(): Prisma.TestDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -213,6 +347,126 @@ export class PrismaClient<
     * ```
     */
   get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.playerProfile`: Exposes CRUD operations for the **PlayerProfile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PlayerProfiles
+    * const playerProfiles = await prisma.playerProfile.findMany()
+    * ```
+    */
+  get playerProfile(): Prisma.PlayerProfileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.facility`: Exposes CRUD operations for the **Facility** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Facilities
+    * const facilities = await prisma.facility.findMany()
+    * ```
+    */
+  get facility(): Prisma.FacilityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.court`: Exposes CRUD operations for the **Court** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Courts
+    * const courts = await prisma.court.findMany()
+    * ```
+    */
+  get court(): Prisma.CourtDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.timeSlot`: Exposes CRUD operations for the **TimeSlot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TimeSlots
+    * const timeSlots = await prisma.timeSlot.findMany()
+    * ```
+    */
+  get timeSlot(): Prisma.TimeSlotDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.booking`: Exposes CRUD operations for the **Booking** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Bookings
+    * const bookings = await prisma.booking.findMany()
+    * ```
+    */
+  get booking(): Prisma.BookingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.match`: Exposes CRUD operations for the **Match** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Matches
+    * const matches = await prisma.match.findMany()
+    * ```
+    */
+  get match(): Prisma.MatchDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.matchPlayer`: Exposes CRUD operations for the **MatchPlayer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MatchPlayers
+    * const matchPlayers = await prisma.matchPlayer.findMany()
+    * ```
+    */
+  get matchPlayer(): Prisma.MatchPlayerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.playerRating`: Exposes CRUD operations for the **PlayerRating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PlayerRatings
+    * const playerRatings = await prisma.playerRating.findMany()
+    * ```
+    */
+  get playerRating(): Prisma.PlayerRatingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ratingHistory`: Exposes CRUD operations for the **RatingHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RatingHistories
+    * const ratingHistories = await prisma.ratingHistory.findMany()
+    * ```
+    */
+  get ratingHistory(): Prisma.RatingHistoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.waitlistEntry`: Exposes CRUD operations for the **WaitlistEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WaitlistEntries
+    * const waitlistEntries = await prisma.waitlistEntry.findMany()
+    * ```
+    */
+  get waitlistEntry(): Prisma.WaitlistEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.occupancyStats`: Exposes CRUD operations for the **OccupancyStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OccupancyStats
+    * const occupancyStats = await prisma.occupancyStats.findMany()
+    * ```
+    */
+  get occupancyStats(): Prisma.OccupancyStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notificationLog`: Exposes CRUD operations for the **NotificationLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NotificationLogs
+    * const notificationLogs = await prisma.notificationLog.findMany()
+    * ```
+    */
+  get notificationLog(): Prisma.NotificationLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -653,11 +907,22 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Test: 'Test',
     User: 'User',
     Session: 'Session',
     Account: 'Account',
-    Verification: 'Verification'
+    Verification: 'Verification',
+    PlayerProfile: 'PlayerProfile',
+    Facility: 'Facility',
+    Court: 'Court',
+    TimeSlot: 'TimeSlot',
+    Booking: 'Booking',
+    Match: 'Match',
+    MatchPlayer: 'MatchPlayer',
+    PlayerRating: 'PlayerRating',
+    RatingHistory: 'RatingHistory',
+    WaitlistEntry: 'WaitlistEntry',
+    OccupancyStats: 'OccupancyStats',
+    NotificationLog: 'NotificationLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -676,84 +941,10 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "test" | "user" | "session" | "account" | "verification"
+      modelProps: "user" | "session" | "account" | "verification" | "playerProfile" | "facility" | "court" | "timeSlot" | "booking" | "match" | "matchPlayer" | "playerRating" | "ratingHistory" | "waitlistEntry" | "occupancyStats" | "notificationLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Test: {
-        payload: Prisma.$TestPayload<ExtArgs>
-        fields: Prisma.TestFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TestFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TestFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
-          }
-          findFirst: {
-            args: Prisma.TestFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TestFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
-          }
-          findMany: {
-            args: Prisma.TestFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>[]
-          }
-          create: {
-            args: Prisma.TestCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
-          }
-          createMany: {
-            args: Prisma.TestCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TestCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>[]
-          }
-          delete: {
-            args: Prisma.TestDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
-          }
-          update: {
-            args: Prisma.TestUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
-          }
-          deleteMany: {
-            args: Prisma.TestDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TestUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TestUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>[]
-          }
-          upsert: {
-            args: Prisma.TestUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
-          }
-          aggregate: {
-            args: Prisma.TestAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTest>
-          }
-          groupBy: {
-            args: Prisma.TestGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TestGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TestCountArgs<ExtArgs>
-            result: $Utils.Optional<TestCountAggregateOutputType> | number
-          }
-        }
-      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -1050,6 +1241,894 @@ export namespace Prisma {
           }
         }
       }
+      PlayerProfile: {
+        payload: Prisma.$PlayerProfilePayload<ExtArgs>
+        fields: Prisma.PlayerProfileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerProfileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerProfileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerProfileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerProfileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>
+          }
+          findMany: {
+            args: Prisma.PlayerProfileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>[]
+          }
+          create: {
+            args: Prisma.PlayerProfileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>
+          }
+          createMany: {
+            args: Prisma.PlayerProfileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerProfileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerProfileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>
+          }
+          update: {
+            args: Prisma.PlayerProfileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerProfileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerProfileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerProfileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerProfileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerProfilePayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerProfileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayerProfile>
+          }
+          groupBy: {
+            args: Prisma.PlayerProfileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerProfileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerProfileCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerProfileCountAggregateOutputType> | number
+          }
+        }
+      }
+      Facility: {
+        payload: Prisma.$FacilityPayload<ExtArgs>
+        fields: Prisma.FacilityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FacilityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FacilityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          findFirst: {
+            args: Prisma.FacilityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FacilityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          findMany: {
+            args: Prisma.FacilityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>[]
+          }
+          create: {
+            args: Prisma.FacilityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          createMany: {
+            args: Prisma.FacilityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FacilityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>[]
+          }
+          delete: {
+            args: Prisma.FacilityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          update: {
+            args: Prisma.FacilityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          deleteMany: {
+            args: Prisma.FacilityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FacilityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FacilityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>[]
+          }
+          upsert: {
+            args: Prisma.FacilityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityPayload>
+          }
+          aggregate: {
+            args: Prisma.FacilityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFacility>
+          }
+          groupBy: {
+            args: Prisma.FacilityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FacilityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FacilityCountArgs<ExtArgs>
+            result: $Utils.Optional<FacilityCountAggregateOutputType> | number
+          }
+        }
+      }
+      Court: {
+        payload: Prisma.$CourtPayload<ExtArgs>
+        fields: Prisma.CourtFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CourtFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CourtFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>
+          }
+          findFirst: {
+            args: Prisma.CourtFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CourtFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>
+          }
+          findMany: {
+            args: Prisma.CourtFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>[]
+          }
+          create: {
+            args: Prisma.CourtCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>
+          }
+          createMany: {
+            args: Prisma.CourtCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CourtCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>[]
+          }
+          delete: {
+            args: Prisma.CourtDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>
+          }
+          update: {
+            args: Prisma.CourtUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>
+          }
+          deleteMany: {
+            args: Prisma.CourtDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CourtUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CourtUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>[]
+          }
+          upsert: {
+            args: Prisma.CourtUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CourtPayload>
+          }
+          aggregate: {
+            args: Prisma.CourtAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCourt>
+          }
+          groupBy: {
+            args: Prisma.CourtGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CourtGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CourtCountArgs<ExtArgs>
+            result: $Utils.Optional<CourtCountAggregateOutputType> | number
+          }
+        }
+      }
+      TimeSlot: {
+        payload: Prisma.$TimeSlotPayload<ExtArgs>
+        fields: Prisma.TimeSlotFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TimeSlotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TimeSlotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>
+          }
+          findFirst: {
+            args: Prisma.TimeSlotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TimeSlotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>
+          }
+          findMany: {
+            args: Prisma.TimeSlotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>[]
+          }
+          create: {
+            args: Prisma.TimeSlotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>
+          }
+          createMany: {
+            args: Prisma.TimeSlotCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TimeSlotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>[]
+          }
+          delete: {
+            args: Prisma.TimeSlotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>
+          }
+          update: {
+            args: Prisma.TimeSlotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>
+          }
+          deleteMany: {
+            args: Prisma.TimeSlotDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TimeSlotUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TimeSlotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>[]
+          }
+          upsert: {
+            args: Prisma.TimeSlotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeSlotPayload>
+          }
+          aggregate: {
+            args: Prisma.TimeSlotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTimeSlot>
+          }
+          groupBy: {
+            args: Prisma.TimeSlotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TimeSlotGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TimeSlotCountArgs<ExtArgs>
+            result: $Utils.Optional<TimeSlotCountAggregateOutputType> | number
+          }
+        }
+      }
+      Booking: {
+        payload: Prisma.$BookingPayload<ExtArgs>
+        fields: Prisma.BookingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BookingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BookingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>
+          }
+          findFirst: {
+            args: Prisma.BookingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BookingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>
+          }
+          findMany: {
+            args: Prisma.BookingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>[]
+          }
+          create: {
+            args: Prisma.BookingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>
+          }
+          createMany: {
+            args: Prisma.BookingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BookingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>[]
+          }
+          delete: {
+            args: Prisma.BookingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>
+          }
+          update: {
+            args: Prisma.BookingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>
+          }
+          deleteMany: {
+            args: Prisma.BookingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BookingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BookingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>[]
+          }
+          upsert: {
+            args: Prisma.BookingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>
+          }
+          aggregate: {
+            args: Prisma.BookingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBooking>
+          }
+          groupBy: {
+            args: Prisma.BookingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BookingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BookingCountArgs<ExtArgs>
+            result: $Utils.Optional<BookingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Match: {
+        payload: Prisma.$MatchPayload<ExtArgs>
+        fields: Prisma.MatchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MatchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MatchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>
+          }
+          findFirst: {
+            args: Prisma.MatchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MatchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>
+          }
+          findMany: {
+            args: Prisma.MatchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>[]
+          }
+          create: {
+            args: Prisma.MatchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>
+          }
+          createMany: {
+            args: Prisma.MatchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MatchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>[]
+          }
+          delete: {
+            args: Prisma.MatchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>
+          }
+          update: {
+            args: Prisma.MatchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>
+          }
+          deleteMany: {
+            args: Prisma.MatchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MatchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MatchUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>[]
+          }
+          upsert: {
+            args: Prisma.MatchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPayload>
+          }
+          aggregate: {
+            args: Prisma.MatchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMatch>
+          }
+          groupBy: {
+            args: Prisma.MatchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MatchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MatchCountArgs<ExtArgs>
+            result: $Utils.Optional<MatchCountAggregateOutputType> | number
+          }
+        }
+      }
+      MatchPlayer: {
+        payload: Prisma.$MatchPlayerPayload<ExtArgs>
+        fields: Prisma.MatchPlayerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MatchPlayerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MatchPlayerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>
+          }
+          findFirst: {
+            args: Prisma.MatchPlayerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MatchPlayerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>
+          }
+          findMany: {
+            args: Prisma.MatchPlayerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>[]
+          }
+          create: {
+            args: Prisma.MatchPlayerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>
+          }
+          createMany: {
+            args: Prisma.MatchPlayerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MatchPlayerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>[]
+          }
+          delete: {
+            args: Prisma.MatchPlayerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>
+          }
+          update: {
+            args: Prisma.MatchPlayerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>
+          }
+          deleteMany: {
+            args: Prisma.MatchPlayerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MatchPlayerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MatchPlayerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>[]
+          }
+          upsert: {
+            args: Prisma.MatchPlayerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatchPlayerPayload>
+          }
+          aggregate: {
+            args: Prisma.MatchPlayerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMatchPlayer>
+          }
+          groupBy: {
+            args: Prisma.MatchPlayerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MatchPlayerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MatchPlayerCountArgs<ExtArgs>
+            result: $Utils.Optional<MatchPlayerCountAggregateOutputType> | number
+          }
+        }
+      }
+      PlayerRating: {
+        payload: Prisma.$PlayerRatingPayload<ExtArgs>
+        fields: Prisma.PlayerRatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerRatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerRatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerRatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerRatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>
+          }
+          findMany: {
+            args: Prisma.PlayerRatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>[]
+          }
+          create: {
+            args: Prisma.PlayerRatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>
+          }
+          createMany: {
+            args: Prisma.PlayerRatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerRatingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerRatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>
+          }
+          update: {
+            args: Prisma.PlayerRatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerRatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerRatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerRatingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerRatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerRatingPayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerRatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayerRating>
+          }
+          groupBy: {
+            args: Prisma.PlayerRatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerRatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerRatingCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerRatingCountAggregateOutputType> | number
+          }
+        }
+      }
+      RatingHistory: {
+        payload: Prisma.$RatingHistoryPayload<ExtArgs>
+        fields: Prisma.RatingHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RatingHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RatingHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.RatingHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RatingHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.RatingHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.RatingHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.RatingHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RatingHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.RatingHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>
+          }
+          update: {
+            args: Prisma.RatingHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.RatingHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RatingHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RatingHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.RatingHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.RatingHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRatingHistory>
+          }
+          groupBy: {
+            args: Prisma.RatingHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RatingHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RatingHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<RatingHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      WaitlistEntry: {
+        payload: Prisma.$WaitlistEntryPayload<ExtArgs>
+        fields: Prisma.WaitlistEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WaitlistEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WaitlistEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.WaitlistEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WaitlistEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>
+          }
+          findMany: {
+            args: Prisma.WaitlistEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>[]
+          }
+          create: {
+            args: Prisma.WaitlistEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>
+          }
+          createMany: {
+            args: Prisma.WaitlistEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WaitlistEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.WaitlistEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>
+          }
+          update: {
+            args: Prisma.WaitlistEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.WaitlistEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WaitlistEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WaitlistEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.WaitlistEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WaitlistEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.WaitlistEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWaitlistEntry>
+          }
+          groupBy: {
+            args: Prisma.WaitlistEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WaitlistEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WaitlistEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<WaitlistEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      OccupancyStats: {
+        payload: Prisma.$OccupancyStatsPayload<ExtArgs>
+        fields: Prisma.OccupancyStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OccupancyStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OccupancyStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.OccupancyStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OccupancyStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>
+          }
+          findMany: {
+            args: Prisma.OccupancyStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>[]
+          }
+          create: {
+            args: Prisma.OccupancyStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>
+          }
+          createMany: {
+            args: Prisma.OccupancyStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OccupancyStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.OccupancyStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>
+          }
+          update: {
+            args: Prisma.OccupancyStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.OccupancyStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OccupancyStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OccupancyStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.OccupancyStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OccupancyStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.OccupancyStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOccupancyStats>
+          }
+          groupBy: {
+            args: Prisma.OccupancyStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OccupancyStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OccupancyStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<OccupancyStatsCountAggregateOutputType> | number
+          }
+        }
+      }
+      NotificationLog: {
+        payload: Prisma.$NotificationLogPayload<ExtArgs>
+        fields: Prisma.NotificationLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>
+          }
+          update: {
+            args: Prisma.NotificationLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotificationLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotificationLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationLogPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotificationLog>
+          }
+          groupBy: {
+            args: Prisma.NotificationLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationLogCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1142,11 +2221,22 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    test?: TestOmit
     user?: UserOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
+    playerProfile?: PlayerProfileOmit
+    facility?: FacilityOmit
+    court?: CourtOmit
+    timeSlot?: TimeSlotOmit
+    booking?: BookingOmit
+    match?: MatchOmit
+    matchPlayer?: MatchPlayerOmit
+    playerRating?: PlayerRatingOmit
+    ratingHistory?: RatingHistoryOmit
+    waitlistEntry?: WaitlistEntryOmit
+    occupancyStats?: OccupancyStatsOmit
+    notificationLog?: NotificationLogOmit
   }
 
   /* Types for Logging */
@@ -1282,977 +2372,257 @@ export namespace Prisma {
 
 
   /**
-   * Models
+   * Count Type PlayerProfileCountOutputType
    */
 
-  /**
-   * Model Test
-   */
-
-  export type AggregateTest = {
-    _count: TestCountAggregateOutputType | null
-    _min: TestMinAggregateOutputType | null
-    _max: TestMaxAggregateOutputType | null
+  export type PlayerProfileCountOutputType = {
+    bookings: number
+    ownedFacilities: number
+    ratings: number
+    matchPlayers: number
+    waitlistEntries: number
+    notifications: number
   }
 
-  export type TestMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
+  export type PlayerProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bookings?: boolean | PlayerProfileCountOutputTypeCountBookingsArgs
+    ownedFacilities?: boolean | PlayerProfileCountOutputTypeCountOwnedFacilitiesArgs
+    ratings?: boolean | PlayerProfileCountOutputTypeCountRatingsArgs
+    matchPlayers?: boolean | PlayerProfileCountOutputTypeCountMatchPlayersArgs
+    waitlistEntries?: boolean | PlayerProfileCountOutputTypeCountWaitlistEntriesArgs
+    notifications?: boolean | PlayerProfileCountOutputTypeCountNotificationsArgs
   }
-
-  export type TestMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-  }
-
-  export type TestCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    _all: number
-  }
-
-
-  export type TestMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-  }
-
-  export type TestMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-  }
-
-  export type TestCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    _all?: true
-  }
-
-  export type TestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Test to aggregate.
-     */
-    where?: TestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tests to fetch.
-     */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Tests
-    **/
-    _count?: true | TestCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TestMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TestMaxAggregateInputType
-  }
-
-  export type GetTestAggregateType<T extends TestAggregateArgs> = {
-        [P in keyof T & keyof AggregateTest]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTest[P]>
-      : GetScalarType<T[P], AggregateTest[P]>
-  }
-
-
-
-
-  export type TestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TestWhereInput
-    orderBy?: TestOrderByWithAggregationInput | TestOrderByWithAggregationInput[]
-    by: TestScalarFieldEnum[] | TestScalarFieldEnum
-    having?: TestScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TestCountAggregateInputType | true
-    _min?: TestMinAggregateInputType
-    _max?: TestMaxAggregateInputType
-  }
-
-  export type TestGroupByOutputType = {
-    id: string
-    name: string
-    email: string
-    _count: TestCountAggregateOutputType | null
-    _min: TestMinAggregateOutputType | null
-    _max: TestMaxAggregateOutputType | null
-  }
-
-  type GetTestGroupByPayload<T extends TestGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TestGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TestGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TestGroupByOutputType[P]>
-            : GetScalarType<T[P], TestGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }, ExtArgs["result"]["test"]>
-
-  export type TestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }, ExtArgs["result"]["test"]>
-
-  export type TestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }, ExtArgs["result"]["test"]>
-
-  export type TestSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }
-
-  export type TestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email", ExtArgs["result"]["test"]>
-
-  export type $TestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Test"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      email: string
-    }, ExtArgs["result"]["test"]>
-    composites: {}
-  }
-
-  type TestGetPayload<S extends boolean | null | undefined | TestDefaultArgs> = $Result.GetResult<Prisma.$TestPayload, S>
-
-  type TestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TestCountAggregateInputType | true
-    }
-
-  export interface TestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Test'], meta: { name: 'Test' } }
-    /**
-     * Find zero or one Test that matches the filter.
-     * @param {TestFindUniqueArgs} args - Arguments to find a Test
-     * @example
-     * // Get one Test
-     * const test = await prisma.test.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TestFindUniqueArgs>(args: SelectSubset<T, TestFindUniqueArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Test that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TestFindUniqueOrThrowArgs} args - Arguments to find a Test
-     * @example
-     * // Get one Test
-     * const test = await prisma.test.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TestFindUniqueOrThrowArgs>(args: SelectSubset<T, TestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Test that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestFindFirstArgs} args - Arguments to find a Test
-     * @example
-     * // Get one Test
-     * const test = await prisma.test.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TestFindFirstArgs>(args?: SelectSubset<T, TestFindFirstArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Test that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestFindFirstOrThrowArgs} args - Arguments to find a Test
-     * @example
-     * // Get one Test
-     * const test = await prisma.test.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TestFindFirstOrThrowArgs>(args?: SelectSubset<T, TestFindFirstOrThrowArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Tests that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Tests
-     * const tests = await prisma.test.findMany()
-     * 
-     * // Get first 10 Tests
-     * const tests = await prisma.test.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const testWithIdOnly = await prisma.test.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TestFindManyArgs>(args?: SelectSubset<T, TestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Test.
-     * @param {TestCreateArgs} args - Arguments to create a Test.
-     * @example
-     * // Create one Test
-     * const Test = await prisma.test.create({
-     *   data: {
-     *     // ... data to create a Test
-     *   }
-     * })
-     * 
-     */
-    create<T extends TestCreateArgs>(args: SelectSubset<T, TestCreateArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Tests.
-     * @param {TestCreateManyArgs} args - Arguments to create many Tests.
-     * @example
-     * // Create many Tests
-     * const test = await prisma.test.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TestCreateManyArgs>(args?: SelectSubset<T, TestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Tests and returns the data saved in the database.
-     * @param {TestCreateManyAndReturnArgs} args - Arguments to create many Tests.
-     * @example
-     * // Create many Tests
-     * const test = await prisma.test.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Tests and only return the `id`
-     * const testWithIdOnly = await prisma.test.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TestCreateManyAndReturnArgs>(args?: SelectSubset<T, TestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Test.
-     * @param {TestDeleteArgs} args - Arguments to delete one Test.
-     * @example
-     * // Delete one Test
-     * const Test = await prisma.test.delete({
-     *   where: {
-     *     // ... filter to delete one Test
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TestDeleteArgs>(args: SelectSubset<T, TestDeleteArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Test.
-     * @param {TestUpdateArgs} args - Arguments to update one Test.
-     * @example
-     * // Update one Test
-     * const test = await prisma.test.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TestUpdateArgs>(args: SelectSubset<T, TestUpdateArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Tests.
-     * @param {TestDeleteManyArgs} args - Arguments to filter Tests to delete.
-     * @example
-     * // Delete a few Tests
-     * const { count } = await prisma.test.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TestDeleteManyArgs>(args?: SelectSubset<T, TestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Tests.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Tests
-     * const test = await prisma.test.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TestUpdateManyArgs>(args: SelectSubset<T, TestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Tests and returns the data updated in the database.
-     * @param {TestUpdateManyAndReturnArgs} args - Arguments to update many Tests.
-     * @example
-     * // Update many Tests
-     * const test = await prisma.test.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Tests and only return the `id`
-     * const testWithIdOnly = await prisma.test.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TestUpdateManyAndReturnArgs>(args: SelectSubset<T, TestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Test.
-     * @param {TestUpsertArgs} args - Arguments to update or create a Test.
-     * @example
-     * // Update or create a Test
-     * const test = await prisma.test.upsert({
-     *   create: {
-     *     // ... data to create a Test
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Test we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TestUpsertArgs>(args: SelectSubset<T, TestUpsertArgs<ExtArgs>>): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Tests.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestCountArgs} args - Arguments to filter Tests to count.
-     * @example
-     * // Count the number of Tests
-     * const count = await prisma.test.count({
-     *   where: {
-     *     // ... the filter for the Tests we want to count
-     *   }
-     * })
-    **/
-    count<T extends TestCountArgs>(
-      args?: Subset<T, TestCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TestCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Test.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TestAggregateArgs>(args: Subset<T, TestAggregateArgs>): Prisma.PrismaPromise<GetTestAggregateType<T>>
-
-    /**
-     * Group by Test.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TestGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TestGroupByArgs['orderBy'] }
-        : { orderBy?: TestGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Test model
-   */
-  readonly fields: TestFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Test.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Test model
-   */
-  interface TestFieldRefs {
-    readonly id: FieldRef<"Test", 'String'>
-    readonly name: FieldRef<"Test", 'String'>
-    readonly email: FieldRef<"Test", 'String'>
-  }
-    
 
   // Custom InputTypes
   /**
-   * Test findUnique
+   * PlayerProfileCountOutputType without action
    */
-  export type TestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PlayerProfileCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the PlayerProfileCountOutputType
      */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * Filter, which Test to fetch.
-     */
-    where: TestWhereUniqueInput
+    select?: PlayerProfileCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Test findUniqueOrThrow
+   * PlayerProfileCountOutputType without action
    */
-  export type TestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * Filter, which Test to fetch.
-     */
-    where: TestWhereUniqueInput
+  export type PlayerProfileCountOutputTypeCountBookingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookingWhereInput
   }
 
   /**
-   * Test findFirst
+   * PlayerProfileCountOutputType without action
    */
-  export type TestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * Filter, which Test to fetch.
-     */
-    where?: TestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tests to fetch.
-     */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Tests.
-     */
-    cursor?: TestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Tests.
-     */
-    distinct?: TestScalarFieldEnum | TestScalarFieldEnum[]
+  export type PlayerProfileCountOutputTypeCountOwnedFacilitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityWhereInput
   }
 
   /**
-   * Test findFirstOrThrow
+   * PlayerProfileCountOutputType without action
    */
-  export type TestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * Filter, which Test to fetch.
-     */
-    where?: TestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tests to fetch.
-     */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Tests.
-     */
-    cursor?: TestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Tests.
-     */
-    distinct?: TestScalarFieldEnum | TestScalarFieldEnum[]
+  export type PlayerProfileCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerRatingWhereInput
   }
 
   /**
-   * Test findMany
+   * PlayerProfileCountOutputType without action
    */
-  export type TestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * Filter, which Tests to fetch.
-     */
-    where?: TestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tests to fetch.
-     */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Tests.
-     */
-    cursor?: TestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tests.
-     */
-    skip?: number
-    distinct?: TestScalarFieldEnum | TestScalarFieldEnum[]
+  export type PlayerProfileCountOutputTypeCountMatchPlayersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchPlayerWhereInput
   }
 
   /**
-   * Test create
+   * PlayerProfileCountOutputType without action
    */
-  export type TestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * The data needed to create a Test.
-     */
-    data: XOR<TestCreateInput, TestUncheckedCreateInput>
+  export type PlayerProfileCountOutputTypeCountWaitlistEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WaitlistEntryWhereInput
   }
 
   /**
-   * Test createMany
+   * PlayerProfileCountOutputType without action
    */
-  export type TestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PlayerProfileCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationLogWhereInput
+  }
+
+
+  /**
+   * Count Type FacilityCountOutputType
+   */
+
+  export type FacilityCountOutputType = {
+    courts: number
+  }
+
+  export type FacilityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    courts?: boolean | FacilityCountOutputTypeCountCourtsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Tests.
+     * Select specific fields to fetch from the FacilityCountOutputType
      */
-    data: TestCreateManyInput | TestCreateManyInput[]
-    skipDuplicates?: boolean
+    select?: FacilityCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Test createManyAndReturn
+   * FacilityCountOutputType without action
    */
-  export type TestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FacilityCountOutputTypeCountCourtsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourtWhereInput
+  }
+
+
+  /**
+   * Count Type CourtCountOutputType
+   */
+
+  export type CourtCountOutputType = {
+    timeSlots: number
+    bookings: number
+    occupancyStats: number
+  }
+
+  export type CourtCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlots?: boolean | CourtCountOutputTypeCountTimeSlotsArgs
+    bookings?: boolean | CourtCountOutputTypeCountBookingsArgs
+    occupancyStats?: boolean | CourtCountOutputTypeCountOccupancyStatsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CourtCountOutputType without action
+   */
+  export type CourtCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the CourtCountOutputType
      */
-    select?: TestSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * The data used to create many Tests.
-     */
-    data: TestCreateManyInput | TestCreateManyInput[]
-    skipDuplicates?: boolean
+    select?: CourtCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Test update
+   * CourtCountOutputType without action
    */
-  export type TestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * The data needed to update a Test.
-     */
-    data: XOR<TestUpdateInput, TestUncheckedUpdateInput>
-    /**
-     * Choose, which Test to update.
-     */
-    where: TestWhereUniqueInput
+  export type CourtCountOutputTypeCountTimeSlotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeSlotWhereInput
   }
 
   /**
-   * Test updateMany
+   * CourtCountOutputType without action
    */
-  export type TestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Tests.
-     */
-    data: XOR<TestUpdateManyMutationInput, TestUncheckedUpdateManyInput>
-    /**
-     * Filter which Tests to update
-     */
-    where?: TestWhereInput
-    /**
-     * Limit how many Tests to update.
-     */
-    limit?: number
+  export type CourtCountOutputTypeCountBookingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookingWhereInput
   }
 
   /**
-   * Test updateManyAndReturn
+   * CourtCountOutputType without action
    */
-  export type TestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CourtCountOutputTypeCountOccupancyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OccupancyStatsWhereInput
+  }
+
+
+  /**
+   * Count Type TimeSlotCountOutputType
+   */
+
+  export type TimeSlotCountOutputType = {
+    waitlistEntries: number
+  }
+
+  export type TimeSlotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    waitlistEntries?: boolean | TimeSlotCountOutputTypeCountWaitlistEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TimeSlotCountOutputType without action
+   */
+  export type TimeSlotCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the TimeSlotCountOutputType
      */
-    select?: TestSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * The data used to update Tests.
-     */
-    data: XOR<TestUpdateManyMutationInput, TestUncheckedUpdateManyInput>
-    /**
-     * Filter which Tests to update
-     */
-    where?: TestWhereInput
-    /**
-     * Limit how many Tests to update.
-     */
-    limit?: number
+    select?: TimeSlotCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Test upsert
+   * TimeSlotCountOutputType without action
    */
-  export type TestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TimeSlotCountOutputTypeCountWaitlistEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WaitlistEntryWhereInput
+  }
+
+
+  /**
+   * Count Type MatchCountOutputType
+   */
+
+  export type MatchCountOutputType = {
+    players: number
+  }
+
+  export type MatchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    players?: boolean | MatchCountOutputTypeCountPlayersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MatchCountOutputType without action
+   */
+  export type MatchCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the MatchCountOutputType
      */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * The filter to search for the Test to update in case it exists.
-     */
-    where: TestWhereUniqueInput
-    /**
-     * In case the Test found by the `where` argument doesn't exist, create a new Test with this data.
-     */
-    create: XOR<TestCreateInput, TestUncheckedCreateInput>
-    /**
-     * In case the Test was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TestUpdateInput, TestUncheckedUpdateInput>
+    select?: MatchCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Test delete
+   * MatchCountOutputType without action
    */
-  export type TestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MatchCountOutputTypeCountPlayersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchPlayerWhereInput
+  }
+
+
+  /**
+   * Count Type PlayerRatingCountOutputType
+   */
+
+  export type PlayerRatingCountOutputType = {
+    history: number
+  }
+
+  export type PlayerRatingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    history?: boolean | PlayerRatingCountOutputTypeCountHistoryArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlayerRatingCountOutputType without action
+   */
+  export type PlayerRatingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the PlayerRatingCountOutputType
      */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-    /**
-     * Filter which Test to delete.
-     */
-    where: TestWhereUniqueInput
+    select?: PlayerRatingCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * Test deleteMany
+   * PlayerRatingCountOutputType without action
    */
-  export type TestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Tests to delete
-     */
-    where?: TestWhereInput
-    /**
-     * Limit how many Tests to delete.
-     */
-    limit?: number
+  export type PlayerRatingCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RatingHistoryWhereInput
   }
+
 
   /**
-   * Test without action
+   * Models
    */
-  export type TestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Test
-     */
-    select?: TestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Test
-     */
-    omit?: TestOmit<ExtArgs> | null
-  }
-
 
   /**
    * Model User
@@ -2436,6 +2806,7 @@ export namespace Prisma {
     updatedAt?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    playerProfile?: boolean | User$playerProfileArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2473,6 +2844,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    playerProfile?: boolean | User$playerProfileArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2483,6 +2855,7 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      playerProfile: Prisma.$PlayerProfilePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2888,6 +3261,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    playerProfile<T extends User$playerProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$playerProfileArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3357,6 +3731,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.playerProfile
+   */
+  export type User$playerProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    where?: PlayerProfileWhereInput
   }
 
   /**
@@ -6646,6 +7039,14221 @@ export namespace Prisma {
 
 
   /**
+   * Model PlayerProfile
+   */
+
+  export type AggregatePlayerProfile = {
+    _count: PlayerProfileCountAggregateOutputType | null
+    _min: PlayerProfileMinAggregateOutputType | null
+    _max: PlayerProfileMaxAggregateOutputType | null
+  }
+
+  export type PlayerProfileMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    role: $Enums.UserRole | null
+    phoneNumber: string | null
+    avatar: string | null
+    isActive: boolean | null
+    isBanned: boolean | null
+    bannedUntil: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PlayerProfileMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    role: $Enums.UserRole | null
+    phoneNumber: string | null
+    avatar: string | null
+    isActive: boolean | null
+    isBanned: boolean | null
+    bannedUntil: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PlayerProfileCountAggregateOutputType = {
+    id: number
+    userId: number
+    role: number
+    phoneNumber: number
+    avatar: number
+    isActive: number
+    isBanned: number
+    bannedUntil: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PlayerProfileMinAggregateInputType = {
+    id?: true
+    userId?: true
+    role?: true
+    phoneNumber?: true
+    avatar?: true
+    isActive?: true
+    isBanned?: true
+    bannedUntil?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PlayerProfileMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    role?: true
+    phoneNumber?: true
+    avatar?: true
+    isActive?: true
+    isBanned?: true
+    bannedUntil?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PlayerProfileCountAggregateInputType = {
+    id?: true
+    userId?: true
+    role?: true
+    phoneNumber?: true
+    avatar?: true
+    isActive?: true
+    isBanned?: true
+    bannedUntil?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PlayerProfileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerProfile to aggregate.
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerProfiles to fetch.
+     */
+    orderBy?: PlayerProfileOrderByWithRelationInput | PlayerProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PlayerProfiles
+    **/
+    _count?: true | PlayerProfileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerProfileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerProfileMaxAggregateInputType
+  }
+
+  export type GetPlayerProfileAggregateType<T extends PlayerProfileAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayerProfile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayerProfile[P]>
+      : GetScalarType<T[P], AggregatePlayerProfile[P]>
+  }
+
+
+
+
+  export type PlayerProfileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerProfileWhereInput
+    orderBy?: PlayerProfileOrderByWithAggregationInput | PlayerProfileOrderByWithAggregationInput[]
+    by: PlayerProfileScalarFieldEnum[] | PlayerProfileScalarFieldEnum
+    having?: PlayerProfileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerProfileCountAggregateInputType | true
+    _min?: PlayerProfileMinAggregateInputType
+    _max?: PlayerProfileMaxAggregateInputType
+  }
+
+  export type PlayerProfileGroupByOutputType = {
+    id: string
+    userId: string
+    role: $Enums.UserRole
+    phoneNumber: string | null
+    avatar: string | null
+    isActive: boolean
+    isBanned: boolean
+    bannedUntil: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PlayerProfileCountAggregateOutputType | null
+    _min: PlayerProfileMinAggregateOutputType | null
+    _max: PlayerProfileMaxAggregateOutputType | null
+  }
+
+  type GetPlayerProfileGroupByPayload<T extends PlayerProfileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerProfileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerProfileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerProfileGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerProfileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    role?: boolean
+    phoneNumber?: boolean
+    avatar?: boolean
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    bookings?: boolean | PlayerProfile$bookingsArgs<ExtArgs>
+    ownedFacilities?: boolean | PlayerProfile$ownedFacilitiesArgs<ExtArgs>
+    ratings?: boolean | PlayerProfile$ratingsArgs<ExtArgs>
+    matchPlayers?: boolean | PlayerProfile$matchPlayersArgs<ExtArgs>
+    waitlistEntries?: boolean | PlayerProfile$waitlistEntriesArgs<ExtArgs>
+    notifications?: boolean | PlayerProfile$notificationsArgs<ExtArgs>
+    _count?: boolean | PlayerProfileCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerProfile"]>
+
+  export type PlayerProfileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    role?: boolean
+    phoneNumber?: boolean
+    avatar?: boolean
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerProfile"]>
+
+  export type PlayerProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    role?: boolean
+    phoneNumber?: boolean
+    avatar?: boolean
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerProfile"]>
+
+  export type PlayerProfileSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    role?: boolean
+    phoneNumber?: boolean
+    avatar?: boolean
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PlayerProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "role" | "phoneNumber" | "avatar" | "isActive" | "isBanned" | "bannedUntil" | "createdAt" | "updatedAt", ExtArgs["result"]["playerProfile"]>
+  export type PlayerProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    bookings?: boolean | PlayerProfile$bookingsArgs<ExtArgs>
+    ownedFacilities?: boolean | PlayerProfile$ownedFacilitiesArgs<ExtArgs>
+    ratings?: boolean | PlayerProfile$ratingsArgs<ExtArgs>
+    matchPlayers?: boolean | PlayerProfile$matchPlayersArgs<ExtArgs>
+    waitlistEntries?: boolean | PlayerProfile$waitlistEntriesArgs<ExtArgs>
+    notifications?: boolean | PlayerProfile$notificationsArgs<ExtArgs>
+    _count?: boolean | PlayerProfileCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PlayerProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PlayerProfileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PlayerProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PlayerProfile"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      bookings: Prisma.$BookingPayload<ExtArgs>[]
+      ownedFacilities: Prisma.$FacilityPayload<ExtArgs>[]
+      ratings: Prisma.$PlayerRatingPayload<ExtArgs>[]
+      matchPlayers: Prisma.$MatchPlayerPayload<ExtArgs>[]
+      waitlistEntries: Prisma.$WaitlistEntryPayload<ExtArgs>[]
+      notifications: Prisma.$NotificationLogPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      role: $Enums.UserRole
+      phoneNumber: string | null
+      avatar: string | null
+      isActive: boolean
+      isBanned: boolean
+      bannedUntil: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["playerProfile"]>
+    composites: {}
+  }
+
+  type PlayerProfileGetPayload<S extends boolean | null | undefined | PlayerProfileDefaultArgs> = $Result.GetResult<Prisma.$PlayerProfilePayload, S>
+
+  type PlayerProfileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerProfileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerProfileCountAggregateInputType | true
+    }
+
+  export interface PlayerProfileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PlayerProfile'], meta: { name: 'PlayerProfile' } }
+    /**
+     * Find zero or one PlayerProfile that matches the filter.
+     * @param {PlayerProfileFindUniqueArgs} args - Arguments to find a PlayerProfile
+     * @example
+     * // Get one PlayerProfile
+     * const playerProfile = await prisma.playerProfile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerProfileFindUniqueArgs>(args: SelectSubset<T, PlayerProfileFindUniqueArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PlayerProfile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerProfileFindUniqueOrThrowArgs} args - Arguments to find a PlayerProfile
+     * @example
+     * // Get one PlayerProfile
+     * const playerProfile = await prisma.playerProfile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerProfileFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerProfileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerProfile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileFindFirstArgs} args - Arguments to find a PlayerProfile
+     * @example
+     * // Get one PlayerProfile
+     * const playerProfile = await prisma.playerProfile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerProfileFindFirstArgs>(args?: SelectSubset<T, PlayerProfileFindFirstArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerProfile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileFindFirstOrThrowArgs} args - Arguments to find a PlayerProfile
+     * @example
+     * // Get one PlayerProfile
+     * const playerProfile = await prisma.playerProfile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerProfileFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerProfileFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PlayerProfiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PlayerProfiles
+     * const playerProfiles = await prisma.playerProfile.findMany()
+     * 
+     * // Get first 10 PlayerProfiles
+     * const playerProfiles = await prisma.playerProfile.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const playerProfileWithIdOnly = await prisma.playerProfile.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlayerProfileFindManyArgs>(args?: SelectSubset<T, PlayerProfileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PlayerProfile.
+     * @param {PlayerProfileCreateArgs} args - Arguments to create a PlayerProfile.
+     * @example
+     * // Create one PlayerProfile
+     * const PlayerProfile = await prisma.playerProfile.create({
+     *   data: {
+     *     // ... data to create a PlayerProfile
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerProfileCreateArgs>(args: SelectSubset<T, PlayerProfileCreateArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PlayerProfiles.
+     * @param {PlayerProfileCreateManyArgs} args - Arguments to create many PlayerProfiles.
+     * @example
+     * // Create many PlayerProfiles
+     * const playerProfile = await prisma.playerProfile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerProfileCreateManyArgs>(args?: SelectSubset<T, PlayerProfileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PlayerProfiles and returns the data saved in the database.
+     * @param {PlayerProfileCreateManyAndReturnArgs} args - Arguments to create many PlayerProfiles.
+     * @example
+     * // Create many PlayerProfiles
+     * const playerProfile = await prisma.playerProfile.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PlayerProfiles and only return the `id`
+     * const playerProfileWithIdOnly = await prisma.playerProfile.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerProfileCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerProfileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PlayerProfile.
+     * @param {PlayerProfileDeleteArgs} args - Arguments to delete one PlayerProfile.
+     * @example
+     * // Delete one PlayerProfile
+     * const PlayerProfile = await prisma.playerProfile.delete({
+     *   where: {
+     *     // ... filter to delete one PlayerProfile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerProfileDeleteArgs>(args: SelectSubset<T, PlayerProfileDeleteArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PlayerProfile.
+     * @param {PlayerProfileUpdateArgs} args - Arguments to update one PlayerProfile.
+     * @example
+     * // Update one PlayerProfile
+     * const playerProfile = await prisma.playerProfile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerProfileUpdateArgs>(args: SelectSubset<T, PlayerProfileUpdateArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PlayerProfiles.
+     * @param {PlayerProfileDeleteManyArgs} args - Arguments to filter PlayerProfiles to delete.
+     * @example
+     * // Delete a few PlayerProfiles
+     * const { count } = await prisma.playerProfile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerProfileDeleteManyArgs>(args?: SelectSubset<T, PlayerProfileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PlayerProfiles
+     * const playerProfile = await prisma.playerProfile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerProfileUpdateManyArgs>(args: SelectSubset<T, PlayerProfileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerProfiles and returns the data updated in the database.
+     * @param {PlayerProfileUpdateManyAndReturnArgs} args - Arguments to update many PlayerProfiles.
+     * @example
+     * // Update many PlayerProfiles
+     * const playerProfile = await prisma.playerProfile.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PlayerProfiles and only return the `id`
+     * const playerProfileWithIdOnly = await prisma.playerProfile.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerProfileUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerProfileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PlayerProfile.
+     * @param {PlayerProfileUpsertArgs} args - Arguments to update or create a PlayerProfile.
+     * @example
+     * // Update or create a PlayerProfile
+     * const playerProfile = await prisma.playerProfile.upsert({
+     *   create: {
+     *     // ... data to create a PlayerProfile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PlayerProfile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerProfileUpsertArgs>(args: SelectSubset<T, PlayerProfileUpsertArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PlayerProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileCountArgs} args - Arguments to filter PlayerProfiles to count.
+     * @example
+     * // Count the number of PlayerProfiles
+     * const count = await prisma.playerProfile.count({
+     *   where: {
+     *     // ... the filter for the PlayerProfiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerProfileCountArgs>(
+      args?: Subset<T, PlayerProfileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerProfileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PlayerProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerProfileAggregateArgs>(args: Subset<T, PlayerProfileAggregateArgs>): Prisma.PrismaPromise<GetPlayerProfileAggregateType<T>>
+
+    /**
+     * Group by PlayerProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerProfileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerProfileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerProfileGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerProfileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerProfileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PlayerProfile model
+   */
+  readonly fields: PlayerProfileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PlayerProfile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bookings<T extends PlayerProfile$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfile$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ownedFacilities<T extends PlayerProfile$ownedFacilitiesArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfile$ownedFacilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ratings<T extends PlayerProfile$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfile$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    matchPlayers<T extends PlayerProfile$matchPlayersArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfile$matchPlayersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    waitlistEntries<T extends PlayerProfile$waitlistEntriesArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfile$waitlistEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notifications<T extends PlayerProfile$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfile$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PlayerProfile model
+   */
+  interface PlayerProfileFieldRefs {
+    readonly id: FieldRef<"PlayerProfile", 'String'>
+    readonly userId: FieldRef<"PlayerProfile", 'String'>
+    readonly role: FieldRef<"PlayerProfile", 'UserRole'>
+    readonly phoneNumber: FieldRef<"PlayerProfile", 'String'>
+    readonly avatar: FieldRef<"PlayerProfile", 'String'>
+    readonly isActive: FieldRef<"PlayerProfile", 'Boolean'>
+    readonly isBanned: FieldRef<"PlayerProfile", 'Boolean'>
+    readonly bannedUntil: FieldRef<"PlayerProfile", 'DateTime'>
+    readonly createdAt: FieldRef<"PlayerProfile", 'DateTime'>
+    readonly updatedAt: FieldRef<"PlayerProfile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PlayerProfile findUnique
+   */
+  export type PlayerProfileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerProfile to fetch.
+     */
+    where: PlayerProfileWhereUniqueInput
+  }
+
+  /**
+   * PlayerProfile findUniqueOrThrow
+   */
+  export type PlayerProfileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerProfile to fetch.
+     */
+    where: PlayerProfileWhereUniqueInput
+  }
+
+  /**
+   * PlayerProfile findFirst
+   */
+  export type PlayerProfileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerProfile to fetch.
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerProfiles to fetch.
+     */
+    orderBy?: PlayerProfileOrderByWithRelationInput | PlayerProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerProfiles.
+     */
+    cursor?: PlayerProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerProfiles.
+     */
+    distinct?: PlayerProfileScalarFieldEnum | PlayerProfileScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile findFirstOrThrow
+   */
+  export type PlayerProfileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerProfile to fetch.
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerProfiles to fetch.
+     */
+    orderBy?: PlayerProfileOrderByWithRelationInput | PlayerProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerProfiles.
+     */
+    cursor?: PlayerProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerProfiles.
+     */
+    distinct?: PlayerProfileScalarFieldEnum | PlayerProfileScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile findMany
+   */
+  export type PlayerProfileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerProfiles to fetch.
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerProfiles to fetch.
+     */
+    orderBy?: PlayerProfileOrderByWithRelationInput | PlayerProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PlayerProfiles.
+     */
+    cursor?: PlayerProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerProfiles.
+     */
+    skip?: number
+    distinct?: PlayerProfileScalarFieldEnum | PlayerProfileScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile create
+   */
+  export type PlayerProfileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PlayerProfile.
+     */
+    data: XOR<PlayerProfileCreateInput, PlayerProfileUncheckedCreateInput>
+  }
+
+  /**
+   * PlayerProfile createMany
+   */
+  export type PlayerProfileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PlayerProfiles.
+     */
+    data: PlayerProfileCreateManyInput | PlayerProfileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerProfile createManyAndReturn
+   */
+  export type PlayerProfileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * The data used to create many PlayerProfiles.
+     */
+    data: PlayerProfileCreateManyInput | PlayerProfileCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PlayerProfile update
+   */
+  export type PlayerProfileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PlayerProfile.
+     */
+    data: XOR<PlayerProfileUpdateInput, PlayerProfileUncheckedUpdateInput>
+    /**
+     * Choose, which PlayerProfile to update.
+     */
+    where: PlayerProfileWhereUniqueInput
+  }
+
+  /**
+   * PlayerProfile updateMany
+   */
+  export type PlayerProfileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PlayerProfiles.
+     */
+    data: XOR<PlayerProfileUpdateManyMutationInput, PlayerProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerProfiles to update
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * Limit how many PlayerProfiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerProfile updateManyAndReturn
+   */
+  export type PlayerProfileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * The data used to update PlayerProfiles.
+     */
+    data: XOR<PlayerProfileUpdateManyMutationInput, PlayerProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerProfiles to update
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * Limit how many PlayerProfiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PlayerProfile upsert
+   */
+  export type PlayerProfileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PlayerProfile to update in case it exists.
+     */
+    where: PlayerProfileWhereUniqueInput
+    /**
+     * In case the PlayerProfile found by the `where` argument doesn't exist, create a new PlayerProfile with this data.
+     */
+    create: XOR<PlayerProfileCreateInput, PlayerProfileUncheckedCreateInput>
+    /**
+     * In case the PlayerProfile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerProfileUpdateInput, PlayerProfileUncheckedUpdateInput>
+  }
+
+  /**
+   * PlayerProfile delete
+   */
+  export type PlayerProfileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+    /**
+     * Filter which PlayerProfile to delete.
+     */
+    where: PlayerProfileWhereUniqueInput
+  }
+
+  /**
+   * PlayerProfile deleteMany
+   */
+  export type PlayerProfileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerProfiles to delete
+     */
+    where?: PlayerProfileWhereInput
+    /**
+     * Limit how many PlayerProfiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerProfile.bookings
+   */
+  export type PlayerProfile$bookingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    where?: BookingWhereInput
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    cursor?: BookingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile.ownedFacilities
+   */
+  export type PlayerProfile$ownedFacilitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    where?: FacilityWhereInput
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    cursor?: FacilityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile.ratings
+   */
+  export type PlayerProfile$ratingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    where?: PlayerRatingWhereInput
+    orderBy?: PlayerRatingOrderByWithRelationInput | PlayerRatingOrderByWithRelationInput[]
+    cursor?: PlayerRatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlayerRatingScalarFieldEnum | PlayerRatingScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile.matchPlayers
+   */
+  export type PlayerProfile$matchPlayersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    where?: MatchPlayerWhereInput
+    orderBy?: MatchPlayerOrderByWithRelationInput | MatchPlayerOrderByWithRelationInput[]
+    cursor?: MatchPlayerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatchPlayerScalarFieldEnum | MatchPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile.waitlistEntries
+   */
+  export type PlayerProfile$waitlistEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    where?: WaitlistEntryWhereInput
+    orderBy?: WaitlistEntryOrderByWithRelationInput | WaitlistEntryOrderByWithRelationInput[]
+    cursor?: WaitlistEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WaitlistEntryScalarFieldEnum | WaitlistEntryScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile.notifications
+   */
+  export type PlayerProfile$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    where?: NotificationLogWhereInput
+    orderBy?: NotificationLogOrderByWithRelationInput | NotificationLogOrderByWithRelationInput[]
+    cursor?: NotificationLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationLogScalarFieldEnum | NotificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerProfile without action
+   */
+  export type PlayerProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerProfile
+     */
+    select?: PlayerProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerProfile
+     */
+    omit?: PlayerProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerProfileInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Facility
+   */
+
+  export type AggregateFacility = {
+    _count: FacilityCountAggregateOutputType | null
+    _avg: FacilityAvgAggregateOutputType | null
+    _sum: FacilitySumAggregateOutputType | null
+    _min: FacilityMinAggregateOutputType | null
+    _max: FacilityMaxAggregateOutputType | null
+  }
+
+  export type FacilityAvgAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type FacilitySumAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type FacilityMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    address: string | null
+    latitude: number | null
+    longitude: number | null
+    ownerId: string | null
+    status: $Enums.FacilityStatus | null
+    approvedAt: Date | null
+    approvedBy: string | null
+    rejectionReason: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    address: string | null
+    latitude: number | null
+    longitude: number | null
+    ownerId: string | null
+    status: $Enums.FacilityStatus | null
+    approvedAt: Date | null
+    approvedBy: string | null
+    rejectionReason: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FacilityCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    address: number
+    latitude: number
+    longitude: number
+    amenities: number
+    photos: number
+    ownerId: number
+    status: number
+    approvedAt: number
+    approvedBy: number
+    rejectionReason: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FacilityAvgAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type FacilitySumAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type FacilityMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    address?: true
+    latitude?: true
+    longitude?: true
+    ownerId?: true
+    status?: true
+    approvedAt?: true
+    approvedBy?: true
+    rejectionReason?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    address?: true
+    latitude?: true
+    longitude?: true
+    ownerId?: true
+    status?: true
+    approvedAt?: true
+    approvedBy?: true
+    rejectionReason?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FacilityCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    address?: true
+    latitude?: true
+    longitude?: true
+    amenities?: true
+    photos?: true
+    ownerId?: true
+    status?: true
+    approvedAt?: true
+    approvedBy?: true
+    rejectionReason?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FacilityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Facility to aggregate.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Facilities
+    **/
+    _count?: true | FacilityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FacilityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FacilitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FacilityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FacilityMaxAggregateInputType
+  }
+
+  export type GetFacilityAggregateType<T extends FacilityAggregateArgs> = {
+        [P in keyof T & keyof AggregateFacility]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFacility[P]>
+      : GetScalarType<T[P], AggregateFacility[P]>
+  }
+
+
+
+
+  export type FacilityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityWhereInput
+    orderBy?: FacilityOrderByWithAggregationInput | FacilityOrderByWithAggregationInput[]
+    by: FacilityScalarFieldEnum[] | FacilityScalarFieldEnum
+    having?: FacilityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FacilityCountAggregateInputType | true
+    _avg?: FacilityAvgAggregateInputType
+    _sum?: FacilitySumAggregateInputType
+    _min?: FacilityMinAggregateInputType
+    _max?: FacilityMaxAggregateInputType
+  }
+
+  export type FacilityGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    address: string
+    latitude: number | null
+    longitude: number | null
+    amenities: string[]
+    photos: string[]
+    ownerId: string
+    status: $Enums.FacilityStatus
+    approvedAt: Date | null
+    approvedBy: string | null
+    rejectionReason: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: FacilityCountAggregateOutputType | null
+    _avg: FacilityAvgAggregateOutputType | null
+    _sum: FacilitySumAggregateOutputType | null
+    _min: FacilityMinAggregateOutputType | null
+    _max: FacilityMaxAggregateOutputType | null
+  }
+
+  type GetFacilityGroupByPayload<T extends FacilityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FacilityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FacilityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FacilityGroupByOutputType[P]>
+            : GetScalarType<T[P], FacilityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FacilitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    address?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    amenities?: boolean
+    photos?: boolean
+    ownerId?: boolean
+    status?: boolean
+    approvedAt?: boolean
+    approvedBy?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    owner?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+    courts?: boolean | Facility$courtsArgs<ExtArgs>
+    _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facility"]>
+
+  export type FacilitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    address?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    amenities?: boolean
+    photos?: boolean
+    ownerId?: boolean
+    status?: boolean
+    approvedAt?: boolean
+    approvedBy?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    owner?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facility"]>
+
+  export type FacilitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    address?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    amenities?: boolean
+    photos?: boolean
+    ownerId?: boolean
+    status?: boolean
+    approvedAt?: boolean
+    approvedBy?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    owner?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facility"]>
+
+  export type FacilitySelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    address?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    amenities?: boolean
+    photos?: boolean
+    ownerId?: boolean
+    status?: boolean
+    approvedAt?: boolean
+    approvedBy?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FacilityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "address" | "latitude" | "longitude" | "amenities" | "photos" | "ownerId" | "status" | "approvedAt" | "approvedBy" | "rejectionReason" | "createdAt" | "updatedAt", ExtArgs["result"]["facility"]>
+  export type FacilityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+    courts?: boolean | Facility$courtsArgs<ExtArgs>
+    _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FacilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type FacilityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $FacilityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Facility"
+    objects: {
+      owner: Prisma.$PlayerProfilePayload<ExtArgs>
+      courts: Prisma.$CourtPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      address: string
+      latitude: number | null
+      longitude: number | null
+      amenities: string[]
+      photos: string[]
+      ownerId: string
+      status: $Enums.FacilityStatus
+      approvedAt: Date | null
+      approvedBy: string | null
+      rejectionReason: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["facility"]>
+    composites: {}
+  }
+
+  type FacilityGetPayload<S extends boolean | null | undefined | FacilityDefaultArgs> = $Result.GetResult<Prisma.$FacilityPayload, S>
+
+  type FacilityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FacilityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FacilityCountAggregateInputType | true
+    }
+
+  export interface FacilityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Facility'], meta: { name: 'Facility' } }
+    /**
+     * Find zero or one Facility that matches the filter.
+     * @param {FacilityFindUniqueArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FacilityFindUniqueArgs>(args: SelectSubset<T, FacilityFindUniqueArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Facility that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FacilityFindUniqueOrThrowArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FacilityFindUniqueOrThrowArgs>(args: SelectSubset<T, FacilityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Facility that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityFindFirstArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FacilityFindFirstArgs>(args?: SelectSubset<T, FacilityFindFirstArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Facility that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityFindFirstOrThrowArgs} args - Arguments to find a Facility
+     * @example
+     * // Get one Facility
+     * const facility = await prisma.facility.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FacilityFindFirstOrThrowArgs>(args?: SelectSubset<T, FacilityFindFirstOrThrowArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Facilities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Facilities
+     * const facilities = await prisma.facility.findMany()
+     * 
+     * // Get first 10 Facilities
+     * const facilities = await prisma.facility.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const facilityWithIdOnly = await prisma.facility.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FacilityFindManyArgs>(args?: SelectSubset<T, FacilityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Facility.
+     * @param {FacilityCreateArgs} args - Arguments to create a Facility.
+     * @example
+     * // Create one Facility
+     * const Facility = await prisma.facility.create({
+     *   data: {
+     *     // ... data to create a Facility
+     *   }
+     * })
+     * 
+     */
+    create<T extends FacilityCreateArgs>(args: SelectSubset<T, FacilityCreateArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Facilities.
+     * @param {FacilityCreateManyArgs} args - Arguments to create many Facilities.
+     * @example
+     * // Create many Facilities
+     * const facility = await prisma.facility.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FacilityCreateManyArgs>(args?: SelectSubset<T, FacilityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Facilities and returns the data saved in the database.
+     * @param {FacilityCreateManyAndReturnArgs} args - Arguments to create many Facilities.
+     * @example
+     * // Create many Facilities
+     * const facility = await prisma.facility.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Facilities and only return the `id`
+     * const facilityWithIdOnly = await prisma.facility.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FacilityCreateManyAndReturnArgs>(args?: SelectSubset<T, FacilityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Facility.
+     * @param {FacilityDeleteArgs} args - Arguments to delete one Facility.
+     * @example
+     * // Delete one Facility
+     * const Facility = await prisma.facility.delete({
+     *   where: {
+     *     // ... filter to delete one Facility
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FacilityDeleteArgs>(args: SelectSubset<T, FacilityDeleteArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Facility.
+     * @param {FacilityUpdateArgs} args - Arguments to update one Facility.
+     * @example
+     * // Update one Facility
+     * const facility = await prisma.facility.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FacilityUpdateArgs>(args: SelectSubset<T, FacilityUpdateArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Facilities.
+     * @param {FacilityDeleteManyArgs} args - Arguments to filter Facilities to delete.
+     * @example
+     * // Delete a few Facilities
+     * const { count } = await prisma.facility.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FacilityDeleteManyArgs>(args?: SelectSubset<T, FacilityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Facilities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Facilities
+     * const facility = await prisma.facility.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FacilityUpdateManyArgs>(args: SelectSubset<T, FacilityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Facilities and returns the data updated in the database.
+     * @param {FacilityUpdateManyAndReturnArgs} args - Arguments to update many Facilities.
+     * @example
+     * // Update many Facilities
+     * const facility = await prisma.facility.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Facilities and only return the `id`
+     * const facilityWithIdOnly = await prisma.facility.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FacilityUpdateManyAndReturnArgs>(args: SelectSubset<T, FacilityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Facility.
+     * @param {FacilityUpsertArgs} args - Arguments to update or create a Facility.
+     * @example
+     * // Update or create a Facility
+     * const facility = await prisma.facility.upsert({
+     *   create: {
+     *     // ... data to create a Facility
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Facility we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FacilityUpsertArgs>(args: SelectSubset<T, FacilityUpsertArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Facilities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityCountArgs} args - Arguments to filter Facilities to count.
+     * @example
+     * // Count the number of Facilities
+     * const count = await prisma.facility.count({
+     *   where: {
+     *     // ... the filter for the Facilities we want to count
+     *   }
+     * })
+    **/
+    count<T extends FacilityCountArgs>(
+      args?: Subset<T, FacilityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FacilityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Facility.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FacilityAggregateArgs>(args: Subset<T, FacilityAggregateArgs>): Prisma.PrismaPromise<GetFacilityAggregateType<T>>
+
+    /**
+     * Group by Facility.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FacilityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FacilityGroupByArgs['orderBy'] }
+        : { orderBy?: FacilityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FacilityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFacilityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Facility model
+   */
+  readonly fields: FacilityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Facility.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FacilityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    owner<T extends PlayerProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfileDefaultArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    courts<T extends Facility$courtsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$courtsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Facility model
+   */
+  interface FacilityFieldRefs {
+    readonly id: FieldRef<"Facility", 'String'>
+    readonly name: FieldRef<"Facility", 'String'>
+    readonly description: FieldRef<"Facility", 'String'>
+    readonly address: FieldRef<"Facility", 'String'>
+    readonly latitude: FieldRef<"Facility", 'Float'>
+    readonly longitude: FieldRef<"Facility", 'Float'>
+    readonly amenities: FieldRef<"Facility", 'String[]'>
+    readonly photos: FieldRef<"Facility", 'String[]'>
+    readonly ownerId: FieldRef<"Facility", 'String'>
+    readonly status: FieldRef<"Facility", 'FacilityStatus'>
+    readonly approvedAt: FieldRef<"Facility", 'DateTime'>
+    readonly approvedBy: FieldRef<"Facility", 'String'>
+    readonly rejectionReason: FieldRef<"Facility", 'String'>
+    readonly createdAt: FieldRef<"Facility", 'DateTime'>
+    readonly updatedAt: FieldRef<"Facility", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Facility findUnique
+   */
+  export type FacilityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility findUniqueOrThrow
+   */
+  export type FacilityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility findFirst
+   */
+  export type FacilityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Facilities.
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Facilities.
+     */
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * Facility findFirstOrThrow
+   */
+  export type FacilityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facility to fetch.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Facilities.
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Facilities.
+     */
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * Facility findMany
+   */
+  export type FacilityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter, which Facilities to fetch.
+     */
+    where?: FacilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Facilities to fetch.
+     */
+    orderBy?: FacilityOrderByWithRelationInput | FacilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Facilities.
+     */
+    cursor?: FacilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Facilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Facilities.
+     */
+    skip?: number
+    distinct?: FacilityScalarFieldEnum | FacilityScalarFieldEnum[]
+  }
+
+  /**
+   * Facility create
+   */
+  export type FacilityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Facility.
+     */
+    data: XOR<FacilityCreateInput, FacilityUncheckedCreateInput>
+  }
+
+  /**
+   * Facility createMany
+   */
+  export type FacilityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Facilities.
+     */
+    data: FacilityCreateManyInput | FacilityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Facility createManyAndReturn
+   */
+  export type FacilityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * The data used to create many Facilities.
+     */
+    data: FacilityCreateManyInput | FacilityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Facility update
+   */
+  export type FacilityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Facility.
+     */
+    data: XOR<FacilityUpdateInput, FacilityUncheckedUpdateInput>
+    /**
+     * Choose, which Facility to update.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility updateMany
+   */
+  export type FacilityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Facilities.
+     */
+    data: XOR<FacilityUpdateManyMutationInput, FacilityUncheckedUpdateManyInput>
+    /**
+     * Filter which Facilities to update
+     */
+    where?: FacilityWhereInput
+    /**
+     * Limit how many Facilities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Facility updateManyAndReturn
+   */
+  export type FacilityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * The data used to update Facilities.
+     */
+    data: XOR<FacilityUpdateManyMutationInput, FacilityUncheckedUpdateManyInput>
+    /**
+     * Filter which Facilities to update
+     */
+    where?: FacilityWhereInput
+    /**
+     * Limit how many Facilities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Facility upsert
+   */
+  export type FacilityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Facility to update in case it exists.
+     */
+    where: FacilityWhereUniqueInput
+    /**
+     * In case the Facility found by the `where` argument doesn't exist, create a new Facility with this data.
+     */
+    create: XOR<FacilityCreateInput, FacilityUncheckedCreateInput>
+    /**
+     * In case the Facility was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FacilityUpdateInput, FacilityUncheckedUpdateInput>
+  }
+
+  /**
+   * Facility delete
+   */
+  export type FacilityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+    /**
+     * Filter which Facility to delete.
+     */
+    where: FacilityWhereUniqueInput
+  }
+
+  /**
+   * Facility deleteMany
+   */
+  export type FacilityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Facilities to delete
+     */
+    where?: FacilityWhereInput
+    /**
+     * Limit how many Facilities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Facility.courts
+   */
+  export type Facility$courtsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    where?: CourtWhereInput
+    orderBy?: CourtOrderByWithRelationInput | CourtOrderByWithRelationInput[]
+    cursor?: CourtWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CourtScalarFieldEnum | CourtScalarFieldEnum[]
+  }
+
+  /**
+   * Facility without action
+   */
+  export type FacilityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Facility
+     */
+    select?: FacilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Facility
+     */
+    omit?: FacilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Court
+   */
+
+  export type AggregateCourt = {
+    _count: CourtCountAggregateOutputType | null
+    _avg: CourtAvgAggregateOutputType | null
+    _sum: CourtSumAggregateOutputType | null
+    _min: CourtMinAggregateOutputType | null
+    _max: CourtMaxAggregateOutputType | null
+  }
+
+  export type CourtAvgAggregateOutputType = {
+    pricePerHour: number | null
+    operatingStartHour: number | null
+    operatingEndHour: number | null
+  }
+
+  export type CourtSumAggregateOutputType = {
+    pricePerHour: number | null
+    operatingStartHour: number | null
+    operatingEndHour: number | null
+  }
+
+  export type CourtMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    facilityId: string | null
+    sportType: $Enums.SportType | null
+    pricePerHour: number | null
+    operatingStartHour: number | null
+    operatingEndHour: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CourtMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    facilityId: string | null
+    sportType: $Enums.SportType | null
+    pricePerHour: number | null
+    operatingStartHour: number | null
+    operatingEndHour: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CourtCountAggregateOutputType = {
+    id: number
+    name: number
+    facilityId: number
+    sportType: number
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CourtAvgAggregateInputType = {
+    pricePerHour?: true
+    operatingStartHour?: true
+    operatingEndHour?: true
+  }
+
+  export type CourtSumAggregateInputType = {
+    pricePerHour?: true
+    operatingStartHour?: true
+    operatingEndHour?: true
+  }
+
+  export type CourtMinAggregateInputType = {
+    id?: true
+    name?: true
+    facilityId?: true
+    sportType?: true
+    pricePerHour?: true
+    operatingStartHour?: true
+    operatingEndHour?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CourtMaxAggregateInputType = {
+    id?: true
+    name?: true
+    facilityId?: true
+    sportType?: true
+    pricePerHour?: true
+    operatingStartHour?: true
+    operatingEndHour?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CourtCountAggregateInputType = {
+    id?: true
+    name?: true
+    facilityId?: true
+    sportType?: true
+    pricePerHour?: true
+    operatingStartHour?: true
+    operatingEndHour?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CourtAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Court to aggregate.
+     */
+    where?: CourtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courts to fetch.
+     */
+    orderBy?: CourtOrderByWithRelationInput | CourtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CourtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Courts
+    **/
+    _count?: true | CourtCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CourtAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CourtSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CourtMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CourtMaxAggregateInputType
+  }
+
+  export type GetCourtAggregateType<T extends CourtAggregateArgs> = {
+        [P in keyof T & keyof AggregateCourt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCourt[P]>
+      : GetScalarType<T[P], AggregateCourt[P]>
+  }
+
+
+
+
+  export type CourtGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourtWhereInput
+    orderBy?: CourtOrderByWithAggregationInput | CourtOrderByWithAggregationInput[]
+    by: CourtScalarFieldEnum[] | CourtScalarFieldEnum
+    having?: CourtScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CourtCountAggregateInputType | true
+    _avg?: CourtAvgAggregateInputType
+    _sum?: CourtSumAggregateInputType
+    _min?: CourtMinAggregateInputType
+    _max?: CourtMaxAggregateInputType
+  }
+
+  export type CourtGroupByOutputType = {
+    id: string
+    name: string
+    facilityId: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: CourtCountAggregateOutputType | null
+    _avg: CourtAvgAggregateOutputType | null
+    _sum: CourtSumAggregateOutputType | null
+    _min: CourtMinAggregateOutputType | null
+    _max: CourtMaxAggregateOutputType | null
+  }
+
+  type GetCourtGroupByPayload<T extends CourtGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CourtGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CourtGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CourtGroupByOutputType[P]>
+            : GetScalarType<T[P], CourtGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CourtSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    facilityId?: boolean
+    sportType?: boolean
+    pricePerHour?: boolean
+    operatingStartHour?: boolean
+    operatingEndHour?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    timeSlots?: boolean | Court$timeSlotsArgs<ExtArgs>
+    bookings?: boolean | Court$bookingsArgs<ExtArgs>
+    occupancyStats?: boolean | Court$occupancyStatsArgs<ExtArgs>
+    _count?: boolean | CourtCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["court"]>
+
+  export type CourtSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    facilityId?: boolean
+    sportType?: boolean
+    pricePerHour?: boolean
+    operatingStartHour?: boolean
+    operatingEndHour?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["court"]>
+
+  export type CourtSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    facilityId?: boolean
+    sportType?: boolean
+    pricePerHour?: boolean
+    operatingStartHour?: boolean
+    operatingEndHour?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["court"]>
+
+  export type CourtSelectScalar = {
+    id?: boolean
+    name?: boolean
+    facilityId?: boolean
+    sportType?: boolean
+    pricePerHour?: boolean
+    operatingStartHour?: boolean
+    operatingEndHour?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CourtOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "facilityId" | "sportType" | "pricePerHour" | "operatingStartHour" | "operatingEndHour" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["court"]>
+  export type CourtInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    timeSlots?: boolean | Court$timeSlotsArgs<ExtArgs>
+    bookings?: boolean | Court$bookingsArgs<ExtArgs>
+    occupancyStats?: boolean | Court$occupancyStatsArgs<ExtArgs>
+    _count?: boolean | CourtCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CourtIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+  export type CourtIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+
+  export type $CourtPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Court"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+      timeSlots: Prisma.$TimeSlotPayload<ExtArgs>[]
+      bookings: Prisma.$BookingPayload<ExtArgs>[]
+      occupancyStats: Prisma.$OccupancyStatsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      facilityId: string
+      sportType: $Enums.SportType
+      pricePerHour: number
+      operatingStartHour: number
+      operatingEndHour: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["court"]>
+    composites: {}
+  }
+
+  type CourtGetPayload<S extends boolean | null | undefined | CourtDefaultArgs> = $Result.GetResult<Prisma.$CourtPayload, S>
+
+  type CourtCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CourtFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CourtCountAggregateInputType | true
+    }
+
+  export interface CourtDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Court'], meta: { name: 'Court' } }
+    /**
+     * Find zero or one Court that matches the filter.
+     * @param {CourtFindUniqueArgs} args - Arguments to find a Court
+     * @example
+     * // Get one Court
+     * const court = await prisma.court.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CourtFindUniqueArgs>(args: SelectSubset<T, CourtFindUniqueArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Court that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CourtFindUniqueOrThrowArgs} args - Arguments to find a Court
+     * @example
+     * // Get one Court
+     * const court = await prisma.court.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CourtFindUniqueOrThrowArgs>(args: SelectSubset<T, CourtFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Court that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtFindFirstArgs} args - Arguments to find a Court
+     * @example
+     * // Get one Court
+     * const court = await prisma.court.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CourtFindFirstArgs>(args?: SelectSubset<T, CourtFindFirstArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Court that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtFindFirstOrThrowArgs} args - Arguments to find a Court
+     * @example
+     * // Get one Court
+     * const court = await prisma.court.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CourtFindFirstOrThrowArgs>(args?: SelectSubset<T, CourtFindFirstOrThrowArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Courts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Courts
+     * const courts = await prisma.court.findMany()
+     * 
+     * // Get first 10 Courts
+     * const courts = await prisma.court.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const courtWithIdOnly = await prisma.court.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CourtFindManyArgs>(args?: SelectSubset<T, CourtFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Court.
+     * @param {CourtCreateArgs} args - Arguments to create a Court.
+     * @example
+     * // Create one Court
+     * const Court = await prisma.court.create({
+     *   data: {
+     *     // ... data to create a Court
+     *   }
+     * })
+     * 
+     */
+    create<T extends CourtCreateArgs>(args: SelectSubset<T, CourtCreateArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Courts.
+     * @param {CourtCreateManyArgs} args - Arguments to create many Courts.
+     * @example
+     * // Create many Courts
+     * const court = await prisma.court.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CourtCreateManyArgs>(args?: SelectSubset<T, CourtCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Courts and returns the data saved in the database.
+     * @param {CourtCreateManyAndReturnArgs} args - Arguments to create many Courts.
+     * @example
+     * // Create many Courts
+     * const court = await prisma.court.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Courts and only return the `id`
+     * const courtWithIdOnly = await prisma.court.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CourtCreateManyAndReturnArgs>(args?: SelectSubset<T, CourtCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Court.
+     * @param {CourtDeleteArgs} args - Arguments to delete one Court.
+     * @example
+     * // Delete one Court
+     * const Court = await prisma.court.delete({
+     *   where: {
+     *     // ... filter to delete one Court
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CourtDeleteArgs>(args: SelectSubset<T, CourtDeleteArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Court.
+     * @param {CourtUpdateArgs} args - Arguments to update one Court.
+     * @example
+     * // Update one Court
+     * const court = await prisma.court.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CourtUpdateArgs>(args: SelectSubset<T, CourtUpdateArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Courts.
+     * @param {CourtDeleteManyArgs} args - Arguments to filter Courts to delete.
+     * @example
+     * // Delete a few Courts
+     * const { count } = await prisma.court.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CourtDeleteManyArgs>(args?: SelectSubset<T, CourtDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Courts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Courts
+     * const court = await prisma.court.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CourtUpdateManyArgs>(args: SelectSubset<T, CourtUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Courts and returns the data updated in the database.
+     * @param {CourtUpdateManyAndReturnArgs} args - Arguments to update many Courts.
+     * @example
+     * // Update many Courts
+     * const court = await prisma.court.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Courts and only return the `id`
+     * const courtWithIdOnly = await prisma.court.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CourtUpdateManyAndReturnArgs>(args: SelectSubset<T, CourtUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Court.
+     * @param {CourtUpsertArgs} args - Arguments to update or create a Court.
+     * @example
+     * // Update or create a Court
+     * const court = await prisma.court.upsert({
+     *   create: {
+     *     // ... data to create a Court
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Court we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CourtUpsertArgs>(args: SelectSubset<T, CourtUpsertArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Courts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtCountArgs} args - Arguments to filter Courts to count.
+     * @example
+     * // Count the number of Courts
+     * const count = await prisma.court.count({
+     *   where: {
+     *     // ... the filter for the Courts we want to count
+     *   }
+     * })
+    **/
+    count<T extends CourtCountArgs>(
+      args?: Subset<T, CourtCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CourtCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Court.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CourtAggregateArgs>(args: Subset<T, CourtAggregateArgs>): Prisma.PrismaPromise<GetCourtAggregateType<T>>
+
+    /**
+     * Group by Court.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourtGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CourtGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CourtGroupByArgs['orderBy'] }
+        : { orderBy?: CourtGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CourtGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCourtGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Court model
+   */
+  readonly fields: CourtFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Court.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CourtClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    timeSlots<T extends Court$timeSlotsArgs<ExtArgs> = {}>(args?: Subset<T, Court$timeSlotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bookings<T extends Court$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, Court$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    occupancyStats<T extends Court$occupancyStatsArgs<ExtArgs> = {}>(args?: Subset<T, Court$occupancyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Court model
+   */
+  interface CourtFieldRefs {
+    readonly id: FieldRef<"Court", 'String'>
+    readonly name: FieldRef<"Court", 'String'>
+    readonly facilityId: FieldRef<"Court", 'String'>
+    readonly sportType: FieldRef<"Court", 'SportType'>
+    readonly pricePerHour: FieldRef<"Court", 'Float'>
+    readonly operatingStartHour: FieldRef<"Court", 'Int'>
+    readonly operatingEndHour: FieldRef<"Court", 'Int'>
+    readonly isActive: FieldRef<"Court", 'Boolean'>
+    readonly createdAt: FieldRef<"Court", 'DateTime'>
+    readonly updatedAt: FieldRef<"Court", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Court findUnique
+   */
+  export type CourtFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * Filter, which Court to fetch.
+     */
+    where: CourtWhereUniqueInput
+  }
+
+  /**
+   * Court findUniqueOrThrow
+   */
+  export type CourtFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * Filter, which Court to fetch.
+     */
+    where: CourtWhereUniqueInput
+  }
+
+  /**
+   * Court findFirst
+   */
+  export type CourtFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * Filter, which Court to fetch.
+     */
+    where?: CourtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courts to fetch.
+     */
+    orderBy?: CourtOrderByWithRelationInput | CourtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Courts.
+     */
+    cursor?: CourtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Courts.
+     */
+    distinct?: CourtScalarFieldEnum | CourtScalarFieldEnum[]
+  }
+
+  /**
+   * Court findFirstOrThrow
+   */
+  export type CourtFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * Filter, which Court to fetch.
+     */
+    where?: CourtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courts to fetch.
+     */
+    orderBy?: CourtOrderByWithRelationInput | CourtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Courts.
+     */
+    cursor?: CourtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Courts.
+     */
+    distinct?: CourtScalarFieldEnum | CourtScalarFieldEnum[]
+  }
+
+  /**
+   * Court findMany
+   */
+  export type CourtFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * Filter, which Courts to fetch.
+     */
+    where?: CourtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courts to fetch.
+     */
+    orderBy?: CourtOrderByWithRelationInput | CourtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Courts.
+     */
+    cursor?: CourtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courts.
+     */
+    skip?: number
+    distinct?: CourtScalarFieldEnum | CourtScalarFieldEnum[]
+  }
+
+  /**
+   * Court create
+   */
+  export type CourtCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Court.
+     */
+    data: XOR<CourtCreateInput, CourtUncheckedCreateInput>
+  }
+
+  /**
+   * Court createMany
+   */
+  export type CourtCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Courts.
+     */
+    data: CourtCreateManyInput | CourtCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Court createManyAndReturn
+   */
+  export type CourtCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * The data used to create many Courts.
+     */
+    data: CourtCreateManyInput | CourtCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Court update
+   */
+  export type CourtUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Court.
+     */
+    data: XOR<CourtUpdateInput, CourtUncheckedUpdateInput>
+    /**
+     * Choose, which Court to update.
+     */
+    where: CourtWhereUniqueInput
+  }
+
+  /**
+   * Court updateMany
+   */
+  export type CourtUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Courts.
+     */
+    data: XOR<CourtUpdateManyMutationInput, CourtUncheckedUpdateManyInput>
+    /**
+     * Filter which Courts to update
+     */
+    where?: CourtWhereInput
+    /**
+     * Limit how many Courts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Court updateManyAndReturn
+   */
+  export type CourtUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * The data used to update Courts.
+     */
+    data: XOR<CourtUpdateManyMutationInput, CourtUncheckedUpdateManyInput>
+    /**
+     * Filter which Courts to update
+     */
+    where?: CourtWhereInput
+    /**
+     * Limit how many Courts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Court upsert
+   */
+  export type CourtUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Court to update in case it exists.
+     */
+    where: CourtWhereUniqueInput
+    /**
+     * In case the Court found by the `where` argument doesn't exist, create a new Court with this data.
+     */
+    create: XOR<CourtCreateInput, CourtUncheckedCreateInput>
+    /**
+     * In case the Court was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CourtUpdateInput, CourtUncheckedUpdateInput>
+  }
+
+  /**
+   * Court delete
+   */
+  export type CourtDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+    /**
+     * Filter which Court to delete.
+     */
+    where: CourtWhereUniqueInput
+  }
+
+  /**
+   * Court deleteMany
+   */
+  export type CourtDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Courts to delete
+     */
+    where?: CourtWhereInput
+    /**
+     * Limit how many Courts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Court.timeSlots
+   */
+  export type Court$timeSlotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    where?: TimeSlotWhereInput
+    orderBy?: TimeSlotOrderByWithRelationInput | TimeSlotOrderByWithRelationInput[]
+    cursor?: TimeSlotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimeSlotScalarFieldEnum | TimeSlotScalarFieldEnum[]
+  }
+
+  /**
+   * Court.bookings
+   */
+  export type Court$bookingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    where?: BookingWhereInput
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    cursor?: BookingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * Court.occupancyStats
+   */
+  export type Court$occupancyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    where?: OccupancyStatsWhereInput
+    orderBy?: OccupancyStatsOrderByWithRelationInput | OccupancyStatsOrderByWithRelationInput[]
+    cursor?: OccupancyStatsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OccupancyStatsScalarFieldEnum | OccupancyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * Court without action
+   */
+  export type CourtDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Court
+     */
+    select?: CourtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Court
+     */
+    omit?: CourtOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourtInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TimeSlot
+   */
+
+  export type AggregateTimeSlot = {
+    _count: TimeSlotCountAggregateOutputType | null
+    _avg: TimeSlotAvgAggregateOutputType | null
+    _sum: TimeSlotSumAggregateOutputType | null
+    _min: TimeSlotMinAggregateOutputType | null
+    _max: TimeSlotMaxAggregateOutputType | null
+  }
+
+  export type TimeSlotAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type TimeSlotSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type TimeSlotMinAggregateOutputType = {
+    id: string | null
+    courtId: string | null
+    startTime: Date | null
+    endTime: Date | null
+    isMaintenanceBlocked: boolean | null
+    maintenanceReason: string | null
+    version: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TimeSlotMaxAggregateOutputType = {
+    id: string | null
+    courtId: string | null
+    startTime: Date | null
+    endTime: Date | null
+    isMaintenanceBlocked: boolean | null
+    maintenanceReason: string | null
+    version: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TimeSlotCountAggregateOutputType = {
+    id: number
+    courtId: number
+    startTime: number
+    endTime: number
+    isMaintenanceBlocked: number
+    maintenanceReason: number
+    version: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TimeSlotAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type TimeSlotSumAggregateInputType = {
+    version?: true
+  }
+
+  export type TimeSlotMinAggregateInputType = {
+    id?: true
+    courtId?: true
+    startTime?: true
+    endTime?: true
+    isMaintenanceBlocked?: true
+    maintenanceReason?: true
+    version?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TimeSlotMaxAggregateInputType = {
+    id?: true
+    courtId?: true
+    startTime?: true
+    endTime?: true
+    isMaintenanceBlocked?: true
+    maintenanceReason?: true
+    version?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TimeSlotCountAggregateInputType = {
+    id?: true
+    courtId?: true
+    startTime?: true
+    endTime?: true
+    isMaintenanceBlocked?: true
+    maintenanceReason?: true
+    version?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TimeSlotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimeSlot to aggregate.
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeSlots to fetch.
+     */
+    orderBy?: TimeSlotOrderByWithRelationInput | TimeSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TimeSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeSlots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TimeSlots
+    **/
+    _count?: true | TimeSlotCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TimeSlotAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TimeSlotSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TimeSlotMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TimeSlotMaxAggregateInputType
+  }
+
+  export type GetTimeSlotAggregateType<T extends TimeSlotAggregateArgs> = {
+        [P in keyof T & keyof AggregateTimeSlot]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTimeSlot[P]>
+      : GetScalarType<T[P], AggregateTimeSlot[P]>
+  }
+
+
+
+
+  export type TimeSlotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeSlotWhereInput
+    orderBy?: TimeSlotOrderByWithAggregationInput | TimeSlotOrderByWithAggregationInput[]
+    by: TimeSlotScalarFieldEnum[] | TimeSlotScalarFieldEnum
+    having?: TimeSlotScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TimeSlotCountAggregateInputType | true
+    _avg?: TimeSlotAvgAggregateInputType
+    _sum?: TimeSlotSumAggregateInputType
+    _min?: TimeSlotMinAggregateInputType
+    _max?: TimeSlotMaxAggregateInputType
+  }
+
+  export type TimeSlotGroupByOutputType = {
+    id: string
+    courtId: string
+    startTime: Date
+    endTime: Date
+    isMaintenanceBlocked: boolean
+    maintenanceReason: string | null
+    version: number
+    createdAt: Date
+    updatedAt: Date
+    _count: TimeSlotCountAggregateOutputType | null
+    _avg: TimeSlotAvgAggregateOutputType | null
+    _sum: TimeSlotSumAggregateOutputType | null
+    _min: TimeSlotMinAggregateOutputType | null
+    _max: TimeSlotMaxAggregateOutputType | null
+  }
+
+  type GetTimeSlotGroupByPayload<T extends TimeSlotGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TimeSlotGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TimeSlotGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TimeSlotGroupByOutputType[P]>
+            : GetScalarType<T[P], TimeSlotGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TimeSlotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courtId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    booking?: boolean | TimeSlot$bookingArgs<ExtArgs>
+    waitlistEntries?: boolean | TimeSlot$waitlistEntriesArgs<ExtArgs>
+    _count?: boolean | TimeSlotCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timeSlot"]>
+
+  export type TimeSlotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courtId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timeSlot"]>
+
+  export type TimeSlotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courtId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timeSlot"]>
+
+  export type TimeSlotSelectScalar = {
+    id?: boolean
+    courtId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TimeSlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courtId" | "startTime" | "endTime" | "isMaintenanceBlocked" | "maintenanceReason" | "version" | "createdAt" | "updatedAt", ExtArgs["result"]["timeSlot"]>
+  export type TimeSlotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    booking?: boolean | TimeSlot$bookingArgs<ExtArgs>
+    waitlistEntries?: boolean | TimeSlot$waitlistEntriesArgs<ExtArgs>
+    _count?: boolean | TimeSlotCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TimeSlotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }
+  export type TimeSlotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }
+
+  export type $TimeSlotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TimeSlot"
+    objects: {
+      court: Prisma.$CourtPayload<ExtArgs>
+      booking: Prisma.$BookingPayload<ExtArgs> | null
+      waitlistEntries: Prisma.$WaitlistEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      courtId: string
+      startTime: Date
+      endTime: Date
+      isMaintenanceBlocked: boolean
+      maintenanceReason: string | null
+      version: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["timeSlot"]>
+    composites: {}
+  }
+
+  type TimeSlotGetPayload<S extends boolean | null | undefined | TimeSlotDefaultArgs> = $Result.GetResult<Prisma.$TimeSlotPayload, S>
+
+  type TimeSlotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TimeSlotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TimeSlotCountAggregateInputType | true
+    }
+
+  export interface TimeSlotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TimeSlot'], meta: { name: 'TimeSlot' } }
+    /**
+     * Find zero or one TimeSlot that matches the filter.
+     * @param {TimeSlotFindUniqueArgs} args - Arguments to find a TimeSlot
+     * @example
+     * // Get one TimeSlot
+     * const timeSlot = await prisma.timeSlot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TimeSlotFindUniqueArgs>(args: SelectSubset<T, TimeSlotFindUniqueArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TimeSlot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TimeSlotFindUniqueOrThrowArgs} args - Arguments to find a TimeSlot
+     * @example
+     * // Get one TimeSlot
+     * const timeSlot = await prisma.timeSlot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TimeSlotFindUniqueOrThrowArgs>(args: SelectSubset<T, TimeSlotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimeSlot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotFindFirstArgs} args - Arguments to find a TimeSlot
+     * @example
+     * // Get one TimeSlot
+     * const timeSlot = await prisma.timeSlot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TimeSlotFindFirstArgs>(args?: SelectSubset<T, TimeSlotFindFirstArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimeSlot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotFindFirstOrThrowArgs} args - Arguments to find a TimeSlot
+     * @example
+     * // Get one TimeSlot
+     * const timeSlot = await prisma.timeSlot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TimeSlotFindFirstOrThrowArgs>(args?: SelectSubset<T, TimeSlotFindFirstOrThrowArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TimeSlots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TimeSlots
+     * const timeSlots = await prisma.timeSlot.findMany()
+     * 
+     * // Get first 10 TimeSlots
+     * const timeSlots = await prisma.timeSlot.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const timeSlotWithIdOnly = await prisma.timeSlot.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TimeSlotFindManyArgs>(args?: SelectSubset<T, TimeSlotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TimeSlot.
+     * @param {TimeSlotCreateArgs} args - Arguments to create a TimeSlot.
+     * @example
+     * // Create one TimeSlot
+     * const TimeSlot = await prisma.timeSlot.create({
+     *   data: {
+     *     // ... data to create a TimeSlot
+     *   }
+     * })
+     * 
+     */
+    create<T extends TimeSlotCreateArgs>(args: SelectSubset<T, TimeSlotCreateArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TimeSlots.
+     * @param {TimeSlotCreateManyArgs} args - Arguments to create many TimeSlots.
+     * @example
+     * // Create many TimeSlots
+     * const timeSlot = await prisma.timeSlot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TimeSlotCreateManyArgs>(args?: SelectSubset<T, TimeSlotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TimeSlots and returns the data saved in the database.
+     * @param {TimeSlotCreateManyAndReturnArgs} args - Arguments to create many TimeSlots.
+     * @example
+     * // Create many TimeSlots
+     * const timeSlot = await prisma.timeSlot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TimeSlots and only return the `id`
+     * const timeSlotWithIdOnly = await prisma.timeSlot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TimeSlotCreateManyAndReturnArgs>(args?: SelectSubset<T, TimeSlotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TimeSlot.
+     * @param {TimeSlotDeleteArgs} args - Arguments to delete one TimeSlot.
+     * @example
+     * // Delete one TimeSlot
+     * const TimeSlot = await prisma.timeSlot.delete({
+     *   where: {
+     *     // ... filter to delete one TimeSlot
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TimeSlotDeleteArgs>(args: SelectSubset<T, TimeSlotDeleteArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TimeSlot.
+     * @param {TimeSlotUpdateArgs} args - Arguments to update one TimeSlot.
+     * @example
+     * // Update one TimeSlot
+     * const timeSlot = await prisma.timeSlot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TimeSlotUpdateArgs>(args: SelectSubset<T, TimeSlotUpdateArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TimeSlots.
+     * @param {TimeSlotDeleteManyArgs} args - Arguments to filter TimeSlots to delete.
+     * @example
+     * // Delete a few TimeSlots
+     * const { count } = await prisma.timeSlot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TimeSlotDeleteManyArgs>(args?: SelectSubset<T, TimeSlotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimeSlots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TimeSlots
+     * const timeSlot = await prisma.timeSlot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TimeSlotUpdateManyArgs>(args: SelectSubset<T, TimeSlotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimeSlots and returns the data updated in the database.
+     * @param {TimeSlotUpdateManyAndReturnArgs} args - Arguments to update many TimeSlots.
+     * @example
+     * // Update many TimeSlots
+     * const timeSlot = await prisma.timeSlot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TimeSlots and only return the `id`
+     * const timeSlotWithIdOnly = await prisma.timeSlot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TimeSlotUpdateManyAndReturnArgs>(args: SelectSubset<T, TimeSlotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TimeSlot.
+     * @param {TimeSlotUpsertArgs} args - Arguments to update or create a TimeSlot.
+     * @example
+     * // Update or create a TimeSlot
+     * const timeSlot = await prisma.timeSlot.upsert({
+     *   create: {
+     *     // ... data to create a TimeSlot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TimeSlot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TimeSlotUpsertArgs>(args: SelectSubset<T, TimeSlotUpsertArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TimeSlots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotCountArgs} args - Arguments to filter TimeSlots to count.
+     * @example
+     * // Count the number of TimeSlots
+     * const count = await prisma.timeSlot.count({
+     *   where: {
+     *     // ... the filter for the TimeSlots we want to count
+     *   }
+     * })
+    **/
+    count<T extends TimeSlotCountArgs>(
+      args?: Subset<T, TimeSlotCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TimeSlotCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TimeSlot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TimeSlotAggregateArgs>(args: Subset<T, TimeSlotAggregateArgs>): Prisma.PrismaPromise<GetTimeSlotAggregateType<T>>
+
+    /**
+     * Group by TimeSlot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeSlotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TimeSlotGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TimeSlotGroupByArgs['orderBy'] }
+        : { orderBy?: TimeSlotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TimeSlotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTimeSlotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TimeSlot model
+   */
+  readonly fields: TimeSlotFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TimeSlot.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TimeSlotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    court<T extends CourtDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourtDefaultArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    booking<T extends TimeSlot$bookingArgs<ExtArgs> = {}>(args?: Subset<T, TimeSlot$bookingArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    waitlistEntries<T extends TimeSlot$waitlistEntriesArgs<ExtArgs> = {}>(args?: Subset<T, TimeSlot$waitlistEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TimeSlot model
+   */
+  interface TimeSlotFieldRefs {
+    readonly id: FieldRef<"TimeSlot", 'String'>
+    readonly courtId: FieldRef<"TimeSlot", 'String'>
+    readonly startTime: FieldRef<"TimeSlot", 'DateTime'>
+    readonly endTime: FieldRef<"TimeSlot", 'DateTime'>
+    readonly isMaintenanceBlocked: FieldRef<"TimeSlot", 'Boolean'>
+    readonly maintenanceReason: FieldRef<"TimeSlot", 'String'>
+    readonly version: FieldRef<"TimeSlot", 'Int'>
+    readonly createdAt: FieldRef<"TimeSlot", 'DateTime'>
+    readonly updatedAt: FieldRef<"TimeSlot", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TimeSlot findUnique
+   */
+  export type TimeSlotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeSlot to fetch.
+     */
+    where: TimeSlotWhereUniqueInput
+  }
+
+  /**
+   * TimeSlot findUniqueOrThrow
+   */
+  export type TimeSlotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeSlot to fetch.
+     */
+    where: TimeSlotWhereUniqueInput
+  }
+
+  /**
+   * TimeSlot findFirst
+   */
+  export type TimeSlotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeSlot to fetch.
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeSlots to fetch.
+     */
+    orderBy?: TimeSlotOrderByWithRelationInput | TimeSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimeSlots.
+     */
+    cursor?: TimeSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeSlots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimeSlots.
+     */
+    distinct?: TimeSlotScalarFieldEnum | TimeSlotScalarFieldEnum[]
+  }
+
+  /**
+   * TimeSlot findFirstOrThrow
+   */
+  export type TimeSlotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeSlot to fetch.
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeSlots to fetch.
+     */
+    orderBy?: TimeSlotOrderByWithRelationInput | TimeSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimeSlots.
+     */
+    cursor?: TimeSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeSlots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimeSlots.
+     */
+    distinct?: TimeSlotScalarFieldEnum | TimeSlotScalarFieldEnum[]
+  }
+
+  /**
+   * TimeSlot findMany
+   */
+  export type TimeSlotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeSlots to fetch.
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeSlots to fetch.
+     */
+    orderBy?: TimeSlotOrderByWithRelationInput | TimeSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TimeSlots.
+     */
+    cursor?: TimeSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeSlots.
+     */
+    skip?: number
+    distinct?: TimeSlotScalarFieldEnum | TimeSlotScalarFieldEnum[]
+  }
+
+  /**
+   * TimeSlot create
+   */
+  export type TimeSlotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TimeSlot.
+     */
+    data: XOR<TimeSlotCreateInput, TimeSlotUncheckedCreateInput>
+  }
+
+  /**
+   * TimeSlot createMany
+   */
+  export type TimeSlotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TimeSlots.
+     */
+    data: TimeSlotCreateManyInput | TimeSlotCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TimeSlot createManyAndReturn
+   */
+  export type TimeSlotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * The data used to create many TimeSlots.
+     */
+    data: TimeSlotCreateManyInput | TimeSlotCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TimeSlot update
+   */
+  export type TimeSlotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TimeSlot.
+     */
+    data: XOR<TimeSlotUpdateInput, TimeSlotUncheckedUpdateInput>
+    /**
+     * Choose, which TimeSlot to update.
+     */
+    where: TimeSlotWhereUniqueInput
+  }
+
+  /**
+   * TimeSlot updateMany
+   */
+  export type TimeSlotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TimeSlots.
+     */
+    data: XOR<TimeSlotUpdateManyMutationInput, TimeSlotUncheckedUpdateManyInput>
+    /**
+     * Filter which TimeSlots to update
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * Limit how many TimeSlots to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimeSlot updateManyAndReturn
+   */
+  export type TimeSlotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * The data used to update TimeSlots.
+     */
+    data: XOR<TimeSlotUpdateManyMutationInput, TimeSlotUncheckedUpdateManyInput>
+    /**
+     * Filter which TimeSlots to update
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * Limit how many TimeSlots to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TimeSlot upsert
+   */
+  export type TimeSlotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TimeSlot to update in case it exists.
+     */
+    where: TimeSlotWhereUniqueInput
+    /**
+     * In case the TimeSlot found by the `where` argument doesn't exist, create a new TimeSlot with this data.
+     */
+    create: XOR<TimeSlotCreateInput, TimeSlotUncheckedCreateInput>
+    /**
+     * In case the TimeSlot was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TimeSlotUpdateInput, TimeSlotUncheckedUpdateInput>
+  }
+
+  /**
+   * TimeSlot delete
+   */
+  export type TimeSlotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+    /**
+     * Filter which TimeSlot to delete.
+     */
+    where: TimeSlotWhereUniqueInput
+  }
+
+  /**
+   * TimeSlot deleteMany
+   */
+  export type TimeSlotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimeSlots to delete
+     */
+    where?: TimeSlotWhereInput
+    /**
+     * Limit how many TimeSlots to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimeSlot.booking
+   */
+  export type TimeSlot$bookingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    where?: BookingWhereInput
+  }
+
+  /**
+   * TimeSlot.waitlistEntries
+   */
+  export type TimeSlot$waitlistEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    where?: WaitlistEntryWhereInput
+    orderBy?: WaitlistEntryOrderByWithRelationInput | WaitlistEntryOrderByWithRelationInput[]
+    cursor?: WaitlistEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WaitlistEntryScalarFieldEnum | WaitlistEntryScalarFieldEnum[]
+  }
+
+  /**
+   * TimeSlot without action
+   */
+  export type TimeSlotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeSlot
+     */
+    select?: TimeSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeSlot
+     */
+    omit?: TimeSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeSlotInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Booking
+   */
+
+  export type AggregateBooking = {
+    _count: BookingCountAggregateOutputType | null
+    _avg: BookingAvgAggregateOutputType | null
+    _sum: BookingSumAggregateOutputType | null
+    _min: BookingMinAggregateOutputType | null
+    _max: BookingMaxAggregateOutputType | null
+  }
+
+  export type BookingAvgAggregateOutputType = {
+    totalPrice: number | null
+    version: number | null
+  }
+
+  export type BookingSumAggregateOutputType = {
+    totalPrice: number | null
+    version: number | null
+  }
+
+  export type BookingMinAggregateOutputType = {
+    id: string | null
+    timeSlotId: string | null
+    courtId: string | null
+    playerId: string | null
+    totalPrice: number | null
+    status: $Enums.BookingStatus | null
+    paymentSimulated: boolean | null
+    bookingNotes: string | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
+    version: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BookingMaxAggregateOutputType = {
+    id: string | null
+    timeSlotId: string | null
+    courtId: string | null
+    playerId: string | null
+    totalPrice: number | null
+    status: $Enums.BookingStatus | null
+    paymentSimulated: boolean | null
+    bookingNotes: string | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
+    version: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BookingCountAggregateOutputType = {
+    id: number
+    timeSlotId: number
+    courtId: number
+    playerId: number
+    totalPrice: number
+    status: number
+    paymentSimulated: number
+    bookingNotes: number
+    cancelledAt: number
+    cancellationReason: number
+    version: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BookingAvgAggregateInputType = {
+    totalPrice?: true
+    version?: true
+  }
+
+  export type BookingSumAggregateInputType = {
+    totalPrice?: true
+    version?: true
+  }
+
+  export type BookingMinAggregateInputType = {
+    id?: true
+    timeSlotId?: true
+    courtId?: true
+    playerId?: true
+    totalPrice?: true
+    status?: true
+    paymentSimulated?: true
+    bookingNotes?: true
+    cancelledAt?: true
+    cancellationReason?: true
+    version?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BookingMaxAggregateInputType = {
+    id?: true
+    timeSlotId?: true
+    courtId?: true
+    playerId?: true
+    totalPrice?: true
+    status?: true
+    paymentSimulated?: true
+    bookingNotes?: true
+    cancelledAt?: true
+    cancellationReason?: true
+    version?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BookingCountAggregateInputType = {
+    id?: true
+    timeSlotId?: true
+    courtId?: true
+    playerId?: true
+    totalPrice?: true
+    status?: true
+    paymentSimulated?: true
+    bookingNotes?: true
+    cancelledAt?: true
+    cancellationReason?: true
+    version?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BookingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Booking to aggregate.
+     */
+    where?: BookingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bookings to fetch.
+     */
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BookingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bookings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bookings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Bookings
+    **/
+    _count?: true | BookingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BookingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BookingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BookingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BookingMaxAggregateInputType
+  }
+
+  export type GetBookingAggregateType<T extends BookingAggregateArgs> = {
+        [P in keyof T & keyof AggregateBooking]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBooking[P]>
+      : GetScalarType<T[P], AggregateBooking[P]>
+  }
+
+
+
+
+  export type BookingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookingWhereInput
+    orderBy?: BookingOrderByWithAggregationInput | BookingOrderByWithAggregationInput[]
+    by: BookingScalarFieldEnum[] | BookingScalarFieldEnum
+    having?: BookingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BookingCountAggregateInputType | true
+    _avg?: BookingAvgAggregateInputType
+    _sum?: BookingSumAggregateInputType
+    _min?: BookingMinAggregateInputType
+    _max?: BookingMaxAggregateInputType
+  }
+
+  export type BookingGroupByOutputType = {
+    id: string
+    timeSlotId: string
+    courtId: string
+    playerId: string
+    totalPrice: number
+    status: $Enums.BookingStatus
+    paymentSimulated: boolean
+    bookingNotes: string | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
+    version: number
+    createdAt: Date
+    updatedAt: Date
+    _count: BookingCountAggregateOutputType | null
+    _avg: BookingAvgAggregateOutputType | null
+    _sum: BookingSumAggregateOutputType | null
+    _min: BookingMinAggregateOutputType | null
+    _max: BookingMaxAggregateOutputType | null
+  }
+
+  type GetBookingGroupByPayload<T extends BookingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BookingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BookingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BookingGroupByOutputType[P]>
+            : GetScalarType<T[P], BookingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BookingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timeSlotId?: boolean
+    courtId?: boolean
+    playerId?: boolean
+    totalPrice?: boolean
+    status?: boolean
+    paymentSimulated?: boolean
+    bookingNotes?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+    match?: boolean | Booking$matchArgs<ExtArgs>
+  }, ExtArgs["result"]["booking"]>
+
+  export type BookingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timeSlotId?: boolean
+    courtId?: boolean
+    playerId?: boolean
+    totalPrice?: boolean
+    status?: boolean
+    paymentSimulated?: boolean
+    bookingNotes?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["booking"]>
+
+  export type BookingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timeSlotId?: boolean
+    courtId?: boolean
+    playerId?: boolean
+    totalPrice?: boolean
+    status?: boolean
+    paymentSimulated?: boolean
+    bookingNotes?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["booking"]>
+
+  export type BookingSelectScalar = {
+    id?: boolean
+    timeSlotId?: boolean
+    courtId?: boolean
+    playerId?: boolean
+    totalPrice?: boolean
+    status?: boolean
+    paymentSimulated?: boolean
+    bookingNotes?: boolean
+    cancelledAt?: boolean
+    cancellationReason?: boolean
+    version?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timeSlotId" | "courtId" | "playerId" | "totalPrice" | "status" | "paymentSimulated" | "bookingNotes" | "cancelledAt" | "cancellationReason" | "version" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+  export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+    match?: boolean | Booking$matchArgs<ExtArgs>
+  }
+  export type BookingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type BookingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $BookingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Booking"
+    objects: {
+      timeSlot: Prisma.$TimeSlotPayload<ExtArgs>
+      court: Prisma.$CourtPayload<ExtArgs>
+      player: Prisma.$PlayerProfilePayload<ExtArgs>
+      match: Prisma.$MatchPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timeSlotId: string
+      courtId: string
+      playerId: string
+      totalPrice: number
+      status: $Enums.BookingStatus
+      paymentSimulated: boolean
+      bookingNotes: string | null
+      cancelledAt: Date | null
+      cancellationReason: string | null
+      version: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["booking"]>
+    composites: {}
+  }
+
+  type BookingGetPayload<S extends boolean | null | undefined | BookingDefaultArgs> = $Result.GetResult<Prisma.$BookingPayload, S>
+
+  type BookingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BookingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BookingCountAggregateInputType | true
+    }
+
+  export interface BookingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Booking'], meta: { name: 'Booking' } }
+    /**
+     * Find zero or one Booking that matches the filter.
+     * @param {BookingFindUniqueArgs} args - Arguments to find a Booking
+     * @example
+     * // Get one Booking
+     * const booking = await prisma.booking.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BookingFindUniqueArgs>(args: SelectSubset<T, BookingFindUniqueArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Booking that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BookingFindUniqueOrThrowArgs} args - Arguments to find a Booking
+     * @example
+     * // Get one Booking
+     * const booking = await prisma.booking.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BookingFindUniqueOrThrowArgs>(args: SelectSubset<T, BookingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Booking that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingFindFirstArgs} args - Arguments to find a Booking
+     * @example
+     * // Get one Booking
+     * const booking = await prisma.booking.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BookingFindFirstArgs>(args?: SelectSubset<T, BookingFindFirstArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Booking that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingFindFirstOrThrowArgs} args - Arguments to find a Booking
+     * @example
+     * // Get one Booking
+     * const booking = await prisma.booking.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BookingFindFirstOrThrowArgs>(args?: SelectSubset<T, BookingFindFirstOrThrowArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Bookings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Bookings
+     * const bookings = await prisma.booking.findMany()
+     * 
+     * // Get first 10 Bookings
+     * const bookings = await prisma.booking.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bookingWithIdOnly = await prisma.booking.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BookingFindManyArgs>(args?: SelectSubset<T, BookingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Booking.
+     * @param {BookingCreateArgs} args - Arguments to create a Booking.
+     * @example
+     * // Create one Booking
+     * const Booking = await prisma.booking.create({
+     *   data: {
+     *     // ... data to create a Booking
+     *   }
+     * })
+     * 
+     */
+    create<T extends BookingCreateArgs>(args: SelectSubset<T, BookingCreateArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Bookings.
+     * @param {BookingCreateManyArgs} args - Arguments to create many Bookings.
+     * @example
+     * // Create many Bookings
+     * const booking = await prisma.booking.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BookingCreateManyArgs>(args?: SelectSubset<T, BookingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Bookings and returns the data saved in the database.
+     * @param {BookingCreateManyAndReturnArgs} args - Arguments to create many Bookings.
+     * @example
+     * // Create many Bookings
+     * const booking = await prisma.booking.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Bookings and only return the `id`
+     * const bookingWithIdOnly = await prisma.booking.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BookingCreateManyAndReturnArgs>(args?: SelectSubset<T, BookingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Booking.
+     * @param {BookingDeleteArgs} args - Arguments to delete one Booking.
+     * @example
+     * // Delete one Booking
+     * const Booking = await prisma.booking.delete({
+     *   where: {
+     *     // ... filter to delete one Booking
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BookingDeleteArgs>(args: SelectSubset<T, BookingDeleteArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Booking.
+     * @param {BookingUpdateArgs} args - Arguments to update one Booking.
+     * @example
+     * // Update one Booking
+     * const booking = await prisma.booking.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BookingUpdateArgs>(args: SelectSubset<T, BookingUpdateArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Bookings.
+     * @param {BookingDeleteManyArgs} args - Arguments to filter Bookings to delete.
+     * @example
+     * // Delete a few Bookings
+     * const { count } = await prisma.booking.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BookingDeleteManyArgs>(args?: SelectSubset<T, BookingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Bookings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Bookings
+     * const booking = await prisma.booking.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BookingUpdateManyArgs>(args: SelectSubset<T, BookingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Bookings and returns the data updated in the database.
+     * @param {BookingUpdateManyAndReturnArgs} args - Arguments to update many Bookings.
+     * @example
+     * // Update many Bookings
+     * const booking = await prisma.booking.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Bookings and only return the `id`
+     * const bookingWithIdOnly = await prisma.booking.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BookingUpdateManyAndReturnArgs>(args: SelectSubset<T, BookingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Booking.
+     * @param {BookingUpsertArgs} args - Arguments to update or create a Booking.
+     * @example
+     * // Update or create a Booking
+     * const booking = await prisma.booking.upsert({
+     *   create: {
+     *     // ... data to create a Booking
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Booking we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BookingUpsertArgs>(args: SelectSubset<T, BookingUpsertArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Bookings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingCountArgs} args - Arguments to filter Bookings to count.
+     * @example
+     * // Count the number of Bookings
+     * const count = await prisma.booking.count({
+     *   where: {
+     *     // ... the filter for the Bookings we want to count
+     *   }
+     * })
+    **/
+    count<T extends BookingCountArgs>(
+      args?: Subset<T, BookingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BookingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Booking.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BookingAggregateArgs>(args: Subset<T, BookingAggregateArgs>): Prisma.PrismaPromise<GetBookingAggregateType<T>>
+
+    /**
+     * Group by Booking.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BookingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BookingGroupByArgs['orderBy'] }
+        : { orderBy?: BookingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BookingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBookingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Booking model
+   */
+  readonly fields: BookingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Booking.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BookingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    timeSlot<T extends TimeSlotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TimeSlotDefaultArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    court<T extends CourtDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourtDefaultArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    player<T extends PlayerProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfileDefaultArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    match<T extends Booking$matchArgs<ExtArgs> = {}>(args?: Subset<T, Booking$matchArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Booking model
+   */
+  interface BookingFieldRefs {
+    readonly id: FieldRef<"Booking", 'String'>
+    readonly timeSlotId: FieldRef<"Booking", 'String'>
+    readonly courtId: FieldRef<"Booking", 'String'>
+    readonly playerId: FieldRef<"Booking", 'String'>
+    readonly totalPrice: FieldRef<"Booking", 'Float'>
+    readonly status: FieldRef<"Booking", 'BookingStatus'>
+    readonly paymentSimulated: FieldRef<"Booking", 'Boolean'>
+    readonly bookingNotes: FieldRef<"Booking", 'String'>
+    readonly cancelledAt: FieldRef<"Booking", 'DateTime'>
+    readonly cancellationReason: FieldRef<"Booking", 'String'>
+    readonly version: FieldRef<"Booking", 'Int'>
+    readonly createdAt: FieldRef<"Booking", 'DateTime'>
+    readonly updatedAt: FieldRef<"Booking", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Booking findUnique
+   */
+  export type BookingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * Filter, which Booking to fetch.
+     */
+    where: BookingWhereUniqueInput
+  }
+
+  /**
+   * Booking findUniqueOrThrow
+   */
+  export type BookingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * Filter, which Booking to fetch.
+     */
+    where: BookingWhereUniqueInput
+  }
+
+  /**
+   * Booking findFirst
+   */
+  export type BookingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * Filter, which Booking to fetch.
+     */
+    where?: BookingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bookings to fetch.
+     */
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Bookings.
+     */
+    cursor?: BookingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bookings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bookings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Bookings.
+     */
+    distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * Booking findFirstOrThrow
+   */
+  export type BookingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * Filter, which Booking to fetch.
+     */
+    where?: BookingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bookings to fetch.
+     */
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Bookings.
+     */
+    cursor?: BookingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bookings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bookings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Bookings.
+     */
+    distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * Booking findMany
+   */
+  export type BookingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * Filter, which Bookings to fetch.
+     */
+    where?: BookingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Bookings to fetch.
+     */
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Bookings.
+     */
+    cursor?: BookingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Bookings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Bookings.
+     */
+    skip?: number
+    distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * Booking create
+   */
+  export type BookingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Booking.
+     */
+    data: XOR<BookingCreateInput, BookingUncheckedCreateInput>
+  }
+
+  /**
+   * Booking createMany
+   */
+  export type BookingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Bookings.
+     */
+    data: BookingCreateManyInput | BookingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Booking createManyAndReturn
+   */
+  export type BookingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * The data used to create many Bookings.
+     */
+    data: BookingCreateManyInput | BookingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Booking update
+   */
+  export type BookingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Booking.
+     */
+    data: XOR<BookingUpdateInput, BookingUncheckedUpdateInput>
+    /**
+     * Choose, which Booking to update.
+     */
+    where: BookingWhereUniqueInput
+  }
+
+  /**
+   * Booking updateMany
+   */
+  export type BookingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Bookings.
+     */
+    data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyInput>
+    /**
+     * Filter which Bookings to update
+     */
+    where?: BookingWhereInput
+    /**
+     * Limit how many Bookings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Booking updateManyAndReturn
+   */
+  export type BookingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * The data used to update Bookings.
+     */
+    data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyInput>
+    /**
+     * Filter which Bookings to update
+     */
+    where?: BookingWhereInput
+    /**
+     * Limit how many Bookings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Booking upsert
+   */
+  export type BookingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Booking to update in case it exists.
+     */
+    where: BookingWhereUniqueInput
+    /**
+     * In case the Booking found by the `where` argument doesn't exist, create a new Booking with this data.
+     */
+    create: XOR<BookingCreateInput, BookingUncheckedCreateInput>
+    /**
+     * In case the Booking was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BookingUpdateInput, BookingUncheckedUpdateInput>
+  }
+
+  /**
+   * Booking delete
+   */
+  export type BookingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    /**
+     * Filter which Booking to delete.
+     */
+    where: BookingWhereUniqueInput
+  }
+
+  /**
+   * Booking deleteMany
+   */
+  export type BookingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Bookings to delete
+     */
+    where?: BookingWhereInput
+    /**
+     * Limit how many Bookings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Booking.match
+   */
+  export type Booking$matchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    where?: MatchWhereInput
+  }
+
+  /**
+   * Booking without action
+   */
+  export type BookingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Match
+   */
+
+  export type AggregateMatch = {
+    _count: MatchCountAggregateOutputType | null
+    _avg: MatchAvgAggregateOutputType | null
+    _sum: MatchSumAggregateOutputType | null
+    _min: MatchMinAggregateOutputType | null
+    _max: MatchMaxAggregateOutputType | null
+  }
+
+  export type MatchAvgAggregateOutputType = {
+    maxPlayers: number | null
+  }
+
+  export type MatchSumAggregateOutputType = {
+    maxPlayers: number | null
+  }
+
+  export type MatchMinAggregateOutputType = {
+    id: string | null
+    bookingId: string | null
+    title: string | null
+    description: string | null
+    maxPlayers: number | null
+    sportType: $Enums.SportType | null
+    skillLevel: string | null
+    status: $Enums.MatchStatus | null
+    startTime: Date | null
+    endTime: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MatchMaxAggregateOutputType = {
+    id: string | null
+    bookingId: string | null
+    title: string | null
+    description: string | null
+    maxPlayers: number | null
+    sportType: $Enums.SportType | null
+    skillLevel: string | null
+    status: $Enums.MatchStatus | null
+    startTime: Date | null
+    endTime: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MatchCountAggregateOutputType = {
+    id: number
+    bookingId: number
+    title: number
+    description: number
+    maxPlayers: number
+    sportType: number
+    skillLevel: number
+    status: number
+    startTime: number
+    endTime: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MatchAvgAggregateInputType = {
+    maxPlayers?: true
+  }
+
+  export type MatchSumAggregateInputType = {
+    maxPlayers?: true
+  }
+
+  export type MatchMinAggregateInputType = {
+    id?: true
+    bookingId?: true
+    title?: true
+    description?: true
+    maxPlayers?: true
+    sportType?: true
+    skillLevel?: true
+    status?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MatchMaxAggregateInputType = {
+    id?: true
+    bookingId?: true
+    title?: true
+    description?: true
+    maxPlayers?: true
+    sportType?: true
+    skillLevel?: true
+    status?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MatchCountAggregateInputType = {
+    id?: true
+    bookingId?: true
+    title?: true
+    description?: true
+    maxPlayers?: true
+    sportType?: true
+    skillLevel?: true
+    status?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MatchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Match to aggregate.
+     */
+    where?: MatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matches to fetch.
+     */
+    orderBy?: MatchOrderByWithRelationInput | MatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Matches
+    **/
+    _count?: true | MatchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MatchAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MatchSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MatchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MatchMaxAggregateInputType
+  }
+
+  export type GetMatchAggregateType<T extends MatchAggregateArgs> = {
+        [P in keyof T & keyof AggregateMatch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMatch[P]>
+      : GetScalarType<T[P], AggregateMatch[P]>
+  }
+
+
+
+
+  export type MatchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchWhereInput
+    orderBy?: MatchOrderByWithAggregationInput | MatchOrderByWithAggregationInput[]
+    by: MatchScalarFieldEnum[] | MatchScalarFieldEnum
+    having?: MatchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MatchCountAggregateInputType | true
+    _avg?: MatchAvgAggregateInputType
+    _sum?: MatchSumAggregateInputType
+    _min?: MatchMinAggregateInputType
+    _max?: MatchMaxAggregateInputType
+  }
+
+  export type MatchGroupByOutputType = {
+    id: string
+    bookingId: string
+    title: string | null
+    description: string | null
+    maxPlayers: number
+    sportType: $Enums.SportType
+    skillLevel: string | null
+    status: $Enums.MatchStatus
+    startTime: Date
+    endTime: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: MatchCountAggregateOutputType | null
+    _avg: MatchAvgAggregateOutputType | null
+    _sum: MatchSumAggregateOutputType | null
+    _min: MatchMinAggregateOutputType | null
+    _max: MatchMaxAggregateOutputType | null
+  }
+
+  type GetMatchGroupByPayload<T extends MatchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MatchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MatchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MatchGroupByOutputType[P]>
+            : GetScalarType<T[P], MatchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MatchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingId?: boolean
+    title?: boolean
+    description?: boolean
+    maxPlayers?: boolean
+    sportType?: boolean
+    skillLevel?: boolean
+    status?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    players?: boolean | Match$playersArgs<ExtArgs>
+    _count?: boolean | MatchCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["match"]>
+
+  export type MatchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingId?: boolean
+    title?: boolean
+    description?: boolean
+    maxPlayers?: boolean
+    sportType?: boolean
+    skillLevel?: boolean
+    status?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["match"]>
+
+  export type MatchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingId?: boolean
+    title?: boolean
+    description?: boolean
+    maxPlayers?: boolean
+    sportType?: boolean
+    skillLevel?: boolean
+    status?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["match"]>
+
+  export type MatchSelectScalar = {
+    id?: boolean
+    bookingId?: boolean
+    title?: boolean
+    description?: boolean
+    maxPlayers?: boolean
+    sportType?: boolean
+    skillLevel?: boolean
+    status?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "title" | "description" | "maxPlayers" | "sportType" | "skillLevel" | "status" | "startTime" | "endTime" | "createdAt" | "updatedAt", ExtArgs["result"]["match"]>
+  export type MatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    players?: boolean | Match$playersArgs<ExtArgs>
+    _count?: boolean | MatchCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+  }
+  export type MatchIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+  }
+
+  export type $MatchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Match"
+    objects: {
+      booking: Prisma.$BookingPayload<ExtArgs>
+      players: Prisma.$MatchPlayerPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      bookingId: string
+      title: string | null
+      description: string | null
+      maxPlayers: number
+      sportType: $Enums.SportType
+      skillLevel: string | null
+      status: $Enums.MatchStatus
+      startTime: Date
+      endTime: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["match"]>
+    composites: {}
+  }
+
+  type MatchGetPayload<S extends boolean | null | undefined | MatchDefaultArgs> = $Result.GetResult<Prisma.$MatchPayload, S>
+
+  type MatchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MatchFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MatchCountAggregateInputType | true
+    }
+
+  export interface MatchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Match'], meta: { name: 'Match' } }
+    /**
+     * Find zero or one Match that matches the filter.
+     * @param {MatchFindUniqueArgs} args - Arguments to find a Match
+     * @example
+     * // Get one Match
+     * const match = await prisma.match.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MatchFindUniqueArgs>(args: SelectSubset<T, MatchFindUniqueArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Match that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MatchFindUniqueOrThrowArgs} args - Arguments to find a Match
+     * @example
+     * // Get one Match
+     * const match = await prisma.match.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MatchFindUniqueOrThrowArgs>(args: SelectSubset<T, MatchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Match that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchFindFirstArgs} args - Arguments to find a Match
+     * @example
+     * // Get one Match
+     * const match = await prisma.match.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MatchFindFirstArgs>(args?: SelectSubset<T, MatchFindFirstArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Match that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchFindFirstOrThrowArgs} args - Arguments to find a Match
+     * @example
+     * // Get one Match
+     * const match = await prisma.match.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MatchFindFirstOrThrowArgs>(args?: SelectSubset<T, MatchFindFirstOrThrowArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Matches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Matches
+     * const matches = await prisma.match.findMany()
+     * 
+     * // Get first 10 Matches
+     * const matches = await prisma.match.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const matchWithIdOnly = await prisma.match.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MatchFindManyArgs>(args?: SelectSubset<T, MatchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Match.
+     * @param {MatchCreateArgs} args - Arguments to create a Match.
+     * @example
+     * // Create one Match
+     * const Match = await prisma.match.create({
+     *   data: {
+     *     // ... data to create a Match
+     *   }
+     * })
+     * 
+     */
+    create<T extends MatchCreateArgs>(args: SelectSubset<T, MatchCreateArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Matches.
+     * @param {MatchCreateManyArgs} args - Arguments to create many Matches.
+     * @example
+     * // Create many Matches
+     * const match = await prisma.match.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MatchCreateManyArgs>(args?: SelectSubset<T, MatchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Matches and returns the data saved in the database.
+     * @param {MatchCreateManyAndReturnArgs} args - Arguments to create many Matches.
+     * @example
+     * // Create many Matches
+     * const match = await prisma.match.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Matches and only return the `id`
+     * const matchWithIdOnly = await prisma.match.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MatchCreateManyAndReturnArgs>(args?: SelectSubset<T, MatchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Match.
+     * @param {MatchDeleteArgs} args - Arguments to delete one Match.
+     * @example
+     * // Delete one Match
+     * const Match = await prisma.match.delete({
+     *   where: {
+     *     // ... filter to delete one Match
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MatchDeleteArgs>(args: SelectSubset<T, MatchDeleteArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Match.
+     * @param {MatchUpdateArgs} args - Arguments to update one Match.
+     * @example
+     * // Update one Match
+     * const match = await prisma.match.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MatchUpdateArgs>(args: SelectSubset<T, MatchUpdateArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Matches.
+     * @param {MatchDeleteManyArgs} args - Arguments to filter Matches to delete.
+     * @example
+     * // Delete a few Matches
+     * const { count } = await prisma.match.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MatchDeleteManyArgs>(args?: SelectSubset<T, MatchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Matches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Matches
+     * const match = await prisma.match.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MatchUpdateManyArgs>(args: SelectSubset<T, MatchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Matches and returns the data updated in the database.
+     * @param {MatchUpdateManyAndReturnArgs} args - Arguments to update many Matches.
+     * @example
+     * // Update many Matches
+     * const match = await prisma.match.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Matches and only return the `id`
+     * const matchWithIdOnly = await prisma.match.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MatchUpdateManyAndReturnArgs>(args: SelectSubset<T, MatchUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Match.
+     * @param {MatchUpsertArgs} args - Arguments to update or create a Match.
+     * @example
+     * // Update or create a Match
+     * const match = await prisma.match.upsert({
+     *   create: {
+     *     // ... data to create a Match
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Match we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MatchUpsertArgs>(args: SelectSubset<T, MatchUpsertArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Matches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchCountArgs} args - Arguments to filter Matches to count.
+     * @example
+     * // Count the number of Matches
+     * const count = await prisma.match.count({
+     *   where: {
+     *     // ... the filter for the Matches we want to count
+     *   }
+     * })
+    **/
+    count<T extends MatchCountArgs>(
+      args?: Subset<T, MatchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MatchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Match.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MatchAggregateArgs>(args: Subset<T, MatchAggregateArgs>): Prisma.PrismaPromise<GetMatchAggregateType<T>>
+
+    /**
+     * Group by Match.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MatchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MatchGroupByArgs['orderBy'] }
+        : { orderBy?: MatchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MatchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMatchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Match model
+   */
+  readonly fields: MatchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Match.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MatchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    booking<T extends BookingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BookingDefaultArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    players<T extends Match$playersArgs<ExtArgs> = {}>(args?: Subset<T, Match$playersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Match model
+   */
+  interface MatchFieldRefs {
+    readonly id: FieldRef<"Match", 'String'>
+    readonly bookingId: FieldRef<"Match", 'String'>
+    readonly title: FieldRef<"Match", 'String'>
+    readonly description: FieldRef<"Match", 'String'>
+    readonly maxPlayers: FieldRef<"Match", 'Int'>
+    readonly sportType: FieldRef<"Match", 'SportType'>
+    readonly skillLevel: FieldRef<"Match", 'String'>
+    readonly status: FieldRef<"Match", 'MatchStatus'>
+    readonly startTime: FieldRef<"Match", 'DateTime'>
+    readonly endTime: FieldRef<"Match", 'DateTime'>
+    readonly createdAt: FieldRef<"Match", 'DateTime'>
+    readonly updatedAt: FieldRef<"Match", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Match findUnique
+   */
+  export type MatchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * Filter, which Match to fetch.
+     */
+    where: MatchWhereUniqueInput
+  }
+
+  /**
+   * Match findUniqueOrThrow
+   */
+  export type MatchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * Filter, which Match to fetch.
+     */
+    where: MatchWhereUniqueInput
+  }
+
+  /**
+   * Match findFirst
+   */
+  export type MatchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * Filter, which Match to fetch.
+     */
+    where?: MatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matches to fetch.
+     */
+    orderBy?: MatchOrderByWithRelationInput | MatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Matches.
+     */
+    cursor?: MatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Matches.
+     */
+    distinct?: MatchScalarFieldEnum | MatchScalarFieldEnum[]
+  }
+
+  /**
+   * Match findFirstOrThrow
+   */
+  export type MatchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * Filter, which Match to fetch.
+     */
+    where?: MatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matches to fetch.
+     */
+    orderBy?: MatchOrderByWithRelationInput | MatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Matches.
+     */
+    cursor?: MatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Matches.
+     */
+    distinct?: MatchScalarFieldEnum | MatchScalarFieldEnum[]
+  }
+
+  /**
+   * Match findMany
+   */
+  export type MatchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * Filter, which Matches to fetch.
+     */
+    where?: MatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matches to fetch.
+     */
+    orderBy?: MatchOrderByWithRelationInput | MatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Matches.
+     */
+    cursor?: MatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matches.
+     */
+    skip?: number
+    distinct?: MatchScalarFieldEnum | MatchScalarFieldEnum[]
+  }
+
+  /**
+   * Match create
+   */
+  export type MatchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Match.
+     */
+    data: XOR<MatchCreateInput, MatchUncheckedCreateInput>
+  }
+
+  /**
+   * Match createMany
+   */
+  export type MatchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Matches.
+     */
+    data: MatchCreateManyInput | MatchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Match createManyAndReturn
+   */
+  export type MatchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * The data used to create many Matches.
+     */
+    data: MatchCreateManyInput | MatchCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Match update
+   */
+  export type MatchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Match.
+     */
+    data: XOR<MatchUpdateInput, MatchUncheckedUpdateInput>
+    /**
+     * Choose, which Match to update.
+     */
+    where: MatchWhereUniqueInput
+  }
+
+  /**
+   * Match updateMany
+   */
+  export type MatchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Matches.
+     */
+    data: XOR<MatchUpdateManyMutationInput, MatchUncheckedUpdateManyInput>
+    /**
+     * Filter which Matches to update
+     */
+    where?: MatchWhereInput
+    /**
+     * Limit how many Matches to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Match updateManyAndReturn
+   */
+  export type MatchUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * The data used to update Matches.
+     */
+    data: XOR<MatchUpdateManyMutationInput, MatchUncheckedUpdateManyInput>
+    /**
+     * Filter which Matches to update
+     */
+    where?: MatchWhereInput
+    /**
+     * Limit how many Matches to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Match upsert
+   */
+  export type MatchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Match to update in case it exists.
+     */
+    where: MatchWhereUniqueInput
+    /**
+     * In case the Match found by the `where` argument doesn't exist, create a new Match with this data.
+     */
+    create: XOR<MatchCreateInput, MatchUncheckedCreateInput>
+    /**
+     * In case the Match was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MatchUpdateInput, MatchUncheckedUpdateInput>
+  }
+
+  /**
+   * Match delete
+   */
+  export type MatchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+    /**
+     * Filter which Match to delete.
+     */
+    where: MatchWhereUniqueInput
+  }
+
+  /**
+   * Match deleteMany
+   */
+  export type MatchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Matches to delete
+     */
+    where?: MatchWhereInput
+    /**
+     * Limit how many Matches to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Match.players
+   */
+  export type Match$playersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    where?: MatchPlayerWhereInput
+    orderBy?: MatchPlayerOrderByWithRelationInput | MatchPlayerOrderByWithRelationInput[]
+    cursor?: MatchPlayerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatchPlayerScalarFieldEnum | MatchPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Match without action
+   */
+  export type MatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Match
+     */
+    select?: MatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Match
+     */
+    omit?: MatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MatchPlayer
+   */
+
+  export type AggregateMatchPlayer = {
+    _count: MatchPlayerCountAggregateOutputType | null
+    _min: MatchPlayerMinAggregateOutputType | null
+    _max: MatchPlayerMaxAggregateOutputType | null
+  }
+
+  export type MatchPlayerMinAggregateOutputType = {
+    id: string | null
+    matchId: string | null
+    playerId: string | null
+    joinedAt: Date | null
+    result: string | null
+  }
+
+  export type MatchPlayerMaxAggregateOutputType = {
+    id: string | null
+    matchId: string | null
+    playerId: string | null
+    joinedAt: Date | null
+    result: string | null
+  }
+
+  export type MatchPlayerCountAggregateOutputType = {
+    id: number
+    matchId: number
+    playerId: number
+    joinedAt: number
+    result: number
+    _all: number
+  }
+
+
+  export type MatchPlayerMinAggregateInputType = {
+    id?: true
+    matchId?: true
+    playerId?: true
+    joinedAt?: true
+    result?: true
+  }
+
+  export type MatchPlayerMaxAggregateInputType = {
+    id?: true
+    matchId?: true
+    playerId?: true
+    joinedAt?: true
+    result?: true
+  }
+
+  export type MatchPlayerCountAggregateInputType = {
+    id?: true
+    matchId?: true
+    playerId?: true
+    joinedAt?: true
+    result?: true
+    _all?: true
+  }
+
+  export type MatchPlayerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MatchPlayer to aggregate.
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchPlayers to fetch.
+     */
+    orderBy?: MatchPlayerOrderByWithRelationInput | MatchPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MatchPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchPlayers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MatchPlayers
+    **/
+    _count?: true | MatchPlayerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MatchPlayerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MatchPlayerMaxAggregateInputType
+  }
+
+  export type GetMatchPlayerAggregateType<T extends MatchPlayerAggregateArgs> = {
+        [P in keyof T & keyof AggregateMatchPlayer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMatchPlayer[P]>
+      : GetScalarType<T[P], AggregateMatchPlayer[P]>
+  }
+
+
+
+
+  export type MatchPlayerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchPlayerWhereInput
+    orderBy?: MatchPlayerOrderByWithAggregationInput | MatchPlayerOrderByWithAggregationInput[]
+    by: MatchPlayerScalarFieldEnum[] | MatchPlayerScalarFieldEnum
+    having?: MatchPlayerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MatchPlayerCountAggregateInputType | true
+    _min?: MatchPlayerMinAggregateInputType
+    _max?: MatchPlayerMaxAggregateInputType
+  }
+
+  export type MatchPlayerGroupByOutputType = {
+    id: string
+    matchId: string
+    playerId: string
+    joinedAt: Date
+    result: string | null
+    _count: MatchPlayerCountAggregateOutputType | null
+    _min: MatchPlayerMinAggregateOutputType | null
+    _max: MatchPlayerMaxAggregateOutputType | null
+  }
+
+  type GetMatchPlayerGroupByPayload<T extends MatchPlayerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MatchPlayerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MatchPlayerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MatchPlayerGroupByOutputType[P]>
+            : GetScalarType<T[P], MatchPlayerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MatchPlayerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    matchId?: boolean
+    playerId?: boolean
+    joinedAt?: boolean
+    result?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matchPlayer"]>
+
+  export type MatchPlayerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    matchId?: boolean
+    playerId?: boolean
+    joinedAt?: boolean
+    result?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matchPlayer"]>
+
+  export type MatchPlayerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    matchId?: boolean
+    playerId?: boolean
+    joinedAt?: boolean
+    result?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matchPlayer"]>
+
+  export type MatchPlayerSelectScalar = {
+    id?: boolean
+    matchId?: boolean
+    playerId?: boolean
+    joinedAt?: boolean
+    result?: boolean
+  }
+
+  export type MatchPlayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "playerId" | "joinedAt" | "result", ExtArgs["result"]["matchPlayer"]>
+  export type MatchPlayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type MatchPlayerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type MatchPlayerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $MatchPlayerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MatchPlayer"
+    objects: {
+      match: Prisma.$MatchPayload<ExtArgs>
+      player: Prisma.$PlayerProfilePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      matchId: string
+      playerId: string
+      joinedAt: Date
+      result: string | null
+    }, ExtArgs["result"]["matchPlayer"]>
+    composites: {}
+  }
+
+  type MatchPlayerGetPayload<S extends boolean | null | undefined | MatchPlayerDefaultArgs> = $Result.GetResult<Prisma.$MatchPlayerPayload, S>
+
+  type MatchPlayerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MatchPlayerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MatchPlayerCountAggregateInputType | true
+    }
+
+  export interface MatchPlayerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MatchPlayer'], meta: { name: 'MatchPlayer' } }
+    /**
+     * Find zero or one MatchPlayer that matches the filter.
+     * @param {MatchPlayerFindUniqueArgs} args - Arguments to find a MatchPlayer
+     * @example
+     * // Get one MatchPlayer
+     * const matchPlayer = await prisma.matchPlayer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MatchPlayerFindUniqueArgs>(args: SelectSubset<T, MatchPlayerFindUniqueArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MatchPlayer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MatchPlayerFindUniqueOrThrowArgs} args - Arguments to find a MatchPlayer
+     * @example
+     * // Get one MatchPlayer
+     * const matchPlayer = await prisma.matchPlayer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MatchPlayerFindUniqueOrThrowArgs>(args: SelectSubset<T, MatchPlayerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MatchPlayer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerFindFirstArgs} args - Arguments to find a MatchPlayer
+     * @example
+     * // Get one MatchPlayer
+     * const matchPlayer = await prisma.matchPlayer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MatchPlayerFindFirstArgs>(args?: SelectSubset<T, MatchPlayerFindFirstArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MatchPlayer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerFindFirstOrThrowArgs} args - Arguments to find a MatchPlayer
+     * @example
+     * // Get one MatchPlayer
+     * const matchPlayer = await prisma.matchPlayer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MatchPlayerFindFirstOrThrowArgs>(args?: SelectSubset<T, MatchPlayerFindFirstOrThrowArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MatchPlayers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MatchPlayers
+     * const matchPlayers = await prisma.matchPlayer.findMany()
+     * 
+     * // Get first 10 MatchPlayers
+     * const matchPlayers = await prisma.matchPlayer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const matchPlayerWithIdOnly = await prisma.matchPlayer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MatchPlayerFindManyArgs>(args?: SelectSubset<T, MatchPlayerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MatchPlayer.
+     * @param {MatchPlayerCreateArgs} args - Arguments to create a MatchPlayer.
+     * @example
+     * // Create one MatchPlayer
+     * const MatchPlayer = await prisma.matchPlayer.create({
+     *   data: {
+     *     // ... data to create a MatchPlayer
+     *   }
+     * })
+     * 
+     */
+    create<T extends MatchPlayerCreateArgs>(args: SelectSubset<T, MatchPlayerCreateArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MatchPlayers.
+     * @param {MatchPlayerCreateManyArgs} args - Arguments to create many MatchPlayers.
+     * @example
+     * // Create many MatchPlayers
+     * const matchPlayer = await prisma.matchPlayer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MatchPlayerCreateManyArgs>(args?: SelectSubset<T, MatchPlayerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MatchPlayers and returns the data saved in the database.
+     * @param {MatchPlayerCreateManyAndReturnArgs} args - Arguments to create many MatchPlayers.
+     * @example
+     * // Create many MatchPlayers
+     * const matchPlayer = await prisma.matchPlayer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MatchPlayers and only return the `id`
+     * const matchPlayerWithIdOnly = await prisma.matchPlayer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MatchPlayerCreateManyAndReturnArgs>(args?: SelectSubset<T, MatchPlayerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MatchPlayer.
+     * @param {MatchPlayerDeleteArgs} args - Arguments to delete one MatchPlayer.
+     * @example
+     * // Delete one MatchPlayer
+     * const MatchPlayer = await prisma.matchPlayer.delete({
+     *   where: {
+     *     // ... filter to delete one MatchPlayer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MatchPlayerDeleteArgs>(args: SelectSubset<T, MatchPlayerDeleteArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MatchPlayer.
+     * @param {MatchPlayerUpdateArgs} args - Arguments to update one MatchPlayer.
+     * @example
+     * // Update one MatchPlayer
+     * const matchPlayer = await prisma.matchPlayer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MatchPlayerUpdateArgs>(args: SelectSubset<T, MatchPlayerUpdateArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MatchPlayers.
+     * @param {MatchPlayerDeleteManyArgs} args - Arguments to filter MatchPlayers to delete.
+     * @example
+     * // Delete a few MatchPlayers
+     * const { count } = await prisma.matchPlayer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MatchPlayerDeleteManyArgs>(args?: SelectSubset<T, MatchPlayerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MatchPlayers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MatchPlayers
+     * const matchPlayer = await prisma.matchPlayer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MatchPlayerUpdateManyArgs>(args: SelectSubset<T, MatchPlayerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MatchPlayers and returns the data updated in the database.
+     * @param {MatchPlayerUpdateManyAndReturnArgs} args - Arguments to update many MatchPlayers.
+     * @example
+     * // Update many MatchPlayers
+     * const matchPlayer = await prisma.matchPlayer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MatchPlayers and only return the `id`
+     * const matchPlayerWithIdOnly = await prisma.matchPlayer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MatchPlayerUpdateManyAndReturnArgs>(args: SelectSubset<T, MatchPlayerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MatchPlayer.
+     * @param {MatchPlayerUpsertArgs} args - Arguments to update or create a MatchPlayer.
+     * @example
+     * // Update or create a MatchPlayer
+     * const matchPlayer = await prisma.matchPlayer.upsert({
+     *   create: {
+     *     // ... data to create a MatchPlayer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MatchPlayer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MatchPlayerUpsertArgs>(args: SelectSubset<T, MatchPlayerUpsertArgs<ExtArgs>>): Prisma__MatchPlayerClient<$Result.GetResult<Prisma.$MatchPlayerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MatchPlayers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerCountArgs} args - Arguments to filter MatchPlayers to count.
+     * @example
+     * // Count the number of MatchPlayers
+     * const count = await prisma.matchPlayer.count({
+     *   where: {
+     *     // ... the filter for the MatchPlayers we want to count
+     *   }
+     * })
+    **/
+    count<T extends MatchPlayerCountArgs>(
+      args?: Subset<T, MatchPlayerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MatchPlayerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MatchPlayer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MatchPlayerAggregateArgs>(args: Subset<T, MatchPlayerAggregateArgs>): Prisma.PrismaPromise<GetMatchPlayerAggregateType<T>>
+
+    /**
+     * Group by MatchPlayer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchPlayerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MatchPlayerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MatchPlayerGroupByArgs['orderBy'] }
+        : { orderBy?: MatchPlayerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MatchPlayerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMatchPlayerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MatchPlayer model
+   */
+  readonly fields: MatchPlayerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MatchPlayer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MatchPlayerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    match<T extends MatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MatchDefaultArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    player<T extends PlayerProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfileDefaultArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MatchPlayer model
+   */
+  interface MatchPlayerFieldRefs {
+    readonly id: FieldRef<"MatchPlayer", 'String'>
+    readonly matchId: FieldRef<"MatchPlayer", 'String'>
+    readonly playerId: FieldRef<"MatchPlayer", 'String'>
+    readonly joinedAt: FieldRef<"MatchPlayer", 'DateTime'>
+    readonly result: FieldRef<"MatchPlayer", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MatchPlayer findUnique
+   */
+  export type MatchPlayerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchPlayer to fetch.
+     */
+    where: MatchPlayerWhereUniqueInput
+  }
+
+  /**
+   * MatchPlayer findUniqueOrThrow
+   */
+  export type MatchPlayerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchPlayer to fetch.
+     */
+    where: MatchPlayerWhereUniqueInput
+  }
+
+  /**
+   * MatchPlayer findFirst
+   */
+  export type MatchPlayerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchPlayer to fetch.
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchPlayers to fetch.
+     */
+    orderBy?: MatchPlayerOrderByWithRelationInput | MatchPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MatchPlayers.
+     */
+    cursor?: MatchPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchPlayers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MatchPlayers.
+     */
+    distinct?: MatchPlayerScalarFieldEnum | MatchPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * MatchPlayer findFirstOrThrow
+   */
+  export type MatchPlayerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchPlayer to fetch.
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchPlayers to fetch.
+     */
+    orderBy?: MatchPlayerOrderByWithRelationInput | MatchPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MatchPlayers.
+     */
+    cursor?: MatchPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchPlayers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MatchPlayers.
+     */
+    distinct?: MatchPlayerScalarFieldEnum | MatchPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * MatchPlayer findMany
+   */
+  export type MatchPlayerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchPlayers to fetch.
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchPlayers to fetch.
+     */
+    orderBy?: MatchPlayerOrderByWithRelationInput | MatchPlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MatchPlayers.
+     */
+    cursor?: MatchPlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchPlayers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchPlayers.
+     */
+    skip?: number
+    distinct?: MatchPlayerScalarFieldEnum | MatchPlayerScalarFieldEnum[]
+  }
+
+  /**
+   * MatchPlayer create
+   */
+  export type MatchPlayerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MatchPlayer.
+     */
+    data: XOR<MatchPlayerCreateInput, MatchPlayerUncheckedCreateInput>
+  }
+
+  /**
+   * MatchPlayer createMany
+   */
+  export type MatchPlayerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MatchPlayers.
+     */
+    data: MatchPlayerCreateManyInput | MatchPlayerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MatchPlayer createManyAndReturn
+   */
+  export type MatchPlayerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * The data used to create many MatchPlayers.
+     */
+    data: MatchPlayerCreateManyInput | MatchPlayerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MatchPlayer update
+   */
+  export type MatchPlayerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MatchPlayer.
+     */
+    data: XOR<MatchPlayerUpdateInput, MatchPlayerUncheckedUpdateInput>
+    /**
+     * Choose, which MatchPlayer to update.
+     */
+    where: MatchPlayerWhereUniqueInput
+  }
+
+  /**
+   * MatchPlayer updateMany
+   */
+  export type MatchPlayerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MatchPlayers.
+     */
+    data: XOR<MatchPlayerUpdateManyMutationInput, MatchPlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which MatchPlayers to update
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * Limit how many MatchPlayers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MatchPlayer updateManyAndReturn
+   */
+  export type MatchPlayerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * The data used to update MatchPlayers.
+     */
+    data: XOR<MatchPlayerUpdateManyMutationInput, MatchPlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which MatchPlayers to update
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * Limit how many MatchPlayers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MatchPlayer upsert
+   */
+  export type MatchPlayerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MatchPlayer to update in case it exists.
+     */
+    where: MatchPlayerWhereUniqueInput
+    /**
+     * In case the MatchPlayer found by the `where` argument doesn't exist, create a new MatchPlayer with this data.
+     */
+    create: XOR<MatchPlayerCreateInput, MatchPlayerUncheckedCreateInput>
+    /**
+     * In case the MatchPlayer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MatchPlayerUpdateInput, MatchPlayerUncheckedUpdateInput>
+  }
+
+  /**
+   * MatchPlayer delete
+   */
+  export type MatchPlayerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+    /**
+     * Filter which MatchPlayer to delete.
+     */
+    where: MatchPlayerWhereUniqueInput
+  }
+
+  /**
+   * MatchPlayer deleteMany
+   */
+  export type MatchPlayerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MatchPlayers to delete
+     */
+    where?: MatchPlayerWhereInput
+    /**
+     * Limit how many MatchPlayers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MatchPlayer without action
+   */
+  export type MatchPlayerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchPlayer
+     */
+    select?: MatchPlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MatchPlayer
+     */
+    omit?: MatchPlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchPlayerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PlayerRating
+   */
+
+  export type AggregatePlayerRating = {
+    _count: PlayerRatingCountAggregateOutputType | null
+    _avg: PlayerRatingAvgAggregateOutputType | null
+    _sum: PlayerRatingSumAggregateOutputType | null
+    _min: PlayerRatingMinAggregateOutputType | null
+    _max: PlayerRatingMaxAggregateOutputType | null
+  }
+
+  export type PlayerRatingAvgAggregateOutputType = {
+    rating: number | null
+    gamesPlayed: number | null
+    wins: number | null
+    losses: number | null
+    draws: number | null
+  }
+
+  export type PlayerRatingSumAggregateOutputType = {
+    rating: number | null
+    gamesPlayed: number | null
+    wins: number | null
+    losses: number | null
+    draws: number | null
+  }
+
+  export type PlayerRatingMinAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    sportType: $Enums.SportType | null
+    rating: number | null
+    gamesPlayed: number | null
+    wins: number | null
+    losses: number | null
+    draws: number | null
+    lastMatchAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PlayerRatingMaxAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    sportType: $Enums.SportType | null
+    rating: number | null
+    gamesPlayed: number | null
+    wins: number | null
+    losses: number | null
+    draws: number | null
+    lastMatchAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PlayerRatingCountAggregateOutputType = {
+    id: number
+    playerId: number
+    sportType: number
+    rating: number
+    gamesPlayed: number
+    wins: number
+    losses: number
+    draws: number
+    lastMatchAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PlayerRatingAvgAggregateInputType = {
+    rating?: true
+    gamesPlayed?: true
+    wins?: true
+    losses?: true
+    draws?: true
+  }
+
+  export type PlayerRatingSumAggregateInputType = {
+    rating?: true
+    gamesPlayed?: true
+    wins?: true
+    losses?: true
+    draws?: true
+  }
+
+  export type PlayerRatingMinAggregateInputType = {
+    id?: true
+    playerId?: true
+    sportType?: true
+    rating?: true
+    gamesPlayed?: true
+    wins?: true
+    losses?: true
+    draws?: true
+    lastMatchAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PlayerRatingMaxAggregateInputType = {
+    id?: true
+    playerId?: true
+    sportType?: true
+    rating?: true
+    gamesPlayed?: true
+    wins?: true
+    losses?: true
+    draws?: true
+    lastMatchAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PlayerRatingCountAggregateInputType = {
+    id?: true
+    playerId?: true
+    sportType?: true
+    rating?: true
+    gamesPlayed?: true
+    wins?: true
+    losses?: true
+    draws?: true
+    lastMatchAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PlayerRatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerRating to aggregate.
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerRatings to fetch.
+     */
+    orderBy?: PlayerRatingOrderByWithRelationInput | PlayerRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PlayerRatings
+    **/
+    _count?: true | PlayerRatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlayerRatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlayerRatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerRatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerRatingMaxAggregateInputType
+  }
+
+  export type GetPlayerRatingAggregateType<T extends PlayerRatingAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayerRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayerRating[P]>
+      : GetScalarType<T[P], AggregatePlayerRating[P]>
+  }
+
+
+
+
+  export type PlayerRatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerRatingWhereInput
+    orderBy?: PlayerRatingOrderByWithAggregationInput | PlayerRatingOrderByWithAggregationInput[]
+    by: PlayerRatingScalarFieldEnum[] | PlayerRatingScalarFieldEnum
+    having?: PlayerRatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerRatingCountAggregateInputType | true
+    _avg?: PlayerRatingAvgAggregateInputType
+    _sum?: PlayerRatingSumAggregateInputType
+    _min?: PlayerRatingMinAggregateInputType
+    _max?: PlayerRatingMaxAggregateInputType
+  }
+
+  export type PlayerRatingGroupByOutputType = {
+    id: string
+    playerId: string
+    sportType: $Enums.SportType
+    rating: number
+    gamesPlayed: number
+    wins: number
+    losses: number
+    draws: number
+    lastMatchAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PlayerRatingCountAggregateOutputType | null
+    _avg: PlayerRatingAvgAggregateOutputType | null
+    _sum: PlayerRatingSumAggregateOutputType | null
+    _min: PlayerRatingMinAggregateOutputType | null
+    _max: PlayerRatingMaxAggregateOutputType | null
+  }
+
+  type GetPlayerRatingGroupByPayload<T extends PlayerRatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerRatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerRatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerRatingGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerRatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerRatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    sportType?: boolean
+    rating?: boolean
+    gamesPlayed?: boolean
+    wins?: boolean
+    losses?: boolean
+    draws?: boolean
+    lastMatchAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+    history?: boolean | PlayerRating$historyArgs<ExtArgs>
+    _count?: boolean | PlayerRatingCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerRating"]>
+
+  export type PlayerRatingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    sportType?: boolean
+    rating?: boolean
+    gamesPlayed?: boolean
+    wins?: boolean
+    losses?: boolean
+    draws?: boolean
+    lastMatchAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerRating"]>
+
+  export type PlayerRatingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    sportType?: boolean
+    rating?: boolean
+    gamesPlayed?: boolean
+    wins?: boolean
+    losses?: boolean
+    draws?: boolean
+    lastMatchAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerRating"]>
+
+  export type PlayerRatingSelectScalar = {
+    id?: boolean
+    playerId?: boolean
+    sportType?: boolean
+    rating?: boolean
+    gamesPlayed?: boolean
+    wins?: boolean
+    losses?: boolean
+    draws?: boolean
+    lastMatchAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PlayerRatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "sportType" | "rating" | "gamesPlayed" | "wins" | "losses" | "draws" | "lastMatchAt" | "createdAt" | "updatedAt", ExtArgs["result"]["playerRating"]>
+  export type PlayerRatingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+    history?: boolean | PlayerRating$historyArgs<ExtArgs>
+    _count?: boolean | PlayerRatingCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PlayerRatingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type PlayerRatingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $PlayerRatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PlayerRating"
+    objects: {
+      player: Prisma.$PlayerProfilePayload<ExtArgs>
+      history: Prisma.$RatingHistoryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      playerId: string
+      sportType: $Enums.SportType
+      rating: number
+      gamesPlayed: number
+      wins: number
+      losses: number
+      draws: number
+      lastMatchAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["playerRating"]>
+    composites: {}
+  }
+
+  type PlayerRatingGetPayload<S extends boolean | null | undefined | PlayerRatingDefaultArgs> = $Result.GetResult<Prisma.$PlayerRatingPayload, S>
+
+  type PlayerRatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerRatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerRatingCountAggregateInputType | true
+    }
+
+  export interface PlayerRatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PlayerRating'], meta: { name: 'PlayerRating' } }
+    /**
+     * Find zero or one PlayerRating that matches the filter.
+     * @param {PlayerRatingFindUniqueArgs} args - Arguments to find a PlayerRating
+     * @example
+     * // Get one PlayerRating
+     * const playerRating = await prisma.playerRating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerRatingFindUniqueArgs>(args: SelectSubset<T, PlayerRatingFindUniqueArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PlayerRating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerRatingFindUniqueOrThrowArgs} args - Arguments to find a PlayerRating
+     * @example
+     * // Get one PlayerRating
+     * const playerRating = await prisma.playerRating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerRatingFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerRatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerRating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingFindFirstArgs} args - Arguments to find a PlayerRating
+     * @example
+     * // Get one PlayerRating
+     * const playerRating = await prisma.playerRating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerRatingFindFirstArgs>(args?: SelectSubset<T, PlayerRatingFindFirstArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerRating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingFindFirstOrThrowArgs} args - Arguments to find a PlayerRating
+     * @example
+     * // Get one PlayerRating
+     * const playerRating = await prisma.playerRating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerRatingFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerRatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PlayerRatings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PlayerRatings
+     * const playerRatings = await prisma.playerRating.findMany()
+     * 
+     * // Get first 10 PlayerRatings
+     * const playerRatings = await prisma.playerRating.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const playerRatingWithIdOnly = await prisma.playerRating.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlayerRatingFindManyArgs>(args?: SelectSubset<T, PlayerRatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PlayerRating.
+     * @param {PlayerRatingCreateArgs} args - Arguments to create a PlayerRating.
+     * @example
+     * // Create one PlayerRating
+     * const PlayerRating = await prisma.playerRating.create({
+     *   data: {
+     *     // ... data to create a PlayerRating
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerRatingCreateArgs>(args: SelectSubset<T, PlayerRatingCreateArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PlayerRatings.
+     * @param {PlayerRatingCreateManyArgs} args - Arguments to create many PlayerRatings.
+     * @example
+     * // Create many PlayerRatings
+     * const playerRating = await prisma.playerRating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerRatingCreateManyArgs>(args?: SelectSubset<T, PlayerRatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PlayerRatings and returns the data saved in the database.
+     * @param {PlayerRatingCreateManyAndReturnArgs} args - Arguments to create many PlayerRatings.
+     * @example
+     * // Create many PlayerRatings
+     * const playerRating = await prisma.playerRating.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PlayerRatings and only return the `id`
+     * const playerRatingWithIdOnly = await prisma.playerRating.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerRatingCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerRatingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PlayerRating.
+     * @param {PlayerRatingDeleteArgs} args - Arguments to delete one PlayerRating.
+     * @example
+     * // Delete one PlayerRating
+     * const PlayerRating = await prisma.playerRating.delete({
+     *   where: {
+     *     // ... filter to delete one PlayerRating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerRatingDeleteArgs>(args: SelectSubset<T, PlayerRatingDeleteArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PlayerRating.
+     * @param {PlayerRatingUpdateArgs} args - Arguments to update one PlayerRating.
+     * @example
+     * // Update one PlayerRating
+     * const playerRating = await prisma.playerRating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerRatingUpdateArgs>(args: SelectSubset<T, PlayerRatingUpdateArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PlayerRatings.
+     * @param {PlayerRatingDeleteManyArgs} args - Arguments to filter PlayerRatings to delete.
+     * @example
+     * // Delete a few PlayerRatings
+     * const { count } = await prisma.playerRating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerRatingDeleteManyArgs>(args?: SelectSubset<T, PlayerRatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PlayerRatings
+     * const playerRating = await prisma.playerRating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerRatingUpdateManyArgs>(args: SelectSubset<T, PlayerRatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerRatings and returns the data updated in the database.
+     * @param {PlayerRatingUpdateManyAndReturnArgs} args - Arguments to update many PlayerRatings.
+     * @example
+     * // Update many PlayerRatings
+     * const playerRating = await prisma.playerRating.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PlayerRatings and only return the `id`
+     * const playerRatingWithIdOnly = await prisma.playerRating.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerRatingUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerRatingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PlayerRating.
+     * @param {PlayerRatingUpsertArgs} args - Arguments to update or create a PlayerRating.
+     * @example
+     * // Update or create a PlayerRating
+     * const playerRating = await prisma.playerRating.upsert({
+     *   create: {
+     *     // ... data to create a PlayerRating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PlayerRating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerRatingUpsertArgs>(args: SelectSubset<T, PlayerRatingUpsertArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PlayerRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingCountArgs} args - Arguments to filter PlayerRatings to count.
+     * @example
+     * // Count the number of PlayerRatings
+     * const count = await prisma.playerRating.count({
+     *   where: {
+     *     // ... the filter for the PlayerRatings we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerRatingCountArgs>(
+      args?: Subset<T, PlayerRatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerRatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PlayerRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerRatingAggregateArgs>(args: Subset<T, PlayerRatingAggregateArgs>): Prisma.PrismaPromise<GetPlayerRatingAggregateType<T>>
+
+    /**
+     * Group by PlayerRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerRatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerRatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerRatingGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerRatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerRatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PlayerRating model
+   */
+  readonly fields: PlayerRatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PlayerRating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerRatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    player<T extends PlayerProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfileDefaultArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    history<T extends PlayerRating$historyArgs<ExtArgs> = {}>(args?: Subset<T, PlayerRating$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PlayerRating model
+   */
+  interface PlayerRatingFieldRefs {
+    readonly id: FieldRef<"PlayerRating", 'String'>
+    readonly playerId: FieldRef<"PlayerRating", 'String'>
+    readonly sportType: FieldRef<"PlayerRating", 'SportType'>
+    readonly rating: FieldRef<"PlayerRating", 'Float'>
+    readonly gamesPlayed: FieldRef<"PlayerRating", 'Int'>
+    readonly wins: FieldRef<"PlayerRating", 'Int'>
+    readonly losses: FieldRef<"PlayerRating", 'Int'>
+    readonly draws: FieldRef<"PlayerRating", 'Int'>
+    readonly lastMatchAt: FieldRef<"PlayerRating", 'DateTime'>
+    readonly createdAt: FieldRef<"PlayerRating", 'DateTime'>
+    readonly updatedAt: FieldRef<"PlayerRating", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PlayerRating findUnique
+   */
+  export type PlayerRatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerRating to fetch.
+     */
+    where: PlayerRatingWhereUniqueInput
+  }
+
+  /**
+   * PlayerRating findUniqueOrThrow
+   */
+  export type PlayerRatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerRating to fetch.
+     */
+    where: PlayerRatingWhereUniqueInput
+  }
+
+  /**
+   * PlayerRating findFirst
+   */
+  export type PlayerRatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerRating to fetch.
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerRatings to fetch.
+     */
+    orderBy?: PlayerRatingOrderByWithRelationInput | PlayerRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerRatings.
+     */
+    cursor?: PlayerRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerRatings.
+     */
+    distinct?: PlayerRatingScalarFieldEnum | PlayerRatingScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerRating findFirstOrThrow
+   */
+  export type PlayerRatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerRating to fetch.
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerRatings to fetch.
+     */
+    orderBy?: PlayerRatingOrderByWithRelationInput | PlayerRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerRatings.
+     */
+    cursor?: PlayerRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerRatings.
+     */
+    distinct?: PlayerRatingScalarFieldEnum | PlayerRatingScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerRating findMany
+   */
+  export type PlayerRatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerRatings to fetch.
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerRatings to fetch.
+     */
+    orderBy?: PlayerRatingOrderByWithRelationInput | PlayerRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PlayerRatings.
+     */
+    cursor?: PlayerRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerRatings.
+     */
+    skip?: number
+    distinct?: PlayerRatingScalarFieldEnum | PlayerRatingScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerRating create
+   */
+  export type PlayerRatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PlayerRating.
+     */
+    data: XOR<PlayerRatingCreateInput, PlayerRatingUncheckedCreateInput>
+  }
+
+  /**
+   * PlayerRating createMany
+   */
+  export type PlayerRatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PlayerRatings.
+     */
+    data: PlayerRatingCreateManyInput | PlayerRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerRating createManyAndReturn
+   */
+  export type PlayerRatingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * The data used to create many PlayerRatings.
+     */
+    data: PlayerRatingCreateManyInput | PlayerRatingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PlayerRating update
+   */
+  export type PlayerRatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PlayerRating.
+     */
+    data: XOR<PlayerRatingUpdateInput, PlayerRatingUncheckedUpdateInput>
+    /**
+     * Choose, which PlayerRating to update.
+     */
+    where: PlayerRatingWhereUniqueInput
+  }
+
+  /**
+   * PlayerRating updateMany
+   */
+  export type PlayerRatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PlayerRatings.
+     */
+    data: XOR<PlayerRatingUpdateManyMutationInput, PlayerRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerRatings to update
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * Limit how many PlayerRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerRating updateManyAndReturn
+   */
+  export type PlayerRatingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * The data used to update PlayerRatings.
+     */
+    data: XOR<PlayerRatingUpdateManyMutationInput, PlayerRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerRatings to update
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * Limit how many PlayerRatings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PlayerRating upsert
+   */
+  export type PlayerRatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PlayerRating to update in case it exists.
+     */
+    where: PlayerRatingWhereUniqueInput
+    /**
+     * In case the PlayerRating found by the `where` argument doesn't exist, create a new PlayerRating with this data.
+     */
+    create: XOR<PlayerRatingCreateInput, PlayerRatingUncheckedCreateInput>
+    /**
+     * In case the PlayerRating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerRatingUpdateInput, PlayerRatingUncheckedUpdateInput>
+  }
+
+  /**
+   * PlayerRating delete
+   */
+  export type PlayerRatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+    /**
+     * Filter which PlayerRating to delete.
+     */
+    where: PlayerRatingWhereUniqueInput
+  }
+
+  /**
+   * PlayerRating deleteMany
+   */
+  export type PlayerRatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerRatings to delete
+     */
+    where?: PlayerRatingWhereInput
+    /**
+     * Limit how many PlayerRatings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerRating.history
+   */
+  export type PlayerRating$historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    where?: RatingHistoryWhereInput
+    orderBy?: RatingHistoryOrderByWithRelationInput | RatingHistoryOrderByWithRelationInput[]
+    cursor?: RatingHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RatingHistoryScalarFieldEnum | RatingHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerRating without action
+   */
+  export type PlayerRatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerRating
+     */
+    select?: PlayerRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerRating
+     */
+    omit?: PlayerRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerRatingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RatingHistory
+   */
+
+  export type AggregateRatingHistory = {
+    _count: RatingHistoryCountAggregateOutputType | null
+    _avg: RatingHistoryAvgAggregateOutputType | null
+    _sum: RatingHistorySumAggregateOutputType | null
+    _min: RatingHistoryMinAggregateOutputType | null
+    _max: RatingHistoryMaxAggregateOutputType | null
+  }
+
+  export type RatingHistoryAvgAggregateOutputType = {
+    oldRating: number | null
+    newRating: number | null
+    ratingChange: number | null
+    opponentRating: number | null
+  }
+
+  export type RatingHistorySumAggregateOutputType = {
+    oldRating: number | null
+    newRating: number | null
+    ratingChange: number | null
+    opponentRating: number | null
+  }
+
+  export type RatingHistoryMinAggregateOutputType = {
+    id: string | null
+    ratingId: string | null
+    oldRating: number | null
+    newRating: number | null
+    ratingChange: number | null
+    opponentRating: number | null
+    matchResult: string | null
+    createdAt: Date | null
+  }
+
+  export type RatingHistoryMaxAggregateOutputType = {
+    id: string | null
+    ratingId: string | null
+    oldRating: number | null
+    newRating: number | null
+    ratingChange: number | null
+    opponentRating: number | null
+    matchResult: string | null
+    createdAt: Date | null
+  }
+
+  export type RatingHistoryCountAggregateOutputType = {
+    id: number
+    ratingId: number
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating: number
+    matchResult: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RatingHistoryAvgAggregateInputType = {
+    oldRating?: true
+    newRating?: true
+    ratingChange?: true
+    opponentRating?: true
+  }
+
+  export type RatingHistorySumAggregateInputType = {
+    oldRating?: true
+    newRating?: true
+    ratingChange?: true
+    opponentRating?: true
+  }
+
+  export type RatingHistoryMinAggregateInputType = {
+    id?: true
+    ratingId?: true
+    oldRating?: true
+    newRating?: true
+    ratingChange?: true
+    opponentRating?: true
+    matchResult?: true
+    createdAt?: true
+  }
+
+  export type RatingHistoryMaxAggregateInputType = {
+    id?: true
+    ratingId?: true
+    oldRating?: true
+    newRating?: true
+    ratingChange?: true
+    opponentRating?: true
+    matchResult?: true
+    createdAt?: true
+  }
+
+  export type RatingHistoryCountAggregateInputType = {
+    id?: true
+    ratingId?: true
+    oldRating?: true
+    newRating?: true
+    ratingChange?: true
+    opponentRating?: true
+    matchResult?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RatingHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RatingHistory to aggregate.
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RatingHistories to fetch.
+     */
+    orderBy?: RatingHistoryOrderByWithRelationInput | RatingHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RatingHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RatingHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RatingHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RatingHistories
+    **/
+    _count?: true | RatingHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RatingHistoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RatingHistorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RatingHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RatingHistoryMaxAggregateInputType
+  }
+
+  export type GetRatingHistoryAggregateType<T extends RatingHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateRatingHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRatingHistory[P]>
+      : GetScalarType<T[P], AggregateRatingHistory[P]>
+  }
+
+
+
+
+  export type RatingHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RatingHistoryWhereInput
+    orderBy?: RatingHistoryOrderByWithAggregationInput | RatingHistoryOrderByWithAggregationInput[]
+    by: RatingHistoryScalarFieldEnum[] | RatingHistoryScalarFieldEnum
+    having?: RatingHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RatingHistoryCountAggregateInputType | true
+    _avg?: RatingHistoryAvgAggregateInputType
+    _sum?: RatingHistorySumAggregateInputType
+    _min?: RatingHistoryMinAggregateInputType
+    _max?: RatingHistoryMaxAggregateInputType
+  }
+
+  export type RatingHistoryGroupByOutputType = {
+    id: string
+    ratingId: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating: number | null
+    matchResult: string
+    createdAt: Date
+    _count: RatingHistoryCountAggregateOutputType | null
+    _avg: RatingHistoryAvgAggregateOutputType | null
+    _sum: RatingHistorySumAggregateOutputType | null
+    _min: RatingHistoryMinAggregateOutputType | null
+    _max: RatingHistoryMaxAggregateOutputType | null
+  }
+
+  type GetRatingHistoryGroupByPayload<T extends RatingHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RatingHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RatingHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RatingHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], RatingHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RatingHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ratingId?: boolean
+    oldRating?: boolean
+    newRating?: boolean
+    ratingChange?: boolean
+    opponentRating?: boolean
+    matchResult?: boolean
+    createdAt?: boolean
+    rating?: boolean | PlayerRatingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ratingHistory"]>
+
+  export type RatingHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ratingId?: boolean
+    oldRating?: boolean
+    newRating?: boolean
+    ratingChange?: boolean
+    opponentRating?: boolean
+    matchResult?: boolean
+    createdAt?: boolean
+    rating?: boolean | PlayerRatingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ratingHistory"]>
+
+  export type RatingHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ratingId?: boolean
+    oldRating?: boolean
+    newRating?: boolean
+    ratingChange?: boolean
+    opponentRating?: boolean
+    matchResult?: boolean
+    createdAt?: boolean
+    rating?: boolean | PlayerRatingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ratingHistory"]>
+
+  export type RatingHistorySelectScalar = {
+    id?: boolean
+    ratingId?: boolean
+    oldRating?: boolean
+    newRating?: boolean
+    ratingChange?: boolean
+    opponentRating?: boolean
+    matchResult?: boolean
+    createdAt?: boolean
+  }
+
+  export type RatingHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ratingId" | "oldRating" | "newRating" | "ratingChange" | "opponentRating" | "matchResult" | "createdAt", ExtArgs["result"]["ratingHistory"]>
+  export type RatingHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rating?: boolean | PlayerRatingDefaultArgs<ExtArgs>
+  }
+  export type RatingHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rating?: boolean | PlayerRatingDefaultArgs<ExtArgs>
+  }
+  export type RatingHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rating?: boolean | PlayerRatingDefaultArgs<ExtArgs>
+  }
+
+  export type $RatingHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RatingHistory"
+    objects: {
+      rating: Prisma.$PlayerRatingPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      ratingId: string
+      oldRating: number
+      newRating: number
+      ratingChange: number
+      opponentRating: number | null
+      matchResult: string
+      createdAt: Date
+    }, ExtArgs["result"]["ratingHistory"]>
+    composites: {}
+  }
+
+  type RatingHistoryGetPayload<S extends boolean | null | undefined | RatingHistoryDefaultArgs> = $Result.GetResult<Prisma.$RatingHistoryPayload, S>
+
+  type RatingHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RatingHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RatingHistoryCountAggregateInputType | true
+    }
+
+  export interface RatingHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RatingHistory'], meta: { name: 'RatingHistory' } }
+    /**
+     * Find zero or one RatingHistory that matches the filter.
+     * @param {RatingHistoryFindUniqueArgs} args - Arguments to find a RatingHistory
+     * @example
+     * // Get one RatingHistory
+     * const ratingHistory = await prisma.ratingHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RatingHistoryFindUniqueArgs>(args: SelectSubset<T, RatingHistoryFindUniqueArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RatingHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RatingHistoryFindUniqueOrThrowArgs} args - Arguments to find a RatingHistory
+     * @example
+     * // Get one RatingHistory
+     * const ratingHistory = await prisma.ratingHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RatingHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, RatingHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RatingHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryFindFirstArgs} args - Arguments to find a RatingHistory
+     * @example
+     * // Get one RatingHistory
+     * const ratingHistory = await prisma.ratingHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RatingHistoryFindFirstArgs>(args?: SelectSubset<T, RatingHistoryFindFirstArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RatingHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryFindFirstOrThrowArgs} args - Arguments to find a RatingHistory
+     * @example
+     * // Get one RatingHistory
+     * const ratingHistory = await prisma.ratingHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RatingHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, RatingHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RatingHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RatingHistories
+     * const ratingHistories = await prisma.ratingHistory.findMany()
+     * 
+     * // Get first 10 RatingHistories
+     * const ratingHistories = await prisma.ratingHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ratingHistoryWithIdOnly = await prisma.ratingHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RatingHistoryFindManyArgs>(args?: SelectSubset<T, RatingHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RatingHistory.
+     * @param {RatingHistoryCreateArgs} args - Arguments to create a RatingHistory.
+     * @example
+     * // Create one RatingHistory
+     * const RatingHistory = await prisma.ratingHistory.create({
+     *   data: {
+     *     // ... data to create a RatingHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends RatingHistoryCreateArgs>(args: SelectSubset<T, RatingHistoryCreateArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RatingHistories.
+     * @param {RatingHistoryCreateManyArgs} args - Arguments to create many RatingHistories.
+     * @example
+     * // Create many RatingHistories
+     * const ratingHistory = await prisma.ratingHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RatingHistoryCreateManyArgs>(args?: SelectSubset<T, RatingHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RatingHistories and returns the data saved in the database.
+     * @param {RatingHistoryCreateManyAndReturnArgs} args - Arguments to create many RatingHistories.
+     * @example
+     * // Create many RatingHistories
+     * const ratingHistory = await prisma.ratingHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RatingHistories and only return the `id`
+     * const ratingHistoryWithIdOnly = await prisma.ratingHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RatingHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, RatingHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RatingHistory.
+     * @param {RatingHistoryDeleteArgs} args - Arguments to delete one RatingHistory.
+     * @example
+     * // Delete one RatingHistory
+     * const RatingHistory = await prisma.ratingHistory.delete({
+     *   where: {
+     *     // ... filter to delete one RatingHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RatingHistoryDeleteArgs>(args: SelectSubset<T, RatingHistoryDeleteArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RatingHistory.
+     * @param {RatingHistoryUpdateArgs} args - Arguments to update one RatingHistory.
+     * @example
+     * // Update one RatingHistory
+     * const ratingHistory = await prisma.ratingHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RatingHistoryUpdateArgs>(args: SelectSubset<T, RatingHistoryUpdateArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RatingHistories.
+     * @param {RatingHistoryDeleteManyArgs} args - Arguments to filter RatingHistories to delete.
+     * @example
+     * // Delete a few RatingHistories
+     * const { count } = await prisma.ratingHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RatingHistoryDeleteManyArgs>(args?: SelectSubset<T, RatingHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RatingHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RatingHistories
+     * const ratingHistory = await prisma.ratingHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RatingHistoryUpdateManyArgs>(args: SelectSubset<T, RatingHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RatingHistories and returns the data updated in the database.
+     * @param {RatingHistoryUpdateManyAndReturnArgs} args - Arguments to update many RatingHistories.
+     * @example
+     * // Update many RatingHistories
+     * const ratingHistory = await prisma.ratingHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RatingHistories and only return the `id`
+     * const ratingHistoryWithIdOnly = await prisma.ratingHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RatingHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, RatingHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RatingHistory.
+     * @param {RatingHistoryUpsertArgs} args - Arguments to update or create a RatingHistory.
+     * @example
+     * // Update or create a RatingHistory
+     * const ratingHistory = await prisma.ratingHistory.upsert({
+     *   create: {
+     *     // ... data to create a RatingHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RatingHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RatingHistoryUpsertArgs>(args: SelectSubset<T, RatingHistoryUpsertArgs<ExtArgs>>): Prisma__RatingHistoryClient<$Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RatingHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryCountArgs} args - Arguments to filter RatingHistories to count.
+     * @example
+     * // Count the number of RatingHistories
+     * const count = await prisma.ratingHistory.count({
+     *   where: {
+     *     // ... the filter for the RatingHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends RatingHistoryCountArgs>(
+      args?: Subset<T, RatingHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RatingHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RatingHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RatingHistoryAggregateArgs>(args: Subset<T, RatingHistoryAggregateArgs>): Prisma.PrismaPromise<GetRatingHistoryAggregateType<T>>
+
+    /**
+     * Group by RatingHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RatingHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RatingHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: RatingHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RatingHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRatingHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RatingHistory model
+   */
+  readonly fields: RatingHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RatingHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RatingHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    rating<T extends PlayerRatingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerRatingDefaultArgs<ExtArgs>>): Prisma__PlayerRatingClient<$Result.GetResult<Prisma.$PlayerRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RatingHistory model
+   */
+  interface RatingHistoryFieldRefs {
+    readonly id: FieldRef<"RatingHistory", 'String'>
+    readonly ratingId: FieldRef<"RatingHistory", 'String'>
+    readonly oldRating: FieldRef<"RatingHistory", 'Float'>
+    readonly newRating: FieldRef<"RatingHistory", 'Float'>
+    readonly ratingChange: FieldRef<"RatingHistory", 'Float'>
+    readonly opponentRating: FieldRef<"RatingHistory", 'Float'>
+    readonly matchResult: FieldRef<"RatingHistory", 'String'>
+    readonly createdAt: FieldRef<"RatingHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RatingHistory findUnique
+   */
+  export type RatingHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which RatingHistory to fetch.
+     */
+    where: RatingHistoryWhereUniqueInput
+  }
+
+  /**
+   * RatingHistory findUniqueOrThrow
+   */
+  export type RatingHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which RatingHistory to fetch.
+     */
+    where: RatingHistoryWhereUniqueInput
+  }
+
+  /**
+   * RatingHistory findFirst
+   */
+  export type RatingHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which RatingHistory to fetch.
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RatingHistories to fetch.
+     */
+    orderBy?: RatingHistoryOrderByWithRelationInput | RatingHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RatingHistories.
+     */
+    cursor?: RatingHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RatingHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RatingHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RatingHistories.
+     */
+    distinct?: RatingHistoryScalarFieldEnum | RatingHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * RatingHistory findFirstOrThrow
+   */
+  export type RatingHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which RatingHistory to fetch.
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RatingHistories to fetch.
+     */
+    orderBy?: RatingHistoryOrderByWithRelationInput | RatingHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RatingHistories.
+     */
+    cursor?: RatingHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RatingHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RatingHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RatingHistories.
+     */
+    distinct?: RatingHistoryScalarFieldEnum | RatingHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * RatingHistory findMany
+   */
+  export type RatingHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which RatingHistories to fetch.
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RatingHistories to fetch.
+     */
+    orderBy?: RatingHistoryOrderByWithRelationInput | RatingHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RatingHistories.
+     */
+    cursor?: RatingHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RatingHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RatingHistories.
+     */
+    skip?: number
+    distinct?: RatingHistoryScalarFieldEnum | RatingHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * RatingHistory create
+   */
+  export type RatingHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RatingHistory.
+     */
+    data: XOR<RatingHistoryCreateInput, RatingHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * RatingHistory createMany
+   */
+  export type RatingHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RatingHistories.
+     */
+    data: RatingHistoryCreateManyInput | RatingHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RatingHistory createManyAndReturn
+   */
+  export type RatingHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many RatingHistories.
+     */
+    data: RatingHistoryCreateManyInput | RatingHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RatingHistory update
+   */
+  export type RatingHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RatingHistory.
+     */
+    data: XOR<RatingHistoryUpdateInput, RatingHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which RatingHistory to update.
+     */
+    where: RatingHistoryWhereUniqueInput
+  }
+
+  /**
+   * RatingHistory updateMany
+   */
+  export type RatingHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RatingHistories.
+     */
+    data: XOR<RatingHistoryUpdateManyMutationInput, RatingHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which RatingHistories to update
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * Limit how many RatingHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RatingHistory updateManyAndReturn
+   */
+  export type RatingHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update RatingHistories.
+     */
+    data: XOR<RatingHistoryUpdateManyMutationInput, RatingHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which RatingHistories to update
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * Limit how many RatingHistories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RatingHistory upsert
+   */
+  export type RatingHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RatingHistory to update in case it exists.
+     */
+    where: RatingHistoryWhereUniqueInput
+    /**
+     * In case the RatingHistory found by the `where` argument doesn't exist, create a new RatingHistory with this data.
+     */
+    create: XOR<RatingHistoryCreateInput, RatingHistoryUncheckedCreateInput>
+    /**
+     * In case the RatingHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RatingHistoryUpdateInput, RatingHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * RatingHistory delete
+   */
+  export type RatingHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which RatingHistory to delete.
+     */
+    where: RatingHistoryWhereUniqueInput
+  }
+
+  /**
+   * RatingHistory deleteMany
+   */
+  export type RatingHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RatingHistories to delete
+     */
+    where?: RatingHistoryWhereInput
+    /**
+     * Limit how many RatingHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RatingHistory without action
+   */
+  export type RatingHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingHistory
+     */
+    select?: RatingHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingHistory
+     */
+    omit?: RatingHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WaitlistEntry
+   */
+
+  export type AggregateWaitlistEntry = {
+    _count: WaitlistEntryCountAggregateOutputType | null
+    _avg: WaitlistEntryAvgAggregateOutputType | null
+    _sum: WaitlistEntrySumAggregateOutputType | null
+    _min: WaitlistEntryMinAggregateOutputType | null
+    _max: WaitlistEntryMaxAggregateOutputType | null
+  }
+
+  export type WaitlistEntryAvgAggregateOutputType = {
+    priority: number | null
+  }
+
+  export type WaitlistEntrySumAggregateOutputType = {
+    priority: number | null
+  }
+
+  export type WaitlistEntryMinAggregateOutputType = {
+    id: string | null
+    timeSlotId: string | null
+    playerId: string | null
+    priority: number | null
+    status: $Enums.WaitlistStatus | null
+    notifiedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WaitlistEntryMaxAggregateOutputType = {
+    id: string | null
+    timeSlotId: string | null
+    playerId: string | null
+    priority: number | null
+    status: $Enums.WaitlistStatus | null
+    notifiedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WaitlistEntryCountAggregateOutputType = {
+    id: number
+    timeSlotId: number
+    playerId: number
+    priority: number
+    status: number
+    notifiedAt: number
+    expiresAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WaitlistEntryAvgAggregateInputType = {
+    priority?: true
+  }
+
+  export type WaitlistEntrySumAggregateInputType = {
+    priority?: true
+  }
+
+  export type WaitlistEntryMinAggregateInputType = {
+    id?: true
+    timeSlotId?: true
+    playerId?: true
+    priority?: true
+    status?: true
+    notifiedAt?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WaitlistEntryMaxAggregateInputType = {
+    id?: true
+    timeSlotId?: true
+    playerId?: true
+    priority?: true
+    status?: true
+    notifiedAt?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WaitlistEntryCountAggregateInputType = {
+    id?: true
+    timeSlotId?: true
+    playerId?: true
+    priority?: true
+    status?: true
+    notifiedAt?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WaitlistEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WaitlistEntry to aggregate.
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WaitlistEntries to fetch.
+     */
+    orderBy?: WaitlistEntryOrderByWithRelationInput | WaitlistEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WaitlistEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WaitlistEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WaitlistEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WaitlistEntries
+    **/
+    _count?: true | WaitlistEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WaitlistEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WaitlistEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WaitlistEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WaitlistEntryMaxAggregateInputType
+  }
+
+  export type GetWaitlistEntryAggregateType<T extends WaitlistEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateWaitlistEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWaitlistEntry[P]>
+      : GetScalarType<T[P], AggregateWaitlistEntry[P]>
+  }
+
+
+
+
+  export type WaitlistEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WaitlistEntryWhereInput
+    orderBy?: WaitlistEntryOrderByWithAggregationInput | WaitlistEntryOrderByWithAggregationInput[]
+    by: WaitlistEntryScalarFieldEnum[] | WaitlistEntryScalarFieldEnum
+    having?: WaitlistEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WaitlistEntryCountAggregateInputType | true
+    _avg?: WaitlistEntryAvgAggregateInputType
+    _sum?: WaitlistEntrySumAggregateInputType
+    _min?: WaitlistEntryMinAggregateInputType
+    _max?: WaitlistEntryMaxAggregateInputType
+  }
+
+  export type WaitlistEntryGroupByOutputType = {
+    id: string
+    timeSlotId: string
+    playerId: string
+    priority: number
+    status: $Enums.WaitlistStatus
+    notifiedAt: Date | null
+    expiresAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: WaitlistEntryCountAggregateOutputType | null
+    _avg: WaitlistEntryAvgAggregateOutputType | null
+    _sum: WaitlistEntrySumAggregateOutputType | null
+    _min: WaitlistEntryMinAggregateOutputType | null
+    _max: WaitlistEntryMaxAggregateOutputType | null
+  }
+
+  type GetWaitlistEntryGroupByPayload<T extends WaitlistEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WaitlistEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WaitlistEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WaitlistEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], WaitlistEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WaitlistEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timeSlotId?: boolean
+    playerId?: boolean
+    priority?: boolean
+    status?: boolean
+    notifiedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["waitlistEntry"]>
+
+  export type WaitlistEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timeSlotId?: boolean
+    playerId?: boolean
+    priority?: boolean
+    status?: boolean
+    notifiedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["waitlistEntry"]>
+
+  export type WaitlistEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timeSlotId?: boolean
+    playerId?: boolean
+    priority?: boolean
+    status?: boolean
+    notifiedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["waitlistEntry"]>
+
+  export type WaitlistEntrySelectScalar = {
+    id?: boolean
+    timeSlotId?: boolean
+    playerId?: boolean
+    priority?: boolean
+    status?: boolean
+    notifiedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WaitlistEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timeSlotId" | "playerId" | "priority" | "status" | "notifiedAt" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["waitlistEntry"]>
+  export type WaitlistEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type WaitlistEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type WaitlistEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timeSlot?: boolean | TimeSlotDefaultArgs<ExtArgs>
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $WaitlistEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WaitlistEntry"
+    objects: {
+      timeSlot: Prisma.$TimeSlotPayload<ExtArgs>
+      player: Prisma.$PlayerProfilePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timeSlotId: string
+      playerId: string
+      priority: number
+      status: $Enums.WaitlistStatus
+      notifiedAt: Date | null
+      expiresAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["waitlistEntry"]>
+    composites: {}
+  }
+
+  type WaitlistEntryGetPayload<S extends boolean | null | undefined | WaitlistEntryDefaultArgs> = $Result.GetResult<Prisma.$WaitlistEntryPayload, S>
+
+  type WaitlistEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WaitlistEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WaitlistEntryCountAggregateInputType | true
+    }
+
+  export interface WaitlistEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WaitlistEntry'], meta: { name: 'WaitlistEntry' } }
+    /**
+     * Find zero or one WaitlistEntry that matches the filter.
+     * @param {WaitlistEntryFindUniqueArgs} args - Arguments to find a WaitlistEntry
+     * @example
+     * // Get one WaitlistEntry
+     * const waitlistEntry = await prisma.waitlistEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WaitlistEntryFindUniqueArgs>(args: SelectSubset<T, WaitlistEntryFindUniqueArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WaitlistEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WaitlistEntryFindUniqueOrThrowArgs} args - Arguments to find a WaitlistEntry
+     * @example
+     * // Get one WaitlistEntry
+     * const waitlistEntry = await prisma.waitlistEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WaitlistEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, WaitlistEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WaitlistEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryFindFirstArgs} args - Arguments to find a WaitlistEntry
+     * @example
+     * // Get one WaitlistEntry
+     * const waitlistEntry = await prisma.waitlistEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WaitlistEntryFindFirstArgs>(args?: SelectSubset<T, WaitlistEntryFindFirstArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WaitlistEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryFindFirstOrThrowArgs} args - Arguments to find a WaitlistEntry
+     * @example
+     * // Get one WaitlistEntry
+     * const waitlistEntry = await prisma.waitlistEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WaitlistEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, WaitlistEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WaitlistEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WaitlistEntries
+     * const waitlistEntries = await prisma.waitlistEntry.findMany()
+     * 
+     * // Get first 10 WaitlistEntries
+     * const waitlistEntries = await prisma.waitlistEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const waitlistEntryWithIdOnly = await prisma.waitlistEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WaitlistEntryFindManyArgs>(args?: SelectSubset<T, WaitlistEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WaitlistEntry.
+     * @param {WaitlistEntryCreateArgs} args - Arguments to create a WaitlistEntry.
+     * @example
+     * // Create one WaitlistEntry
+     * const WaitlistEntry = await prisma.waitlistEntry.create({
+     *   data: {
+     *     // ... data to create a WaitlistEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends WaitlistEntryCreateArgs>(args: SelectSubset<T, WaitlistEntryCreateArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WaitlistEntries.
+     * @param {WaitlistEntryCreateManyArgs} args - Arguments to create many WaitlistEntries.
+     * @example
+     * // Create many WaitlistEntries
+     * const waitlistEntry = await prisma.waitlistEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WaitlistEntryCreateManyArgs>(args?: SelectSubset<T, WaitlistEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WaitlistEntries and returns the data saved in the database.
+     * @param {WaitlistEntryCreateManyAndReturnArgs} args - Arguments to create many WaitlistEntries.
+     * @example
+     * // Create many WaitlistEntries
+     * const waitlistEntry = await prisma.waitlistEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WaitlistEntries and only return the `id`
+     * const waitlistEntryWithIdOnly = await prisma.waitlistEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WaitlistEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, WaitlistEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WaitlistEntry.
+     * @param {WaitlistEntryDeleteArgs} args - Arguments to delete one WaitlistEntry.
+     * @example
+     * // Delete one WaitlistEntry
+     * const WaitlistEntry = await prisma.waitlistEntry.delete({
+     *   where: {
+     *     // ... filter to delete one WaitlistEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WaitlistEntryDeleteArgs>(args: SelectSubset<T, WaitlistEntryDeleteArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WaitlistEntry.
+     * @param {WaitlistEntryUpdateArgs} args - Arguments to update one WaitlistEntry.
+     * @example
+     * // Update one WaitlistEntry
+     * const waitlistEntry = await prisma.waitlistEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WaitlistEntryUpdateArgs>(args: SelectSubset<T, WaitlistEntryUpdateArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WaitlistEntries.
+     * @param {WaitlistEntryDeleteManyArgs} args - Arguments to filter WaitlistEntries to delete.
+     * @example
+     * // Delete a few WaitlistEntries
+     * const { count } = await prisma.waitlistEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WaitlistEntryDeleteManyArgs>(args?: SelectSubset<T, WaitlistEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WaitlistEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WaitlistEntries
+     * const waitlistEntry = await prisma.waitlistEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WaitlistEntryUpdateManyArgs>(args: SelectSubset<T, WaitlistEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WaitlistEntries and returns the data updated in the database.
+     * @param {WaitlistEntryUpdateManyAndReturnArgs} args - Arguments to update many WaitlistEntries.
+     * @example
+     * // Update many WaitlistEntries
+     * const waitlistEntry = await prisma.waitlistEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WaitlistEntries and only return the `id`
+     * const waitlistEntryWithIdOnly = await prisma.waitlistEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WaitlistEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, WaitlistEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WaitlistEntry.
+     * @param {WaitlistEntryUpsertArgs} args - Arguments to update or create a WaitlistEntry.
+     * @example
+     * // Update or create a WaitlistEntry
+     * const waitlistEntry = await prisma.waitlistEntry.upsert({
+     *   create: {
+     *     // ... data to create a WaitlistEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WaitlistEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WaitlistEntryUpsertArgs>(args: SelectSubset<T, WaitlistEntryUpsertArgs<ExtArgs>>): Prisma__WaitlistEntryClient<$Result.GetResult<Prisma.$WaitlistEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WaitlistEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryCountArgs} args - Arguments to filter WaitlistEntries to count.
+     * @example
+     * // Count the number of WaitlistEntries
+     * const count = await prisma.waitlistEntry.count({
+     *   where: {
+     *     // ... the filter for the WaitlistEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends WaitlistEntryCountArgs>(
+      args?: Subset<T, WaitlistEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WaitlistEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WaitlistEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WaitlistEntryAggregateArgs>(args: Subset<T, WaitlistEntryAggregateArgs>): Prisma.PrismaPromise<GetWaitlistEntryAggregateType<T>>
+
+    /**
+     * Group by WaitlistEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WaitlistEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WaitlistEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WaitlistEntryGroupByArgs['orderBy'] }
+        : { orderBy?: WaitlistEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WaitlistEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWaitlistEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WaitlistEntry model
+   */
+  readonly fields: WaitlistEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WaitlistEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WaitlistEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    timeSlot<T extends TimeSlotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TimeSlotDefaultArgs<ExtArgs>>): Prisma__TimeSlotClient<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    player<T extends PlayerProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfileDefaultArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WaitlistEntry model
+   */
+  interface WaitlistEntryFieldRefs {
+    readonly id: FieldRef<"WaitlistEntry", 'String'>
+    readonly timeSlotId: FieldRef<"WaitlistEntry", 'String'>
+    readonly playerId: FieldRef<"WaitlistEntry", 'String'>
+    readonly priority: FieldRef<"WaitlistEntry", 'Int'>
+    readonly status: FieldRef<"WaitlistEntry", 'WaitlistStatus'>
+    readonly notifiedAt: FieldRef<"WaitlistEntry", 'DateTime'>
+    readonly expiresAt: FieldRef<"WaitlistEntry", 'DateTime'>
+    readonly createdAt: FieldRef<"WaitlistEntry", 'DateTime'>
+    readonly updatedAt: FieldRef<"WaitlistEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WaitlistEntry findUnique
+   */
+  export type WaitlistEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WaitlistEntry to fetch.
+     */
+    where: WaitlistEntryWhereUniqueInput
+  }
+
+  /**
+   * WaitlistEntry findUniqueOrThrow
+   */
+  export type WaitlistEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WaitlistEntry to fetch.
+     */
+    where: WaitlistEntryWhereUniqueInput
+  }
+
+  /**
+   * WaitlistEntry findFirst
+   */
+  export type WaitlistEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WaitlistEntry to fetch.
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WaitlistEntries to fetch.
+     */
+    orderBy?: WaitlistEntryOrderByWithRelationInput | WaitlistEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WaitlistEntries.
+     */
+    cursor?: WaitlistEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WaitlistEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WaitlistEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WaitlistEntries.
+     */
+    distinct?: WaitlistEntryScalarFieldEnum | WaitlistEntryScalarFieldEnum[]
+  }
+
+  /**
+   * WaitlistEntry findFirstOrThrow
+   */
+  export type WaitlistEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WaitlistEntry to fetch.
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WaitlistEntries to fetch.
+     */
+    orderBy?: WaitlistEntryOrderByWithRelationInput | WaitlistEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WaitlistEntries.
+     */
+    cursor?: WaitlistEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WaitlistEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WaitlistEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WaitlistEntries.
+     */
+    distinct?: WaitlistEntryScalarFieldEnum | WaitlistEntryScalarFieldEnum[]
+  }
+
+  /**
+   * WaitlistEntry findMany
+   */
+  export type WaitlistEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WaitlistEntries to fetch.
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WaitlistEntries to fetch.
+     */
+    orderBy?: WaitlistEntryOrderByWithRelationInput | WaitlistEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WaitlistEntries.
+     */
+    cursor?: WaitlistEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WaitlistEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WaitlistEntries.
+     */
+    skip?: number
+    distinct?: WaitlistEntryScalarFieldEnum | WaitlistEntryScalarFieldEnum[]
+  }
+
+  /**
+   * WaitlistEntry create
+   */
+  export type WaitlistEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WaitlistEntry.
+     */
+    data: XOR<WaitlistEntryCreateInput, WaitlistEntryUncheckedCreateInput>
+  }
+
+  /**
+   * WaitlistEntry createMany
+   */
+  export type WaitlistEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WaitlistEntries.
+     */
+    data: WaitlistEntryCreateManyInput | WaitlistEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WaitlistEntry createManyAndReturn
+   */
+  export type WaitlistEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * The data used to create many WaitlistEntries.
+     */
+    data: WaitlistEntryCreateManyInput | WaitlistEntryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WaitlistEntry update
+   */
+  export type WaitlistEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WaitlistEntry.
+     */
+    data: XOR<WaitlistEntryUpdateInput, WaitlistEntryUncheckedUpdateInput>
+    /**
+     * Choose, which WaitlistEntry to update.
+     */
+    where: WaitlistEntryWhereUniqueInput
+  }
+
+  /**
+   * WaitlistEntry updateMany
+   */
+  export type WaitlistEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WaitlistEntries.
+     */
+    data: XOR<WaitlistEntryUpdateManyMutationInput, WaitlistEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which WaitlistEntries to update
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * Limit how many WaitlistEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WaitlistEntry updateManyAndReturn
+   */
+  export type WaitlistEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * The data used to update WaitlistEntries.
+     */
+    data: XOR<WaitlistEntryUpdateManyMutationInput, WaitlistEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which WaitlistEntries to update
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * Limit how many WaitlistEntries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WaitlistEntry upsert
+   */
+  export type WaitlistEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WaitlistEntry to update in case it exists.
+     */
+    where: WaitlistEntryWhereUniqueInput
+    /**
+     * In case the WaitlistEntry found by the `where` argument doesn't exist, create a new WaitlistEntry with this data.
+     */
+    create: XOR<WaitlistEntryCreateInput, WaitlistEntryUncheckedCreateInput>
+    /**
+     * In case the WaitlistEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WaitlistEntryUpdateInput, WaitlistEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * WaitlistEntry delete
+   */
+  export type WaitlistEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+    /**
+     * Filter which WaitlistEntry to delete.
+     */
+    where: WaitlistEntryWhereUniqueInput
+  }
+
+  /**
+   * WaitlistEntry deleteMany
+   */
+  export type WaitlistEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WaitlistEntries to delete
+     */
+    where?: WaitlistEntryWhereInput
+    /**
+     * Limit how many WaitlistEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WaitlistEntry without action
+   */
+  export type WaitlistEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WaitlistEntry
+     */
+    select?: WaitlistEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WaitlistEntry
+     */
+    omit?: WaitlistEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WaitlistEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OccupancyStats
+   */
+
+  export type AggregateOccupancyStats = {
+    _count: OccupancyStatsCountAggregateOutputType | null
+    _avg: OccupancyStatsAvgAggregateOutputType | null
+    _sum: OccupancyStatsSumAggregateOutputType | null
+    _min: OccupancyStatsMinAggregateOutputType | null
+    _max: OccupancyStatsMaxAggregateOutputType | null
+  }
+
+  export type OccupancyStatsAvgAggregateOutputType = {
+    hourOfWeek: number | null
+    avgOccupancy: number | null
+    sampleCount: number | null
+  }
+
+  export type OccupancyStatsSumAggregateOutputType = {
+    hourOfWeek: number | null
+    avgOccupancy: number | null
+    sampleCount: number | null
+  }
+
+  export type OccupancyStatsMinAggregateOutputType = {
+    id: string | null
+    courtId: string | null
+    hourOfWeek: number | null
+    avgOccupancy: number | null
+    sampleCount: number | null
+    lastUpdated: Date | null
+  }
+
+  export type OccupancyStatsMaxAggregateOutputType = {
+    id: string | null
+    courtId: string | null
+    hourOfWeek: number | null
+    avgOccupancy: number | null
+    sampleCount: number | null
+    lastUpdated: Date | null
+  }
+
+  export type OccupancyStatsCountAggregateOutputType = {
+    id: number
+    courtId: number
+    hourOfWeek: number
+    avgOccupancy: number
+    sampleCount: number
+    lastUpdated: number
+    _all: number
+  }
+
+
+  export type OccupancyStatsAvgAggregateInputType = {
+    hourOfWeek?: true
+    avgOccupancy?: true
+    sampleCount?: true
+  }
+
+  export type OccupancyStatsSumAggregateInputType = {
+    hourOfWeek?: true
+    avgOccupancy?: true
+    sampleCount?: true
+  }
+
+  export type OccupancyStatsMinAggregateInputType = {
+    id?: true
+    courtId?: true
+    hourOfWeek?: true
+    avgOccupancy?: true
+    sampleCount?: true
+    lastUpdated?: true
+  }
+
+  export type OccupancyStatsMaxAggregateInputType = {
+    id?: true
+    courtId?: true
+    hourOfWeek?: true
+    avgOccupancy?: true
+    sampleCount?: true
+    lastUpdated?: true
+  }
+
+  export type OccupancyStatsCountAggregateInputType = {
+    id?: true
+    courtId?: true
+    hourOfWeek?: true
+    avgOccupancy?: true
+    sampleCount?: true
+    lastUpdated?: true
+    _all?: true
+  }
+
+  export type OccupancyStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OccupancyStats to aggregate.
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OccupancyStats to fetch.
+     */
+    orderBy?: OccupancyStatsOrderByWithRelationInput | OccupancyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OccupancyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OccupancyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OccupancyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OccupancyStats
+    **/
+    _count?: true | OccupancyStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OccupancyStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OccupancyStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OccupancyStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OccupancyStatsMaxAggregateInputType
+  }
+
+  export type GetOccupancyStatsAggregateType<T extends OccupancyStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateOccupancyStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOccupancyStats[P]>
+      : GetScalarType<T[P], AggregateOccupancyStats[P]>
+  }
+
+
+
+
+  export type OccupancyStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OccupancyStatsWhereInput
+    orderBy?: OccupancyStatsOrderByWithAggregationInput | OccupancyStatsOrderByWithAggregationInput[]
+    by: OccupancyStatsScalarFieldEnum[] | OccupancyStatsScalarFieldEnum
+    having?: OccupancyStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OccupancyStatsCountAggregateInputType | true
+    _avg?: OccupancyStatsAvgAggregateInputType
+    _sum?: OccupancyStatsSumAggregateInputType
+    _min?: OccupancyStatsMinAggregateInputType
+    _max?: OccupancyStatsMaxAggregateInputType
+  }
+
+  export type OccupancyStatsGroupByOutputType = {
+    id: string
+    courtId: string
+    hourOfWeek: number
+    avgOccupancy: number
+    sampleCount: number
+    lastUpdated: Date
+    _count: OccupancyStatsCountAggregateOutputType | null
+    _avg: OccupancyStatsAvgAggregateOutputType | null
+    _sum: OccupancyStatsSumAggregateOutputType | null
+    _min: OccupancyStatsMinAggregateOutputType | null
+    _max: OccupancyStatsMaxAggregateOutputType | null
+  }
+
+  type GetOccupancyStatsGroupByPayload<T extends OccupancyStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OccupancyStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OccupancyStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OccupancyStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], OccupancyStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OccupancyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courtId?: boolean
+    hourOfWeek?: boolean
+    avgOccupancy?: boolean
+    sampleCount?: boolean
+    lastUpdated?: boolean
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["occupancyStats"]>
+
+  export type OccupancyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courtId?: boolean
+    hourOfWeek?: boolean
+    avgOccupancy?: boolean
+    sampleCount?: boolean
+    lastUpdated?: boolean
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["occupancyStats"]>
+
+  export type OccupancyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courtId?: boolean
+    hourOfWeek?: boolean
+    avgOccupancy?: boolean
+    sampleCount?: boolean
+    lastUpdated?: boolean
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["occupancyStats"]>
+
+  export type OccupancyStatsSelectScalar = {
+    id?: boolean
+    courtId?: boolean
+    hourOfWeek?: boolean
+    avgOccupancy?: boolean
+    sampleCount?: boolean
+    lastUpdated?: boolean
+  }
+
+  export type OccupancyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courtId" | "hourOfWeek" | "avgOccupancy" | "sampleCount" | "lastUpdated", ExtArgs["result"]["occupancyStats"]>
+  export type OccupancyStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }
+  export type OccupancyStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }
+  export type OccupancyStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    court?: boolean | CourtDefaultArgs<ExtArgs>
+  }
+
+  export type $OccupancyStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OccupancyStats"
+    objects: {
+      court: Prisma.$CourtPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      courtId: string
+      hourOfWeek: number
+      avgOccupancy: number
+      sampleCount: number
+      lastUpdated: Date
+    }, ExtArgs["result"]["occupancyStats"]>
+    composites: {}
+  }
+
+  type OccupancyStatsGetPayload<S extends boolean | null | undefined | OccupancyStatsDefaultArgs> = $Result.GetResult<Prisma.$OccupancyStatsPayload, S>
+
+  type OccupancyStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OccupancyStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OccupancyStatsCountAggregateInputType | true
+    }
+
+  export interface OccupancyStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OccupancyStats'], meta: { name: 'OccupancyStats' } }
+    /**
+     * Find zero or one OccupancyStats that matches the filter.
+     * @param {OccupancyStatsFindUniqueArgs} args - Arguments to find a OccupancyStats
+     * @example
+     * // Get one OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OccupancyStatsFindUniqueArgs>(args: SelectSubset<T, OccupancyStatsFindUniqueArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OccupancyStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OccupancyStatsFindUniqueOrThrowArgs} args - Arguments to find a OccupancyStats
+     * @example
+     * // Get one OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OccupancyStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, OccupancyStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OccupancyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsFindFirstArgs} args - Arguments to find a OccupancyStats
+     * @example
+     * // Get one OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OccupancyStatsFindFirstArgs>(args?: SelectSubset<T, OccupancyStatsFindFirstArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OccupancyStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsFindFirstOrThrowArgs} args - Arguments to find a OccupancyStats
+     * @example
+     * // Get one OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OccupancyStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, OccupancyStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OccupancyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.findMany()
+     * 
+     * // Get first 10 OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const occupancyStatsWithIdOnly = await prisma.occupancyStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OccupancyStatsFindManyArgs>(args?: SelectSubset<T, OccupancyStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OccupancyStats.
+     * @param {OccupancyStatsCreateArgs} args - Arguments to create a OccupancyStats.
+     * @example
+     * // Create one OccupancyStats
+     * const OccupancyStats = await prisma.occupancyStats.create({
+     *   data: {
+     *     // ... data to create a OccupancyStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends OccupancyStatsCreateArgs>(args: SelectSubset<T, OccupancyStatsCreateArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OccupancyStats.
+     * @param {OccupancyStatsCreateManyArgs} args - Arguments to create many OccupancyStats.
+     * @example
+     * // Create many OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OccupancyStatsCreateManyArgs>(args?: SelectSubset<T, OccupancyStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OccupancyStats and returns the data saved in the database.
+     * @param {OccupancyStatsCreateManyAndReturnArgs} args - Arguments to create many OccupancyStats.
+     * @example
+     * // Create many OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OccupancyStats and only return the `id`
+     * const occupancyStatsWithIdOnly = await prisma.occupancyStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OccupancyStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, OccupancyStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OccupancyStats.
+     * @param {OccupancyStatsDeleteArgs} args - Arguments to delete one OccupancyStats.
+     * @example
+     * // Delete one OccupancyStats
+     * const OccupancyStats = await prisma.occupancyStats.delete({
+     *   where: {
+     *     // ... filter to delete one OccupancyStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OccupancyStatsDeleteArgs>(args: SelectSubset<T, OccupancyStatsDeleteArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OccupancyStats.
+     * @param {OccupancyStatsUpdateArgs} args - Arguments to update one OccupancyStats.
+     * @example
+     * // Update one OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OccupancyStatsUpdateArgs>(args: SelectSubset<T, OccupancyStatsUpdateArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OccupancyStats.
+     * @param {OccupancyStatsDeleteManyArgs} args - Arguments to filter OccupancyStats to delete.
+     * @example
+     * // Delete a few OccupancyStats
+     * const { count } = await prisma.occupancyStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OccupancyStatsDeleteManyArgs>(args?: SelectSubset<T, OccupancyStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OccupancyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OccupancyStatsUpdateManyArgs>(args: SelectSubset<T, OccupancyStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OccupancyStats and returns the data updated in the database.
+     * @param {OccupancyStatsUpdateManyAndReturnArgs} args - Arguments to update many OccupancyStats.
+     * @example
+     * // Update many OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OccupancyStats and only return the `id`
+     * const occupancyStatsWithIdOnly = await prisma.occupancyStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OccupancyStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, OccupancyStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OccupancyStats.
+     * @param {OccupancyStatsUpsertArgs} args - Arguments to update or create a OccupancyStats.
+     * @example
+     * // Update or create a OccupancyStats
+     * const occupancyStats = await prisma.occupancyStats.upsert({
+     *   create: {
+     *     // ... data to create a OccupancyStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OccupancyStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OccupancyStatsUpsertArgs>(args: SelectSubset<T, OccupancyStatsUpsertArgs<ExtArgs>>): Prisma__OccupancyStatsClient<$Result.GetResult<Prisma.$OccupancyStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OccupancyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsCountArgs} args - Arguments to filter OccupancyStats to count.
+     * @example
+     * // Count the number of OccupancyStats
+     * const count = await prisma.occupancyStats.count({
+     *   where: {
+     *     // ... the filter for the OccupancyStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends OccupancyStatsCountArgs>(
+      args?: Subset<T, OccupancyStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OccupancyStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OccupancyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OccupancyStatsAggregateArgs>(args: Subset<T, OccupancyStatsAggregateArgs>): Prisma.PrismaPromise<GetOccupancyStatsAggregateType<T>>
+
+    /**
+     * Group by OccupancyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OccupancyStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OccupancyStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OccupancyStatsGroupByArgs['orderBy'] }
+        : { orderBy?: OccupancyStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OccupancyStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOccupancyStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OccupancyStats model
+   */
+  readonly fields: OccupancyStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OccupancyStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OccupancyStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    court<T extends CourtDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourtDefaultArgs<ExtArgs>>): Prisma__CourtClient<$Result.GetResult<Prisma.$CourtPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OccupancyStats model
+   */
+  interface OccupancyStatsFieldRefs {
+    readonly id: FieldRef<"OccupancyStats", 'String'>
+    readonly courtId: FieldRef<"OccupancyStats", 'String'>
+    readonly hourOfWeek: FieldRef<"OccupancyStats", 'Int'>
+    readonly avgOccupancy: FieldRef<"OccupancyStats", 'Float'>
+    readonly sampleCount: FieldRef<"OccupancyStats", 'Int'>
+    readonly lastUpdated: FieldRef<"OccupancyStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OccupancyStats findUnique
+   */
+  export type OccupancyStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which OccupancyStats to fetch.
+     */
+    where: OccupancyStatsWhereUniqueInput
+  }
+
+  /**
+   * OccupancyStats findUniqueOrThrow
+   */
+  export type OccupancyStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which OccupancyStats to fetch.
+     */
+    where: OccupancyStatsWhereUniqueInput
+  }
+
+  /**
+   * OccupancyStats findFirst
+   */
+  export type OccupancyStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which OccupancyStats to fetch.
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OccupancyStats to fetch.
+     */
+    orderBy?: OccupancyStatsOrderByWithRelationInput | OccupancyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OccupancyStats.
+     */
+    cursor?: OccupancyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OccupancyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OccupancyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OccupancyStats.
+     */
+    distinct?: OccupancyStatsScalarFieldEnum | OccupancyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * OccupancyStats findFirstOrThrow
+   */
+  export type OccupancyStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which OccupancyStats to fetch.
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OccupancyStats to fetch.
+     */
+    orderBy?: OccupancyStatsOrderByWithRelationInput | OccupancyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OccupancyStats.
+     */
+    cursor?: OccupancyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OccupancyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OccupancyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OccupancyStats.
+     */
+    distinct?: OccupancyStatsScalarFieldEnum | OccupancyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * OccupancyStats findMany
+   */
+  export type OccupancyStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which OccupancyStats to fetch.
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OccupancyStats to fetch.
+     */
+    orderBy?: OccupancyStatsOrderByWithRelationInput | OccupancyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OccupancyStats.
+     */
+    cursor?: OccupancyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OccupancyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OccupancyStats.
+     */
+    skip?: number
+    distinct?: OccupancyStatsScalarFieldEnum | OccupancyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * OccupancyStats create
+   */
+  export type OccupancyStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OccupancyStats.
+     */
+    data: XOR<OccupancyStatsCreateInput, OccupancyStatsUncheckedCreateInput>
+  }
+
+  /**
+   * OccupancyStats createMany
+   */
+  export type OccupancyStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OccupancyStats.
+     */
+    data: OccupancyStatsCreateManyInput | OccupancyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OccupancyStats createManyAndReturn
+   */
+  export type OccupancyStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many OccupancyStats.
+     */
+    data: OccupancyStatsCreateManyInput | OccupancyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OccupancyStats update
+   */
+  export type OccupancyStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OccupancyStats.
+     */
+    data: XOR<OccupancyStatsUpdateInput, OccupancyStatsUncheckedUpdateInput>
+    /**
+     * Choose, which OccupancyStats to update.
+     */
+    where: OccupancyStatsWhereUniqueInput
+  }
+
+  /**
+   * OccupancyStats updateMany
+   */
+  export type OccupancyStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OccupancyStats.
+     */
+    data: XOR<OccupancyStatsUpdateManyMutationInput, OccupancyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which OccupancyStats to update
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * Limit how many OccupancyStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OccupancyStats updateManyAndReturn
+   */
+  export type OccupancyStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update OccupancyStats.
+     */
+    data: XOR<OccupancyStatsUpdateManyMutationInput, OccupancyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which OccupancyStats to update
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * Limit how many OccupancyStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OccupancyStats upsert
+   */
+  export type OccupancyStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OccupancyStats to update in case it exists.
+     */
+    where: OccupancyStatsWhereUniqueInput
+    /**
+     * In case the OccupancyStats found by the `where` argument doesn't exist, create a new OccupancyStats with this data.
+     */
+    create: XOR<OccupancyStatsCreateInput, OccupancyStatsUncheckedCreateInput>
+    /**
+     * In case the OccupancyStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OccupancyStatsUpdateInput, OccupancyStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * OccupancyStats delete
+   */
+  export type OccupancyStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+    /**
+     * Filter which OccupancyStats to delete.
+     */
+    where: OccupancyStatsWhereUniqueInput
+  }
+
+  /**
+   * OccupancyStats deleteMany
+   */
+  export type OccupancyStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OccupancyStats to delete
+     */
+    where?: OccupancyStatsWhereInput
+    /**
+     * Limit how many OccupancyStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OccupancyStats without action
+   */
+  export type OccupancyStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OccupancyStats
+     */
+    select?: OccupancyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OccupancyStats
+     */
+    omit?: OccupancyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OccupancyStatsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NotificationLog
+   */
+
+  export type AggregateNotificationLog = {
+    _count: NotificationLogCountAggregateOutputType | null
+    _min: NotificationLogMinAggregateOutputType | null
+    _max: NotificationLogMaxAggregateOutputType | null
+  }
+
+  export type NotificationLogMinAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    type: string | null
+    title: string | null
+    message: string | null
+    sentAt: Date | null
+    readAt: Date | null
+  }
+
+  export type NotificationLogMaxAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    type: string | null
+    title: string | null
+    message: string | null
+    sentAt: Date | null
+    readAt: Date | null
+  }
+
+  export type NotificationLogCountAggregateOutputType = {
+    id: number
+    playerId: number
+    type: number
+    title: number
+    message: number
+    sentAt: number
+    readAt: number
+    _all: number
+  }
+
+
+  export type NotificationLogMinAggregateInputType = {
+    id?: true
+    playerId?: true
+    type?: true
+    title?: true
+    message?: true
+    sentAt?: true
+    readAt?: true
+  }
+
+  export type NotificationLogMaxAggregateInputType = {
+    id?: true
+    playerId?: true
+    type?: true
+    title?: true
+    message?: true
+    sentAt?: true
+    readAt?: true
+  }
+
+  export type NotificationLogCountAggregateInputType = {
+    id?: true
+    playerId?: true
+    type?: true
+    title?: true
+    message?: true
+    sentAt?: true
+    readAt?: true
+    _all?: true
+  }
+
+  export type NotificationLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NotificationLog to aggregate.
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationLogs to fetch.
+     */
+    orderBy?: NotificationLogOrderByWithRelationInput | NotificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NotificationLogs
+    **/
+    _count?: true | NotificationLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationLogMaxAggregateInputType
+  }
+
+  export type GetNotificationLogAggregateType<T extends NotificationLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotificationLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotificationLog[P]>
+      : GetScalarType<T[P], AggregateNotificationLog[P]>
+  }
+
+
+
+
+  export type NotificationLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationLogWhereInput
+    orderBy?: NotificationLogOrderByWithAggregationInput | NotificationLogOrderByWithAggregationInput[]
+    by: NotificationLogScalarFieldEnum[] | NotificationLogScalarFieldEnum
+    having?: NotificationLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationLogCountAggregateInputType | true
+    _min?: NotificationLogMinAggregateInputType
+    _max?: NotificationLogMaxAggregateInputType
+  }
+
+  export type NotificationLogGroupByOutputType = {
+    id: string
+    playerId: string
+    type: string
+    title: string
+    message: string
+    sentAt: Date
+    readAt: Date | null
+    _count: NotificationLogCountAggregateOutputType | null
+    _min: NotificationLogMinAggregateOutputType | null
+    _max: NotificationLogMaxAggregateOutputType | null
+  }
+
+  type GetNotificationLogGroupByPayload<T extends NotificationLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationLogGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    sentAt?: boolean
+    readAt?: boolean
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationLog"]>
+
+  export type NotificationLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    sentAt?: boolean
+    readAt?: boolean
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationLog"]>
+
+  export type NotificationLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    sentAt?: boolean
+    readAt?: boolean
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationLog"]>
+
+  export type NotificationLogSelectScalar = {
+    id?: boolean
+    playerId?: boolean
+    type?: boolean
+    title?: boolean
+    message?: boolean
+    sentAt?: boolean
+    readAt?: boolean
+  }
+
+  export type NotificationLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "type" | "title" | "message" | "sentAt" | "readAt", ExtArgs["result"]["notificationLog"]>
+  export type NotificationLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type NotificationLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+  export type NotificationLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $NotificationLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NotificationLog"
+    objects: {
+      player: Prisma.$PlayerProfilePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      playerId: string
+      type: string
+      title: string
+      message: string
+      sentAt: Date
+      readAt: Date | null
+    }, ExtArgs["result"]["notificationLog"]>
+    composites: {}
+  }
+
+  type NotificationLogGetPayload<S extends boolean | null | undefined | NotificationLogDefaultArgs> = $Result.GetResult<Prisma.$NotificationLogPayload, S>
+
+  type NotificationLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationLogCountAggregateInputType | true
+    }
+
+  export interface NotificationLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NotificationLog'], meta: { name: 'NotificationLog' } }
+    /**
+     * Find zero or one NotificationLog that matches the filter.
+     * @param {NotificationLogFindUniqueArgs} args - Arguments to find a NotificationLog
+     * @example
+     * // Get one NotificationLog
+     * const notificationLog = await prisma.notificationLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationLogFindUniqueArgs>(args: SelectSubset<T, NotificationLogFindUniqueArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NotificationLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationLogFindUniqueOrThrowArgs} args - Arguments to find a NotificationLog
+     * @example
+     * // Get one NotificationLog
+     * const notificationLog = await prisma.notificationLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationLogFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NotificationLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogFindFirstArgs} args - Arguments to find a NotificationLog
+     * @example
+     * // Get one NotificationLog
+     * const notificationLog = await prisma.notificationLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationLogFindFirstArgs>(args?: SelectSubset<T, NotificationLogFindFirstArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NotificationLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogFindFirstOrThrowArgs} args - Arguments to find a NotificationLog
+     * @example
+     * // Get one NotificationLog
+     * const notificationLog = await prisma.notificationLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationLogFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NotificationLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NotificationLogs
+     * const notificationLogs = await prisma.notificationLog.findMany()
+     * 
+     * // Get first 10 NotificationLogs
+     * const notificationLogs = await prisma.notificationLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const notificationLogWithIdOnly = await prisma.notificationLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NotificationLogFindManyArgs>(args?: SelectSubset<T, NotificationLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NotificationLog.
+     * @param {NotificationLogCreateArgs} args - Arguments to create a NotificationLog.
+     * @example
+     * // Create one NotificationLog
+     * const NotificationLog = await prisma.notificationLog.create({
+     *   data: {
+     *     // ... data to create a NotificationLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationLogCreateArgs>(args: SelectSubset<T, NotificationLogCreateArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NotificationLogs.
+     * @param {NotificationLogCreateManyArgs} args - Arguments to create many NotificationLogs.
+     * @example
+     * // Create many NotificationLogs
+     * const notificationLog = await prisma.notificationLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationLogCreateManyArgs>(args?: SelectSubset<T, NotificationLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NotificationLogs and returns the data saved in the database.
+     * @param {NotificationLogCreateManyAndReturnArgs} args - Arguments to create many NotificationLogs.
+     * @example
+     * // Create many NotificationLogs
+     * const notificationLog = await prisma.notificationLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NotificationLogs and only return the `id`
+     * const notificationLogWithIdOnly = await prisma.notificationLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationLogCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NotificationLog.
+     * @param {NotificationLogDeleteArgs} args - Arguments to delete one NotificationLog.
+     * @example
+     * // Delete one NotificationLog
+     * const NotificationLog = await prisma.notificationLog.delete({
+     *   where: {
+     *     // ... filter to delete one NotificationLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationLogDeleteArgs>(args: SelectSubset<T, NotificationLogDeleteArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NotificationLog.
+     * @param {NotificationLogUpdateArgs} args - Arguments to update one NotificationLog.
+     * @example
+     * // Update one NotificationLog
+     * const notificationLog = await prisma.notificationLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationLogUpdateArgs>(args: SelectSubset<T, NotificationLogUpdateArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NotificationLogs.
+     * @param {NotificationLogDeleteManyArgs} args - Arguments to filter NotificationLogs to delete.
+     * @example
+     * // Delete a few NotificationLogs
+     * const { count } = await prisma.notificationLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationLogDeleteManyArgs>(args?: SelectSubset<T, NotificationLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NotificationLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NotificationLogs
+     * const notificationLog = await prisma.notificationLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationLogUpdateManyArgs>(args: SelectSubset<T, NotificationLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NotificationLogs and returns the data updated in the database.
+     * @param {NotificationLogUpdateManyAndReturnArgs} args - Arguments to update many NotificationLogs.
+     * @example
+     * // Update many NotificationLogs
+     * const notificationLog = await prisma.notificationLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NotificationLogs and only return the `id`
+     * const notificationLogWithIdOnly = await prisma.notificationLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotificationLogUpdateManyAndReturnArgs>(args: SelectSubset<T, NotificationLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NotificationLog.
+     * @param {NotificationLogUpsertArgs} args - Arguments to update or create a NotificationLog.
+     * @example
+     * // Update or create a NotificationLog
+     * const notificationLog = await prisma.notificationLog.upsert({
+     *   create: {
+     *     // ... data to create a NotificationLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NotificationLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationLogUpsertArgs>(args: SelectSubset<T, NotificationLogUpsertArgs<ExtArgs>>): Prisma__NotificationLogClient<$Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NotificationLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogCountArgs} args - Arguments to filter NotificationLogs to count.
+     * @example
+     * // Count the number of NotificationLogs
+     * const count = await prisma.notificationLog.count({
+     *   where: {
+     *     // ... the filter for the NotificationLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationLogCountArgs>(
+      args?: Subset<T, NotificationLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NotificationLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationLogAggregateArgs>(args: Subset<T, NotificationLogAggregateArgs>): Prisma.PrismaPromise<GetNotificationLogAggregateType<T>>
+
+    /**
+     * Group by NotificationLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationLogGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NotificationLog model
+   */
+  readonly fields: NotificationLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NotificationLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    player<T extends PlayerProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerProfileDefaultArgs<ExtArgs>>): Prisma__PlayerProfileClient<$Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NotificationLog model
+   */
+  interface NotificationLogFieldRefs {
+    readonly id: FieldRef<"NotificationLog", 'String'>
+    readonly playerId: FieldRef<"NotificationLog", 'String'>
+    readonly type: FieldRef<"NotificationLog", 'String'>
+    readonly title: FieldRef<"NotificationLog", 'String'>
+    readonly message: FieldRef<"NotificationLog", 'String'>
+    readonly sentAt: FieldRef<"NotificationLog", 'DateTime'>
+    readonly readAt: FieldRef<"NotificationLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NotificationLog findUnique
+   */
+  export type NotificationLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationLog to fetch.
+     */
+    where: NotificationLogWhereUniqueInput
+  }
+
+  /**
+   * NotificationLog findUniqueOrThrow
+   */
+  export type NotificationLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationLog to fetch.
+     */
+    where: NotificationLogWhereUniqueInput
+  }
+
+  /**
+   * NotificationLog findFirst
+   */
+  export type NotificationLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationLog to fetch.
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationLogs to fetch.
+     */
+    orderBy?: NotificationLogOrderByWithRelationInput | NotificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NotificationLogs.
+     */
+    cursor?: NotificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NotificationLogs.
+     */
+    distinct?: NotificationLogScalarFieldEnum | NotificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationLog findFirstOrThrow
+   */
+  export type NotificationLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationLog to fetch.
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationLogs to fetch.
+     */
+    orderBy?: NotificationLogOrderByWithRelationInput | NotificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NotificationLogs.
+     */
+    cursor?: NotificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NotificationLogs.
+     */
+    distinct?: NotificationLogScalarFieldEnum | NotificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationLog findMany
+   */
+  export type NotificationLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationLogs to fetch.
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationLogs to fetch.
+     */
+    orderBy?: NotificationLogOrderByWithRelationInput | NotificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NotificationLogs.
+     */
+    cursor?: NotificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationLogs.
+     */
+    skip?: number
+    distinct?: NotificationLogScalarFieldEnum | NotificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationLog create
+   */
+  export type NotificationLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NotificationLog.
+     */
+    data: XOR<NotificationLogCreateInput, NotificationLogUncheckedCreateInput>
+  }
+
+  /**
+   * NotificationLog createMany
+   */
+  export type NotificationLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NotificationLogs.
+     */
+    data: NotificationLogCreateManyInput | NotificationLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NotificationLog createManyAndReturn
+   */
+  export type NotificationLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many NotificationLogs.
+     */
+    data: NotificationLogCreateManyInput | NotificationLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NotificationLog update
+   */
+  export type NotificationLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NotificationLog.
+     */
+    data: XOR<NotificationLogUpdateInput, NotificationLogUncheckedUpdateInput>
+    /**
+     * Choose, which NotificationLog to update.
+     */
+    where: NotificationLogWhereUniqueInput
+  }
+
+  /**
+   * NotificationLog updateMany
+   */
+  export type NotificationLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NotificationLogs.
+     */
+    data: XOR<NotificationLogUpdateManyMutationInput, NotificationLogUncheckedUpdateManyInput>
+    /**
+     * Filter which NotificationLogs to update
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * Limit how many NotificationLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NotificationLog updateManyAndReturn
+   */
+  export type NotificationLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * The data used to update NotificationLogs.
+     */
+    data: XOR<NotificationLogUpdateManyMutationInput, NotificationLogUncheckedUpdateManyInput>
+    /**
+     * Filter which NotificationLogs to update
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * Limit how many NotificationLogs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NotificationLog upsert
+   */
+  export type NotificationLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NotificationLog to update in case it exists.
+     */
+    where: NotificationLogWhereUniqueInput
+    /**
+     * In case the NotificationLog found by the `where` argument doesn't exist, create a new NotificationLog with this data.
+     */
+    create: XOR<NotificationLogCreateInput, NotificationLogUncheckedCreateInput>
+    /**
+     * In case the NotificationLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationLogUpdateInput, NotificationLogUncheckedUpdateInput>
+  }
+
+  /**
+   * NotificationLog delete
+   */
+  export type NotificationLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+    /**
+     * Filter which NotificationLog to delete.
+     */
+    where: NotificationLogWhereUniqueInput
+  }
+
+  /**
+   * NotificationLog deleteMany
+   */
+  export type NotificationLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NotificationLogs to delete
+     */
+    where?: NotificationLogWhereInput
+    /**
+     * Limit how many NotificationLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NotificationLog without action
+   */
+  export type NotificationLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationLog
+     */
+    select?: NotificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationLog
+     */
+    omit?: NotificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationLogInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6657,15 +21265,6 @@ export namespace Prisma {
   };
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-  export const TestScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email'
-  };
-
-  export type TestScalarFieldEnum = (typeof TestScalarFieldEnum)[keyof typeof TestScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
@@ -6724,6 +21323,193 @@ export namespace Prisma {
   };
 
   export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+  export const PlayerProfileScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    role: 'role',
+    phoneNumber: 'phoneNumber',
+    avatar: 'avatar',
+    isActive: 'isActive',
+    isBanned: 'isBanned',
+    bannedUntil: 'bannedUntil',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PlayerProfileScalarFieldEnum = (typeof PlayerProfileScalarFieldEnum)[keyof typeof PlayerProfileScalarFieldEnum]
+
+
+  export const FacilityScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    address: 'address',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    amenities: 'amenities',
+    photos: 'photos',
+    ownerId: 'ownerId',
+    status: 'status',
+    approvedAt: 'approvedAt',
+    approvedBy: 'approvedBy',
+    rejectionReason: 'rejectionReason',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FacilityScalarFieldEnum = (typeof FacilityScalarFieldEnum)[keyof typeof FacilityScalarFieldEnum]
+
+
+  export const CourtScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    facilityId: 'facilityId',
+    sportType: 'sportType',
+    pricePerHour: 'pricePerHour',
+    operatingStartHour: 'operatingStartHour',
+    operatingEndHour: 'operatingEndHour',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CourtScalarFieldEnum = (typeof CourtScalarFieldEnum)[keyof typeof CourtScalarFieldEnum]
+
+
+  export const TimeSlotScalarFieldEnum: {
+    id: 'id',
+    courtId: 'courtId',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    isMaintenanceBlocked: 'isMaintenanceBlocked',
+    maintenanceReason: 'maintenanceReason',
+    version: 'version',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TimeSlotScalarFieldEnum = (typeof TimeSlotScalarFieldEnum)[keyof typeof TimeSlotScalarFieldEnum]
+
+
+  export const BookingScalarFieldEnum: {
+    id: 'id',
+    timeSlotId: 'timeSlotId',
+    courtId: 'courtId',
+    playerId: 'playerId',
+    totalPrice: 'totalPrice',
+    status: 'status',
+    paymentSimulated: 'paymentSimulated',
+    bookingNotes: 'bookingNotes',
+    cancelledAt: 'cancelledAt',
+    cancellationReason: 'cancellationReason',
+    version: 'version',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+  export const MatchScalarFieldEnum: {
+    id: 'id',
+    bookingId: 'bookingId',
+    title: 'title',
+    description: 'description',
+    maxPlayers: 'maxPlayers',
+    sportType: 'sportType',
+    skillLevel: 'skillLevel',
+    status: 'status',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+  export const MatchPlayerScalarFieldEnum: {
+    id: 'id',
+    matchId: 'matchId',
+    playerId: 'playerId',
+    joinedAt: 'joinedAt',
+    result: 'result'
+  };
+
+  export type MatchPlayerScalarFieldEnum = (typeof MatchPlayerScalarFieldEnum)[keyof typeof MatchPlayerScalarFieldEnum]
+
+
+  export const PlayerRatingScalarFieldEnum: {
+    id: 'id',
+    playerId: 'playerId',
+    sportType: 'sportType',
+    rating: 'rating',
+    gamesPlayed: 'gamesPlayed',
+    wins: 'wins',
+    losses: 'losses',
+    draws: 'draws',
+    lastMatchAt: 'lastMatchAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PlayerRatingScalarFieldEnum = (typeof PlayerRatingScalarFieldEnum)[keyof typeof PlayerRatingScalarFieldEnum]
+
+
+  export const RatingHistoryScalarFieldEnum: {
+    id: 'id',
+    ratingId: 'ratingId',
+    oldRating: 'oldRating',
+    newRating: 'newRating',
+    ratingChange: 'ratingChange',
+    opponentRating: 'opponentRating',
+    matchResult: 'matchResult',
+    createdAt: 'createdAt'
+  };
+
+  export type RatingHistoryScalarFieldEnum = (typeof RatingHistoryScalarFieldEnum)[keyof typeof RatingHistoryScalarFieldEnum]
+
+
+  export const WaitlistEntryScalarFieldEnum: {
+    id: 'id',
+    timeSlotId: 'timeSlotId',
+    playerId: 'playerId',
+    priority: 'priority',
+    status: 'status',
+    notifiedAt: 'notifiedAt',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WaitlistEntryScalarFieldEnum = (typeof WaitlistEntryScalarFieldEnum)[keyof typeof WaitlistEntryScalarFieldEnum]
+
+
+  export const OccupancyStatsScalarFieldEnum: {
+    id: 'id',
+    courtId: 'courtId',
+    hourOfWeek: 'hourOfWeek',
+    avgOccupancy: 'avgOccupancy',
+    sampleCount: 'sampleCount',
+    lastUpdated: 'lastUpdated'
+  };
+
+  export type OccupancyStatsScalarFieldEnum = (typeof OccupancyStatsScalarFieldEnum)[keyof typeof OccupancyStatsScalarFieldEnum]
+
+
+  export const NotificationLogScalarFieldEnum: {
+    id: 'id',
+    playerId: 'playerId',
+    type: 'type',
+    title: 'title',
+    message: 'message',
+    sentAt: 'sentAt',
+    readAt: 'readAt'
+  };
+
+  export type NotificationLogScalarFieldEnum = (typeof NotificationLogScalarFieldEnum)[keyof typeof NotificationLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6791,6 +21577,62 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FacilityStatus'
+   */
+  export type EnumFacilityStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FacilityStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'FacilityStatus[]'
+   */
+  export type ListEnumFacilityStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FacilityStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SportType'
+   */
+  export type EnumSportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SportType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SportType[]'
+   */
+  export type ListEnumSportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SportType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6802,52 +21644,52 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'BookingStatus'
+   */
+  export type EnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'BookingStatus[]'
+   */
+  export type ListEnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MatchStatus'
+   */
+  export type EnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'MatchStatus[]'
+   */
+  export type ListEnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WaitlistStatus'
+   */
+  export type EnumWaitlistStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WaitlistStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'WaitlistStatus[]'
+   */
+  export type ListEnumWaitlistStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WaitlistStatus[]'>
+    
   /**
    * Deep Input Types
    */
 
-
-  export type TestWhereInput = {
-    AND?: TestWhereInput | TestWhereInput[]
-    OR?: TestWhereInput[]
-    NOT?: TestWhereInput | TestWhereInput[]
-    id?: StringFilter<"Test"> | string
-    name?: StringFilter<"Test"> | string
-    email?: StringFilter<"Test"> | string
-  }
-
-  export type TestOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type TestWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    email?: string
-    AND?: TestWhereInput | TestWhereInput[]
-    OR?: TestWhereInput[]
-    NOT?: TestWhereInput | TestWhereInput[]
-    name?: StringFilter<"Test"> | string
-  }, "id" | "email">
-
-  export type TestOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    _count?: TestCountOrderByAggregateInput
-    _max?: TestMaxOrderByAggregateInput
-    _min?: TestMinOrderByAggregateInput
-  }
-
-  export type TestScalarWhereWithAggregatesInput = {
-    AND?: TestScalarWhereWithAggregatesInput | TestScalarWhereWithAggregatesInput[]
-    OR?: TestScalarWhereWithAggregatesInput[]
-    NOT?: TestScalarWhereWithAggregatesInput | TestScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Test"> | string
-    name?: StringWithAggregatesFilter<"Test"> | string
-    email?: StringWithAggregatesFilter<"Test"> | string
-  }
 
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
@@ -6862,6 +21704,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    playerProfile?: XOR<PlayerProfileNullableScalarRelationFilter, PlayerProfileWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6874,6 +21717,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    playerProfile?: PlayerProfileOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6889,6 +21733,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    playerProfile?: XOR<PlayerProfileNullableScalarRelationFilter, PlayerProfileWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -7139,46 +21984,1019 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
   }
 
-  export type TestCreateInput = {
+  export type PlayerProfileWhereInput = {
+    AND?: PlayerProfileWhereInput | PlayerProfileWhereInput[]
+    OR?: PlayerProfileWhereInput[]
+    NOT?: PlayerProfileWhereInput | PlayerProfileWhereInput[]
+    id?: StringFilter<"PlayerProfile"> | string
+    userId?: StringFilter<"PlayerProfile"> | string
+    role?: EnumUserRoleFilter<"PlayerProfile"> | $Enums.UserRole
+    phoneNumber?: StringNullableFilter<"PlayerProfile"> | string | null
+    avatar?: StringNullableFilter<"PlayerProfile"> | string | null
+    isActive?: BoolFilter<"PlayerProfile"> | boolean
+    isBanned?: BoolFilter<"PlayerProfile"> | boolean
+    bannedUntil?: DateTimeNullableFilter<"PlayerProfile"> | Date | string | null
+    createdAt?: DateTimeFilter<"PlayerProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"PlayerProfile"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    bookings?: BookingListRelationFilter
+    ownedFacilities?: FacilityListRelationFilter
+    ratings?: PlayerRatingListRelationFilter
+    matchPlayers?: MatchPlayerListRelationFilter
+    waitlistEntries?: WaitlistEntryListRelationFilter
+    notifications?: NotificationLogListRelationFilter
+  }
+
+  export type PlayerProfileOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    isBanned?: SortOrder
+    bannedUntil?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    bookings?: BookingOrderByRelationAggregateInput
+    ownedFacilities?: FacilityOrderByRelationAggregateInput
+    ratings?: PlayerRatingOrderByRelationAggregateInput
+    matchPlayers?: MatchPlayerOrderByRelationAggregateInput
+    waitlistEntries?: WaitlistEntryOrderByRelationAggregateInput
+    notifications?: NotificationLogOrderByRelationAggregateInput
+  }
+
+  export type PlayerProfileWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name: string
-    email: string
+    userId?: string
+    AND?: PlayerProfileWhereInput | PlayerProfileWhereInput[]
+    OR?: PlayerProfileWhereInput[]
+    NOT?: PlayerProfileWhereInput | PlayerProfileWhereInput[]
+    role?: EnumUserRoleFilter<"PlayerProfile"> | $Enums.UserRole
+    phoneNumber?: StringNullableFilter<"PlayerProfile"> | string | null
+    avatar?: StringNullableFilter<"PlayerProfile"> | string | null
+    isActive?: BoolFilter<"PlayerProfile"> | boolean
+    isBanned?: BoolFilter<"PlayerProfile"> | boolean
+    bannedUntil?: DateTimeNullableFilter<"PlayerProfile"> | Date | string | null
+    createdAt?: DateTimeFilter<"PlayerProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"PlayerProfile"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    bookings?: BookingListRelationFilter
+    ownedFacilities?: FacilityListRelationFilter
+    ratings?: PlayerRatingListRelationFilter
+    matchPlayers?: MatchPlayerListRelationFilter
+    waitlistEntries?: WaitlistEntryListRelationFilter
+    notifications?: NotificationLogListRelationFilter
+  }, "id" | "userId">
+
+  export type PlayerProfileOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    isBanned?: SortOrder
+    bannedUntil?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PlayerProfileCountOrderByAggregateInput
+    _max?: PlayerProfileMaxOrderByAggregateInput
+    _min?: PlayerProfileMinOrderByAggregateInput
   }
 
-  export type TestUncheckedCreateInput = {
+  export type PlayerProfileScalarWhereWithAggregatesInput = {
+    AND?: PlayerProfileScalarWhereWithAggregatesInput | PlayerProfileScalarWhereWithAggregatesInput[]
+    OR?: PlayerProfileScalarWhereWithAggregatesInput[]
+    NOT?: PlayerProfileScalarWhereWithAggregatesInput | PlayerProfileScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PlayerProfile"> | string
+    userId?: StringWithAggregatesFilter<"PlayerProfile"> | string
+    role?: EnumUserRoleWithAggregatesFilter<"PlayerProfile"> | $Enums.UserRole
+    phoneNumber?: StringNullableWithAggregatesFilter<"PlayerProfile"> | string | null
+    avatar?: StringNullableWithAggregatesFilter<"PlayerProfile"> | string | null
+    isActive?: BoolWithAggregatesFilter<"PlayerProfile"> | boolean
+    isBanned?: BoolWithAggregatesFilter<"PlayerProfile"> | boolean
+    bannedUntil?: DateTimeNullableWithAggregatesFilter<"PlayerProfile"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PlayerProfile"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PlayerProfile"> | Date | string
+  }
+
+  export type FacilityWhereInput = {
+    AND?: FacilityWhereInput | FacilityWhereInput[]
+    OR?: FacilityWhereInput[]
+    NOT?: FacilityWhereInput | FacilityWhereInput[]
+    id?: StringFilter<"Facility"> | string
+    name?: StringFilter<"Facility"> | string
+    description?: StringNullableFilter<"Facility"> | string | null
+    address?: StringFilter<"Facility"> | string
+    latitude?: FloatNullableFilter<"Facility"> | number | null
+    longitude?: FloatNullableFilter<"Facility"> | number | null
+    amenities?: StringNullableListFilter<"Facility">
+    photos?: StringNullableListFilter<"Facility">
+    ownerId?: StringFilter<"Facility"> | string
+    status?: EnumFacilityStatusFilter<"Facility"> | $Enums.FacilityStatus
+    approvedAt?: DateTimeNullableFilter<"Facility"> | Date | string | null
+    approvedBy?: StringNullableFilter<"Facility"> | string | null
+    rejectionReason?: StringNullableFilter<"Facility"> | string | null
+    createdAt?: DateTimeFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeFilter<"Facility"> | Date | string
+    owner?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+    courts?: CourtListRelationFilter
+  }
+
+  export type FacilityOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    address?: SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
+    amenities?: SortOrder
+    photos?: SortOrder
+    ownerId?: SortOrder
+    status?: SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    rejectionReason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    owner?: PlayerProfileOrderByWithRelationInput
+    courts?: CourtOrderByRelationAggregateInput
+  }
+
+  export type FacilityWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name: string
-    email: string
+    AND?: FacilityWhereInput | FacilityWhereInput[]
+    OR?: FacilityWhereInput[]
+    NOT?: FacilityWhereInput | FacilityWhereInput[]
+    name?: StringFilter<"Facility"> | string
+    description?: StringNullableFilter<"Facility"> | string | null
+    address?: StringFilter<"Facility"> | string
+    latitude?: FloatNullableFilter<"Facility"> | number | null
+    longitude?: FloatNullableFilter<"Facility"> | number | null
+    amenities?: StringNullableListFilter<"Facility">
+    photos?: StringNullableListFilter<"Facility">
+    ownerId?: StringFilter<"Facility"> | string
+    status?: EnumFacilityStatusFilter<"Facility"> | $Enums.FacilityStatus
+    approvedAt?: DateTimeNullableFilter<"Facility"> | Date | string | null
+    approvedBy?: StringNullableFilter<"Facility"> | string | null
+    rejectionReason?: StringNullableFilter<"Facility"> | string | null
+    createdAt?: DateTimeFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeFilter<"Facility"> | Date | string
+    owner?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+    courts?: CourtListRelationFilter
+  }, "id">
+
+  export type FacilityOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    address?: SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
+    amenities?: SortOrder
+    photos?: SortOrder
+    ownerId?: SortOrder
+    status?: SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    rejectionReason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FacilityCountOrderByAggregateInput
+    _avg?: FacilityAvgOrderByAggregateInput
+    _max?: FacilityMaxOrderByAggregateInput
+    _min?: FacilityMinOrderByAggregateInput
+    _sum?: FacilitySumOrderByAggregateInput
   }
 
-  export type TestUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+  export type FacilityScalarWhereWithAggregatesInput = {
+    AND?: FacilityScalarWhereWithAggregatesInput | FacilityScalarWhereWithAggregatesInput[]
+    OR?: FacilityScalarWhereWithAggregatesInput[]
+    NOT?: FacilityScalarWhereWithAggregatesInput | FacilityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Facility"> | string
+    name?: StringWithAggregatesFilter<"Facility"> | string
+    description?: StringNullableWithAggregatesFilter<"Facility"> | string | null
+    address?: StringWithAggregatesFilter<"Facility"> | string
+    latitude?: FloatNullableWithAggregatesFilter<"Facility"> | number | null
+    longitude?: FloatNullableWithAggregatesFilter<"Facility"> | number | null
+    amenities?: StringNullableListFilter<"Facility">
+    photos?: StringNullableListFilter<"Facility">
+    ownerId?: StringWithAggregatesFilter<"Facility"> | string
+    status?: EnumFacilityStatusWithAggregatesFilter<"Facility"> | $Enums.FacilityStatus
+    approvedAt?: DateTimeNullableWithAggregatesFilter<"Facility"> | Date | string | null
+    approvedBy?: StringNullableWithAggregatesFilter<"Facility"> | string | null
+    rejectionReason?: StringNullableWithAggregatesFilter<"Facility"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Facility"> | Date | string
   }
 
-  export type TestUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+  export type CourtWhereInput = {
+    AND?: CourtWhereInput | CourtWhereInput[]
+    OR?: CourtWhereInput[]
+    NOT?: CourtWhereInput | CourtWhereInput[]
+    id?: StringFilter<"Court"> | string
+    name?: StringFilter<"Court"> | string
+    facilityId?: StringFilter<"Court"> | string
+    sportType?: EnumSportTypeFilter<"Court"> | $Enums.SportType
+    pricePerHour?: FloatFilter<"Court"> | number
+    operatingStartHour?: IntFilter<"Court"> | number
+    operatingEndHour?: IntFilter<"Court"> | number
+    isActive?: BoolFilter<"Court"> | boolean
+    createdAt?: DateTimeFilter<"Court"> | Date | string
+    updatedAt?: DateTimeFilter<"Court"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    timeSlots?: TimeSlotListRelationFilter
+    bookings?: BookingListRelationFilter
+    occupancyStats?: OccupancyStatsListRelationFilter
   }
 
-  export type TestCreateManyInput = {
+  export type CourtOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facilityId?: SortOrder
+    sportType?: SortOrder
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    facility?: FacilityOrderByWithRelationInput
+    timeSlots?: TimeSlotOrderByRelationAggregateInput
+    bookings?: BookingOrderByRelationAggregateInput
+    occupancyStats?: OccupancyStatsOrderByRelationAggregateInput
+  }
+
+  export type CourtWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name: string
-    email: string
+    AND?: CourtWhereInput | CourtWhereInput[]
+    OR?: CourtWhereInput[]
+    NOT?: CourtWhereInput | CourtWhereInput[]
+    name?: StringFilter<"Court"> | string
+    facilityId?: StringFilter<"Court"> | string
+    sportType?: EnumSportTypeFilter<"Court"> | $Enums.SportType
+    pricePerHour?: FloatFilter<"Court"> | number
+    operatingStartHour?: IntFilter<"Court"> | number
+    operatingEndHour?: IntFilter<"Court"> | number
+    isActive?: BoolFilter<"Court"> | boolean
+    createdAt?: DateTimeFilter<"Court"> | Date | string
+    updatedAt?: DateTimeFilter<"Court"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    timeSlots?: TimeSlotListRelationFilter
+    bookings?: BookingListRelationFilter
+    occupancyStats?: OccupancyStatsListRelationFilter
+  }, "id">
+
+  export type CourtOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facilityId?: SortOrder
+    sportType?: SortOrder
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CourtCountOrderByAggregateInput
+    _avg?: CourtAvgOrderByAggregateInput
+    _max?: CourtMaxOrderByAggregateInput
+    _min?: CourtMinOrderByAggregateInput
+    _sum?: CourtSumOrderByAggregateInput
   }
 
-  export type TestUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+  export type CourtScalarWhereWithAggregatesInput = {
+    AND?: CourtScalarWhereWithAggregatesInput | CourtScalarWhereWithAggregatesInput[]
+    OR?: CourtScalarWhereWithAggregatesInput[]
+    NOT?: CourtScalarWhereWithAggregatesInput | CourtScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Court"> | string
+    name?: StringWithAggregatesFilter<"Court"> | string
+    facilityId?: StringWithAggregatesFilter<"Court"> | string
+    sportType?: EnumSportTypeWithAggregatesFilter<"Court"> | $Enums.SportType
+    pricePerHour?: FloatWithAggregatesFilter<"Court"> | number
+    operatingStartHour?: IntWithAggregatesFilter<"Court"> | number
+    operatingEndHour?: IntWithAggregatesFilter<"Court"> | number
+    isActive?: BoolWithAggregatesFilter<"Court"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Court"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Court"> | Date | string
   }
 
-  export type TestUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+  export type TimeSlotWhereInput = {
+    AND?: TimeSlotWhereInput | TimeSlotWhereInput[]
+    OR?: TimeSlotWhereInput[]
+    NOT?: TimeSlotWhereInput | TimeSlotWhereInput[]
+    id?: StringFilter<"TimeSlot"> | string
+    courtId?: StringFilter<"TimeSlot"> | string
+    startTime?: DateTimeFilter<"TimeSlot"> | Date | string
+    endTime?: DateTimeFilter<"TimeSlot"> | Date | string
+    isMaintenanceBlocked?: BoolFilter<"TimeSlot"> | boolean
+    maintenanceReason?: StringNullableFilter<"TimeSlot"> | string | null
+    version?: IntFilter<"TimeSlot"> | number
+    createdAt?: DateTimeFilter<"TimeSlot"> | Date | string
+    updatedAt?: DateTimeFilter<"TimeSlot"> | Date | string
+    court?: XOR<CourtScalarRelationFilter, CourtWhereInput>
+    booking?: XOR<BookingNullableScalarRelationFilter, BookingWhereInput> | null
+    waitlistEntries?: WaitlistEntryListRelationFilter
+  }
+
+  export type TimeSlotOrderByWithRelationInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isMaintenanceBlocked?: SortOrder
+    maintenanceReason?: SortOrderInput | SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    court?: CourtOrderByWithRelationInput
+    booking?: BookingOrderByWithRelationInput
+    waitlistEntries?: WaitlistEntryOrderByRelationAggregateInput
+  }
+
+  export type TimeSlotWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    courtId_startTime?: TimeSlotCourtIdStartTimeCompoundUniqueInput
+    AND?: TimeSlotWhereInput | TimeSlotWhereInput[]
+    OR?: TimeSlotWhereInput[]
+    NOT?: TimeSlotWhereInput | TimeSlotWhereInput[]
+    courtId?: StringFilter<"TimeSlot"> | string
+    startTime?: DateTimeFilter<"TimeSlot"> | Date | string
+    endTime?: DateTimeFilter<"TimeSlot"> | Date | string
+    isMaintenanceBlocked?: BoolFilter<"TimeSlot"> | boolean
+    maintenanceReason?: StringNullableFilter<"TimeSlot"> | string | null
+    version?: IntFilter<"TimeSlot"> | number
+    createdAt?: DateTimeFilter<"TimeSlot"> | Date | string
+    updatedAt?: DateTimeFilter<"TimeSlot"> | Date | string
+    court?: XOR<CourtScalarRelationFilter, CourtWhereInput>
+    booking?: XOR<BookingNullableScalarRelationFilter, BookingWhereInput> | null
+    waitlistEntries?: WaitlistEntryListRelationFilter
+  }, "id" | "courtId_startTime">
+
+  export type TimeSlotOrderByWithAggregationInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isMaintenanceBlocked?: SortOrder
+    maintenanceReason?: SortOrderInput | SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TimeSlotCountOrderByAggregateInput
+    _avg?: TimeSlotAvgOrderByAggregateInput
+    _max?: TimeSlotMaxOrderByAggregateInput
+    _min?: TimeSlotMinOrderByAggregateInput
+    _sum?: TimeSlotSumOrderByAggregateInput
+  }
+
+  export type TimeSlotScalarWhereWithAggregatesInput = {
+    AND?: TimeSlotScalarWhereWithAggregatesInput | TimeSlotScalarWhereWithAggregatesInput[]
+    OR?: TimeSlotScalarWhereWithAggregatesInput[]
+    NOT?: TimeSlotScalarWhereWithAggregatesInput | TimeSlotScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TimeSlot"> | string
+    courtId?: StringWithAggregatesFilter<"TimeSlot"> | string
+    startTime?: DateTimeWithAggregatesFilter<"TimeSlot"> | Date | string
+    endTime?: DateTimeWithAggregatesFilter<"TimeSlot"> | Date | string
+    isMaintenanceBlocked?: BoolWithAggregatesFilter<"TimeSlot"> | boolean
+    maintenanceReason?: StringNullableWithAggregatesFilter<"TimeSlot"> | string | null
+    version?: IntWithAggregatesFilter<"TimeSlot"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"TimeSlot"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TimeSlot"> | Date | string
+  }
+
+  export type BookingWhereInput = {
+    AND?: BookingWhereInput | BookingWhereInput[]
+    OR?: BookingWhereInput[]
+    NOT?: BookingWhereInput | BookingWhereInput[]
+    id?: StringFilter<"Booking"> | string
+    timeSlotId?: StringFilter<"Booking"> | string
+    courtId?: StringFilter<"Booking"> | string
+    playerId?: StringFilter<"Booking"> | string
+    totalPrice?: FloatFilter<"Booking"> | number
+    status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+    paymentSimulated?: BoolFilter<"Booking"> | boolean
+    bookingNotes?: StringNullableFilter<"Booking"> | string | null
+    cancelledAt?: DateTimeNullableFilter<"Booking"> | Date | string | null
+    cancellationReason?: StringNullableFilter<"Booking"> | string | null
+    version?: IntFilter<"Booking"> | number
+    createdAt?: DateTimeFilter<"Booking"> | Date | string
+    updatedAt?: DateTimeFilter<"Booking"> | Date | string
+    timeSlot?: XOR<TimeSlotScalarRelationFilter, TimeSlotWhereInput>
+    court?: XOR<CourtScalarRelationFilter, CourtWhereInput>
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+    match?: XOR<MatchNullableScalarRelationFilter, MatchWhereInput> | null
+  }
+
+  export type BookingOrderByWithRelationInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    courtId?: SortOrder
+    playerId?: SortOrder
+    totalPrice?: SortOrder
+    status?: SortOrder
+    paymentSimulated?: SortOrder
+    bookingNotes?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    timeSlot?: TimeSlotOrderByWithRelationInput
+    court?: CourtOrderByWithRelationInput
+    player?: PlayerProfileOrderByWithRelationInput
+    match?: MatchOrderByWithRelationInput
+  }
+
+  export type BookingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    timeSlotId?: string
+    AND?: BookingWhereInput | BookingWhereInput[]
+    OR?: BookingWhereInput[]
+    NOT?: BookingWhereInput | BookingWhereInput[]
+    courtId?: StringFilter<"Booking"> | string
+    playerId?: StringFilter<"Booking"> | string
+    totalPrice?: FloatFilter<"Booking"> | number
+    status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+    paymentSimulated?: BoolFilter<"Booking"> | boolean
+    bookingNotes?: StringNullableFilter<"Booking"> | string | null
+    cancelledAt?: DateTimeNullableFilter<"Booking"> | Date | string | null
+    cancellationReason?: StringNullableFilter<"Booking"> | string | null
+    version?: IntFilter<"Booking"> | number
+    createdAt?: DateTimeFilter<"Booking"> | Date | string
+    updatedAt?: DateTimeFilter<"Booking"> | Date | string
+    timeSlot?: XOR<TimeSlotScalarRelationFilter, TimeSlotWhereInput>
+    court?: XOR<CourtScalarRelationFilter, CourtWhereInput>
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+    match?: XOR<MatchNullableScalarRelationFilter, MatchWhereInput> | null
+  }, "id" | "timeSlotId">
+
+  export type BookingOrderByWithAggregationInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    courtId?: SortOrder
+    playerId?: SortOrder
+    totalPrice?: SortOrder
+    status?: SortOrder
+    paymentSimulated?: SortOrder
+    bookingNotes?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BookingCountOrderByAggregateInput
+    _avg?: BookingAvgOrderByAggregateInput
+    _max?: BookingMaxOrderByAggregateInput
+    _min?: BookingMinOrderByAggregateInput
+    _sum?: BookingSumOrderByAggregateInput
+  }
+
+  export type BookingScalarWhereWithAggregatesInput = {
+    AND?: BookingScalarWhereWithAggregatesInput | BookingScalarWhereWithAggregatesInput[]
+    OR?: BookingScalarWhereWithAggregatesInput[]
+    NOT?: BookingScalarWhereWithAggregatesInput | BookingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Booking"> | string
+    timeSlotId?: StringWithAggregatesFilter<"Booking"> | string
+    courtId?: StringWithAggregatesFilter<"Booking"> | string
+    playerId?: StringWithAggregatesFilter<"Booking"> | string
+    totalPrice?: FloatWithAggregatesFilter<"Booking"> | number
+    status?: EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
+    paymentSimulated?: BoolWithAggregatesFilter<"Booking"> | boolean
+    bookingNotes?: StringNullableWithAggregatesFilter<"Booking"> | string | null
+    cancelledAt?: DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
+    cancellationReason?: StringNullableWithAggregatesFilter<"Booking"> | string | null
+    version?: IntWithAggregatesFilter<"Booking"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  }
+
+  export type MatchWhereInput = {
+    AND?: MatchWhereInput | MatchWhereInput[]
+    OR?: MatchWhereInput[]
+    NOT?: MatchWhereInput | MatchWhereInput[]
+    id?: StringFilter<"Match"> | string
+    bookingId?: StringFilter<"Match"> | string
+    title?: StringNullableFilter<"Match"> | string | null
+    description?: StringNullableFilter<"Match"> | string | null
+    maxPlayers?: IntFilter<"Match"> | number
+    sportType?: EnumSportTypeFilter<"Match"> | $Enums.SportType
+    skillLevel?: StringNullableFilter<"Match"> | string | null
+    status?: EnumMatchStatusFilter<"Match"> | $Enums.MatchStatus
+    startTime?: DateTimeFilter<"Match"> | Date | string
+    endTime?: DateTimeFilter<"Match"> | Date | string
+    createdAt?: DateTimeFilter<"Match"> | Date | string
+    updatedAt?: DateTimeFilter<"Match"> | Date | string
+    booking?: XOR<BookingScalarRelationFilter, BookingWhereInput>
+    players?: MatchPlayerListRelationFilter
+  }
+
+  export type MatchOrderByWithRelationInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    maxPlayers?: SortOrder
+    sportType?: SortOrder
+    skillLevel?: SortOrderInput | SortOrder
+    status?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    booking?: BookingOrderByWithRelationInput
+    players?: MatchPlayerOrderByRelationAggregateInput
+  }
+
+  export type MatchWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    bookingId?: string
+    AND?: MatchWhereInput | MatchWhereInput[]
+    OR?: MatchWhereInput[]
+    NOT?: MatchWhereInput | MatchWhereInput[]
+    title?: StringNullableFilter<"Match"> | string | null
+    description?: StringNullableFilter<"Match"> | string | null
+    maxPlayers?: IntFilter<"Match"> | number
+    sportType?: EnumSportTypeFilter<"Match"> | $Enums.SportType
+    skillLevel?: StringNullableFilter<"Match"> | string | null
+    status?: EnumMatchStatusFilter<"Match"> | $Enums.MatchStatus
+    startTime?: DateTimeFilter<"Match"> | Date | string
+    endTime?: DateTimeFilter<"Match"> | Date | string
+    createdAt?: DateTimeFilter<"Match"> | Date | string
+    updatedAt?: DateTimeFilter<"Match"> | Date | string
+    booking?: XOR<BookingScalarRelationFilter, BookingWhereInput>
+    players?: MatchPlayerListRelationFilter
+  }, "id" | "bookingId">
+
+  export type MatchOrderByWithAggregationInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    maxPlayers?: SortOrder
+    sportType?: SortOrder
+    skillLevel?: SortOrderInput | SortOrder
+    status?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MatchCountOrderByAggregateInput
+    _avg?: MatchAvgOrderByAggregateInput
+    _max?: MatchMaxOrderByAggregateInput
+    _min?: MatchMinOrderByAggregateInput
+    _sum?: MatchSumOrderByAggregateInput
+  }
+
+  export type MatchScalarWhereWithAggregatesInput = {
+    AND?: MatchScalarWhereWithAggregatesInput | MatchScalarWhereWithAggregatesInput[]
+    OR?: MatchScalarWhereWithAggregatesInput[]
+    NOT?: MatchScalarWhereWithAggregatesInput | MatchScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Match"> | string
+    bookingId?: StringWithAggregatesFilter<"Match"> | string
+    title?: StringNullableWithAggregatesFilter<"Match"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Match"> | string | null
+    maxPlayers?: IntWithAggregatesFilter<"Match"> | number
+    sportType?: EnumSportTypeWithAggregatesFilter<"Match"> | $Enums.SportType
+    skillLevel?: StringNullableWithAggregatesFilter<"Match"> | string | null
+    status?: EnumMatchStatusWithAggregatesFilter<"Match"> | $Enums.MatchStatus
+    startTime?: DateTimeWithAggregatesFilter<"Match"> | Date | string
+    endTime?: DateTimeWithAggregatesFilter<"Match"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
+  }
+
+  export type MatchPlayerWhereInput = {
+    AND?: MatchPlayerWhereInput | MatchPlayerWhereInput[]
+    OR?: MatchPlayerWhereInput[]
+    NOT?: MatchPlayerWhereInput | MatchPlayerWhereInput[]
+    id?: StringFilter<"MatchPlayer"> | string
+    matchId?: StringFilter<"MatchPlayer"> | string
+    playerId?: StringFilter<"MatchPlayer"> | string
+    joinedAt?: DateTimeFilter<"MatchPlayer"> | Date | string
+    result?: StringNullableFilter<"MatchPlayer"> | string | null
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+  }
+
+  export type MatchPlayerOrderByWithRelationInput = {
+    id?: SortOrder
+    matchId?: SortOrder
+    playerId?: SortOrder
+    joinedAt?: SortOrder
+    result?: SortOrderInput | SortOrder
+    match?: MatchOrderByWithRelationInput
+    player?: PlayerProfileOrderByWithRelationInput
+  }
+
+  export type MatchPlayerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    matchId_playerId?: MatchPlayerMatchIdPlayerIdCompoundUniqueInput
+    AND?: MatchPlayerWhereInput | MatchPlayerWhereInput[]
+    OR?: MatchPlayerWhereInput[]
+    NOT?: MatchPlayerWhereInput | MatchPlayerWhereInput[]
+    matchId?: StringFilter<"MatchPlayer"> | string
+    playerId?: StringFilter<"MatchPlayer"> | string
+    joinedAt?: DateTimeFilter<"MatchPlayer"> | Date | string
+    result?: StringNullableFilter<"MatchPlayer"> | string | null
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+  }, "id" | "matchId_playerId">
+
+  export type MatchPlayerOrderByWithAggregationInput = {
+    id?: SortOrder
+    matchId?: SortOrder
+    playerId?: SortOrder
+    joinedAt?: SortOrder
+    result?: SortOrderInput | SortOrder
+    _count?: MatchPlayerCountOrderByAggregateInput
+    _max?: MatchPlayerMaxOrderByAggregateInput
+    _min?: MatchPlayerMinOrderByAggregateInput
+  }
+
+  export type MatchPlayerScalarWhereWithAggregatesInput = {
+    AND?: MatchPlayerScalarWhereWithAggregatesInput | MatchPlayerScalarWhereWithAggregatesInput[]
+    OR?: MatchPlayerScalarWhereWithAggregatesInput[]
+    NOT?: MatchPlayerScalarWhereWithAggregatesInput | MatchPlayerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MatchPlayer"> | string
+    matchId?: StringWithAggregatesFilter<"MatchPlayer"> | string
+    playerId?: StringWithAggregatesFilter<"MatchPlayer"> | string
+    joinedAt?: DateTimeWithAggregatesFilter<"MatchPlayer"> | Date | string
+    result?: StringNullableWithAggregatesFilter<"MatchPlayer"> | string | null
+  }
+
+  export type PlayerRatingWhereInput = {
+    AND?: PlayerRatingWhereInput | PlayerRatingWhereInput[]
+    OR?: PlayerRatingWhereInput[]
+    NOT?: PlayerRatingWhereInput | PlayerRatingWhereInput[]
+    id?: StringFilter<"PlayerRating"> | string
+    playerId?: StringFilter<"PlayerRating"> | string
+    sportType?: EnumSportTypeFilter<"PlayerRating"> | $Enums.SportType
+    rating?: FloatFilter<"PlayerRating"> | number
+    gamesPlayed?: IntFilter<"PlayerRating"> | number
+    wins?: IntFilter<"PlayerRating"> | number
+    losses?: IntFilter<"PlayerRating"> | number
+    draws?: IntFilter<"PlayerRating"> | number
+    lastMatchAt?: DateTimeNullableFilter<"PlayerRating"> | Date | string | null
+    createdAt?: DateTimeFilter<"PlayerRating"> | Date | string
+    updatedAt?: DateTimeFilter<"PlayerRating"> | Date | string
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+    history?: RatingHistoryListRelationFilter
+  }
+
+  export type PlayerRatingOrderByWithRelationInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    sportType?: SortOrder
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+    lastMatchAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    player?: PlayerProfileOrderByWithRelationInput
+    history?: RatingHistoryOrderByRelationAggregateInput
+  }
+
+  export type PlayerRatingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    playerId_sportType?: PlayerRatingPlayerIdSportTypeCompoundUniqueInput
+    AND?: PlayerRatingWhereInput | PlayerRatingWhereInput[]
+    OR?: PlayerRatingWhereInput[]
+    NOT?: PlayerRatingWhereInput | PlayerRatingWhereInput[]
+    playerId?: StringFilter<"PlayerRating"> | string
+    sportType?: EnumSportTypeFilter<"PlayerRating"> | $Enums.SportType
+    rating?: FloatFilter<"PlayerRating"> | number
+    gamesPlayed?: IntFilter<"PlayerRating"> | number
+    wins?: IntFilter<"PlayerRating"> | number
+    losses?: IntFilter<"PlayerRating"> | number
+    draws?: IntFilter<"PlayerRating"> | number
+    lastMatchAt?: DateTimeNullableFilter<"PlayerRating"> | Date | string | null
+    createdAt?: DateTimeFilter<"PlayerRating"> | Date | string
+    updatedAt?: DateTimeFilter<"PlayerRating"> | Date | string
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+    history?: RatingHistoryListRelationFilter
+  }, "id" | "playerId_sportType">
+
+  export type PlayerRatingOrderByWithAggregationInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    sportType?: SortOrder
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+    lastMatchAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PlayerRatingCountOrderByAggregateInput
+    _avg?: PlayerRatingAvgOrderByAggregateInput
+    _max?: PlayerRatingMaxOrderByAggregateInput
+    _min?: PlayerRatingMinOrderByAggregateInput
+    _sum?: PlayerRatingSumOrderByAggregateInput
+  }
+
+  export type PlayerRatingScalarWhereWithAggregatesInput = {
+    AND?: PlayerRatingScalarWhereWithAggregatesInput | PlayerRatingScalarWhereWithAggregatesInput[]
+    OR?: PlayerRatingScalarWhereWithAggregatesInput[]
+    NOT?: PlayerRatingScalarWhereWithAggregatesInput | PlayerRatingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PlayerRating"> | string
+    playerId?: StringWithAggregatesFilter<"PlayerRating"> | string
+    sportType?: EnumSportTypeWithAggregatesFilter<"PlayerRating"> | $Enums.SportType
+    rating?: FloatWithAggregatesFilter<"PlayerRating"> | number
+    gamesPlayed?: IntWithAggregatesFilter<"PlayerRating"> | number
+    wins?: IntWithAggregatesFilter<"PlayerRating"> | number
+    losses?: IntWithAggregatesFilter<"PlayerRating"> | number
+    draws?: IntWithAggregatesFilter<"PlayerRating"> | number
+    lastMatchAt?: DateTimeNullableWithAggregatesFilter<"PlayerRating"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PlayerRating"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PlayerRating"> | Date | string
+  }
+
+  export type RatingHistoryWhereInput = {
+    AND?: RatingHistoryWhereInput | RatingHistoryWhereInput[]
+    OR?: RatingHistoryWhereInput[]
+    NOT?: RatingHistoryWhereInput | RatingHistoryWhereInput[]
+    id?: StringFilter<"RatingHistory"> | string
+    ratingId?: StringFilter<"RatingHistory"> | string
+    oldRating?: FloatFilter<"RatingHistory"> | number
+    newRating?: FloatFilter<"RatingHistory"> | number
+    ratingChange?: FloatFilter<"RatingHistory"> | number
+    opponentRating?: FloatNullableFilter<"RatingHistory"> | number | null
+    matchResult?: StringFilter<"RatingHistory"> | string
+    createdAt?: DateTimeFilter<"RatingHistory"> | Date | string
+    rating?: XOR<PlayerRatingScalarRelationFilter, PlayerRatingWhereInput>
+  }
+
+  export type RatingHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    ratingId?: SortOrder
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrderInput | SortOrder
+    matchResult?: SortOrder
+    createdAt?: SortOrder
+    rating?: PlayerRatingOrderByWithRelationInput
+  }
+
+  export type RatingHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RatingHistoryWhereInput | RatingHistoryWhereInput[]
+    OR?: RatingHistoryWhereInput[]
+    NOT?: RatingHistoryWhereInput | RatingHistoryWhereInput[]
+    ratingId?: StringFilter<"RatingHistory"> | string
+    oldRating?: FloatFilter<"RatingHistory"> | number
+    newRating?: FloatFilter<"RatingHistory"> | number
+    ratingChange?: FloatFilter<"RatingHistory"> | number
+    opponentRating?: FloatNullableFilter<"RatingHistory"> | number | null
+    matchResult?: StringFilter<"RatingHistory"> | string
+    createdAt?: DateTimeFilter<"RatingHistory"> | Date | string
+    rating?: XOR<PlayerRatingScalarRelationFilter, PlayerRatingWhereInput>
+  }, "id">
+
+  export type RatingHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    ratingId?: SortOrder
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrderInput | SortOrder
+    matchResult?: SortOrder
+    createdAt?: SortOrder
+    _count?: RatingHistoryCountOrderByAggregateInput
+    _avg?: RatingHistoryAvgOrderByAggregateInput
+    _max?: RatingHistoryMaxOrderByAggregateInput
+    _min?: RatingHistoryMinOrderByAggregateInput
+    _sum?: RatingHistorySumOrderByAggregateInput
+  }
+
+  export type RatingHistoryScalarWhereWithAggregatesInput = {
+    AND?: RatingHistoryScalarWhereWithAggregatesInput | RatingHistoryScalarWhereWithAggregatesInput[]
+    OR?: RatingHistoryScalarWhereWithAggregatesInput[]
+    NOT?: RatingHistoryScalarWhereWithAggregatesInput | RatingHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RatingHistory"> | string
+    ratingId?: StringWithAggregatesFilter<"RatingHistory"> | string
+    oldRating?: FloatWithAggregatesFilter<"RatingHistory"> | number
+    newRating?: FloatWithAggregatesFilter<"RatingHistory"> | number
+    ratingChange?: FloatWithAggregatesFilter<"RatingHistory"> | number
+    opponentRating?: FloatNullableWithAggregatesFilter<"RatingHistory"> | number | null
+    matchResult?: StringWithAggregatesFilter<"RatingHistory"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RatingHistory"> | Date | string
+  }
+
+  export type WaitlistEntryWhereInput = {
+    AND?: WaitlistEntryWhereInput | WaitlistEntryWhereInput[]
+    OR?: WaitlistEntryWhereInput[]
+    NOT?: WaitlistEntryWhereInput | WaitlistEntryWhereInput[]
+    id?: StringFilter<"WaitlistEntry"> | string
+    timeSlotId?: StringFilter<"WaitlistEntry"> | string
+    playerId?: StringFilter<"WaitlistEntry"> | string
+    priority?: IntFilter<"WaitlistEntry"> | number
+    status?: EnumWaitlistStatusFilter<"WaitlistEntry"> | $Enums.WaitlistStatus
+    notifiedAt?: DateTimeNullableFilter<"WaitlistEntry"> | Date | string | null
+    expiresAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    createdAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    timeSlot?: XOR<TimeSlotScalarRelationFilter, TimeSlotWhereInput>
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+  }
+
+  export type WaitlistEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    playerId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    notifiedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    timeSlot?: TimeSlotOrderByWithRelationInput
+    player?: PlayerProfileOrderByWithRelationInput
+  }
+
+  export type WaitlistEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    timeSlotId_playerId?: WaitlistEntryTimeSlotIdPlayerIdCompoundUniqueInput
+    AND?: WaitlistEntryWhereInput | WaitlistEntryWhereInput[]
+    OR?: WaitlistEntryWhereInput[]
+    NOT?: WaitlistEntryWhereInput | WaitlistEntryWhereInput[]
+    timeSlotId?: StringFilter<"WaitlistEntry"> | string
+    playerId?: StringFilter<"WaitlistEntry"> | string
+    priority?: IntFilter<"WaitlistEntry"> | number
+    status?: EnumWaitlistStatusFilter<"WaitlistEntry"> | $Enums.WaitlistStatus
+    notifiedAt?: DateTimeNullableFilter<"WaitlistEntry"> | Date | string | null
+    expiresAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    createdAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    timeSlot?: XOR<TimeSlotScalarRelationFilter, TimeSlotWhereInput>
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+  }, "id" | "timeSlotId_playerId">
+
+  export type WaitlistEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    playerId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    notifiedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WaitlistEntryCountOrderByAggregateInput
+    _avg?: WaitlistEntryAvgOrderByAggregateInput
+    _max?: WaitlistEntryMaxOrderByAggregateInput
+    _min?: WaitlistEntryMinOrderByAggregateInput
+    _sum?: WaitlistEntrySumOrderByAggregateInput
+  }
+
+  export type WaitlistEntryScalarWhereWithAggregatesInput = {
+    AND?: WaitlistEntryScalarWhereWithAggregatesInput | WaitlistEntryScalarWhereWithAggregatesInput[]
+    OR?: WaitlistEntryScalarWhereWithAggregatesInput[]
+    NOT?: WaitlistEntryScalarWhereWithAggregatesInput | WaitlistEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WaitlistEntry"> | string
+    timeSlotId?: StringWithAggregatesFilter<"WaitlistEntry"> | string
+    playerId?: StringWithAggregatesFilter<"WaitlistEntry"> | string
+    priority?: IntWithAggregatesFilter<"WaitlistEntry"> | number
+    status?: EnumWaitlistStatusWithAggregatesFilter<"WaitlistEntry"> | $Enums.WaitlistStatus
+    notifiedAt?: DateTimeNullableWithAggregatesFilter<"WaitlistEntry"> | Date | string | null
+    expiresAt?: DateTimeWithAggregatesFilter<"WaitlistEntry"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"WaitlistEntry"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WaitlistEntry"> | Date | string
+  }
+
+  export type OccupancyStatsWhereInput = {
+    AND?: OccupancyStatsWhereInput | OccupancyStatsWhereInput[]
+    OR?: OccupancyStatsWhereInput[]
+    NOT?: OccupancyStatsWhereInput | OccupancyStatsWhereInput[]
+    id?: StringFilter<"OccupancyStats"> | string
+    courtId?: StringFilter<"OccupancyStats"> | string
+    hourOfWeek?: IntFilter<"OccupancyStats"> | number
+    avgOccupancy?: FloatFilter<"OccupancyStats"> | number
+    sampleCount?: IntFilter<"OccupancyStats"> | number
+    lastUpdated?: DateTimeFilter<"OccupancyStats"> | Date | string
+    court?: XOR<CourtScalarRelationFilter, CourtWhereInput>
+  }
+
+  export type OccupancyStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+    lastUpdated?: SortOrder
+    court?: CourtOrderByWithRelationInput
+  }
+
+  export type OccupancyStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    courtId_hourOfWeek?: OccupancyStatsCourtIdHourOfWeekCompoundUniqueInput
+    AND?: OccupancyStatsWhereInput | OccupancyStatsWhereInput[]
+    OR?: OccupancyStatsWhereInput[]
+    NOT?: OccupancyStatsWhereInput | OccupancyStatsWhereInput[]
+    courtId?: StringFilter<"OccupancyStats"> | string
+    hourOfWeek?: IntFilter<"OccupancyStats"> | number
+    avgOccupancy?: FloatFilter<"OccupancyStats"> | number
+    sampleCount?: IntFilter<"OccupancyStats"> | number
+    lastUpdated?: DateTimeFilter<"OccupancyStats"> | Date | string
+    court?: XOR<CourtScalarRelationFilter, CourtWhereInput>
+  }, "id" | "courtId_hourOfWeek">
+
+  export type OccupancyStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+    lastUpdated?: SortOrder
+    _count?: OccupancyStatsCountOrderByAggregateInput
+    _avg?: OccupancyStatsAvgOrderByAggregateInput
+    _max?: OccupancyStatsMaxOrderByAggregateInput
+    _min?: OccupancyStatsMinOrderByAggregateInput
+    _sum?: OccupancyStatsSumOrderByAggregateInput
+  }
+
+  export type OccupancyStatsScalarWhereWithAggregatesInput = {
+    AND?: OccupancyStatsScalarWhereWithAggregatesInput | OccupancyStatsScalarWhereWithAggregatesInput[]
+    OR?: OccupancyStatsScalarWhereWithAggregatesInput[]
+    NOT?: OccupancyStatsScalarWhereWithAggregatesInput | OccupancyStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OccupancyStats"> | string
+    courtId?: StringWithAggregatesFilter<"OccupancyStats"> | string
+    hourOfWeek?: IntWithAggregatesFilter<"OccupancyStats"> | number
+    avgOccupancy?: FloatWithAggregatesFilter<"OccupancyStats"> | number
+    sampleCount?: IntWithAggregatesFilter<"OccupancyStats"> | number
+    lastUpdated?: DateTimeWithAggregatesFilter<"OccupancyStats"> | Date | string
+  }
+
+  export type NotificationLogWhereInput = {
+    AND?: NotificationLogWhereInput | NotificationLogWhereInput[]
+    OR?: NotificationLogWhereInput[]
+    NOT?: NotificationLogWhereInput | NotificationLogWhereInput[]
+    id?: StringFilter<"NotificationLog"> | string
+    playerId?: StringFilter<"NotificationLog"> | string
+    type?: StringFilter<"NotificationLog"> | string
+    title?: StringFilter<"NotificationLog"> | string
+    message?: StringFilter<"NotificationLog"> | string
+    sentAt?: DateTimeFilter<"NotificationLog"> | Date | string
+    readAt?: DateTimeNullableFilter<"NotificationLog"> | Date | string | null
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+  }
+
+  export type NotificationLogOrderByWithRelationInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    sentAt?: SortOrder
+    readAt?: SortOrderInput | SortOrder
+    player?: PlayerProfileOrderByWithRelationInput
+  }
+
+  export type NotificationLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NotificationLogWhereInput | NotificationLogWhereInput[]
+    OR?: NotificationLogWhereInput[]
+    NOT?: NotificationLogWhereInput | NotificationLogWhereInput[]
+    playerId?: StringFilter<"NotificationLog"> | string
+    type?: StringFilter<"NotificationLog"> | string
+    title?: StringFilter<"NotificationLog"> | string
+    message?: StringFilter<"NotificationLog"> | string
+    sentAt?: DateTimeFilter<"NotificationLog"> | Date | string
+    readAt?: DateTimeNullableFilter<"NotificationLog"> | Date | string | null
+    player?: XOR<PlayerProfileScalarRelationFilter, PlayerProfileWhereInput>
+  }, "id">
+
+  export type NotificationLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    sentAt?: SortOrder
+    readAt?: SortOrderInput | SortOrder
+    _count?: NotificationLogCountOrderByAggregateInput
+    _max?: NotificationLogMaxOrderByAggregateInput
+    _min?: NotificationLogMinOrderByAggregateInput
+  }
+
+  export type NotificationLogScalarWhereWithAggregatesInput = {
+    AND?: NotificationLogScalarWhereWithAggregatesInput | NotificationLogScalarWhereWithAggregatesInput[]
+    OR?: NotificationLogScalarWhereWithAggregatesInput[]
+    NOT?: NotificationLogScalarWhereWithAggregatesInput | NotificationLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NotificationLog"> | string
+    playerId?: StringWithAggregatesFilter<"NotificationLog"> | string
+    type?: StringWithAggregatesFilter<"NotificationLog"> | string
+    title?: StringWithAggregatesFilter<"NotificationLog"> | string
+    message?: StringWithAggregatesFilter<"NotificationLog"> | string
+    sentAt?: DateTimeWithAggregatesFilter<"NotificationLog"> | Date | string
+    readAt?: DateTimeNullableWithAggregatesFilter<"NotificationLog"> | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -7191,6 +23009,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    playerProfile?: PlayerProfileCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7203,6 +23022,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7215,6 +23035,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    playerProfile?: PlayerProfileUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7227,6 +23048,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    playerProfile?: PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7509,6 +23331,1107 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type PlayerProfileCreateInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileCreateManyInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PlayerProfileUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerProfileUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: PlayerProfileCreateNestedOneWithoutOwnedFacilitiesInput
+    courts?: CourtCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    ownerId: string
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courts?: CourtUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: PlayerProfileUpdateOneRequiredWithoutOwnedFacilitiesNestedInput
+    courts?: CourtUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    ownerId?: StringFieldUpdateOperationsInput | string
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courts?: CourtUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    ownerId: string
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    ownerId?: StringFieldUpdateOperationsInput | string
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourtCreateInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCourtsInput
+    timeSlots?: TimeSlotCreateNestedManyWithoutCourtInput
+    bookings?: BookingCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtUncheckedCreateInput = {
+    id?: string
+    name: string
+    facilityId: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutCourtInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsUncheckedCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCourtsNestedInput
+    timeSlots?: TimeSlotUpdateManyWithoutCourtNestedInput
+    bookings?: BookingUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlots?: TimeSlotUncheckedUpdateManyWithoutCourtNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUncheckedUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtCreateManyInput = {
+    id?: string
+    name: string
+    facilityId: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CourtUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourtUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeSlotCreateInput = {
+    id?: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    court: CourtCreateNestedOneWithoutTimeSlotsInput
+    booking?: BookingCreateNestedOneWithoutTimeSlotInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutTimeSlotInput
+  }
+
+  export type TimeSlotUncheckedCreateInput = {
+    id?: string
+    courtId: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booking?: BookingUncheckedCreateNestedOneWithoutTimeSlotInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutTimeSlotInput
+  }
+
+  export type TimeSlotUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    court?: CourtUpdateOneRequiredWithoutTimeSlotsNestedInput
+    booking?: BookingUpdateOneWithoutTimeSlotNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutTimeSlotNestedInput
+  }
+
+  export type TimeSlotUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booking?: BookingUncheckedUpdateOneWithoutTimeSlotNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutTimeSlotNestedInput
+  }
+
+  export type TimeSlotCreateManyInput = {
+    id?: string
+    courtId: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimeSlotUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeSlotUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookingCreateInput = {
+    id?: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlot: TimeSlotCreateNestedOneWithoutBookingInput
+    court: CourtCreateNestedOneWithoutBookingsInput
+    player: PlayerProfileCreateNestedOneWithoutBookingsInput
+    match?: MatchCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingUncheckedCreateInput = {
+    id?: string
+    timeSlotId: string
+    courtId: string
+    playerId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    match?: MatchUncheckedCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlot?: TimeSlotUpdateOneRequiredWithoutBookingNestedInput
+    court?: CourtUpdateOneRequiredWithoutBookingsNestedInput
+    player?: PlayerProfileUpdateOneRequiredWithoutBookingsNestedInput
+    match?: MatchUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    match?: MatchUncheckedUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingCreateManyInput = {
+    id?: string
+    timeSlotId: string
+    courtId: string
+    playerId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BookingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchCreateInput = {
+    id?: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booking: BookingCreateNestedOneWithoutMatchInput
+    players?: MatchPlayerCreateNestedManyWithoutMatchInput
+  }
+
+  export type MatchUncheckedCreateInput = {
+    id?: string
+    bookingId: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    players?: MatchPlayerUncheckedCreateNestedManyWithoutMatchInput
+  }
+
+  export type MatchUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booking?: BookingUpdateOneRequiredWithoutMatchNestedInput
+    players?: MatchPlayerUpdateManyWithoutMatchNestedInput
+  }
+
+  export type MatchUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookingId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    players?: MatchPlayerUncheckedUpdateManyWithoutMatchNestedInput
+  }
+
+  export type MatchCreateManyInput = {
+    id?: string
+    bookingId: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MatchUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookingId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchPlayerCreateInput = {
+    id?: string
+    joinedAt?: Date | string
+    result?: string | null
+    match: MatchCreateNestedOneWithoutPlayersInput
+    player: PlayerProfileCreateNestedOneWithoutMatchPlayersInput
+  }
+
+  export type MatchPlayerUncheckedCreateInput = {
+    id?: string
+    matchId: string
+    playerId: string
+    joinedAt?: Date | string
+    result?: string | null
+  }
+
+  export type MatchPlayerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    match?: MatchUpdateOneRequiredWithoutPlayersNestedInput
+    player?: PlayerProfileUpdateOneRequiredWithoutMatchPlayersNestedInput
+  }
+
+  export type MatchPlayerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MatchPlayerCreateManyInput = {
+    id?: string
+    matchId: string
+    playerId: string
+    joinedAt?: Date | string
+    result?: string | null
+  }
+
+  export type MatchPlayerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MatchPlayerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PlayerRatingCreateInput = {
+    id?: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    player: PlayerProfileCreateNestedOneWithoutRatingsInput
+    history?: RatingHistoryCreateNestedManyWithoutRatingInput
+  }
+
+  export type PlayerRatingUncheckedCreateInput = {
+    id?: string
+    playerId: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    history?: RatingHistoryUncheckedCreateNestedManyWithoutRatingInput
+  }
+
+  export type PlayerRatingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    player?: PlayerProfileUpdateOneRequiredWithoutRatingsNestedInput
+    history?: RatingHistoryUpdateManyWithoutRatingNestedInput
+  }
+
+  export type PlayerRatingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    history?: RatingHistoryUncheckedUpdateManyWithoutRatingNestedInput
+  }
+
+  export type PlayerRatingCreateManyInput = {
+    id?: string
+    playerId: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PlayerRatingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerRatingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingHistoryCreateInput = {
+    id?: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating?: number | null
+    matchResult: string
+    createdAt?: Date | string
+    rating: PlayerRatingCreateNestedOneWithoutHistoryInput
+  }
+
+  export type RatingHistoryUncheckedCreateInput = {
+    id?: string
+    ratingId: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating?: number | null
+    matchResult: string
+    createdAt?: Date | string
+  }
+
+  export type RatingHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rating?: PlayerRatingUpdateOneRequiredWithoutHistoryNestedInput
+  }
+
+  export type RatingHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ratingId?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingHistoryCreateManyInput = {
+    id?: string
+    ratingId: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating?: number | null
+    matchResult: string
+    createdAt?: Date | string
+  }
+
+  export type RatingHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ratingId?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WaitlistEntryCreateInput = {
+    id?: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlot: TimeSlotCreateNestedOneWithoutWaitlistEntriesInput
+    player: PlayerProfileCreateNestedOneWithoutWaitlistEntriesInput
+  }
+
+  export type WaitlistEntryUncheckedCreateInput = {
+    id?: string
+    timeSlotId: string
+    playerId: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WaitlistEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlot?: TimeSlotUpdateOneRequiredWithoutWaitlistEntriesNestedInput
+    player?: PlayerProfileUpdateOneRequiredWithoutWaitlistEntriesNestedInput
+  }
+
+  export type WaitlistEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WaitlistEntryCreateManyInput = {
+    id?: string
+    timeSlotId: string
+    playerId: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WaitlistEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WaitlistEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OccupancyStatsCreateInput = {
+    id?: string
+    hourOfWeek: number
+    avgOccupancy?: number
+    sampleCount?: number
+    lastUpdated?: Date | string
+    court: CourtCreateNestedOneWithoutOccupancyStatsInput
+  }
+
+  export type OccupancyStatsUncheckedCreateInput = {
+    id?: string
+    courtId: string
+    hourOfWeek: number
+    avgOccupancy?: number
+    sampleCount?: number
+    lastUpdated?: Date | string
+  }
+
+  export type OccupancyStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    court?: CourtUpdateOneRequiredWithoutOccupancyStatsNestedInput
+  }
+
+  export type OccupancyStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OccupancyStatsCreateManyInput = {
+    id?: string
+    courtId: string
+    hourOfWeek: number
+    avgOccupancy?: number
+    sampleCount?: number
+    lastUpdated?: Date | string
+  }
+
+  export type OccupancyStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OccupancyStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationLogCreateInput = {
+    id?: string
+    type: string
+    title: string
+    message: string
+    sentAt?: Date | string
+    readAt?: Date | string | null
+    player: PlayerProfileCreateNestedOneWithoutNotificationsInput
+  }
+
+  export type NotificationLogUncheckedCreateInput = {
+    id?: string
+    playerId: string
+    type: string
+    title: string
+    message: string
+    sentAt?: Date | string
+    readAt?: Date | string | null
+  }
+
+  export type NotificationLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    player?: PlayerProfileUpdateOneRequiredWithoutNotificationsNestedInput
+  }
+
+  export type NotificationLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NotificationLogCreateManyInput = {
+    id?: string
+    playerId: string
+    type: string
+    title: string
+    message: string
+    sentAt?: Date | string
+    readAt?: Date | string | null
+  }
+
+  export type NotificationLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NotificationLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7522,42 +24445,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type TestCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type TestMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type TestMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -7603,6 +24490,11 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
+  export type PlayerProfileNullableScalarRelationFilter = {
+    is?: PlayerProfileWhereInput | null
+    isNot?: PlayerProfileWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -7644,6 +24536,24 @@ export namespace Prisma {
     image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -7824,8 +24734,912 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
+  export type BookingListRelationFilter = {
+    every?: BookingWhereInput
+    some?: BookingWhereInput
+    none?: BookingWhereInput
+  }
+
+  export type FacilityListRelationFilter = {
+    every?: FacilityWhereInput
+    some?: FacilityWhereInput
+    none?: FacilityWhereInput
+  }
+
+  export type PlayerRatingListRelationFilter = {
+    every?: PlayerRatingWhereInput
+    some?: PlayerRatingWhereInput
+    none?: PlayerRatingWhereInput
+  }
+
+  export type MatchPlayerListRelationFilter = {
+    every?: MatchPlayerWhereInput
+    some?: MatchPlayerWhereInput
+    none?: MatchPlayerWhereInput
+  }
+
+  export type WaitlistEntryListRelationFilter = {
+    every?: WaitlistEntryWhereInput
+    some?: WaitlistEntryWhereInput
+    none?: WaitlistEntryWhereInput
+  }
+
+  export type NotificationLogListRelationFilter = {
+    every?: NotificationLogWhereInput
+    some?: NotificationLogWhereInput
+    none?: NotificationLogWhereInput
+  }
+
+  export type BookingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FacilityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PlayerRatingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MatchPlayerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WaitlistEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PlayerProfileCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    phoneNumber?: SortOrder
+    avatar?: SortOrder
+    isActive?: SortOrder
+    isBanned?: SortOrder
+    bannedUntil?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PlayerProfileMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    phoneNumber?: SortOrder
+    avatar?: SortOrder
+    isActive?: SortOrder
+    isBanned?: SortOrder
+    bannedUntil?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PlayerProfileMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    phoneNumber?: SortOrder
+    avatar?: SortOrder
+    isActive?: SortOrder
+    isBanned?: SortOrder
+    bannedUntil?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumFacilityStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FacilityStatus | EnumFacilityStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFacilityStatusFilter<$PrismaModel> | $Enums.FacilityStatus
+  }
+
+  export type PlayerProfileScalarRelationFilter = {
+    is?: PlayerProfileWhereInput
+    isNot?: PlayerProfileWhereInput
+  }
+
+  export type CourtListRelationFilter = {
+    every?: CourtWhereInput
+    some?: CourtWhereInput
+    none?: CourtWhereInput
+  }
+
+  export type CourtOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FacilityCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    address?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    amenities?: SortOrder
+    photos?: SortOrder
+    ownerId?: SortOrder
+    status?: SortOrder
+    approvedAt?: SortOrder
+    approvedBy?: SortOrder
+    rejectionReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityAvgOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type FacilityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    address?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    ownerId?: SortOrder
+    status?: SortOrder
+    approvedAt?: SortOrder
+    approvedBy?: SortOrder
+    rejectionReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilityMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    address?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    ownerId?: SortOrder
+    status?: SortOrder
+    approvedAt?: SortOrder
+    approvedBy?: SortOrder
+    rejectionReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FacilitySumOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumFacilityStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FacilityStatus | EnumFacilityStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFacilityStatusWithAggregatesFilter<$PrismaModel> | $Enums.FacilityStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFacilityStatusFilter<$PrismaModel>
+    _max?: NestedEnumFacilityStatusFilter<$PrismaModel>
+  }
+
+  export type EnumSportTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SportType | EnumSportTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSportTypeFilter<$PrismaModel> | $Enums.SportType
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type FacilityScalarRelationFilter = {
+    is?: FacilityWhereInput
+    isNot?: FacilityWhereInput
+  }
+
+  export type TimeSlotListRelationFilter = {
+    every?: TimeSlotWhereInput
+    some?: TimeSlotWhereInput
+    none?: TimeSlotWhereInput
+  }
+
+  export type OccupancyStatsListRelationFilter = {
+    every?: OccupancyStatsWhereInput
+    some?: OccupancyStatsWhereInput
+    none?: OccupancyStatsWhereInput
+  }
+
+  export type TimeSlotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OccupancyStatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CourtCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facilityId?: SortOrder
+    sportType?: SortOrder
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CourtAvgOrderByAggregateInput = {
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+  }
+
+  export type CourtMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facilityId?: SortOrder
+    sportType?: SortOrder
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CourtMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facilityId?: SortOrder
+    sportType?: SortOrder
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CourtSumOrderByAggregateInput = {
+    pricePerHour?: SortOrder
+    operatingStartHour?: SortOrder
+    operatingEndHour?: SortOrder
+  }
+
+  export type EnumSportTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SportType | EnumSportTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSportTypeWithAggregatesFilter<$PrismaModel> | $Enums.SportType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSportTypeFilter<$PrismaModel>
+    _max?: NestedEnumSportTypeFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type CourtScalarRelationFilter = {
+    is?: CourtWhereInput
+    isNot?: CourtWhereInput
+  }
+
+  export type BookingNullableScalarRelationFilter = {
+    is?: BookingWhereInput | null
+    isNot?: BookingWhereInput | null
+  }
+
+  export type TimeSlotCourtIdStartTimeCompoundUniqueInput = {
+    courtId: string
+    startTime: Date | string
+  }
+
+  export type TimeSlotCountOrderByAggregateInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isMaintenanceBlocked?: SortOrder
+    maintenanceReason?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TimeSlotAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type TimeSlotMaxOrderByAggregateInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isMaintenanceBlocked?: SortOrder
+    maintenanceReason?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TimeSlotMinOrderByAggregateInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    isMaintenanceBlocked?: SortOrder
+    maintenanceReason?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TimeSlotSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type EnumBookingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBookingStatusFilter<$PrismaModel> | $Enums.BookingStatus
+  }
+
+  export type TimeSlotScalarRelationFilter = {
+    is?: TimeSlotWhereInput
+    isNot?: TimeSlotWhereInput
+  }
+
+  export type MatchNullableScalarRelationFilter = {
+    is?: MatchWhereInput | null
+    isNot?: MatchWhereInput | null
+  }
+
+  export type BookingCountOrderByAggregateInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    courtId?: SortOrder
+    playerId?: SortOrder
+    totalPrice?: SortOrder
+    status?: SortOrder
+    paymentSimulated?: SortOrder
+    bookingNotes?: SortOrder
+    cancelledAt?: SortOrder
+    cancellationReason?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BookingAvgOrderByAggregateInput = {
+    totalPrice?: SortOrder
+    version?: SortOrder
+  }
+
+  export type BookingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    courtId?: SortOrder
+    playerId?: SortOrder
+    totalPrice?: SortOrder
+    status?: SortOrder
+    paymentSimulated?: SortOrder
+    bookingNotes?: SortOrder
+    cancelledAt?: SortOrder
+    cancellationReason?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BookingMinOrderByAggregateInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    courtId?: SortOrder
+    playerId?: SortOrder
+    totalPrice?: SortOrder
+    status?: SortOrder
+    paymentSimulated?: SortOrder
+    bookingNotes?: SortOrder
+    cancelledAt?: SortOrder
+    cancellationReason?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BookingSumOrderByAggregateInput = {
+    totalPrice?: SortOrder
+    version?: SortOrder
+  }
+
+  export type EnumBookingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBookingStatusWithAggregatesFilter<$PrismaModel> | $Enums.BookingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBookingStatusFilter<$PrismaModel>
+    _max?: NestedEnumBookingStatusFilter<$PrismaModel>
+  }
+
+  export type EnumMatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusFilter<$PrismaModel> | $Enums.MatchStatus
+  }
+
+  export type BookingScalarRelationFilter = {
+    is?: BookingWhereInput
+    isNot?: BookingWhereInput
+  }
+
+  export type MatchCountOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    maxPlayers?: SortOrder
+    sportType?: SortOrder
+    skillLevel?: SortOrder
+    status?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MatchAvgOrderByAggregateInput = {
+    maxPlayers?: SortOrder
+  }
+
+  export type MatchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    maxPlayers?: SortOrder
+    sportType?: SortOrder
+    skillLevel?: SortOrder
+    status?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MatchMinOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    maxPlayers?: SortOrder
+    sportType?: SortOrder
+    skillLevel?: SortOrder
+    status?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MatchSumOrderByAggregateInput = {
+    maxPlayers?: SortOrder
+  }
+
+  export type EnumMatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.MatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumMatchStatusFilter<$PrismaModel>
+  }
+
+  export type MatchScalarRelationFilter = {
+    is?: MatchWhereInput
+    isNot?: MatchWhereInput
+  }
+
+  export type MatchPlayerMatchIdPlayerIdCompoundUniqueInput = {
+    matchId: string
+    playerId: string
+  }
+
+  export type MatchPlayerCountOrderByAggregateInput = {
+    id?: SortOrder
+    matchId?: SortOrder
+    playerId?: SortOrder
+    joinedAt?: SortOrder
+    result?: SortOrder
+  }
+
+  export type MatchPlayerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    matchId?: SortOrder
+    playerId?: SortOrder
+    joinedAt?: SortOrder
+    result?: SortOrder
+  }
+
+  export type MatchPlayerMinOrderByAggregateInput = {
+    id?: SortOrder
+    matchId?: SortOrder
+    playerId?: SortOrder
+    joinedAt?: SortOrder
+    result?: SortOrder
+  }
+
+  export type RatingHistoryListRelationFilter = {
+    every?: RatingHistoryWhereInput
+    some?: RatingHistoryWhereInput
+    none?: RatingHistoryWhereInput
+  }
+
+  export type RatingHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PlayerRatingPlayerIdSportTypeCompoundUniqueInput = {
+    playerId: string
+    sportType: $Enums.SportType
+  }
+
+  export type PlayerRatingCountOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    sportType?: SortOrder
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+    lastMatchAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PlayerRatingAvgOrderByAggregateInput = {
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+  }
+
+  export type PlayerRatingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    sportType?: SortOrder
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+    lastMatchAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PlayerRatingMinOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    sportType?: SortOrder
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+    lastMatchAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PlayerRatingSumOrderByAggregateInput = {
+    rating?: SortOrder
+    gamesPlayed?: SortOrder
+    wins?: SortOrder
+    losses?: SortOrder
+    draws?: SortOrder
+  }
+
+  export type PlayerRatingScalarRelationFilter = {
+    is?: PlayerRatingWhereInput
+    isNot?: PlayerRatingWhereInput
+  }
+
+  export type RatingHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    ratingId?: SortOrder
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrder
+    matchResult?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RatingHistoryAvgOrderByAggregateInput = {
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrder
+  }
+
+  export type RatingHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    ratingId?: SortOrder
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrder
+    matchResult?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RatingHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    ratingId?: SortOrder
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrder
+    matchResult?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RatingHistorySumOrderByAggregateInput = {
+    oldRating?: SortOrder
+    newRating?: SortOrder
+    ratingChange?: SortOrder
+    opponentRating?: SortOrder
+  }
+
+  export type EnumWaitlistStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WaitlistStatus | EnumWaitlistStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWaitlistStatusFilter<$PrismaModel> | $Enums.WaitlistStatus
+  }
+
+  export type WaitlistEntryTimeSlotIdPlayerIdCompoundUniqueInput = {
+    timeSlotId: string
+    playerId: string
+  }
+
+  export type WaitlistEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    playerId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    notifiedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WaitlistEntryAvgOrderByAggregateInput = {
+    priority?: SortOrder
+  }
+
+  export type WaitlistEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    playerId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    notifiedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WaitlistEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    timeSlotId?: SortOrder
+    playerId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    notifiedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WaitlistEntrySumOrderByAggregateInput = {
+    priority?: SortOrder
+  }
+
+  export type EnumWaitlistStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WaitlistStatus | EnumWaitlistStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWaitlistStatusWithAggregatesFilter<$PrismaModel> | $Enums.WaitlistStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWaitlistStatusFilter<$PrismaModel>
+    _max?: NestedEnumWaitlistStatusFilter<$PrismaModel>
+  }
+
+  export type OccupancyStatsCourtIdHourOfWeekCompoundUniqueInput = {
+    courtId: string
+    hourOfWeek: number
+  }
+
+  export type OccupancyStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+    lastUpdated?: SortOrder
+  }
+
+  export type OccupancyStatsAvgOrderByAggregateInput = {
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+  }
+
+  export type OccupancyStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+    lastUpdated?: SortOrder
+  }
+
+  export type OccupancyStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    courtId?: SortOrder
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+    lastUpdated?: SortOrder
+  }
+
+  export type OccupancyStatsSumOrderByAggregateInput = {
+    hourOfWeek?: SortOrder
+    avgOccupancy?: SortOrder
+    sampleCount?: SortOrder
+  }
+
+  export type NotificationLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    sentAt?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type NotificationLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    sentAt?: SortOrder
+    readAt?: SortOrder
+  }
+
+  export type NotificationLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    message?: SortOrder
+    sentAt?: SortOrder
+    readAt?: SortOrder
   }
 
   export type SessionCreateNestedManyWithoutUserInput = {
@@ -7842,6 +25656,12 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type PlayerProfileCreateNestedOneWithoutUserInput = {
+    create?: XOR<PlayerProfileCreateWithoutUserInput, PlayerProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutUserInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -7854,6 +25674,16 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type PlayerProfileUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<PlayerProfileCreateWithoutUserInput, PlayerProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutUserInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -7896,6 +25726,16 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type PlayerProfileUpdateOneWithoutUserNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutUserInput, PlayerProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutUserInput
+    upsert?: PlayerProfileUpsertWithoutUserInput
+    disconnect?: PlayerProfileWhereInput | boolean
+    delete?: PlayerProfileWhereInput | boolean
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutUserInput, PlayerProfileUpdateWithoutUserInput>, PlayerProfileUncheckedUpdateWithoutUserInput>
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -7922,6 +25762,16 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type PlayerProfileUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutUserInput, PlayerProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutUserInput
+    upsert?: PlayerProfileUpsertWithoutUserInput
+    disconnect?: PlayerProfileWhereInput | boolean
+    delete?: PlayerProfileWhereInput | boolean
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutUserInput, PlayerProfileUpdateWithoutUserInput>, PlayerProfileUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -7956,6 +25806,906 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
   }
 
+  export type UserCreateNestedOneWithoutPlayerProfileInput = {
+    create?: XOR<UserCreateWithoutPlayerProfileInput, UserUncheckedCreateWithoutPlayerProfileInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPlayerProfileInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BookingCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<BookingCreateWithoutPlayerInput, BookingUncheckedCreateWithoutPlayerInput> | BookingCreateWithoutPlayerInput[] | BookingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutPlayerInput | BookingCreateOrConnectWithoutPlayerInput[]
+    createMany?: BookingCreateManyPlayerInputEnvelope
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type FacilityCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<FacilityCreateWithoutOwnerInput, FacilityUncheckedCreateWithoutOwnerInput> | FacilityCreateWithoutOwnerInput[] | FacilityUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: FacilityCreateOrConnectWithoutOwnerInput | FacilityCreateOrConnectWithoutOwnerInput[]
+    createMany?: FacilityCreateManyOwnerInputEnvelope
+    connect?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+  }
+
+  export type PlayerRatingCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<PlayerRatingCreateWithoutPlayerInput, PlayerRatingUncheckedCreateWithoutPlayerInput> | PlayerRatingCreateWithoutPlayerInput[] | PlayerRatingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerRatingCreateOrConnectWithoutPlayerInput | PlayerRatingCreateOrConnectWithoutPlayerInput[]
+    createMany?: PlayerRatingCreateManyPlayerInputEnvelope
+    connect?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+  }
+
+  export type MatchPlayerCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<MatchPlayerCreateWithoutPlayerInput, MatchPlayerUncheckedCreateWithoutPlayerInput> | MatchPlayerCreateWithoutPlayerInput[] | MatchPlayerUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutPlayerInput | MatchPlayerCreateOrConnectWithoutPlayerInput[]
+    createMany?: MatchPlayerCreateManyPlayerInputEnvelope
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+  }
+
+  export type WaitlistEntryCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<WaitlistEntryCreateWithoutPlayerInput, WaitlistEntryUncheckedCreateWithoutPlayerInput> | WaitlistEntryCreateWithoutPlayerInput[] | WaitlistEntryUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutPlayerInput | WaitlistEntryCreateOrConnectWithoutPlayerInput[]
+    createMany?: WaitlistEntryCreateManyPlayerInputEnvelope
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+  }
+
+  export type NotificationLogCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<NotificationLogCreateWithoutPlayerInput, NotificationLogUncheckedCreateWithoutPlayerInput> | NotificationLogCreateWithoutPlayerInput[] | NotificationLogUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: NotificationLogCreateOrConnectWithoutPlayerInput | NotificationLogCreateOrConnectWithoutPlayerInput[]
+    createMany?: NotificationLogCreateManyPlayerInputEnvelope
+    connect?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+  }
+
+  export type BookingUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<BookingCreateWithoutPlayerInput, BookingUncheckedCreateWithoutPlayerInput> | BookingCreateWithoutPlayerInput[] | BookingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutPlayerInput | BookingCreateOrConnectWithoutPlayerInput[]
+    createMany?: BookingCreateManyPlayerInputEnvelope
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type FacilityUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<FacilityCreateWithoutOwnerInput, FacilityUncheckedCreateWithoutOwnerInput> | FacilityCreateWithoutOwnerInput[] | FacilityUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: FacilityCreateOrConnectWithoutOwnerInput | FacilityCreateOrConnectWithoutOwnerInput[]
+    createMany?: FacilityCreateManyOwnerInputEnvelope
+    connect?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+  }
+
+  export type PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<PlayerRatingCreateWithoutPlayerInput, PlayerRatingUncheckedCreateWithoutPlayerInput> | PlayerRatingCreateWithoutPlayerInput[] | PlayerRatingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerRatingCreateOrConnectWithoutPlayerInput | PlayerRatingCreateOrConnectWithoutPlayerInput[]
+    createMany?: PlayerRatingCreateManyPlayerInputEnvelope
+    connect?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+  }
+
+  export type MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<MatchPlayerCreateWithoutPlayerInput, MatchPlayerUncheckedCreateWithoutPlayerInput> | MatchPlayerCreateWithoutPlayerInput[] | MatchPlayerUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutPlayerInput | MatchPlayerCreateOrConnectWithoutPlayerInput[]
+    createMany?: MatchPlayerCreateManyPlayerInputEnvelope
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+  }
+
+  export type WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<WaitlistEntryCreateWithoutPlayerInput, WaitlistEntryUncheckedCreateWithoutPlayerInput> | WaitlistEntryCreateWithoutPlayerInput[] | WaitlistEntryUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutPlayerInput | WaitlistEntryCreateOrConnectWithoutPlayerInput[]
+    createMany?: WaitlistEntryCreateManyPlayerInputEnvelope
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+  }
+
+  export type NotificationLogUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<NotificationLogCreateWithoutPlayerInput, NotificationLogUncheckedCreateWithoutPlayerInput> | NotificationLogCreateWithoutPlayerInput[] | NotificationLogUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: NotificationLogCreateOrConnectWithoutPlayerInput | NotificationLogCreateOrConnectWithoutPlayerInput[]
+    createMany?: NotificationLogCreateManyPlayerInputEnvelope
+    connect?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+  }
+
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
+  }
+
+  export type UserUpdateOneRequiredWithoutPlayerProfileNestedInput = {
+    create?: XOR<UserCreateWithoutPlayerProfileInput, UserUncheckedCreateWithoutPlayerProfileInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPlayerProfileInput
+    upsert?: UserUpsertWithoutPlayerProfileInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPlayerProfileInput, UserUpdateWithoutPlayerProfileInput>, UserUncheckedUpdateWithoutPlayerProfileInput>
+  }
+
+  export type BookingUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<BookingCreateWithoutPlayerInput, BookingUncheckedCreateWithoutPlayerInput> | BookingCreateWithoutPlayerInput[] | BookingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutPlayerInput | BookingCreateOrConnectWithoutPlayerInput[]
+    upsert?: BookingUpsertWithWhereUniqueWithoutPlayerInput | BookingUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: BookingCreateManyPlayerInputEnvelope
+    set?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    disconnect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    delete?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    update?: BookingUpdateWithWhereUniqueWithoutPlayerInput | BookingUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: BookingUpdateManyWithWhereWithoutPlayerInput | BookingUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type FacilityUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<FacilityCreateWithoutOwnerInput, FacilityUncheckedCreateWithoutOwnerInput> | FacilityCreateWithoutOwnerInput[] | FacilityUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: FacilityCreateOrConnectWithoutOwnerInput | FacilityCreateOrConnectWithoutOwnerInput[]
+    upsert?: FacilityUpsertWithWhereUniqueWithoutOwnerInput | FacilityUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: FacilityCreateManyOwnerInputEnvelope
+    set?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    disconnect?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    delete?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    connect?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    update?: FacilityUpdateWithWhereUniqueWithoutOwnerInput | FacilityUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: FacilityUpdateManyWithWhereWithoutOwnerInput | FacilityUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: FacilityScalarWhereInput | FacilityScalarWhereInput[]
+  }
+
+  export type PlayerRatingUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<PlayerRatingCreateWithoutPlayerInput, PlayerRatingUncheckedCreateWithoutPlayerInput> | PlayerRatingCreateWithoutPlayerInput[] | PlayerRatingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerRatingCreateOrConnectWithoutPlayerInput | PlayerRatingCreateOrConnectWithoutPlayerInput[]
+    upsert?: PlayerRatingUpsertWithWhereUniqueWithoutPlayerInput | PlayerRatingUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: PlayerRatingCreateManyPlayerInputEnvelope
+    set?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    disconnect?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    delete?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    connect?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    update?: PlayerRatingUpdateWithWhereUniqueWithoutPlayerInput | PlayerRatingUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: PlayerRatingUpdateManyWithWhereWithoutPlayerInput | PlayerRatingUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: PlayerRatingScalarWhereInput | PlayerRatingScalarWhereInput[]
+  }
+
+  export type MatchPlayerUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<MatchPlayerCreateWithoutPlayerInput, MatchPlayerUncheckedCreateWithoutPlayerInput> | MatchPlayerCreateWithoutPlayerInput[] | MatchPlayerUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutPlayerInput | MatchPlayerCreateOrConnectWithoutPlayerInput[]
+    upsert?: MatchPlayerUpsertWithWhereUniqueWithoutPlayerInput | MatchPlayerUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: MatchPlayerCreateManyPlayerInputEnvelope
+    set?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    disconnect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    delete?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    update?: MatchPlayerUpdateWithWhereUniqueWithoutPlayerInput | MatchPlayerUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: MatchPlayerUpdateManyWithWhereWithoutPlayerInput | MatchPlayerUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: MatchPlayerScalarWhereInput | MatchPlayerScalarWhereInput[]
+  }
+
+  export type WaitlistEntryUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<WaitlistEntryCreateWithoutPlayerInput, WaitlistEntryUncheckedCreateWithoutPlayerInput> | WaitlistEntryCreateWithoutPlayerInput[] | WaitlistEntryUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutPlayerInput | WaitlistEntryCreateOrConnectWithoutPlayerInput[]
+    upsert?: WaitlistEntryUpsertWithWhereUniqueWithoutPlayerInput | WaitlistEntryUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: WaitlistEntryCreateManyPlayerInputEnvelope
+    set?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    disconnect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    delete?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    update?: WaitlistEntryUpdateWithWhereUniqueWithoutPlayerInput | WaitlistEntryUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: WaitlistEntryUpdateManyWithWhereWithoutPlayerInput | WaitlistEntryUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: WaitlistEntryScalarWhereInput | WaitlistEntryScalarWhereInput[]
+  }
+
+  export type NotificationLogUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<NotificationLogCreateWithoutPlayerInput, NotificationLogUncheckedCreateWithoutPlayerInput> | NotificationLogCreateWithoutPlayerInput[] | NotificationLogUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: NotificationLogCreateOrConnectWithoutPlayerInput | NotificationLogCreateOrConnectWithoutPlayerInput[]
+    upsert?: NotificationLogUpsertWithWhereUniqueWithoutPlayerInput | NotificationLogUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: NotificationLogCreateManyPlayerInputEnvelope
+    set?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    disconnect?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    delete?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    connect?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    update?: NotificationLogUpdateWithWhereUniqueWithoutPlayerInput | NotificationLogUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: NotificationLogUpdateManyWithWhereWithoutPlayerInput | NotificationLogUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: NotificationLogScalarWhereInput | NotificationLogScalarWhereInput[]
+  }
+
+  export type BookingUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<BookingCreateWithoutPlayerInput, BookingUncheckedCreateWithoutPlayerInput> | BookingCreateWithoutPlayerInput[] | BookingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutPlayerInput | BookingCreateOrConnectWithoutPlayerInput[]
+    upsert?: BookingUpsertWithWhereUniqueWithoutPlayerInput | BookingUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: BookingCreateManyPlayerInputEnvelope
+    set?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    disconnect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    delete?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    update?: BookingUpdateWithWhereUniqueWithoutPlayerInput | BookingUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: BookingUpdateManyWithWhereWithoutPlayerInput | BookingUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type FacilityUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<FacilityCreateWithoutOwnerInput, FacilityUncheckedCreateWithoutOwnerInput> | FacilityCreateWithoutOwnerInput[] | FacilityUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: FacilityCreateOrConnectWithoutOwnerInput | FacilityCreateOrConnectWithoutOwnerInput[]
+    upsert?: FacilityUpsertWithWhereUniqueWithoutOwnerInput | FacilityUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: FacilityCreateManyOwnerInputEnvelope
+    set?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    disconnect?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    delete?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    connect?: FacilityWhereUniqueInput | FacilityWhereUniqueInput[]
+    update?: FacilityUpdateWithWhereUniqueWithoutOwnerInput | FacilityUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: FacilityUpdateManyWithWhereWithoutOwnerInput | FacilityUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: FacilityScalarWhereInput | FacilityScalarWhereInput[]
+  }
+
+  export type PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<PlayerRatingCreateWithoutPlayerInput, PlayerRatingUncheckedCreateWithoutPlayerInput> | PlayerRatingCreateWithoutPlayerInput[] | PlayerRatingUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerRatingCreateOrConnectWithoutPlayerInput | PlayerRatingCreateOrConnectWithoutPlayerInput[]
+    upsert?: PlayerRatingUpsertWithWhereUniqueWithoutPlayerInput | PlayerRatingUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: PlayerRatingCreateManyPlayerInputEnvelope
+    set?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    disconnect?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    delete?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    connect?: PlayerRatingWhereUniqueInput | PlayerRatingWhereUniqueInput[]
+    update?: PlayerRatingUpdateWithWhereUniqueWithoutPlayerInput | PlayerRatingUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: PlayerRatingUpdateManyWithWhereWithoutPlayerInput | PlayerRatingUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: PlayerRatingScalarWhereInput | PlayerRatingScalarWhereInput[]
+  }
+
+  export type MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<MatchPlayerCreateWithoutPlayerInput, MatchPlayerUncheckedCreateWithoutPlayerInput> | MatchPlayerCreateWithoutPlayerInput[] | MatchPlayerUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutPlayerInput | MatchPlayerCreateOrConnectWithoutPlayerInput[]
+    upsert?: MatchPlayerUpsertWithWhereUniqueWithoutPlayerInput | MatchPlayerUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: MatchPlayerCreateManyPlayerInputEnvelope
+    set?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    disconnect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    delete?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    update?: MatchPlayerUpdateWithWhereUniqueWithoutPlayerInput | MatchPlayerUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: MatchPlayerUpdateManyWithWhereWithoutPlayerInput | MatchPlayerUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: MatchPlayerScalarWhereInput | MatchPlayerScalarWhereInput[]
+  }
+
+  export type WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<WaitlistEntryCreateWithoutPlayerInput, WaitlistEntryUncheckedCreateWithoutPlayerInput> | WaitlistEntryCreateWithoutPlayerInput[] | WaitlistEntryUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutPlayerInput | WaitlistEntryCreateOrConnectWithoutPlayerInput[]
+    upsert?: WaitlistEntryUpsertWithWhereUniqueWithoutPlayerInput | WaitlistEntryUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: WaitlistEntryCreateManyPlayerInputEnvelope
+    set?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    disconnect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    delete?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    update?: WaitlistEntryUpdateWithWhereUniqueWithoutPlayerInput | WaitlistEntryUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: WaitlistEntryUpdateManyWithWhereWithoutPlayerInput | WaitlistEntryUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: WaitlistEntryScalarWhereInput | WaitlistEntryScalarWhereInput[]
+  }
+
+  export type NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<NotificationLogCreateWithoutPlayerInput, NotificationLogUncheckedCreateWithoutPlayerInput> | NotificationLogCreateWithoutPlayerInput[] | NotificationLogUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: NotificationLogCreateOrConnectWithoutPlayerInput | NotificationLogCreateOrConnectWithoutPlayerInput[]
+    upsert?: NotificationLogUpsertWithWhereUniqueWithoutPlayerInput | NotificationLogUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: NotificationLogCreateManyPlayerInputEnvelope
+    set?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    disconnect?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    delete?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    connect?: NotificationLogWhereUniqueInput | NotificationLogWhereUniqueInput[]
+    update?: NotificationLogUpdateWithWhereUniqueWithoutPlayerInput | NotificationLogUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: NotificationLogUpdateManyWithWhereWithoutPlayerInput | NotificationLogUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: NotificationLogScalarWhereInput | NotificationLogScalarWhereInput[]
+  }
+
+  export type FacilityCreateamenitiesInput = {
+    set: string[]
+  }
+
+  export type FacilityCreatephotosInput = {
+    set: string[]
+  }
+
+  export type PlayerProfileCreateNestedOneWithoutOwnedFacilitiesInput = {
+    create?: XOR<PlayerProfileCreateWithoutOwnedFacilitiesInput, PlayerProfileUncheckedCreateWithoutOwnedFacilitiesInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutOwnedFacilitiesInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type CourtCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<CourtCreateWithoutFacilityInput, CourtUncheckedCreateWithoutFacilityInput> | CourtCreateWithoutFacilityInput[] | CourtUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: CourtCreateOrConnectWithoutFacilityInput | CourtCreateOrConnectWithoutFacilityInput[]
+    createMany?: CourtCreateManyFacilityInputEnvelope
+    connect?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+  }
+
+  export type CourtUncheckedCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<CourtCreateWithoutFacilityInput, CourtUncheckedCreateWithoutFacilityInput> | CourtCreateWithoutFacilityInput[] | CourtUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: CourtCreateOrConnectWithoutFacilityInput | CourtCreateOrConnectWithoutFacilityInput[]
+    createMany?: CourtCreateManyFacilityInputEnvelope
+    connect?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type FacilityUpdateamenitiesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FacilityUpdatephotosInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type EnumFacilityStatusFieldUpdateOperationsInput = {
+    set?: $Enums.FacilityStatus
+  }
+
+  export type PlayerProfileUpdateOneRequiredWithoutOwnedFacilitiesNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutOwnedFacilitiesInput, PlayerProfileUncheckedCreateWithoutOwnedFacilitiesInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutOwnedFacilitiesInput
+    upsert?: PlayerProfileUpsertWithoutOwnedFacilitiesInput
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutOwnedFacilitiesInput, PlayerProfileUpdateWithoutOwnedFacilitiesInput>, PlayerProfileUncheckedUpdateWithoutOwnedFacilitiesInput>
+  }
+
+  export type CourtUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<CourtCreateWithoutFacilityInput, CourtUncheckedCreateWithoutFacilityInput> | CourtCreateWithoutFacilityInput[] | CourtUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: CourtCreateOrConnectWithoutFacilityInput | CourtCreateOrConnectWithoutFacilityInput[]
+    upsert?: CourtUpsertWithWhereUniqueWithoutFacilityInput | CourtUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: CourtCreateManyFacilityInputEnvelope
+    set?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    disconnect?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    delete?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    connect?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    update?: CourtUpdateWithWhereUniqueWithoutFacilityInput | CourtUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: CourtUpdateManyWithWhereWithoutFacilityInput | CourtUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: CourtScalarWhereInput | CourtScalarWhereInput[]
+  }
+
+  export type CourtUncheckedUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<CourtCreateWithoutFacilityInput, CourtUncheckedCreateWithoutFacilityInput> | CourtCreateWithoutFacilityInput[] | CourtUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: CourtCreateOrConnectWithoutFacilityInput | CourtCreateOrConnectWithoutFacilityInput[]
+    upsert?: CourtUpsertWithWhereUniqueWithoutFacilityInput | CourtUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: CourtCreateManyFacilityInputEnvelope
+    set?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    disconnect?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    delete?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    connect?: CourtWhereUniqueInput | CourtWhereUniqueInput[]
+    update?: CourtUpdateWithWhereUniqueWithoutFacilityInput | CourtUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: CourtUpdateManyWithWhereWithoutFacilityInput | CourtUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: CourtScalarWhereInput | CourtScalarWhereInput[]
+  }
+
+  export type FacilityCreateNestedOneWithoutCourtsInput = {
+    create?: XOR<FacilityCreateWithoutCourtsInput, FacilityUncheckedCreateWithoutCourtsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutCourtsInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type TimeSlotCreateNestedManyWithoutCourtInput = {
+    create?: XOR<TimeSlotCreateWithoutCourtInput, TimeSlotUncheckedCreateWithoutCourtInput> | TimeSlotCreateWithoutCourtInput[] | TimeSlotUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutCourtInput | TimeSlotCreateOrConnectWithoutCourtInput[]
+    createMany?: TimeSlotCreateManyCourtInputEnvelope
+    connect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+  }
+
+  export type BookingCreateNestedManyWithoutCourtInput = {
+    create?: XOR<BookingCreateWithoutCourtInput, BookingUncheckedCreateWithoutCourtInput> | BookingCreateWithoutCourtInput[] | BookingUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutCourtInput | BookingCreateOrConnectWithoutCourtInput[]
+    createMany?: BookingCreateManyCourtInputEnvelope
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type OccupancyStatsCreateNestedManyWithoutCourtInput = {
+    create?: XOR<OccupancyStatsCreateWithoutCourtInput, OccupancyStatsUncheckedCreateWithoutCourtInput> | OccupancyStatsCreateWithoutCourtInput[] | OccupancyStatsUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: OccupancyStatsCreateOrConnectWithoutCourtInput | OccupancyStatsCreateOrConnectWithoutCourtInput[]
+    createMany?: OccupancyStatsCreateManyCourtInputEnvelope
+    connect?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+  }
+
+  export type TimeSlotUncheckedCreateNestedManyWithoutCourtInput = {
+    create?: XOR<TimeSlotCreateWithoutCourtInput, TimeSlotUncheckedCreateWithoutCourtInput> | TimeSlotCreateWithoutCourtInput[] | TimeSlotUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutCourtInput | TimeSlotCreateOrConnectWithoutCourtInput[]
+    createMany?: TimeSlotCreateManyCourtInputEnvelope
+    connect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+  }
+
+  export type BookingUncheckedCreateNestedManyWithoutCourtInput = {
+    create?: XOR<BookingCreateWithoutCourtInput, BookingUncheckedCreateWithoutCourtInput> | BookingCreateWithoutCourtInput[] | BookingUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutCourtInput | BookingCreateOrConnectWithoutCourtInput[]
+    createMany?: BookingCreateManyCourtInputEnvelope
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type OccupancyStatsUncheckedCreateNestedManyWithoutCourtInput = {
+    create?: XOR<OccupancyStatsCreateWithoutCourtInput, OccupancyStatsUncheckedCreateWithoutCourtInput> | OccupancyStatsCreateWithoutCourtInput[] | OccupancyStatsUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: OccupancyStatsCreateOrConnectWithoutCourtInput | OccupancyStatsCreateOrConnectWithoutCourtInput[]
+    createMany?: OccupancyStatsCreateManyCourtInputEnvelope
+    connect?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+  }
+
+  export type EnumSportTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SportType
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type FacilityUpdateOneRequiredWithoutCourtsNestedInput = {
+    create?: XOR<FacilityCreateWithoutCourtsInput, FacilityUncheckedCreateWithoutCourtsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutCourtsInput
+    upsert?: FacilityUpsertWithoutCourtsInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutCourtsInput, FacilityUpdateWithoutCourtsInput>, FacilityUncheckedUpdateWithoutCourtsInput>
+  }
+
+  export type TimeSlotUpdateManyWithoutCourtNestedInput = {
+    create?: XOR<TimeSlotCreateWithoutCourtInput, TimeSlotUncheckedCreateWithoutCourtInput> | TimeSlotCreateWithoutCourtInput[] | TimeSlotUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutCourtInput | TimeSlotCreateOrConnectWithoutCourtInput[]
+    upsert?: TimeSlotUpsertWithWhereUniqueWithoutCourtInput | TimeSlotUpsertWithWhereUniqueWithoutCourtInput[]
+    createMany?: TimeSlotCreateManyCourtInputEnvelope
+    set?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    disconnect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    delete?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    connect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    update?: TimeSlotUpdateWithWhereUniqueWithoutCourtInput | TimeSlotUpdateWithWhereUniqueWithoutCourtInput[]
+    updateMany?: TimeSlotUpdateManyWithWhereWithoutCourtInput | TimeSlotUpdateManyWithWhereWithoutCourtInput[]
+    deleteMany?: TimeSlotScalarWhereInput | TimeSlotScalarWhereInput[]
+  }
+
+  export type BookingUpdateManyWithoutCourtNestedInput = {
+    create?: XOR<BookingCreateWithoutCourtInput, BookingUncheckedCreateWithoutCourtInput> | BookingCreateWithoutCourtInput[] | BookingUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutCourtInput | BookingCreateOrConnectWithoutCourtInput[]
+    upsert?: BookingUpsertWithWhereUniqueWithoutCourtInput | BookingUpsertWithWhereUniqueWithoutCourtInput[]
+    createMany?: BookingCreateManyCourtInputEnvelope
+    set?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    disconnect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    delete?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    update?: BookingUpdateWithWhereUniqueWithoutCourtInput | BookingUpdateWithWhereUniqueWithoutCourtInput[]
+    updateMany?: BookingUpdateManyWithWhereWithoutCourtInput | BookingUpdateManyWithWhereWithoutCourtInput[]
+    deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type OccupancyStatsUpdateManyWithoutCourtNestedInput = {
+    create?: XOR<OccupancyStatsCreateWithoutCourtInput, OccupancyStatsUncheckedCreateWithoutCourtInput> | OccupancyStatsCreateWithoutCourtInput[] | OccupancyStatsUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: OccupancyStatsCreateOrConnectWithoutCourtInput | OccupancyStatsCreateOrConnectWithoutCourtInput[]
+    upsert?: OccupancyStatsUpsertWithWhereUniqueWithoutCourtInput | OccupancyStatsUpsertWithWhereUniqueWithoutCourtInput[]
+    createMany?: OccupancyStatsCreateManyCourtInputEnvelope
+    set?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    disconnect?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    delete?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    connect?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    update?: OccupancyStatsUpdateWithWhereUniqueWithoutCourtInput | OccupancyStatsUpdateWithWhereUniqueWithoutCourtInput[]
+    updateMany?: OccupancyStatsUpdateManyWithWhereWithoutCourtInput | OccupancyStatsUpdateManyWithWhereWithoutCourtInput[]
+    deleteMany?: OccupancyStatsScalarWhereInput | OccupancyStatsScalarWhereInput[]
+  }
+
+  export type TimeSlotUncheckedUpdateManyWithoutCourtNestedInput = {
+    create?: XOR<TimeSlotCreateWithoutCourtInput, TimeSlotUncheckedCreateWithoutCourtInput> | TimeSlotCreateWithoutCourtInput[] | TimeSlotUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutCourtInput | TimeSlotCreateOrConnectWithoutCourtInput[]
+    upsert?: TimeSlotUpsertWithWhereUniqueWithoutCourtInput | TimeSlotUpsertWithWhereUniqueWithoutCourtInput[]
+    createMany?: TimeSlotCreateManyCourtInputEnvelope
+    set?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    disconnect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    delete?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    connect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+    update?: TimeSlotUpdateWithWhereUniqueWithoutCourtInput | TimeSlotUpdateWithWhereUniqueWithoutCourtInput[]
+    updateMany?: TimeSlotUpdateManyWithWhereWithoutCourtInput | TimeSlotUpdateManyWithWhereWithoutCourtInput[]
+    deleteMany?: TimeSlotScalarWhereInput | TimeSlotScalarWhereInput[]
+  }
+
+  export type BookingUncheckedUpdateManyWithoutCourtNestedInput = {
+    create?: XOR<BookingCreateWithoutCourtInput, BookingUncheckedCreateWithoutCourtInput> | BookingCreateWithoutCourtInput[] | BookingUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutCourtInput | BookingCreateOrConnectWithoutCourtInput[]
+    upsert?: BookingUpsertWithWhereUniqueWithoutCourtInput | BookingUpsertWithWhereUniqueWithoutCourtInput[]
+    createMany?: BookingCreateManyCourtInputEnvelope
+    set?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    disconnect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    delete?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    update?: BookingUpdateWithWhereUniqueWithoutCourtInput | BookingUpdateWithWhereUniqueWithoutCourtInput[]
+    updateMany?: BookingUpdateManyWithWhereWithoutCourtInput | BookingUpdateManyWithWhereWithoutCourtInput[]
+    deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type OccupancyStatsUncheckedUpdateManyWithoutCourtNestedInput = {
+    create?: XOR<OccupancyStatsCreateWithoutCourtInput, OccupancyStatsUncheckedCreateWithoutCourtInput> | OccupancyStatsCreateWithoutCourtInput[] | OccupancyStatsUncheckedCreateWithoutCourtInput[]
+    connectOrCreate?: OccupancyStatsCreateOrConnectWithoutCourtInput | OccupancyStatsCreateOrConnectWithoutCourtInput[]
+    upsert?: OccupancyStatsUpsertWithWhereUniqueWithoutCourtInput | OccupancyStatsUpsertWithWhereUniqueWithoutCourtInput[]
+    createMany?: OccupancyStatsCreateManyCourtInputEnvelope
+    set?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    disconnect?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    delete?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    connect?: OccupancyStatsWhereUniqueInput | OccupancyStatsWhereUniqueInput[]
+    update?: OccupancyStatsUpdateWithWhereUniqueWithoutCourtInput | OccupancyStatsUpdateWithWhereUniqueWithoutCourtInput[]
+    updateMany?: OccupancyStatsUpdateManyWithWhereWithoutCourtInput | OccupancyStatsUpdateManyWithWhereWithoutCourtInput[]
+    deleteMany?: OccupancyStatsScalarWhereInput | OccupancyStatsScalarWhereInput[]
+  }
+
+  export type CourtCreateNestedOneWithoutTimeSlotsInput = {
+    create?: XOR<CourtCreateWithoutTimeSlotsInput, CourtUncheckedCreateWithoutTimeSlotsInput>
+    connectOrCreate?: CourtCreateOrConnectWithoutTimeSlotsInput
+    connect?: CourtWhereUniqueInput
+  }
+
+  export type BookingCreateNestedOneWithoutTimeSlotInput = {
+    create?: XOR<BookingCreateWithoutTimeSlotInput, BookingUncheckedCreateWithoutTimeSlotInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutTimeSlotInput
+    connect?: BookingWhereUniqueInput
+  }
+
+  export type WaitlistEntryCreateNestedManyWithoutTimeSlotInput = {
+    create?: XOR<WaitlistEntryCreateWithoutTimeSlotInput, WaitlistEntryUncheckedCreateWithoutTimeSlotInput> | WaitlistEntryCreateWithoutTimeSlotInput[] | WaitlistEntryUncheckedCreateWithoutTimeSlotInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutTimeSlotInput | WaitlistEntryCreateOrConnectWithoutTimeSlotInput[]
+    createMany?: WaitlistEntryCreateManyTimeSlotInputEnvelope
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+  }
+
+  export type BookingUncheckedCreateNestedOneWithoutTimeSlotInput = {
+    create?: XOR<BookingCreateWithoutTimeSlotInput, BookingUncheckedCreateWithoutTimeSlotInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutTimeSlotInput
+    connect?: BookingWhereUniqueInput
+  }
+
+  export type WaitlistEntryUncheckedCreateNestedManyWithoutTimeSlotInput = {
+    create?: XOR<WaitlistEntryCreateWithoutTimeSlotInput, WaitlistEntryUncheckedCreateWithoutTimeSlotInput> | WaitlistEntryCreateWithoutTimeSlotInput[] | WaitlistEntryUncheckedCreateWithoutTimeSlotInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutTimeSlotInput | WaitlistEntryCreateOrConnectWithoutTimeSlotInput[]
+    createMany?: WaitlistEntryCreateManyTimeSlotInputEnvelope
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+  }
+
+  export type CourtUpdateOneRequiredWithoutTimeSlotsNestedInput = {
+    create?: XOR<CourtCreateWithoutTimeSlotsInput, CourtUncheckedCreateWithoutTimeSlotsInput>
+    connectOrCreate?: CourtCreateOrConnectWithoutTimeSlotsInput
+    upsert?: CourtUpsertWithoutTimeSlotsInput
+    connect?: CourtWhereUniqueInput
+    update?: XOR<XOR<CourtUpdateToOneWithWhereWithoutTimeSlotsInput, CourtUpdateWithoutTimeSlotsInput>, CourtUncheckedUpdateWithoutTimeSlotsInput>
+  }
+
+  export type BookingUpdateOneWithoutTimeSlotNestedInput = {
+    create?: XOR<BookingCreateWithoutTimeSlotInput, BookingUncheckedCreateWithoutTimeSlotInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutTimeSlotInput
+    upsert?: BookingUpsertWithoutTimeSlotInput
+    disconnect?: BookingWhereInput | boolean
+    delete?: BookingWhereInput | boolean
+    connect?: BookingWhereUniqueInput
+    update?: XOR<XOR<BookingUpdateToOneWithWhereWithoutTimeSlotInput, BookingUpdateWithoutTimeSlotInput>, BookingUncheckedUpdateWithoutTimeSlotInput>
+  }
+
+  export type WaitlistEntryUpdateManyWithoutTimeSlotNestedInput = {
+    create?: XOR<WaitlistEntryCreateWithoutTimeSlotInput, WaitlistEntryUncheckedCreateWithoutTimeSlotInput> | WaitlistEntryCreateWithoutTimeSlotInput[] | WaitlistEntryUncheckedCreateWithoutTimeSlotInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutTimeSlotInput | WaitlistEntryCreateOrConnectWithoutTimeSlotInput[]
+    upsert?: WaitlistEntryUpsertWithWhereUniqueWithoutTimeSlotInput | WaitlistEntryUpsertWithWhereUniqueWithoutTimeSlotInput[]
+    createMany?: WaitlistEntryCreateManyTimeSlotInputEnvelope
+    set?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    disconnect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    delete?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    update?: WaitlistEntryUpdateWithWhereUniqueWithoutTimeSlotInput | WaitlistEntryUpdateWithWhereUniqueWithoutTimeSlotInput[]
+    updateMany?: WaitlistEntryUpdateManyWithWhereWithoutTimeSlotInput | WaitlistEntryUpdateManyWithWhereWithoutTimeSlotInput[]
+    deleteMany?: WaitlistEntryScalarWhereInput | WaitlistEntryScalarWhereInput[]
+  }
+
+  export type BookingUncheckedUpdateOneWithoutTimeSlotNestedInput = {
+    create?: XOR<BookingCreateWithoutTimeSlotInput, BookingUncheckedCreateWithoutTimeSlotInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutTimeSlotInput
+    upsert?: BookingUpsertWithoutTimeSlotInput
+    disconnect?: BookingWhereInput | boolean
+    delete?: BookingWhereInput | boolean
+    connect?: BookingWhereUniqueInput
+    update?: XOR<XOR<BookingUpdateToOneWithWhereWithoutTimeSlotInput, BookingUpdateWithoutTimeSlotInput>, BookingUncheckedUpdateWithoutTimeSlotInput>
+  }
+
+  export type WaitlistEntryUncheckedUpdateManyWithoutTimeSlotNestedInput = {
+    create?: XOR<WaitlistEntryCreateWithoutTimeSlotInput, WaitlistEntryUncheckedCreateWithoutTimeSlotInput> | WaitlistEntryCreateWithoutTimeSlotInput[] | WaitlistEntryUncheckedCreateWithoutTimeSlotInput[]
+    connectOrCreate?: WaitlistEntryCreateOrConnectWithoutTimeSlotInput | WaitlistEntryCreateOrConnectWithoutTimeSlotInput[]
+    upsert?: WaitlistEntryUpsertWithWhereUniqueWithoutTimeSlotInput | WaitlistEntryUpsertWithWhereUniqueWithoutTimeSlotInput[]
+    createMany?: WaitlistEntryCreateManyTimeSlotInputEnvelope
+    set?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    disconnect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    delete?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    connect?: WaitlistEntryWhereUniqueInput | WaitlistEntryWhereUniqueInput[]
+    update?: WaitlistEntryUpdateWithWhereUniqueWithoutTimeSlotInput | WaitlistEntryUpdateWithWhereUniqueWithoutTimeSlotInput[]
+    updateMany?: WaitlistEntryUpdateManyWithWhereWithoutTimeSlotInput | WaitlistEntryUpdateManyWithWhereWithoutTimeSlotInput[]
+    deleteMany?: WaitlistEntryScalarWhereInput | WaitlistEntryScalarWhereInput[]
+  }
+
+  export type TimeSlotCreateNestedOneWithoutBookingInput = {
+    create?: XOR<TimeSlotCreateWithoutBookingInput, TimeSlotUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutBookingInput
+    connect?: TimeSlotWhereUniqueInput
+  }
+
+  export type CourtCreateNestedOneWithoutBookingsInput = {
+    create?: XOR<CourtCreateWithoutBookingsInput, CourtUncheckedCreateWithoutBookingsInput>
+    connectOrCreate?: CourtCreateOrConnectWithoutBookingsInput
+    connect?: CourtWhereUniqueInput
+  }
+
+  export type PlayerProfileCreateNestedOneWithoutBookingsInput = {
+    create?: XOR<PlayerProfileCreateWithoutBookingsInput, PlayerProfileUncheckedCreateWithoutBookingsInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutBookingsInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type MatchCreateNestedOneWithoutBookingInput = {
+    create?: XOR<MatchCreateWithoutBookingInput, MatchUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutBookingInput
+    connect?: MatchWhereUniqueInput
+  }
+
+  export type MatchUncheckedCreateNestedOneWithoutBookingInput = {
+    create?: XOR<MatchCreateWithoutBookingInput, MatchUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutBookingInput
+    connect?: MatchWhereUniqueInput
+  }
+
+  export type EnumBookingStatusFieldUpdateOperationsInput = {
+    set?: $Enums.BookingStatus
+  }
+
+  export type TimeSlotUpdateOneRequiredWithoutBookingNestedInput = {
+    create?: XOR<TimeSlotCreateWithoutBookingInput, TimeSlotUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutBookingInput
+    upsert?: TimeSlotUpsertWithoutBookingInput
+    connect?: TimeSlotWhereUniqueInput
+    update?: XOR<XOR<TimeSlotUpdateToOneWithWhereWithoutBookingInput, TimeSlotUpdateWithoutBookingInput>, TimeSlotUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type CourtUpdateOneRequiredWithoutBookingsNestedInput = {
+    create?: XOR<CourtCreateWithoutBookingsInput, CourtUncheckedCreateWithoutBookingsInput>
+    connectOrCreate?: CourtCreateOrConnectWithoutBookingsInput
+    upsert?: CourtUpsertWithoutBookingsInput
+    connect?: CourtWhereUniqueInput
+    update?: XOR<XOR<CourtUpdateToOneWithWhereWithoutBookingsInput, CourtUpdateWithoutBookingsInput>, CourtUncheckedUpdateWithoutBookingsInput>
+  }
+
+  export type PlayerProfileUpdateOneRequiredWithoutBookingsNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutBookingsInput, PlayerProfileUncheckedCreateWithoutBookingsInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutBookingsInput
+    upsert?: PlayerProfileUpsertWithoutBookingsInput
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutBookingsInput, PlayerProfileUpdateWithoutBookingsInput>, PlayerProfileUncheckedUpdateWithoutBookingsInput>
+  }
+
+  export type MatchUpdateOneWithoutBookingNestedInput = {
+    create?: XOR<MatchCreateWithoutBookingInput, MatchUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutBookingInput
+    upsert?: MatchUpsertWithoutBookingInput
+    disconnect?: MatchWhereInput | boolean
+    delete?: MatchWhereInput | boolean
+    connect?: MatchWhereUniqueInput
+    update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutBookingInput, MatchUpdateWithoutBookingInput>, MatchUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type MatchUncheckedUpdateOneWithoutBookingNestedInput = {
+    create?: XOR<MatchCreateWithoutBookingInput, MatchUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutBookingInput
+    upsert?: MatchUpsertWithoutBookingInput
+    disconnect?: MatchWhereInput | boolean
+    delete?: MatchWhereInput | boolean
+    connect?: MatchWhereUniqueInput
+    update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutBookingInput, MatchUpdateWithoutBookingInput>, MatchUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type BookingCreateNestedOneWithoutMatchInput = {
+    create?: XOR<BookingCreateWithoutMatchInput, BookingUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutMatchInput
+    connect?: BookingWhereUniqueInput
+  }
+
+  export type MatchPlayerCreateNestedManyWithoutMatchInput = {
+    create?: XOR<MatchPlayerCreateWithoutMatchInput, MatchPlayerUncheckedCreateWithoutMatchInput> | MatchPlayerCreateWithoutMatchInput[] | MatchPlayerUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutMatchInput | MatchPlayerCreateOrConnectWithoutMatchInput[]
+    createMany?: MatchPlayerCreateManyMatchInputEnvelope
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+  }
+
+  export type MatchPlayerUncheckedCreateNestedManyWithoutMatchInput = {
+    create?: XOR<MatchPlayerCreateWithoutMatchInput, MatchPlayerUncheckedCreateWithoutMatchInput> | MatchPlayerCreateWithoutMatchInput[] | MatchPlayerUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutMatchInput | MatchPlayerCreateOrConnectWithoutMatchInput[]
+    createMany?: MatchPlayerCreateManyMatchInputEnvelope
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+  }
+
+  export type EnumMatchStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MatchStatus
+  }
+
+  export type BookingUpdateOneRequiredWithoutMatchNestedInput = {
+    create?: XOR<BookingCreateWithoutMatchInput, BookingUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutMatchInput
+    upsert?: BookingUpsertWithoutMatchInput
+    connect?: BookingWhereUniqueInput
+    update?: XOR<XOR<BookingUpdateToOneWithWhereWithoutMatchInput, BookingUpdateWithoutMatchInput>, BookingUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type MatchPlayerUpdateManyWithoutMatchNestedInput = {
+    create?: XOR<MatchPlayerCreateWithoutMatchInput, MatchPlayerUncheckedCreateWithoutMatchInput> | MatchPlayerCreateWithoutMatchInput[] | MatchPlayerUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutMatchInput | MatchPlayerCreateOrConnectWithoutMatchInput[]
+    upsert?: MatchPlayerUpsertWithWhereUniqueWithoutMatchInput | MatchPlayerUpsertWithWhereUniqueWithoutMatchInput[]
+    createMany?: MatchPlayerCreateManyMatchInputEnvelope
+    set?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    disconnect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    delete?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    update?: MatchPlayerUpdateWithWhereUniqueWithoutMatchInput | MatchPlayerUpdateWithWhereUniqueWithoutMatchInput[]
+    updateMany?: MatchPlayerUpdateManyWithWhereWithoutMatchInput | MatchPlayerUpdateManyWithWhereWithoutMatchInput[]
+    deleteMany?: MatchPlayerScalarWhereInput | MatchPlayerScalarWhereInput[]
+  }
+
+  export type MatchPlayerUncheckedUpdateManyWithoutMatchNestedInput = {
+    create?: XOR<MatchPlayerCreateWithoutMatchInput, MatchPlayerUncheckedCreateWithoutMatchInput> | MatchPlayerCreateWithoutMatchInput[] | MatchPlayerUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: MatchPlayerCreateOrConnectWithoutMatchInput | MatchPlayerCreateOrConnectWithoutMatchInput[]
+    upsert?: MatchPlayerUpsertWithWhereUniqueWithoutMatchInput | MatchPlayerUpsertWithWhereUniqueWithoutMatchInput[]
+    createMany?: MatchPlayerCreateManyMatchInputEnvelope
+    set?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    disconnect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    delete?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    connect?: MatchPlayerWhereUniqueInput | MatchPlayerWhereUniqueInput[]
+    update?: MatchPlayerUpdateWithWhereUniqueWithoutMatchInput | MatchPlayerUpdateWithWhereUniqueWithoutMatchInput[]
+    updateMany?: MatchPlayerUpdateManyWithWhereWithoutMatchInput | MatchPlayerUpdateManyWithWhereWithoutMatchInput[]
+    deleteMany?: MatchPlayerScalarWhereInput | MatchPlayerScalarWhereInput[]
+  }
+
+  export type MatchCreateNestedOneWithoutPlayersInput = {
+    create?: XOR<MatchCreateWithoutPlayersInput, MatchUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutPlayersInput
+    connect?: MatchWhereUniqueInput
+  }
+
+  export type PlayerProfileCreateNestedOneWithoutMatchPlayersInput = {
+    create?: XOR<PlayerProfileCreateWithoutMatchPlayersInput, PlayerProfileUncheckedCreateWithoutMatchPlayersInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutMatchPlayersInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type MatchUpdateOneRequiredWithoutPlayersNestedInput = {
+    create?: XOR<MatchCreateWithoutPlayersInput, MatchUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutPlayersInput
+    upsert?: MatchUpsertWithoutPlayersInput
+    connect?: MatchWhereUniqueInput
+    update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutPlayersInput, MatchUpdateWithoutPlayersInput>, MatchUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type PlayerProfileUpdateOneRequiredWithoutMatchPlayersNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutMatchPlayersInput, PlayerProfileUncheckedCreateWithoutMatchPlayersInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutMatchPlayersInput
+    upsert?: PlayerProfileUpsertWithoutMatchPlayersInput
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutMatchPlayersInput, PlayerProfileUpdateWithoutMatchPlayersInput>, PlayerProfileUncheckedUpdateWithoutMatchPlayersInput>
+  }
+
+  export type PlayerProfileCreateNestedOneWithoutRatingsInput = {
+    create?: XOR<PlayerProfileCreateWithoutRatingsInput, PlayerProfileUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutRatingsInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type RatingHistoryCreateNestedManyWithoutRatingInput = {
+    create?: XOR<RatingHistoryCreateWithoutRatingInput, RatingHistoryUncheckedCreateWithoutRatingInput> | RatingHistoryCreateWithoutRatingInput[] | RatingHistoryUncheckedCreateWithoutRatingInput[]
+    connectOrCreate?: RatingHistoryCreateOrConnectWithoutRatingInput | RatingHistoryCreateOrConnectWithoutRatingInput[]
+    createMany?: RatingHistoryCreateManyRatingInputEnvelope
+    connect?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+  }
+
+  export type RatingHistoryUncheckedCreateNestedManyWithoutRatingInput = {
+    create?: XOR<RatingHistoryCreateWithoutRatingInput, RatingHistoryUncheckedCreateWithoutRatingInput> | RatingHistoryCreateWithoutRatingInput[] | RatingHistoryUncheckedCreateWithoutRatingInput[]
+    connectOrCreate?: RatingHistoryCreateOrConnectWithoutRatingInput | RatingHistoryCreateOrConnectWithoutRatingInput[]
+    createMany?: RatingHistoryCreateManyRatingInputEnvelope
+    connect?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+  }
+
+  export type PlayerProfileUpdateOneRequiredWithoutRatingsNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutRatingsInput, PlayerProfileUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutRatingsInput
+    upsert?: PlayerProfileUpsertWithoutRatingsInput
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutRatingsInput, PlayerProfileUpdateWithoutRatingsInput>, PlayerProfileUncheckedUpdateWithoutRatingsInput>
+  }
+
+  export type RatingHistoryUpdateManyWithoutRatingNestedInput = {
+    create?: XOR<RatingHistoryCreateWithoutRatingInput, RatingHistoryUncheckedCreateWithoutRatingInput> | RatingHistoryCreateWithoutRatingInput[] | RatingHistoryUncheckedCreateWithoutRatingInput[]
+    connectOrCreate?: RatingHistoryCreateOrConnectWithoutRatingInput | RatingHistoryCreateOrConnectWithoutRatingInput[]
+    upsert?: RatingHistoryUpsertWithWhereUniqueWithoutRatingInput | RatingHistoryUpsertWithWhereUniqueWithoutRatingInput[]
+    createMany?: RatingHistoryCreateManyRatingInputEnvelope
+    set?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    disconnect?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    delete?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    connect?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    update?: RatingHistoryUpdateWithWhereUniqueWithoutRatingInput | RatingHistoryUpdateWithWhereUniqueWithoutRatingInput[]
+    updateMany?: RatingHistoryUpdateManyWithWhereWithoutRatingInput | RatingHistoryUpdateManyWithWhereWithoutRatingInput[]
+    deleteMany?: RatingHistoryScalarWhereInput | RatingHistoryScalarWhereInput[]
+  }
+
+  export type RatingHistoryUncheckedUpdateManyWithoutRatingNestedInput = {
+    create?: XOR<RatingHistoryCreateWithoutRatingInput, RatingHistoryUncheckedCreateWithoutRatingInput> | RatingHistoryCreateWithoutRatingInput[] | RatingHistoryUncheckedCreateWithoutRatingInput[]
+    connectOrCreate?: RatingHistoryCreateOrConnectWithoutRatingInput | RatingHistoryCreateOrConnectWithoutRatingInput[]
+    upsert?: RatingHistoryUpsertWithWhereUniqueWithoutRatingInput | RatingHistoryUpsertWithWhereUniqueWithoutRatingInput[]
+    createMany?: RatingHistoryCreateManyRatingInputEnvelope
+    set?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    disconnect?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    delete?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    connect?: RatingHistoryWhereUniqueInput | RatingHistoryWhereUniqueInput[]
+    update?: RatingHistoryUpdateWithWhereUniqueWithoutRatingInput | RatingHistoryUpdateWithWhereUniqueWithoutRatingInput[]
+    updateMany?: RatingHistoryUpdateManyWithWhereWithoutRatingInput | RatingHistoryUpdateManyWithWhereWithoutRatingInput[]
+    deleteMany?: RatingHistoryScalarWhereInput | RatingHistoryScalarWhereInput[]
+  }
+
+  export type PlayerRatingCreateNestedOneWithoutHistoryInput = {
+    create?: XOR<PlayerRatingCreateWithoutHistoryInput, PlayerRatingUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: PlayerRatingCreateOrConnectWithoutHistoryInput
+    connect?: PlayerRatingWhereUniqueInput
+  }
+
+  export type PlayerRatingUpdateOneRequiredWithoutHistoryNestedInput = {
+    create?: XOR<PlayerRatingCreateWithoutHistoryInput, PlayerRatingUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: PlayerRatingCreateOrConnectWithoutHistoryInput
+    upsert?: PlayerRatingUpsertWithoutHistoryInput
+    connect?: PlayerRatingWhereUniqueInput
+    update?: XOR<XOR<PlayerRatingUpdateToOneWithWhereWithoutHistoryInput, PlayerRatingUpdateWithoutHistoryInput>, PlayerRatingUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type TimeSlotCreateNestedOneWithoutWaitlistEntriesInput = {
+    create?: XOR<TimeSlotCreateWithoutWaitlistEntriesInput, TimeSlotUncheckedCreateWithoutWaitlistEntriesInput>
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutWaitlistEntriesInput
+    connect?: TimeSlotWhereUniqueInput
+  }
+
+  export type PlayerProfileCreateNestedOneWithoutWaitlistEntriesInput = {
+    create?: XOR<PlayerProfileCreateWithoutWaitlistEntriesInput, PlayerProfileUncheckedCreateWithoutWaitlistEntriesInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutWaitlistEntriesInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type EnumWaitlistStatusFieldUpdateOperationsInput = {
+    set?: $Enums.WaitlistStatus
+  }
+
+  export type TimeSlotUpdateOneRequiredWithoutWaitlistEntriesNestedInput = {
+    create?: XOR<TimeSlotCreateWithoutWaitlistEntriesInput, TimeSlotUncheckedCreateWithoutWaitlistEntriesInput>
+    connectOrCreate?: TimeSlotCreateOrConnectWithoutWaitlistEntriesInput
+    upsert?: TimeSlotUpsertWithoutWaitlistEntriesInput
+    connect?: TimeSlotWhereUniqueInput
+    update?: XOR<XOR<TimeSlotUpdateToOneWithWhereWithoutWaitlistEntriesInput, TimeSlotUpdateWithoutWaitlistEntriesInput>, TimeSlotUncheckedUpdateWithoutWaitlistEntriesInput>
+  }
+
+  export type PlayerProfileUpdateOneRequiredWithoutWaitlistEntriesNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutWaitlistEntriesInput, PlayerProfileUncheckedCreateWithoutWaitlistEntriesInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutWaitlistEntriesInput
+    upsert?: PlayerProfileUpsertWithoutWaitlistEntriesInput
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutWaitlistEntriesInput, PlayerProfileUpdateWithoutWaitlistEntriesInput>, PlayerProfileUncheckedUpdateWithoutWaitlistEntriesInput>
+  }
+
+  export type CourtCreateNestedOneWithoutOccupancyStatsInput = {
+    create?: XOR<CourtCreateWithoutOccupancyStatsInput, CourtUncheckedCreateWithoutOccupancyStatsInput>
+    connectOrCreate?: CourtCreateOrConnectWithoutOccupancyStatsInput
+    connect?: CourtWhereUniqueInput
+  }
+
+  export type CourtUpdateOneRequiredWithoutOccupancyStatsNestedInput = {
+    create?: XOR<CourtCreateWithoutOccupancyStatsInput, CourtUncheckedCreateWithoutOccupancyStatsInput>
+    connectOrCreate?: CourtCreateOrConnectWithoutOccupancyStatsInput
+    upsert?: CourtUpsertWithoutOccupancyStatsInput
+    connect?: CourtWhereUniqueInput
+    update?: XOR<XOR<CourtUpdateToOneWithWhereWithoutOccupancyStatsInput, CourtUpdateWithoutOccupancyStatsInput>, CourtUncheckedUpdateWithoutOccupancyStatsInput>
+  }
+
+  export type PlayerProfileCreateNestedOneWithoutNotificationsInput = {
+    create?: XOR<PlayerProfileCreateWithoutNotificationsInput, PlayerProfileUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutNotificationsInput
+    connect?: PlayerProfileWhereUniqueInput
+  }
+
+  export type PlayerProfileUpdateOneRequiredWithoutNotificationsNestedInput = {
+    create?: XOR<PlayerProfileCreateWithoutNotificationsInput, PlayerProfileUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: PlayerProfileCreateOrConnectWithoutNotificationsInput
+    upsert?: PlayerProfileUpsertWithoutNotificationsInput
+    connect?: PlayerProfileWhereUniqueInput
+    update?: XOR<XOR<PlayerProfileUpdateToOneWithWhereWithoutNotificationsInput, PlayerProfileUpdateWithoutNotificationsInput>, PlayerProfileUncheckedUpdateWithoutNotificationsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7968,34 +26718,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -8026,6 +26748,34 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -8103,6 +26853,178 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumFacilityStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FacilityStatus | EnumFacilityStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFacilityStatusFilter<$PrismaModel> | $Enums.FacilityStatus
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFacilityStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FacilityStatus | EnumFacilityStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FacilityStatus[] | ListEnumFacilityStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFacilityStatusWithAggregatesFilter<$PrismaModel> | $Enums.FacilityStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFacilityStatusFilter<$PrismaModel>
+    _max?: NestedEnumFacilityStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSportTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SportType | EnumSportTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSportTypeFilter<$PrismaModel> | $Enums.SportType
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumSportTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SportType | EnumSportTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SportType[] | ListEnumSportTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSportTypeWithAggregatesFilter<$PrismaModel> | $Enums.SportType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSportTypeFilter<$PrismaModel>
+    _max?: NestedEnumSportTypeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedEnumBookingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBookingStatusFilter<$PrismaModel> | $Enums.BookingStatus
+  }
+
+  export type NestedEnumBookingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBookingStatusWithAggregatesFilter<$PrismaModel> | $Enums.BookingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBookingStatusFilter<$PrismaModel>
+    _max?: NestedEnumBookingStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusFilter<$PrismaModel> | $Enums.MatchStatus
+  }
+
+  export type NestedEnumMatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.MatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumMatchStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumWaitlistStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WaitlistStatus | EnumWaitlistStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWaitlistStatusFilter<$PrismaModel> | $Enums.WaitlistStatus
+  }
+
+  export type NestedEnumWaitlistStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WaitlistStatus | EnumWaitlistStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WaitlistStatus[] | ListEnumWaitlistStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWaitlistStatusWithAggregatesFilter<$PrismaModel> | $Enums.WaitlistStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWaitlistStatusFilter<$PrismaModel>
+    _max?: NestedEnumWaitlistStatusFilter<$PrismaModel>
+  }
+
   export type SessionCreateWithoutUserInput = {
     id: string
     expiresAt: Date | string
@@ -8173,6 +27095,47 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PlayerProfileCreateWithoutUserInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutUserInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutUserInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutUserInput, PlayerProfileUncheckedCreateWithoutUserInput>
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -8238,6 +27201,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type PlayerProfileUpsertWithoutUserInput = {
+    update: XOR<PlayerProfileUpdateWithoutUserInput, PlayerProfileUncheckedUpdateWithoutUserInput>
+    create: XOR<PlayerProfileCreateWithoutUserInput, PlayerProfileUncheckedCreateWithoutUserInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutUserInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutUserInput, PlayerProfileUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PlayerProfileUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -8247,6 +27257,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
+    playerProfile?: PlayerProfileCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -8258,6 +27269,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -8285,6 +27297,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    playerProfile?: PlayerProfileUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -8296,6 +27309,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    playerProfile?: PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -8307,6 +27321,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
+    playerProfile?: PlayerProfileCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -8318,6 +27333,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -8345,6 +27361,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    playerProfile?: PlayerProfileUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -8356,6 +27373,2236 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    playerProfile?: PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPlayerProfileInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPlayerProfileInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPlayerProfileInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPlayerProfileInput, UserUncheckedCreateWithoutPlayerProfileInput>
+  }
+
+  export type BookingCreateWithoutPlayerInput = {
+    id?: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlot: TimeSlotCreateNestedOneWithoutBookingInput
+    court: CourtCreateNestedOneWithoutBookingsInput
+    match?: MatchCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    timeSlotId: string
+    courtId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    match?: MatchUncheckedCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingCreateOrConnectWithoutPlayerInput = {
+    where: BookingWhereUniqueInput
+    create: XOR<BookingCreateWithoutPlayerInput, BookingUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type BookingCreateManyPlayerInputEnvelope = {
+    data: BookingCreateManyPlayerInput | BookingCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FacilityCreateWithoutOwnerInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courts?: CourtCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateWithoutOwnerInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courts?: CourtUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityCreateOrConnectWithoutOwnerInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutOwnerInput, FacilityUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type FacilityCreateManyOwnerInputEnvelope = {
+    data: FacilityCreateManyOwnerInput | FacilityCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlayerRatingCreateWithoutPlayerInput = {
+    id?: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    history?: RatingHistoryCreateNestedManyWithoutRatingInput
+  }
+
+  export type PlayerRatingUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    history?: RatingHistoryUncheckedCreateNestedManyWithoutRatingInput
+  }
+
+  export type PlayerRatingCreateOrConnectWithoutPlayerInput = {
+    where: PlayerRatingWhereUniqueInput
+    create: XOR<PlayerRatingCreateWithoutPlayerInput, PlayerRatingUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type PlayerRatingCreateManyPlayerInputEnvelope = {
+    data: PlayerRatingCreateManyPlayerInput | PlayerRatingCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MatchPlayerCreateWithoutPlayerInput = {
+    id?: string
+    joinedAt?: Date | string
+    result?: string | null
+    match: MatchCreateNestedOneWithoutPlayersInput
+  }
+
+  export type MatchPlayerUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    matchId: string
+    joinedAt?: Date | string
+    result?: string | null
+  }
+
+  export type MatchPlayerCreateOrConnectWithoutPlayerInput = {
+    where: MatchPlayerWhereUniqueInput
+    create: XOR<MatchPlayerCreateWithoutPlayerInput, MatchPlayerUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type MatchPlayerCreateManyPlayerInputEnvelope = {
+    data: MatchPlayerCreateManyPlayerInput | MatchPlayerCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WaitlistEntryCreateWithoutPlayerInput = {
+    id?: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlot: TimeSlotCreateNestedOneWithoutWaitlistEntriesInput
+  }
+
+  export type WaitlistEntryUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    timeSlotId: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WaitlistEntryCreateOrConnectWithoutPlayerInput = {
+    where: WaitlistEntryWhereUniqueInput
+    create: XOR<WaitlistEntryCreateWithoutPlayerInput, WaitlistEntryUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type WaitlistEntryCreateManyPlayerInputEnvelope = {
+    data: WaitlistEntryCreateManyPlayerInput | WaitlistEntryCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationLogCreateWithoutPlayerInput = {
+    id?: string
+    type: string
+    title: string
+    message: string
+    sentAt?: Date | string
+    readAt?: Date | string | null
+  }
+
+  export type NotificationLogUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    type: string
+    title: string
+    message: string
+    sentAt?: Date | string
+    readAt?: Date | string | null
+  }
+
+  export type NotificationLogCreateOrConnectWithoutPlayerInput = {
+    where: NotificationLogWhereUniqueInput
+    create: XOR<NotificationLogCreateWithoutPlayerInput, NotificationLogUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type NotificationLogCreateManyPlayerInputEnvelope = {
+    data: NotificationLogCreateManyPlayerInput | NotificationLogCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutPlayerProfileInput = {
+    update: XOR<UserUpdateWithoutPlayerProfileInput, UserUncheckedUpdateWithoutPlayerProfileInput>
+    create: XOR<UserCreateWithoutPlayerProfileInput, UserUncheckedCreateWithoutPlayerProfileInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPlayerProfileInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPlayerProfileInput, UserUncheckedUpdateWithoutPlayerProfileInput>
+  }
+
+  export type UserUpdateWithoutPlayerProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPlayerProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type BookingUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: BookingWhereUniqueInput
+    update: XOR<BookingUpdateWithoutPlayerInput, BookingUncheckedUpdateWithoutPlayerInput>
+    create: XOR<BookingCreateWithoutPlayerInput, BookingUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type BookingUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: BookingWhereUniqueInput
+    data: XOR<BookingUpdateWithoutPlayerInput, BookingUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type BookingUpdateManyWithWhereWithoutPlayerInput = {
+    where: BookingScalarWhereInput
+    data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyWithoutPlayerInput>
+  }
+
+  export type BookingScalarWhereInput = {
+    AND?: BookingScalarWhereInput | BookingScalarWhereInput[]
+    OR?: BookingScalarWhereInput[]
+    NOT?: BookingScalarWhereInput | BookingScalarWhereInput[]
+    id?: StringFilter<"Booking"> | string
+    timeSlotId?: StringFilter<"Booking"> | string
+    courtId?: StringFilter<"Booking"> | string
+    playerId?: StringFilter<"Booking"> | string
+    totalPrice?: FloatFilter<"Booking"> | number
+    status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+    paymentSimulated?: BoolFilter<"Booking"> | boolean
+    bookingNotes?: StringNullableFilter<"Booking"> | string | null
+    cancelledAt?: DateTimeNullableFilter<"Booking"> | Date | string | null
+    cancellationReason?: StringNullableFilter<"Booking"> | string | null
+    version?: IntFilter<"Booking"> | number
+    createdAt?: DateTimeFilter<"Booking"> | Date | string
+    updatedAt?: DateTimeFilter<"Booking"> | Date | string
+  }
+
+  export type FacilityUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: FacilityWhereUniqueInput
+    update: XOR<FacilityUpdateWithoutOwnerInput, FacilityUncheckedUpdateWithoutOwnerInput>
+    create: XOR<FacilityCreateWithoutOwnerInput, FacilityUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type FacilityUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: FacilityWhereUniqueInput
+    data: XOR<FacilityUpdateWithoutOwnerInput, FacilityUncheckedUpdateWithoutOwnerInput>
+  }
+
+  export type FacilityUpdateManyWithWhereWithoutOwnerInput = {
+    where: FacilityScalarWhereInput
+    data: XOR<FacilityUpdateManyMutationInput, FacilityUncheckedUpdateManyWithoutOwnerInput>
+  }
+
+  export type FacilityScalarWhereInput = {
+    AND?: FacilityScalarWhereInput | FacilityScalarWhereInput[]
+    OR?: FacilityScalarWhereInput[]
+    NOT?: FacilityScalarWhereInput | FacilityScalarWhereInput[]
+    id?: StringFilter<"Facility"> | string
+    name?: StringFilter<"Facility"> | string
+    description?: StringNullableFilter<"Facility"> | string | null
+    address?: StringFilter<"Facility"> | string
+    latitude?: FloatNullableFilter<"Facility"> | number | null
+    longitude?: FloatNullableFilter<"Facility"> | number | null
+    amenities?: StringNullableListFilter<"Facility">
+    photos?: StringNullableListFilter<"Facility">
+    ownerId?: StringFilter<"Facility"> | string
+    status?: EnumFacilityStatusFilter<"Facility"> | $Enums.FacilityStatus
+    approvedAt?: DateTimeNullableFilter<"Facility"> | Date | string | null
+    approvedBy?: StringNullableFilter<"Facility"> | string | null
+    rejectionReason?: StringNullableFilter<"Facility"> | string | null
+    createdAt?: DateTimeFilter<"Facility"> | Date | string
+    updatedAt?: DateTimeFilter<"Facility"> | Date | string
+  }
+
+  export type PlayerRatingUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: PlayerRatingWhereUniqueInput
+    update: XOR<PlayerRatingUpdateWithoutPlayerInput, PlayerRatingUncheckedUpdateWithoutPlayerInput>
+    create: XOR<PlayerRatingCreateWithoutPlayerInput, PlayerRatingUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type PlayerRatingUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: PlayerRatingWhereUniqueInput
+    data: XOR<PlayerRatingUpdateWithoutPlayerInput, PlayerRatingUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type PlayerRatingUpdateManyWithWhereWithoutPlayerInput = {
+    where: PlayerRatingScalarWhereInput
+    data: XOR<PlayerRatingUpdateManyMutationInput, PlayerRatingUncheckedUpdateManyWithoutPlayerInput>
+  }
+
+  export type PlayerRatingScalarWhereInput = {
+    AND?: PlayerRatingScalarWhereInput | PlayerRatingScalarWhereInput[]
+    OR?: PlayerRatingScalarWhereInput[]
+    NOT?: PlayerRatingScalarWhereInput | PlayerRatingScalarWhereInput[]
+    id?: StringFilter<"PlayerRating"> | string
+    playerId?: StringFilter<"PlayerRating"> | string
+    sportType?: EnumSportTypeFilter<"PlayerRating"> | $Enums.SportType
+    rating?: FloatFilter<"PlayerRating"> | number
+    gamesPlayed?: IntFilter<"PlayerRating"> | number
+    wins?: IntFilter<"PlayerRating"> | number
+    losses?: IntFilter<"PlayerRating"> | number
+    draws?: IntFilter<"PlayerRating"> | number
+    lastMatchAt?: DateTimeNullableFilter<"PlayerRating"> | Date | string | null
+    createdAt?: DateTimeFilter<"PlayerRating"> | Date | string
+    updatedAt?: DateTimeFilter<"PlayerRating"> | Date | string
+  }
+
+  export type MatchPlayerUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: MatchPlayerWhereUniqueInput
+    update: XOR<MatchPlayerUpdateWithoutPlayerInput, MatchPlayerUncheckedUpdateWithoutPlayerInput>
+    create: XOR<MatchPlayerCreateWithoutPlayerInput, MatchPlayerUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type MatchPlayerUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: MatchPlayerWhereUniqueInput
+    data: XOR<MatchPlayerUpdateWithoutPlayerInput, MatchPlayerUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type MatchPlayerUpdateManyWithWhereWithoutPlayerInput = {
+    where: MatchPlayerScalarWhereInput
+    data: XOR<MatchPlayerUpdateManyMutationInput, MatchPlayerUncheckedUpdateManyWithoutPlayerInput>
+  }
+
+  export type MatchPlayerScalarWhereInput = {
+    AND?: MatchPlayerScalarWhereInput | MatchPlayerScalarWhereInput[]
+    OR?: MatchPlayerScalarWhereInput[]
+    NOT?: MatchPlayerScalarWhereInput | MatchPlayerScalarWhereInput[]
+    id?: StringFilter<"MatchPlayer"> | string
+    matchId?: StringFilter<"MatchPlayer"> | string
+    playerId?: StringFilter<"MatchPlayer"> | string
+    joinedAt?: DateTimeFilter<"MatchPlayer"> | Date | string
+    result?: StringNullableFilter<"MatchPlayer"> | string | null
+  }
+
+  export type WaitlistEntryUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: WaitlistEntryWhereUniqueInput
+    update: XOR<WaitlistEntryUpdateWithoutPlayerInput, WaitlistEntryUncheckedUpdateWithoutPlayerInput>
+    create: XOR<WaitlistEntryCreateWithoutPlayerInput, WaitlistEntryUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type WaitlistEntryUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: WaitlistEntryWhereUniqueInput
+    data: XOR<WaitlistEntryUpdateWithoutPlayerInput, WaitlistEntryUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type WaitlistEntryUpdateManyWithWhereWithoutPlayerInput = {
+    where: WaitlistEntryScalarWhereInput
+    data: XOR<WaitlistEntryUpdateManyMutationInput, WaitlistEntryUncheckedUpdateManyWithoutPlayerInput>
+  }
+
+  export type WaitlistEntryScalarWhereInput = {
+    AND?: WaitlistEntryScalarWhereInput | WaitlistEntryScalarWhereInput[]
+    OR?: WaitlistEntryScalarWhereInput[]
+    NOT?: WaitlistEntryScalarWhereInput | WaitlistEntryScalarWhereInput[]
+    id?: StringFilter<"WaitlistEntry"> | string
+    timeSlotId?: StringFilter<"WaitlistEntry"> | string
+    playerId?: StringFilter<"WaitlistEntry"> | string
+    priority?: IntFilter<"WaitlistEntry"> | number
+    status?: EnumWaitlistStatusFilter<"WaitlistEntry"> | $Enums.WaitlistStatus
+    notifiedAt?: DateTimeNullableFilter<"WaitlistEntry"> | Date | string | null
+    expiresAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    createdAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"WaitlistEntry"> | Date | string
+  }
+
+  export type NotificationLogUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: NotificationLogWhereUniqueInput
+    update: XOR<NotificationLogUpdateWithoutPlayerInput, NotificationLogUncheckedUpdateWithoutPlayerInput>
+    create: XOR<NotificationLogCreateWithoutPlayerInput, NotificationLogUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type NotificationLogUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: NotificationLogWhereUniqueInput
+    data: XOR<NotificationLogUpdateWithoutPlayerInput, NotificationLogUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type NotificationLogUpdateManyWithWhereWithoutPlayerInput = {
+    where: NotificationLogScalarWhereInput
+    data: XOR<NotificationLogUpdateManyMutationInput, NotificationLogUncheckedUpdateManyWithoutPlayerInput>
+  }
+
+  export type NotificationLogScalarWhereInput = {
+    AND?: NotificationLogScalarWhereInput | NotificationLogScalarWhereInput[]
+    OR?: NotificationLogScalarWhereInput[]
+    NOT?: NotificationLogScalarWhereInput | NotificationLogScalarWhereInput[]
+    id?: StringFilter<"NotificationLog"> | string
+    playerId?: StringFilter<"NotificationLog"> | string
+    type?: StringFilter<"NotificationLog"> | string
+    title?: StringFilter<"NotificationLog"> | string
+    message?: StringFilter<"NotificationLog"> | string
+    sentAt?: DateTimeFilter<"NotificationLog"> | Date | string
+    readAt?: DateTimeNullableFilter<"NotificationLog"> | Date | string | null
+  }
+
+  export type PlayerProfileCreateWithoutOwnedFacilitiesInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutOwnedFacilitiesInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutOwnedFacilitiesInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutOwnedFacilitiesInput, PlayerProfileUncheckedCreateWithoutOwnedFacilitiesInput>
+  }
+
+  export type CourtCreateWithoutFacilityInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlots?: TimeSlotCreateNestedManyWithoutCourtInput
+    bookings?: BookingCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutCourtInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsUncheckedCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtCreateOrConnectWithoutFacilityInput = {
+    where: CourtWhereUniqueInput
+    create: XOR<CourtCreateWithoutFacilityInput, CourtUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type CourtCreateManyFacilityInputEnvelope = {
+    data: CourtCreateManyFacilityInput | CourtCreateManyFacilityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlayerProfileUpsertWithoutOwnedFacilitiesInput = {
+    update: XOR<PlayerProfileUpdateWithoutOwnedFacilitiesInput, PlayerProfileUncheckedUpdateWithoutOwnedFacilitiesInput>
+    create: XOR<PlayerProfileCreateWithoutOwnedFacilitiesInput, PlayerProfileUncheckedCreateWithoutOwnedFacilitiesInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutOwnedFacilitiesInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutOwnedFacilitiesInput, PlayerProfileUncheckedUpdateWithoutOwnedFacilitiesInput>
+  }
+
+  export type PlayerProfileUpdateWithoutOwnedFacilitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutOwnedFacilitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type CourtUpsertWithWhereUniqueWithoutFacilityInput = {
+    where: CourtWhereUniqueInput
+    update: XOR<CourtUpdateWithoutFacilityInput, CourtUncheckedUpdateWithoutFacilityInput>
+    create: XOR<CourtCreateWithoutFacilityInput, CourtUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type CourtUpdateWithWhereUniqueWithoutFacilityInput = {
+    where: CourtWhereUniqueInput
+    data: XOR<CourtUpdateWithoutFacilityInput, CourtUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type CourtUpdateManyWithWhereWithoutFacilityInput = {
+    where: CourtScalarWhereInput
+    data: XOR<CourtUpdateManyMutationInput, CourtUncheckedUpdateManyWithoutFacilityInput>
+  }
+
+  export type CourtScalarWhereInput = {
+    AND?: CourtScalarWhereInput | CourtScalarWhereInput[]
+    OR?: CourtScalarWhereInput[]
+    NOT?: CourtScalarWhereInput | CourtScalarWhereInput[]
+    id?: StringFilter<"Court"> | string
+    name?: StringFilter<"Court"> | string
+    facilityId?: StringFilter<"Court"> | string
+    sportType?: EnumSportTypeFilter<"Court"> | $Enums.SportType
+    pricePerHour?: FloatFilter<"Court"> | number
+    operatingStartHour?: IntFilter<"Court"> | number
+    operatingEndHour?: IntFilter<"Court"> | number
+    isActive?: BoolFilter<"Court"> | boolean
+    createdAt?: DateTimeFilter<"Court"> | Date | string
+    updatedAt?: DateTimeFilter<"Court"> | Date | string
+  }
+
+  export type FacilityCreateWithoutCourtsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: PlayerProfileCreateNestedOneWithoutOwnedFacilitiesInput
+  }
+
+  export type FacilityUncheckedCreateWithoutCourtsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    ownerId: string
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityCreateOrConnectWithoutCourtsInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutCourtsInput, FacilityUncheckedCreateWithoutCourtsInput>
+  }
+
+  export type TimeSlotCreateWithoutCourtInput = {
+    id?: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booking?: BookingCreateNestedOneWithoutTimeSlotInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutTimeSlotInput
+  }
+
+  export type TimeSlotUncheckedCreateWithoutCourtInput = {
+    id?: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booking?: BookingUncheckedCreateNestedOneWithoutTimeSlotInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutTimeSlotInput
+  }
+
+  export type TimeSlotCreateOrConnectWithoutCourtInput = {
+    where: TimeSlotWhereUniqueInput
+    create: XOR<TimeSlotCreateWithoutCourtInput, TimeSlotUncheckedCreateWithoutCourtInput>
+  }
+
+  export type TimeSlotCreateManyCourtInputEnvelope = {
+    data: TimeSlotCreateManyCourtInput | TimeSlotCreateManyCourtInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BookingCreateWithoutCourtInput = {
+    id?: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlot: TimeSlotCreateNestedOneWithoutBookingInput
+    player: PlayerProfileCreateNestedOneWithoutBookingsInput
+    match?: MatchCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingUncheckedCreateWithoutCourtInput = {
+    id?: string
+    timeSlotId: string
+    playerId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    match?: MatchUncheckedCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingCreateOrConnectWithoutCourtInput = {
+    where: BookingWhereUniqueInput
+    create: XOR<BookingCreateWithoutCourtInput, BookingUncheckedCreateWithoutCourtInput>
+  }
+
+  export type BookingCreateManyCourtInputEnvelope = {
+    data: BookingCreateManyCourtInput | BookingCreateManyCourtInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OccupancyStatsCreateWithoutCourtInput = {
+    id?: string
+    hourOfWeek: number
+    avgOccupancy?: number
+    sampleCount?: number
+    lastUpdated?: Date | string
+  }
+
+  export type OccupancyStatsUncheckedCreateWithoutCourtInput = {
+    id?: string
+    hourOfWeek: number
+    avgOccupancy?: number
+    sampleCount?: number
+    lastUpdated?: Date | string
+  }
+
+  export type OccupancyStatsCreateOrConnectWithoutCourtInput = {
+    where: OccupancyStatsWhereUniqueInput
+    create: XOR<OccupancyStatsCreateWithoutCourtInput, OccupancyStatsUncheckedCreateWithoutCourtInput>
+  }
+
+  export type OccupancyStatsCreateManyCourtInputEnvelope = {
+    data: OccupancyStatsCreateManyCourtInput | OccupancyStatsCreateManyCourtInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FacilityUpsertWithoutCourtsInput = {
+    update: XOR<FacilityUpdateWithoutCourtsInput, FacilityUncheckedUpdateWithoutCourtsInput>
+    create: XOR<FacilityCreateWithoutCourtsInput, FacilityUncheckedCreateWithoutCourtsInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutCourtsInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutCourtsInput, FacilityUncheckedUpdateWithoutCourtsInput>
+  }
+
+  export type FacilityUpdateWithoutCourtsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: PlayerProfileUpdateOneRequiredWithoutOwnedFacilitiesNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutCourtsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    ownerId?: StringFieldUpdateOperationsInput | string
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeSlotUpsertWithWhereUniqueWithoutCourtInput = {
+    where: TimeSlotWhereUniqueInput
+    update: XOR<TimeSlotUpdateWithoutCourtInput, TimeSlotUncheckedUpdateWithoutCourtInput>
+    create: XOR<TimeSlotCreateWithoutCourtInput, TimeSlotUncheckedCreateWithoutCourtInput>
+  }
+
+  export type TimeSlotUpdateWithWhereUniqueWithoutCourtInput = {
+    where: TimeSlotWhereUniqueInput
+    data: XOR<TimeSlotUpdateWithoutCourtInput, TimeSlotUncheckedUpdateWithoutCourtInput>
+  }
+
+  export type TimeSlotUpdateManyWithWhereWithoutCourtInput = {
+    where: TimeSlotScalarWhereInput
+    data: XOR<TimeSlotUpdateManyMutationInput, TimeSlotUncheckedUpdateManyWithoutCourtInput>
+  }
+
+  export type TimeSlotScalarWhereInput = {
+    AND?: TimeSlotScalarWhereInput | TimeSlotScalarWhereInput[]
+    OR?: TimeSlotScalarWhereInput[]
+    NOT?: TimeSlotScalarWhereInput | TimeSlotScalarWhereInput[]
+    id?: StringFilter<"TimeSlot"> | string
+    courtId?: StringFilter<"TimeSlot"> | string
+    startTime?: DateTimeFilter<"TimeSlot"> | Date | string
+    endTime?: DateTimeFilter<"TimeSlot"> | Date | string
+    isMaintenanceBlocked?: BoolFilter<"TimeSlot"> | boolean
+    maintenanceReason?: StringNullableFilter<"TimeSlot"> | string | null
+    version?: IntFilter<"TimeSlot"> | number
+    createdAt?: DateTimeFilter<"TimeSlot"> | Date | string
+    updatedAt?: DateTimeFilter<"TimeSlot"> | Date | string
+  }
+
+  export type BookingUpsertWithWhereUniqueWithoutCourtInput = {
+    where: BookingWhereUniqueInput
+    update: XOR<BookingUpdateWithoutCourtInput, BookingUncheckedUpdateWithoutCourtInput>
+    create: XOR<BookingCreateWithoutCourtInput, BookingUncheckedCreateWithoutCourtInput>
+  }
+
+  export type BookingUpdateWithWhereUniqueWithoutCourtInput = {
+    where: BookingWhereUniqueInput
+    data: XOR<BookingUpdateWithoutCourtInput, BookingUncheckedUpdateWithoutCourtInput>
+  }
+
+  export type BookingUpdateManyWithWhereWithoutCourtInput = {
+    where: BookingScalarWhereInput
+    data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyWithoutCourtInput>
+  }
+
+  export type OccupancyStatsUpsertWithWhereUniqueWithoutCourtInput = {
+    where: OccupancyStatsWhereUniqueInput
+    update: XOR<OccupancyStatsUpdateWithoutCourtInput, OccupancyStatsUncheckedUpdateWithoutCourtInput>
+    create: XOR<OccupancyStatsCreateWithoutCourtInput, OccupancyStatsUncheckedCreateWithoutCourtInput>
+  }
+
+  export type OccupancyStatsUpdateWithWhereUniqueWithoutCourtInput = {
+    where: OccupancyStatsWhereUniqueInput
+    data: XOR<OccupancyStatsUpdateWithoutCourtInput, OccupancyStatsUncheckedUpdateWithoutCourtInput>
+  }
+
+  export type OccupancyStatsUpdateManyWithWhereWithoutCourtInput = {
+    where: OccupancyStatsScalarWhereInput
+    data: XOR<OccupancyStatsUpdateManyMutationInput, OccupancyStatsUncheckedUpdateManyWithoutCourtInput>
+  }
+
+  export type OccupancyStatsScalarWhereInput = {
+    AND?: OccupancyStatsScalarWhereInput | OccupancyStatsScalarWhereInput[]
+    OR?: OccupancyStatsScalarWhereInput[]
+    NOT?: OccupancyStatsScalarWhereInput | OccupancyStatsScalarWhereInput[]
+    id?: StringFilter<"OccupancyStats"> | string
+    courtId?: StringFilter<"OccupancyStats"> | string
+    hourOfWeek?: IntFilter<"OccupancyStats"> | number
+    avgOccupancy?: FloatFilter<"OccupancyStats"> | number
+    sampleCount?: IntFilter<"OccupancyStats"> | number
+    lastUpdated?: DateTimeFilter<"OccupancyStats"> | Date | string
+  }
+
+  export type CourtCreateWithoutTimeSlotsInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCourtsInput
+    bookings?: BookingCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtUncheckedCreateWithoutTimeSlotsInput = {
+    id?: string
+    name: string
+    facilityId: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsUncheckedCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtCreateOrConnectWithoutTimeSlotsInput = {
+    where: CourtWhereUniqueInput
+    create: XOR<CourtCreateWithoutTimeSlotsInput, CourtUncheckedCreateWithoutTimeSlotsInput>
+  }
+
+  export type BookingCreateWithoutTimeSlotInput = {
+    id?: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    court: CourtCreateNestedOneWithoutBookingsInput
+    player: PlayerProfileCreateNestedOneWithoutBookingsInput
+    match?: MatchCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingUncheckedCreateWithoutTimeSlotInput = {
+    id?: string
+    courtId: string
+    playerId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    match?: MatchUncheckedCreateNestedOneWithoutBookingInput
+  }
+
+  export type BookingCreateOrConnectWithoutTimeSlotInput = {
+    where: BookingWhereUniqueInput
+    create: XOR<BookingCreateWithoutTimeSlotInput, BookingUncheckedCreateWithoutTimeSlotInput>
+  }
+
+  export type WaitlistEntryCreateWithoutTimeSlotInput = {
+    id?: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    player: PlayerProfileCreateNestedOneWithoutWaitlistEntriesInput
+  }
+
+  export type WaitlistEntryUncheckedCreateWithoutTimeSlotInput = {
+    id?: string
+    playerId: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WaitlistEntryCreateOrConnectWithoutTimeSlotInput = {
+    where: WaitlistEntryWhereUniqueInput
+    create: XOR<WaitlistEntryCreateWithoutTimeSlotInput, WaitlistEntryUncheckedCreateWithoutTimeSlotInput>
+  }
+
+  export type WaitlistEntryCreateManyTimeSlotInputEnvelope = {
+    data: WaitlistEntryCreateManyTimeSlotInput | WaitlistEntryCreateManyTimeSlotInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CourtUpsertWithoutTimeSlotsInput = {
+    update: XOR<CourtUpdateWithoutTimeSlotsInput, CourtUncheckedUpdateWithoutTimeSlotsInput>
+    create: XOR<CourtCreateWithoutTimeSlotsInput, CourtUncheckedCreateWithoutTimeSlotsInput>
+    where?: CourtWhereInput
+  }
+
+  export type CourtUpdateToOneWithWhereWithoutTimeSlotsInput = {
+    where?: CourtWhereInput
+    data: XOR<CourtUpdateWithoutTimeSlotsInput, CourtUncheckedUpdateWithoutTimeSlotsInput>
+  }
+
+  export type CourtUpdateWithoutTimeSlotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCourtsNestedInput
+    bookings?: BookingUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtUncheckedUpdateWithoutTimeSlotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUncheckedUpdateManyWithoutCourtNestedInput
+  }
+
+  export type BookingUpsertWithoutTimeSlotInput = {
+    update: XOR<BookingUpdateWithoutTimeSlotInput, BookingUncheckedUpdateWithoutTimeSlotInput>
+    create: XOR<BookingCreateWithoutTimeSlotInput, BookingUncheckedCreateWithoutTimeSlotInput>
+    where?: BookingWhereInput
+  }
+
+  export type BookingUpdateToOneWithWhereWithoutTimeSlotInput = {
+    where?: BookingWhereInput
+    data: XOR<BookingUpdateWithoutTimeSlotInput, BookingUncheckedUpdateWithoutTimeSlotInput>
+  }
+
+  export type BookingUpdateWithoutTimeSlotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    court?: CourtUpdateOneRequiredWithoutBookingsNestedInput
+    player?: PlayerProfileUpdateOneRequiredWithoutBookingsNestedInput
+    match?: MatchUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateWithoutTimeSlotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    match?: MatchUncheckedUpdateOneWithoutBookingNestedInput
+  }
+
+  export type WaitlistEntryUpsertWithWhereUniqueWithoutTimeSlotInput = {
+    where: WaitlistEntryWhereUniqueInput
+    update: XOR<WaitlistEntryUpdateWithoutTimeSlotInput, WaitlistEntryUncheckedUpdateWithoutTimeSlotInput>
+    create: XOR<WaitlistEntryCreateWithoutTimeSlotInput, WaitlistEntryUncheckedCreateWithoutTimeSlotInput>
+  }
+
+  export type WaitlistEntryUpdateWithWhereUniqueWithoutTimeSlotInput = {
+    where: WaitlistEntryWhereUniqueInput
+    data: XOR<WaitlistEntryUpdateWithoutTimeSlotInput, WaitlistEntryUncheckedUpdateWithoutTimeSlotInput>
+  }
+
+  export type WaitlistEntryUpdateManyWithWhereWithoutTimeSlotInput = {
+    where: WaitlistEntryScalarWhereInput
+    data: XOR<WaitlistEntryUpdateManyMutationInput, WaitlistEntryUncheckedUpdateManyWithoutTimeSlotInput>
+  }
+
+  export type TimeSlotCreateWithoutBookingInput = {
+    id?: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    court: CourtCreateNestedOneWithoutTimeSlotsInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutTimeSlotInput
+  }
+
+  export type TimeSlotUncheckedCreateWithoutBookingInput = {
+    id?: string
+    courtId: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutTimeSlotInput
+  }
+
+  export type TimeSlotCreateOrConnectWithoutBookingInput = {
+    where: TimeSlotWhereUniqueInput
+    create: XOR<TimeSlotCreateWithoutBookingInput, TimeSlotUncheckedCreateWithoutBookingInput>
+  }
+
+  export type CourtCreateWithoutBookingsInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCourtsInput
+    timeSlots?: TimeSlotCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtUncheckedCreateWithoutBookingsInput = {
+    id?: string
+    name: string
+    facilityId: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutCourtInput
+    occupancyStats?: OccupancyStatsUncheckedCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtCreateOrConnectWithoutBookingsInput = {
+    where: CourtWhereUniqueInput
+    create: XOR<CourtCreateWithoutBookingsInput, CourtUncheckedCreateWithoutBookingsInput>
+  }
+
+  export type PlayerProfileCreateWithoutBookingsInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutBookingsInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutBookingsInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutBookingsInput, PlayerProfileUncheckedCreateWithoutBookingsInput>
+  }
+
+  export type MatchCreateWithoutBookingInput = {
+    id?: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    players?: MatchPlayerCreateNestedManyWithoutMatchInput
+  }
+
+  export type MatchUncheckedCreateWithoutBookingInput = {
+    id?: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    players?: MatchPlayerUncheckedCreateNestedManyWithoutMatchInput
+  }
+
+  export type MatchCreateOrConnectWithoutBookingInput = {
+    where: MatchWhereUniqueInput
+    create: XOR<MatchCreateWithoutBookingInput, MatchUncheckedCreateWithoutBookingInput>
+  }
+
+  export type TimeSlotUpsertWithoutBookingInput = {
+    update: XOR<TimeSlotUpdateWithoutBookingInput, TimeSlotUncheckedUpdateWithoutBookingInput>
+    create: XOR<TimeSlotCreateWithoutBookingInput, TimeSlotUncheckedCreateWithoutBookingInput>
+    where?: TimeSlotWhereInput
+  }
+
+  export type TimeSlotUpdateToOneWithWhereWithoutBookingInput = {
+    where?: TimeSlotWhereInput
+    data: XOR<TimeSlotUpdateWithoutBookingInput, TimeSlotUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type TimeSlotUpdateWithoutBookingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    court?: CourtUpdateOneRequiredWithoutTimeSlotsNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutTimeSlotNestedInput
+  }
+
+  export type TimeSlotUncheckedUpdateWithoutBookingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutTimeSlotNestedInput
+  }
+
+  export type CourtUpsertWithoutBookingsInput = {
+    update: XOR<CourtUpdateWithoutBookingsInput, CourtUncheckedUpdateWithoutBookingsInput>
+    create: XOR<CourtCreateWithoutBookingsInput, CourtUncheckedCreateWithoutBookingsInput>
+    where?: CourtWhereInput
+  }
+
+  export type CourtUpdateToOneWithWhereWithoutBookingsInput = {
+    where?: CourtWhereInput
+    data: XOR<CourtUpdateWithoutBookingsInput, CourtUncheckedUpdateWithoutBookingsInput>
+  }
+
+  export type CourtUpdateWithoutBookingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCourtsNestedInput
+    timeSlots?: TimeSlotUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtUncheckedUpdateWithoutBookingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlots?: TimeSlotUncheckedUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUncheckedUpdateManyWithoutCourtNestedInput
+  }
+
+  export type PlayerProfileUpsertWithoutBookingsInput = {
+    update: XOR<PlayerProfileUpdateWithoutBookingsInput, PlayerProfileUncheckedUpdateWithoutBookingsInput>
+    create: XOR<PlayerProfileCreateWithoutBookingsInput, PlayerProfileUncheckedCreateWithoutBookingsInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutBookingsInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutBookingsInput, PlayerProfileUncheckedUpdateWithoutBookingsInput>
+  }
+
+  export type PlayerProfileUpdateWithoutBookingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutBookingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type MatchUpsertWithoutBookingInput = {
+    update: XOR<MatchUpdateWithoutBookingInput, MatchUncheckedUpdateWithoutBookingInput>
+    create: XOR<MatchCreateWithoutBookingInput, MatchUncheckedCreateWithoutBookingInput>
+    where?: MatchWhereInput
+  }
+
+  export type MatchUpdateToOneWithWhereWithoutBookingInput = {
+    where?: MatchWhereInput
+    data: XOR<MatchUpdateWithoutBookingInput, MatchUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type MatchUpdateWithoutBookingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    players?: MatchPlayerUpdateManyWithoutMatchNestedInput
+  }
+
+  export type MatchUncheckedUpdateWithoutBookingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    players?: MatchPlayerUncheckedUpdateManyWithoutMatchNestedInput
+  }
+
+  export type BookingCreateWithoutMatchInput = {
+    id?: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlot: TimeSlotCreateNestedOneWithoutBookingInput
+    court: CourtCreateNestedOneWithoutBookingsInput
+    player: PlayerProfileCreateNestedOneWithoutBookingsInput
+  }
+
+  export type BookingUncheckedCreateWithoutMatchInput = {
+    id?: string
+    timeSlotId: string
+    courtId: string
+    playerId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BookingCreateOrConnectWithoutMatchInput = {
+    where: BookingWhereUniqueInput
+    create: XOR<BookingCreateWithoutMatchInput, BookingUncheckedCreateWithoutMatchInput>
+  }
+
+  export type MatchPlayerCreateWithoutMatchInput = {
+    id?: string
+    joinedAt?: Date | string
+    result?: string | null
+    player: PlayerProfileCreateNestedOneWithoutMatchPlayersInput
+  }
+
+  export type MatchPlayerUncheckedCreateWithoutMatchInput = {
+    id?: string
+    playerId: string
+    joinedAt?: Date | string
+    result?: string | null
+  }
+
+  export type MatchPlayerCreateOrConnectWithoutMatchInput = {
+    where: MatchPlayerWhereUniqueInput
+    create: XOR<MatchPlayerCreateWithoutMatchInput, MatchPlayerUncheckedCreateWithoutMatchInput>
+  }
+
+  export type MatchPlayerCreateManyMatchInputEnvelope = {
+    data: MatchPlayerCreateManyMatchInput | MatchPlayerCreateManyMatchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BookingUpsertWithoutMatchInput = {
+    update: XOR<BookingUpdateWithoutMatchInput, BookingUncheckedUpdateWithoutMatchInput>
+    create: XOR<BookingCreateWithoutMatchInput, BookingUncheckedCreateWithoutMatchInput>
+    where?: BookingWhereInput
+  }
+
+  export type BookingUpdateToOneWithWhereWithoutMatchInput = {
+    where?: BookingWhereInput
+    data: XOR<BookingUpdateWithoutMatchInput, BookingUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type BookingUpdateWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlot?: TimeSlotUpdateOneRequiredWithoutBookingNestedInput
+    court?: CourtUpdateOneRequiredWithoutBookingsNestedInput
+    player?: PlayerProfileUpdateOneRequiredWithoutBookingsNestedInput
+  }
+
+  export type BookingUncheckedUpdateWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchPlayerUpsertWithWhereUniqueWithoutMatchInput = {
+    where: MatchPlayerWhereUniqueInput
+    update: XOR<MatchPlayerUpdateWithoutMatchInput, MatchPlayerUncheckedUpdateWithoutMatchInput>
+    create: XOR<MatchPlayerCreateWithoutMatchInput, MatchPlayerUncheckedCreateWithoutMatchInput>
+  }
+
+  export type MatchPlayerUpdateWithWhereUniqueWithoutMatchInput = {
+    where: MatchPlayerWhereUniqueInput
+    data: XOR<MatchPlayerUpdateWithoutMatchInput, MatchPlayerUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type MatchPlayerUpdateManyWithWhereWithoutMatchInput = {
+    where: MatchPlayerScalarWhereInput
+    data: XOR<MatchPlayerUpdateManyMutationInput, MatchPlayerUncheckedUpdateManyWithoutMatchInput>
+  }
+
+  export type MatchCreateWithoutPlayersInput = {
+    id?: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booking: BookingCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchUncheckedCreateWithoutPlayersInput = {
+    id?: string
+    bookingId: string
+    title?: string | null
+    description?: string | null
+    maxPlayers?: number
+    sportType: $Enums.SportType
+    skillLevel?: string | null
+    status?: $Enums.MatchStatus
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MatchCreateOrConnectWithoutPlayersInput = {
+    where: MatchWhereUniqueInput
+    create: XOR<MatchCreateWithoutPlayersInput, MatchUncheckedCreateWithoutPlayersInput>
+  }
+
+  export type PlayerProfileCreateWithoutMatchPlayersInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutMatchPlayersInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutMatchPlayersInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutMatchPlayersInput, PlayerProfileUncheckedCreateWithoutMatchPlayersInput>
+  }
+
+  export type MatchUpsertWithoutPlayersInput = {
+    update: XOR<MatchUpdateWithoutPlayersInput, MatchUncheckedUpdateWithoutPlayersInput>
+    create: XOR<MatchCreateWithoutPlayersInput, MatchUncheckedCreateWithoutPlayersInput>
+    where?: MatchWhereInput
+  }
+
+  export type MatchUpdateToOneWithWhereWithoutPlayersInput = {
+    where?: MatchWhereInput
+    data: XOR<MatchUpdateWithoutPlayersInput, MatchUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type MatchUpdateWithoutPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booking?: BookingUpdateOneRequiredWithoutMatchNestedInput
+  }
+
+  export type MatchUncheckedUpdateWithoutPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookingId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    maxPlayers?: IntFieldUpdateOperationsInput | number
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    skillLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerProfileUpsertWithoutMatchPlayersInput = {
+    update: XOR<PlayerProfileUpdateWithoutMatchPlayersInput, PlayerProfileUncheckedUpdateWithoutMatchPlayersInput>
+    create: XOR<PlayerProfileCreateWithoutMatchPlayersInput, PlayerProfileUncheckedCreateWithoutMatchPlayersInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutMatchPlayersInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutMatchPlayersInput, PlayerProfileUncheckedUpdateWithoutMatchPlayersInput>
+  }
+
+  export type PlayerProfileUpdateWithoutMatchPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutMatchPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileCreateWithoutRatingsInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutRatingsInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutRatingsInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutRatingsInput, PlayerProfileUncheckedCreateWithoutRatingsInput>
+  }
+
+  export type RatingHistoryCreateWithoutRatingInput = {
+    id?: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating?: number | null
+    matchResult: string
+    createdAt?: Date | string
+  }
+
+  export type RatingHistoryUncheckedCreateWithoutRatingInput = {
+    id?: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating?: number | null
+    matchResult: string
+    createdAt?: Date | string
+  }
+
+  export type RatingHistoryCreateOrConnectWithoutRatingInput = {
+    where: RatingHistoryWhereUniqueInput
+    create: XOR<RatingHistoryCreateWithoutRatingInput, RatingHistoryUncheckedCreateWithoutRatingInput>
+  }
+
+  export type RatingHistoryCreateManyRatingInputEnvelope = {
+    data: RatingHistoryCreateManyRatingInput | RatingHistoryCreateManyRatingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlayerProfileUpsertWithoutRatingsInput = {
+    update: XOR<PlayerProfileUpdateWithoutRatingsInput, PlayerProfileUncheckedUpdateWithoutRatingsInput>
+    create: XOR<PlayerProfileCreateWithoutRatingsInput, PlayerProfileUncheckedCreateWithoutRatingsInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutRatingsInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutRatingsInput, PlayerProfileUncheckedUpdateWithoutRatingsInput>
+  }
+
+  export type PlayerProfileUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type RatingHistoryUpsertWithWhereUniqueWithoutRatingInput = {
+    where: RatingHistoryWhereUniqueInput
+    update: XOR<RatingHistoryUpdateWithoutRatingInput, RatingHistoryUncheckedUpdateWithoutRatingInput>
+    create: XOR<RatingHistoryCreateWithoutRatingInput, RatingHistoryUncheckedCreateWithoutRatingInput>
+  }
+
+  export type RatingHistoryUpdateWithWhereUniqueWithoutRatingInput = {
+    where: RatingHistoryWhereUniqueInput
+    data: XOR<RatingHistoryUpdateWithoutRatingInput, RatingHistoryUncheckedUpdateWithoutRatingInput>
+  }
+
+  export type RatingHistoryUpdateManyWithWhereWithoutRatingInput = {
+    where: RatingHistoryScalarWhereInput
+    data: XOR<RatingHistoryUpdateManyMutationInput, RatingHistoryUncheckedUpdateManyWithoutRatingInput>
+  }
+
+  export type RatingHistoryScalarWhereInput = {
+    AND?: RatingHistoryScalarWhereInput | RatingHistoryScalarWhereInput[]
+    OR?: RatingHistoryScalarWhereInput[]
+    NOT?: RatingHistoryScalarWhereInput | RatingHistoryScalarWhereInput[]
+    id?: StringFilter<"RatingHistory"> | string
+    ratingId?: StringFilter<"RatingHistory"> | string
+    oldRating?: FloatFilter<"RatingHistory"> | number
+    newRating?: FloatFilter<"RatingHistory"> | number
+    ratingChange?: FloatFilter<"RatingHistory"> | number
+    opponentRating?: FloatNullableFilter<"RatingHistory"> | number | null
+    matchResult?: StringFilter<"RatingHistory"> | string
+    createdAt?: DateTimeFilter<"RatingHistory"> | Date | string
+  }
+
+  export type PlayerRatingCreateWithoutHistoryInput = {
+    id?: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    player: PlayerProfileCreateNestedOneWithoutRatingsInput
+  }
+
+  export type PlayerRatingUncheckedCreateWithoutHistoryInput = {
+    id?: string
+    playerId: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PlayerRatingCreateOrConnectWithoutHistoryInput = {
+    where: PlayerRatingWhereUniqueInput
+    create: XOR<PlayerRatingCreateWithoutHistoryInput, PlayerRatingUncheckedCreateWithoutHistoryInput>
+  }
+
+  export type PlayerRatingUpsertWithoutHistoryInput = {
+    update: XOR<PlayerRatingUpdateWithoutHistoryInput, PlayerRatingUncheckedUpdateWithoutHistoryInput>
+    create: XOR<PlayerRatingCreateWithoutHistoryInput, PlayerRatingUncheckedCreateWithoutHistoryInput>
+    where?: PlayerRatingWhereInput
+  }
+
+  export type PlayerRatingUpdateToOneWithWhereWithoutHistoryInput = {
+    where?: PlayerRatingWhereInput
+    data: XOR<PlayerRatingUpdateWithoutHistoryInput, PlayerRatingUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type PlayerRatingUpdateWithoutHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    player?: PlayerProfileUpdateOneRequiredWithoutRatingsNestedInput
+  }
+
+  export type PlayerRatingUncheckedUpdateWithoutHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeSlotCreateWithoutWaitlistEntriesInput = {
+    id?: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    court: CourtCreateNestedOneWithoutTimeSlotsInput
+    booking?: BookingCreateNestedOneWithoutTimeSlotInput
+  }
+
+  export type TimeSlotUncheckedCreateWithoutWaitlistEntriesInput = {
+    id?: string
+    courtId: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booking?: BookingUncheckedCreateNestedOneWithoutTimeSlotInput
+  }
+
+  export type TimeSlotCreateOrConnectWithoutWaitlistEntriesInput = {
+    where: TimeSlotWhereUniqueInput
+    create: XOR<TimeSlotCreateWithoutWaitlistEntriesInput, TimeSlotUncheckedCreateWithoutWaitlistEntriesInput>
+  }
+
+  export type PlayerProfileCreateWithoutWaitlistEntriesInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutWaitlistEntriesInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    notifications?: NotificationLogUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutWaitlistEntriesInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutWaitlistEntriesInput, PlayerProfileUncheckedCreateWithoutWaitlistEntriesInput>
+  }
+
+  export type TimeSlotUpsertWithoutWaitlistEntriesInput = {
+    update: XOR<TimeSlotUpdateWithoutWaitlistEntriesInput, TimeSlotUncheckedUpdateWithoutWaitlistEntriesInput>
+    create: XOR<TimeSlotCreateWithoutWaitlistEntriesInput, TimeSlotUncheckedCreateWithoutWaitlistEntriesInput>
+    where?: TimeSlotWhereInput
+  }
+
+  export type TimeSlotUpdateToOneWithWhereWithoutWaitlistEntriesInput = {
+    where?: TimeSlotWhereInput
+    data: XOR<TimeSlotUpdateWithoutWaitlistEntriesInput, TimeSlotUncheckedUpdateWithoutWaitlistEntriesInput>
+  }
+
+  export type TimeSlotUpdateWithoutWaitlistEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    court?: CourtUpdateOneRequiredWithoutTimeSlotsNestedInput
+    booking?: BookingUpdateOneWithoutTimeSlotNestedInput
+  }
+
+  export type TimeSlotUncheckedUpdateWithoutWaitlistEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booking?: BookingUncheckedUpdateOneWithoutTimeSlotNestedInput
+  }
+
+  export type PlayerProfileUpsertWithoutWaitlistEntriesInput = {
+    update: XOR<PlayerProfileUpdateWithoutWaitlistEntriesInput, PlayerProfileUncheckedUpdateWithoutWaitlistEntriesInput>
+    create: XOR<PlayerProfileCreateWithoutWaitlistEntriesInput, PlayerProfileUncheckedCreateWithoutWaitlistEntriesInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutWaitlistEntriesInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutWaitlistEntriesInput, PlayerProfileUncheckedUpdateWithoutWaitlistEntriesInput>
+  }
+
+  export type PlayerProfileUpdateWithoutWaitlistEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutWaitlistEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    notifications?: NotificationLogUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type CourtCreateWithoutOccupancyStatsInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCourtsInput
+    timeSlots?: TimeSlotCreateNestedManyWithoutCourtInput
+    bookings?: BookingCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtUncheckedCreateWithoutOccupancyStatsInput = {
+    id?: string
+    name: string
+    facilityId: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutCourtInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutCourtInput
+  }
+
+  export type CourtCreateOrConnectWithoutOccupancyStatsInput = {
+    where: CourtWhereUniqueInput
+    create: XOR<CourtCreateWithoutOccupancyStatsInput, CourtUncheckedCreateWithoutOccupancyStatsInput>
+  }
+
+  export type CourtUpsertWithoutOccupancyStatsInput = {
+    update: XOR<CourtUpdateWithoutOccupancyStatsInput, CourtUncheckedUpdateWithoutOccupancyStatsInput>
+    create: XOR<CourtCreateWithoutOccupancyStatsInput, CourtUncheckedCreateWithoutOccupancyStatsInput>
+    where?: CourtWhereInput
+  }
+
+  export type CourtUpdateToOneWithWhereWithoutOccupancyStatsInput = {
+    where?: CourtWhereInput
+    data: XOR<CourtUpdateWithoutOccupancyStatsInput, CourtUncheckedUpdateWithoutOccupancyStatsInput>
+  }
+
+  export type CourtUpdateWithoutOccupancyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCourtsNestedInput
+    timeSlots?: TimeSlotUpdateManyWithoutCourtNestedInput
+    bookings?: BookingUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtUncheckedUpdateWithoutOccupancyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlots?: TimeSlotUncheckedUpdateManyWithoutCourtNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutCourtNestedInput
+  }
+
+  export type PlayerProfileCreateWithoutNotificationsInput = {
+    id?: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerProfileInput
+    bookings?: BookingCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileUncheckedCreateWithoutNotificationsInput = {
+    id?: string
+    userId: string
+    role?: $Enums.UserRole
+    phoneNumber?: string | null
+    avatar?: string | null
+    isActive?: boolean
+    isBanned?: boolean
+    bannedUntil?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutPlayerInput
+    ownedFacilities?: FacilityUncheckedCreateNestedManyWithoutOwnerInput
+    ratings?: PlayerRatingUncheckedCreateNestedManyWithoutPlayerInput
+    matchPlayers?: MatchPlayerUncheckedCreateNestedManyWithoutPlayerInput
+    waitlistEntries?: WaitlistEntryUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerProfileCreateOrConnectWithoutNotificationsInput = {
+    where: PlayerProfileWhereUniqueInput
+    create: XOR<PlayerProfileCreateWithoutNotificationsInput, PlayerProfileUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type PlayerProfileUpsertWithoutNotificationsInput = {
+    update: XOR<PlayerProfileUpdateWithoutNotificationsInput, PlayerProfileUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<PlayerProfileCreateWithoutNotificationsInput, PlayerProfileUncheckedCreateWithoutNotificationsInput>
+    where?: PlayerProfileWhereInput
+  }
+
+  export type PlayerProfileUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: PlayerProfileWhereInput
+    data: XOR<PlayerProfileUpdateWithoutNotificationsInput, PlayerProfileUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type PlayerProfileUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerProfileNestedInput
+    bookings?: BookingUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerProfileUncheckedUpdateWithoutNotificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    bannedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutPlayerNestedInput
+    ownedFacilities?: FacilityUncheckedUpdateManyWithoutOwnerNestedInput
+    ratings?: PlayerRatingUncheckedUpdateManyWithoutPlayerNestedInput
+    matchPlayers?: MatchPlayerUncheckedUpdateManyWithoutPlayerNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -8456,6 +29703,608 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookingCreateManyPlayerInput = {
+    id?: string
+    timeSlotId: string
+    courtId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FacilityCreateManyOwnerInput = {
+    id?: string
+    name: string
+    description?: string | null
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+    amenities?: FacilityCreateamenitiesInput | string[]
+    photos?: FacilityCreatephotosInput | string[]
+    status?: $Enums.FacilityStatus
+    approvedAt?: Date | string | null
+    approvedBy?: string | null
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PlayerRatingCreateManyPlayerInput = {
+    id?: string
+    sportType: $Enums.SportType
+    rating?: number
+    gamesPlayed?: number
+    wins?: number
+    losses?: number
+    draws?: number
+    lastMatchAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MatchPlayerCreateManyPlayerInput = {
+    id?: string
+    matchId: string
+    joinedAt?: Date | string
+    result?: string | null
+  }
+
+  export type WaitlistEntryCreateManyPlayerInput = {
+    id?: string
+    timeSlotId: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationLogCreateManyPlayerInput = {
+    id?: string
+    type: string
+    title: string
+    message: string
+    sentAt?: Date | string
+    readAt?: Date | string | null
+  }
+
+  export type BookingUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlot?: TimeSlotUpdateOneRequiredWithoutBookingNestedInput
+    court?: CourtUpdateOneRequiredWithoutBookingsNestedInput
+    match?: MatchUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    match?: MatchUncheckedUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    courtId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courts?: CourtUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courts?: CourtUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    amenities?: FacilityUpdateamenitiesInput | string[]
+    photos?: FacilityUpdatephotosInput | string[]
+    status?: EnumFacilityStatusFieldUpdateOperationsInput | $Enums.FacilityStatus
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerRatingUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    history?: RatingHistoryUpdateManyWithoutRatingNestedInput
+  }
+
+  export type PlayerRatingUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    history?: RatingHistoryUncheckedUpdateManyWithoutRatingNestedInput
+  }
+
+  export type PlayerRatingUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    rating?: FloatFieldUpdateOperationsInput | number
+    gamesPlayed?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    losses?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    lastMatchAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchPlayerUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    match?: MatchUpdateOneRequiredWithoutPlayersNestedInput
+  }
+
+  export type MatchPlayerUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MatchPlayerUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type WaitlistEntryUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlot?: TimeSlotUpdateOneRequiredWithoutWaitlistEntriesNestedInput
+  }
+
+  export type WaitlistEntryUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WaitlistEntryUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationLogUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NotificationLogUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NotificationLogUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CourtCreateManyFacilityInput = {
+    id?: string
+    name: string
+    sportType: $Enums.SportType
+    pricePerHour: number
+    operatingStartHour: number
+    operatingEndHour: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CourtUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlots?: TimeSlotUpdateManyWithoutCourtNestedInput
+    bookings?: BookingUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlots?: TimeSlotUncheckedUpdateManyWithoutCourtNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutCourtNestedInput
+    occupancyStats?: OccupancyStatsUncheckedUpdateManyWithoutCourtNestedInput
+  }
+
+  export type CourtUncheckedUpdateManyWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sportType?: EnumSportTypeFieldUpdateOperationsInput | $Enums.SportType
+    pricePerHour?: FloatFieldUpdateOperationsInput | number
+    operatingStartHour?: IntFieldUpdateOperationsInput | number
+    operatingEndHour?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeSlotCreateManyCourtInput = {
+    id?: string
+    startTime: Date | string
+    endTime: Date | string
+    isMaintenanceBlocked?: boolean
+    maintenanceReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BookingCreateManyCourtInput = {
+    id?: string
+    timeSlotId: string
+    playerId: string
+    totalPrice: number
+    status?: $Enums.BookingStatus
+    paymentSimulated?: boolean
+    bookingNotes?: string | null
+    cancelledAt?: Date | string | null
+    cancellationReason?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OccupancyStatsCreateManyCourtInput = {
+    id?: string
+    hourOfWeek: number
+    avgOccupancy?: number
+    sampleCount?: number
+    lastUpdated?: Date | string
+  }
+
+  export type TimeSlotUpdateWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booking?: BookingUpdateOneWithoutTimeSlotNestedInput
+    waitlistEntries?: WaitlistEntryUpdateManyWithoutTimeSlotNestedInput
+  }
+
+  export type TimeSlotUncheckedUpdateWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booking?: BookingUncheckedUpdateOneWithoutTimeSlotNestedInput
+    waitlistEntries?: WaitlistEntryUncheckedUpdateManyWithoutTimeSlotNestedInput
+  }
+
+  export type TimeSlotUncheckedUpdateManyWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    isMaintenanceBlocked?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookingUpdateWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlot?: TimeSlotUpdateOneRequiredWithoutBookingNestedInput
+    player?: PlayerProfileUpdateOneRequiredWithoutBookingsNestedInput
+    match?: MatchUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    match?: MatchUncheckedUpdateOneWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateManyWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timeSlotId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    paymentSimulated?: BoolFieldUpdateOperationsInput | boolean
+    bookingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OccupancyStatsUpdateWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OccupancyStatsUncheckedUpdateWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OccupancyStatsUncheckedUpdateManyWithoutCourtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hourOfWeek?: IntFieldUpdateOperationsInput | number
+    avgOccupancy?: FloatFieldUpdateOperationsInput | number
+    sampleCount?: IntFieldUpdateOperationsInput | number
+    lastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WaitlistEntryCreateManyTimeSlotInput = {
+    id?: string
+    playerId: string
+    priority?: number
+    status?: $Enums.WaitlistStatus
+    notifiedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WaitlistEntryUpdateWithoutTimeSlotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    player?: PlayerProfileUpdateOneRequiredWithoutWaitlistEntriesNestedInput
+  }
+
+  export type WaitlistEntryUncheckedUpdateWithoutTimeSlotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WaitlistEntryUncheckedUpdateManyWithoutTimeSlotInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
+    status?: EnumWaitlistStatusFieldUpdateOperationsInput | $Enums.WaitlistStatus
+    notifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchPlayerCreateManyMatchInput = {
+    id?: string
+    playerId: string
+    joinedAt?: Date | string
+    result?: string | null
+  }
+
+  export type MatchPlayerUpdateWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    player?: PlayerProfileUpdateOneRequiredWithoutMatchPlayersNestedInput
+  }
+
+  export type MatchPlayerUncheckedUpdateWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MatchPlayerUncheckedUpdateManyWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RatingHistoryCreateManyRatingInput = {
+    id?: string
+    oldRating: number
+    newRating: number
+    ratingChange: number
+    opponentRating?: number | null
+    matchResult: string
+    createdAt?: Date | string
+  }
+
+  export type RatingHistoryUpdateWithoutRatingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingHistoryUncheckedUpdateWithoutRatingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingHistoryUncheckedUpdateManyWithoutRatingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    oldRating?: FloatFieldUpdateOperationsInput | number
+    newRating?: FloatFieldUpdateOperationsInput | number
+    ratingChange?: FloatFieldUpdateOperationsInput | number
+    opponentRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    matchResult?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
