@@ -31,7 +31,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Clock, DollarSign, Trophy } from "lucide-react";
+import { Clock, DollarSign, IndianRupee, Trophy } from "lucide-react";
 import {
   createCourt,
   updateCourt,
@@ -246,7 +246,7 @@ export function CourtForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-2">
-                      <DollarSign className="h-4 w-4" />
+                      <IndianRupee className="h-4 w-4" />
                       Price per Hour
                     </FormLabel>
                     <FormControl>
@@ -255,12 +255,11 @@ export function CourtForm({
                         step="0.01"
                         min="0"
                         placeholder="0.00"
-                        {...field}
-                        onChange={(e) =>
-                          field.onChange(
-                            e.target.value ? parseFloat(e.target.value) : 0,
-                          )
-                        }
+                        value={field.value === 0 ? "" : field.value}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          field.onChange(val === "" ? 0 : parseFloat(val));
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
