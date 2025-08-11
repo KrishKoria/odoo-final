@@ -21,7 +21,7 @@ export async function promoteUserToAdmin(userEmail: string) {
 
     if (!user.playerProfile) {
       // Create player profile if it doesn't exist
-      const playerProfile = await prisma.playerProfile.create({
+      await prisma.playerProfile.create({
         data: {
           userId: user.id,
           role: "ADMIN",
@@ -29,19 +29,14 @@ export async function promoteUserToAdmin(userEmail: string) {
         },
       });
 
-      console.log(
-        `Created admin player profile for ${userEmail}:`,
-        playerProfile,
-      );
       return { success: true, message: `User ${userEmail} promoted to admin` };
     } else {
       // Update existing player profile to admin
-      const updatedProfile = await prisma.playerProfile.update({
+      await prisma.playerProfile.update({
         where: { userId: user.id },
         data: { role: "ADMIN" },
       });
 
-      console.log(`Updated user ${userEmail} to admin:`, updatedProfile);
       return { success: true, message: `User ${userEmail} promoted to admin` };
     }
   } catch (error) {
@@ -67,14 +62,9 @@ export async function getAdminUsers() {
       },
     });
 
-    console.log("Current admin users:", adminUsers);
     return adminUsers;
   } catch (error) {
     console.error("Error fetching admin users:", error);
     return [];
   }
 }
-
-// Example usage:
-// await promoteUserToAdmin("your-email@example.com");
-// await getAdminUsers();

@@ -40,7 +40,6 @@ export async function createPlayerProfile(
     }),
   );
 
-  console.log(`Player profile handled for user: ${userId} with role: ${role}`);
   if (error) {
     // Structured error logging for better monitoring
     console.error("Failed to create player profile:", {

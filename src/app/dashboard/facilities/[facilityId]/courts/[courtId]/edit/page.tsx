@@ -5,6 +5,9 @@ import { ArrowLeft, Clock } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 interface EditCourtPageProps {
   params: Promise<{
     facilityId: string;

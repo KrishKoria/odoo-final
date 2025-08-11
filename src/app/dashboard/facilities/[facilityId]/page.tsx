@@ -5,6 +5,9 @@ import { ArrowLeft, Edit, Building2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 interface FacilityPageProps {
   params: Promise<{
     facilityId: string;

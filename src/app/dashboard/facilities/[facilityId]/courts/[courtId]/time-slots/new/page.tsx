@@ -5,6 +5,9 @@ import { redirect, notFound } from "next/navigation";
 import { TimeSlotForm } from "@/components/dashboard/time-slot-form";
 import { checkCourtAccess } from "@/lib/auth-utils";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{
     facilityId: string;

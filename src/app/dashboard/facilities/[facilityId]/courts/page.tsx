@@ -4,6 +4,9 @@ import Link from "next/link";
 import { getFacilityCourts } from "@/actions/court-actions";
 import { getFacilityById } from "@/actions/facility-actions";
 import { notFound } from "next/navigation";
+
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
 import {
   Card,
   CardContent,

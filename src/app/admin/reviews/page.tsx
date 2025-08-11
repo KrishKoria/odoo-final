@@ -10,6 +10,9 @@ import {
 } from "@/components/ui/card";
 import { Shield } from "lucide-react";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 interface AdminReviewsDataProps {
   searchParams: Promise<{ filter?: string }>;
 }

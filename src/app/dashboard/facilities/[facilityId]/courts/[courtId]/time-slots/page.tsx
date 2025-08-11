@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Plus, Calendar, Clock, Users } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
 import {
   Card,
   CardContent,

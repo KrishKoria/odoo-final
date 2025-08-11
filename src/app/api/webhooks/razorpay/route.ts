@@ -30,7 +30,6 @@ export async function POST(request: NextRequest) {
     }
 
     const event = JSON.parse(body);
-    console.log("Received Razorpay webhook:", event.event, event.payload);
 
     // Handle different webhook events
     switch (event.event) {
@@ -89,7 +88,6 @@ async function handlePaymentCaptured(payment: any) {
       });
 
       if (existingPayment) {
-        console.log("Payment already processed:", razorpayPaymentId);
         return;
       }
 
@@ -146,7 +144,6 @@ async function handlePaymentCaptured(payment: any) {
                   },
                 });
               } else {
-                // Booking already exists and is confirmed, skip
                 console.log(`Booking already exists for slot ${timeSlotId}`);
               }
             }),
@@ -252,18 +249,12 @@ async function handleOrderPaid(order: any) {
   try {
     const { id: razorpayOrderId, amount, amount_paid } = order;
 
-    // For now, just log the event
-    // The actual booking creation is handled in payment.captured
     console.log("Order paid:", razorpayOrderId, { amount, amount_paid });
-
-    // Could add additional logic here if needed
-    // e.g., sending confirmation emails, updating analytics, etc.
   } catch (error) {
     console.error("Error handling order paid:", error);
   }
 }
 
-// Handle other HTTP methods
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }

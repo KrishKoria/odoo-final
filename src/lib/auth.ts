@@ -37,7 +37,6 @@ export const auth = betterAuth({
         if (role && body?.email) {
           // Store the role temporarily using email as key
           signupRoleData.set(body.email, role as UserRole);
-          console.log(`Stored role ${role} for email ${body.email}`);
         }
       }
     }),
@@ -47,15 +46,12 @@ export const auth = betterAuth({
     user: {
       create: {
         after: async (user) => {
-          console.log(`Creating PlayerProfile for new user: ${user.id}`);
           try {
             // Check for stored role data using email
             const selectedRole = signupRoleData.get(user.email) || "USER";
 
             // Clean up the temporary role data
             signupRoleData.delete(user.email);
-
-            console.log(`Using role ${selectedRole} for user ${user.email}`);
 
             const result = await createPlayerProfile(
               user.id,
@@ -70,10 +66,6 @@ export const auth = betterAuth({
               console.error(
                 `Failed to create PlayerProfile for user ${user.id}:`,
                 result.error,
-              );
-            } else {
-              console.log(
-                `PlayerProfile created successfully for user: ${user.id} with role: ${selectedRole}`,
               );
             }
           } catch (error) {
@@ -103,10 +95,8 @@ export const auth = betterAuth({
       };
     }),
     emailOTP({
-      overrideDefaultEmailVerification: true, // This replaces the default email verification
+      overrideDefaultEmailVerification: true,
       async sendVerificationOTP({ email, otp, type }) {
-        console.log(`Sending OTP to ${email}: ${otp} (type: ${type})`);
-
         let subject: string;
         let html: string;
 
@@ -152,14 +142,12 @@ export const auth = betterAuth({
         }
 
         try {
-          console.log(`Attempting to send email via Resend to: ${email}`);
-          const result = await resend.emails.send({
+          await resend.emails.send({
             from: "QuickCourt <noreply@krishkoria.com>",
             to: [email],
             subject,
             html,
           });
-          console.log("Email sent successfully:", result);
         } catch (error) {
           console.error("Failed to send OTP email:", error);
           // Log the full error details for debugging

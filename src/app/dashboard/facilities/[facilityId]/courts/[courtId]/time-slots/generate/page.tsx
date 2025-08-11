@@ -5,6 +5,9 @@ import { headers } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { checkCourtAccess } from "@/lib/auth-utils";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{
     facilityId: string;

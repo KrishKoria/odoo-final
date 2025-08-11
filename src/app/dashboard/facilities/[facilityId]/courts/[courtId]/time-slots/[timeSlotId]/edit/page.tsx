@@ -4,6 +4,9 @@ import { redirect, notFound } from "next/navigation";
 import { getTimeSlotById } from "@/actions/time-slot-actions";
 import { TimeSlotForm } from "@/components/dashboard/time-slot-form";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{
     facilityId: string;

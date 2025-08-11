@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
+// Force dynamic rendering since this route uses authentication
+export const dynamic = "force-dynamic";
+
 export default async function FacilitiesPage() {
   let facilities;
   let error = null;

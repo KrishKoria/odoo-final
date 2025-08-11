@@ -28,16 +28,11 @@ const Hero = ({ location, setLocation }: HeroProps) => {
   });
 
   const handleLocationSearch = useCallback(() => {
-    console.log("Button clicked! Location:", location);
     if (!location.trim()) {
       console.warn("Please enter a location");
       alert("Please enter a location to search for venues");
       return;
     }
-    console.log(
-      "Navigating to:",
-      `/venues?location=${encodeURIComponent(location.trim())}`,
-    );
     router.push(`/venues?location=${encodeURIComponent(location.trim())}`);
   }, [location, router]);
 

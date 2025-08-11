@@ -31,7 +31,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -145,6 +145,26 @@ function getStatusColor(status: string) {
 }
 
 export default function ProfilePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+          <Navbar />
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="text-center">
+              <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-emerald-600" />
+              <p className="text-gray-600">Loading profile...</p>
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <ProfileContent />
+    </Suspense>
+  );
+}
+
+function ProfileContent() {
   const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -310,8 +330,6 @@ export default function ProfilePage() {
   const onSubmit = async (data: ProfileFormValues) => {
     setIsSaving(true);
     try {
-      console.log("Form data being submitted:", data);
-
       // Determine if we need to send form data (for file uploads) or JSON
       const hasAvatar = data.avatar && data.avatar instanceof File;
 
@@ -332,8 +350,6 @@ export default function ProfilePage() {
         if (data.phoneNumber) formData.append("phoneNumber", data.phoneNumber);
         if (data.oldPassword) formData.append("oldPassword", data.oldPassword);
         if (data.newPassword) formData.append("newPassword", data.newPassword);
-
-        console.log("Sending form data with avatar");
 
         response = await fetch("/api/profile", {
           method: "PATCH",
@@ -356,8 +372,6 @@ export default function ProfilePage() {
           }
         });
 
-        console.log("Sending JSON data:", updateData);
-
         response = await fetch("/api/profile", {
           method: "PATCH",
           headers: {
@@ -367,8 +381,6 @@ export default function ProfilePage() {
         });
       }
 
-      console.log("API response status:", response.status);
-
       if (!response.ok) {
         const error = (await response.json()) as { error: string };
         console.error("Profile update failed:", error);
@@ -376,11 +388,10 @@ export default function ProfilePage() {
         return;
       }
 
-      const result = (await response.json()) as {
+      (await response.json()) as {
         success: boolean;
         user: Record<string, unknown>;
       };
-      console.log("Profile updated successfully:", result);
 
       toast.success("Profile updated successfully!");
 

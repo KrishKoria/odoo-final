@@ -34,19 +34,13 @@ export function SessionGuard({
 
         if (!isMounted) return;
 
-        console.log("SessionGuard - Session check:", { session, error });
-
         if (error || !session?.user) {
-          console.log("SessionGuard - No valid session, redirecting to login");
           router.replace(redirectTo);
           return;
         }
 
         // Check email verification if required
         if (requireEmailVerification && !session.user.emailVerified) {
-          console.log(
-            "SessionGuard - Email not verified, redirecting to verification",
-          );
           router.replace("/auth/verify-email");
           return;
         }
@@ -81,33 +75,11 @@ export function SessionGuard({
               break;
           }
 
-          console.log("SessionGuard - Profile data:", {
-            profile,
-            roleString,
-            currentUserRole,
-            requiredRoles,
-            includes: requiredRoles.includes(currentUserRole),
-          });
-
           if (!isMounted) return;
 
           setUserRole(currentUserRole);
 
-          // Check if user has required role
-          console.log("SessionGuard - Role comparison debug:", {
-            currentUserRole,
-            requiredRoles,
-            includes: requiredRoles.includes(currentUserRole),
-            typeOfCurrentRole: typeof currentUserRole,
-            typeOfRequiredRoles: typeof requiredRoles,
-            enumComparison: currentUserRole === UserRole.ADMIN,
-          });
-
           if (!requiredRoles.includes(currentUserRole)) {
-            console.log(
-              `SessionGuard - Insufficient permissions. User role: ${currentUserRole}, Required: ${requiredRoles.join(", ")}`,
-            );
-
             // Redirect based on user role
             if (
               currentUserRole === UserRole.FACILITY_OWNER ||
@@ -120,14 +92,8 @@ export function SessionGuard({
             return;
           }
 
-          console.log(
-            "SessionGuard - Authorization GRANTED! Setting isAuthorized to true",
-          );
           setIsAuthorized(true);
-          console.log("SessionGuard - isAuthorized has been set to true");
-        } catch (profileError) {
-          console.error("SessionGuard - Profile fetch error:", profileError);
-          // If we can't get the profile, assume USER role
+        } catch {
           const fallbackRole: UserRole = UserRole.USER;
           setUserRole(fallbackRole);
 
@@ -156,10 +122,7 @@ export function SessionGuard({
     };
   }, [router, requiredRoles, requireEmailVerification, redirectTo]);
 
-  console.log("SessionGuard - Render state:", { isValidating, isAuthorized });
-
   if (isValidating) {
-    console.log("SessionGuard - Showing validation loading screen");
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="flex flex-col items-center space-y-4">
@@ -171,12 +134,8 @@ export function SessionGuard({
   }
 
   if (!isAuthorized) {
-    console.log(
-      "SessionGuard - Not authorized, returning null (should redirect)",
-    );
     return null; // Router will handle redirect
   }
 
-  console.log("SessionGuard - Authorized! Rendering children");
   return <>{children}</>;
 }
