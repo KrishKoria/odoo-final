@@ -4,11 +4,18 @@ import { useState } from "react";
 import { SignUpForm } from "@/components/forms/signup-form";
 import { LoginForm } from "@/components/forms/login-form";
 import { OtpVerification } from "@/components/forms/otp-verification";
+import { ForgotPasswordForm } from "@/components/forms/forgot-password-form";
+import { ResetPasswordForm } from "@/components/forms/reset-password-form";
 import { useOAuthCallback } from "@/hooks/use-oauth-callback";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 
-type AuthStep = "login" | "signup" | "verify-email" | "forgot-password";
+type AuthStep =
+  | "login"
+  | "signup"
+  | "verify-email"
+  | "forgot-password"
+  | "reset-password";
 
 interface AuthPageProps {
   initialStep?: AuthStep;
@@ -17,6 +24,7 @@ interface AuthPageProps {
 export function AuthPage({ initialStep = "login" }: AuthPageProps) {
   const [currentStep, setCurrentStep] = useState<AuthStep>(initialStep);
   const [verificationEmail, setVerificationEmail] = useState<string>("");
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
 
@@ -57,6 +65,22 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
     setSuccess("");
   };
 
+  const handleForgotPasswordSuccess = (email: string) => {
+    setForgotPasswordEmail(email);
+    setCurrentStep("reset-password");
+    setError("");
+    setSuccess("Verification code sent to your email!");
+  };
+
+  const handleResetPasswordSuccess = () => {
+    setError("");
+    setSuccess(
+      "Password reset successful! You can now log in with your new password.",
+    );
+    setCurrentStep("login");
+    setForgotPasswordEmail("");
+  };
+
   const handleResendOTP = async () => {
     // Implement OTP resend logic
     try {
@@ -94,20 +118,21 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
           />
         );
       case "forgot-password":
-        // You can implement a forgot password form here
         return (
-          <div className="text-center">
-            <h2 className="mb-4 text-xl font-bold">Forgot Password</h2>
-            <p className="text-muted-foreground mb-4">
-              This feature will be implemented soon.
-            </p>
-            <button
-              onClick={() => setCurrentStep("login")}
-              className="text-primary underline"
-            >
-              Back to login
-            </button>
-          </div>
+          <ForgotPasswordForm
+            onSuccess={handleForgotPasswordSuccess}
+            onError={handleError}
+            onBackToLogin={() => setCurrentStep("login")}
+          />
+        );
+      case "reset-password":
+        return (
+          <ResetPasswordForm
+            email={forgotPasswordEmail}
+            onSuccess={handleResetPasswordSuccess}
+            onError={handleError}
+            onBackToForgotPassword={() => setCurrentStep("forgot-password")}
+          />
         );
       default:
         return (

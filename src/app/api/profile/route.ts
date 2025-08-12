@@ -256,11 +256,36 @@ export async function PATCH(request: NextRequest) {
 
     // Handle password change
     if (validatedData.oldPassword && validatedData.newPassword) {
-      // In a real app, you would:
-      // 1. Verify the old password using better-auth
-      // 2. Hash the new password
-      // 3. Update the password in the Account table
-      console.log("Password change requested - implement with better-auth");
+      try {
+        // Use better-auth's change password functionality
+        const passwordChangeResult = await auth.api.changePassword({
+          body: {
+            currentPassword: validatedData.oldPassword,
+            newPassword: validatedData.newPassword,
+            revokeOtherSessions: true, // Security: revoke other sessions when password changes
+          },
+          headers: request.headers,
+        });
+
+        if (!passwordChangeResult) {
+          return NextResponse.json(
+            {
+              error:
+                "Failed to change password. Please check your current password.",
+            },
+            { status: 400 },
+          );
+        }
+      } catch (error) {
+        console.error("Password change error:", error);
+        return NextResponse.json(
+          {
+            error:
+              "Failed to change password. Please check your current password.",
+          },
+          { status: 400 },
+        );
+      }
     }
 
     // Update user in database
