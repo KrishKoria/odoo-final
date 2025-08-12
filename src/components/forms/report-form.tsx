@@ -26,8 +26,8 @@ import { Badge } from "@/components/ui/badge";
 import { Flag, Upload, X, AlertTriangle } from "lucide-react";
 import { submitReport } from "@/actions/report-actions";
 import type { CreateReportData } from "@/actions/report-actions";
-import { ReportType } from "@/generated/prisma";
 import { toast } from "sonner";
+import { ReportType } from "@/types/venue";
 
 interface ReportFormProps {
   targetType: "user" | "facility";
