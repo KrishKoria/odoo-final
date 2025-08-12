@@ -43,8 +43,16 @@ export function AuthPage({ initialStep = "login" }: AuthPageProps) {
   const handleLoginSuccess = () => {
     setError("");
     setSuccess("Login successful!");
-    // Redirect to dashboard or desired page
-    window.location.href = "/";
+
+    // Check for return URL in sessionStorage
+    const returnUrl = sessionStorage.getItem("returnUrl");
+    if (returnUrl) {
+      sessionStorage.removeItem("returnUrl"); // Clean up
+      window.location.href = returnUrl;
+    } else {
+      // Default redirect to home
+      window.location.href = "/";
+    }
   };
 
   const handleVerificationSuccess = () => {

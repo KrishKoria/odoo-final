@@ -38,7 +38,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -78,6 +77,7 @@ import { ReportForm } from "@/components/forms/report-form";
 import { canReviewVenue } from "@/actions/venue-actions";
 import { env } from "@/env";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 interface VenueDetailsProps {
   id: string;
@@ -85,6 +85,9 @@ interface VenueDetailsProps {
 
 export default function VenueDetails({ id }: VenueDetailsProps) {
   const router = useRouter();
+
+  // Authentication state
+  const { data: session, isPending: sessionLoading } = authClient.useSession();
 
   // State for venue data
   const [venue, setVenue] = useState<VenueDetailsType | null>(null);
@@ -276,30 +279,81 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
     }
   };
 
-  const toggleSlot = (time: string) => {
-    const slotIndex = timeSlots.findIndex((slot) => slot.time === time);
+  const toggleSlot = (timeSlotId: string) => {
+    // Find the specific slot by timeSlotId (unique identifier)
+    const slotIndex = timeSlots.findIndex(
+      (slot) => slot.timeSlotId === timeSlotId,
+    );
 
-    if (selectedSlots.includes(time)) {
-      // Remove slot and any consecutive slots after it
-      setSelectedSlots((prev) => prev.filter((slot) => slot !== time));
-    } else {
-      // Add consecutive slots starting from the selected time
-      const consecutiveSlots: string[] = [];
-      for (let i = 0; i < consecutiveHours; i++) {
-        const targetSlot = timeSlots[slotIndex + i];
-        if (targetSlot?.available) {
-          consecutiveSlots.push(targetSlot.time);
-        } else {
-          // If any slot in the sequence is unavailable, don't book any
-          return;
-        }
-      }
-      setSelectedSlots(consecutiveSlots);
+    if (slotIndex === -1) {
+      console.error("Slot not found for timeSlotId:", timeSlotId);
+      return;
     }
+
+    // If clicking on any selected slot, clear all selections
+    if (selectedSlots.includes(timeSlotId)) {
+      setSelectedSlots([]);
+      return;
+    }
+
+    // Check if we can select consecutive slots starting from this slot
+    const canSelect = canSelectConsecutiveSlots(slotIndex, consecutiveHours);
+    if (!canSelect) {
+      return; // Can't select consecutive slots from this position
+    }
+
+    // Get the starting slot to determine the court
+    const startSlot = timeSlots[slotIndex];
+
+    // Get all slots for the same court
+    const sameCourtSlots = timeSlots.filter(
+      (slot) => slot.courtId === startSlot.courtId,
+    );
+
+    // Find the index of the start slot within the same court's slots
+    const courtSlotIndex = sameCourtSlots.findIndex(
+      (slot) => slot.timeSlotId === startSlot.timeSlotId,
+    );
+
+    // Build consecutive slots array from the same court
+    const consecutiveSlots: string[] = [];
+    for (let i = 0; i < consecutiveHours; i++) {
+      const targetSlot = sameCourtSlots[courtSlotIndex + i];
+      if (targetSlot?.available) {
+        consecutiveSlots.push(targetSlot.timeSlotId);
+      } else {
+        // This shouldn't happen if canSelect returned true, but safety check
+        console.error(
+          "Unexpected unavailable slot at court index:",
+          courtSlotIndex + i,
+        );
+        return;
+      }
+    }
+
+    // Set the new selection
+    setSelectedSlots(consecutiveSlots);
   };
 
-  const isSlotPartOfSelection = (time: string) => {
-    return selectedSlots.includes(time);
+  const isSlotPartOfSelection = (timeSlotId: string) => {
+    return selectedSlots.includes(timeSlotId);
+  };
+
+  // Authentication and booking handlers
+  const handleBookingButtonClick = () => {
+    if (!session) {
+      // Save current venue URL to return here after login
+      const currentUrl = window.location.pathname + window.location.search;
+      sessionStorage.setItem("returnUrl", currentUrl);
+
+      toast.info("Please log in to book this venue");
+      router.push("/auth/login");
+      return;
+    }
+
+    // User is authenticated, open booking dialog and refresh slots
+    setIsBookingOpen(true);
+    void refreshTimeSlots();
   };
 
   // Payment handlers
@@ -396,7 +450,7 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
 
       // Get the first selected court (assumes all slots are from same court)
       const firstSlot = timeSlots.find((slot) =>
-        selectedSlots.includes(slot.time),
+        selectedSlots.includes(slot.timeSlotId),
       );
       if (!firstSlot) throw new Error("Selected slot not found");
 
@@ -404,8 +458,8 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
       const totalAmount = getTotalPrice();
 
       // Create booking slots data
-      const bookingSlots = selectedSlots.map((timeSlot) => {
-        const slot = timeSlots.find((s) => s.time === timeSlot);
+      const bookingSlots = selectedSlots.map((timeSlotId) => {
+        const slot = timeSlots.find((s) => s.timeSlotId === timeSlotId);
         return {
           timeSlotId: slot?.timeSlotId || "",
           startTime: slot?.time || "",
@@ -448,15 +502,20 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
             );
           },
           prefill: {
-            name: "User", // You can get this from user session
-            email: "user@example.com", // You can get this from user session
-            contact: "9999999999", // You can get this from user session
+            name: session?.user?.name || "User",
+            email: session?.user?.email || "",
           },
           notes: {
             venue_id: venue.id,
             court_id: courtId,
             date: format(selectedDate, "yyyy-MM-dd"),
-            slots: selectedSlots.join(", "),
+            slots: selectedSlots
+              .map((timeSlotId) => {
+                const slot = timeSlots.find((s) => s.timeSlotId === timeSlotId);
+                return slot?.time;
+              })
+              .filter(Boolean)
+              .join(", "),
           },
           theme: {
             color: "#059669", // Emerald color to match your theme
@@ -499,18 +558,40 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
   };
 
   const canSelectConsecutiveSlots = (startIndex: number, hours: number) => {
+    // Get the starting slot to check which court we're dealing with
+    const startSlot = timeSlots[startIndex];
+    if (!startSlot?.available) {
+      return false;
+    }
+
+    // Get all slots for the same court
+    const sameCourtSlots = timeSlots.filter(
+      (slot) => slot.courtId === startSlot.courtId,
+    );
+
+    // Find the index of the start slot within the same court's slots
+    const courtSlotIndex = sameCourtSlots.findIndex(
+      (slot) => slot.timeSlotId === startSlot.timeSlotId,
+    );
+
+    if (courtSlotIndex === -1) {
+      return false;
+    }
+
+    // Check if we have enough consecutive available slots within the same court
     for (let i = 0; i < hours; i++) {
-      const slot = timeSlots[startIndex + i];
+      const slot = sameCourtSlots[courtSlotIndex + i];
       if (!slot?.available) {
         return false;
       }
     }
+
     return true;
   };
 
   const getTotalPrice = () => {
-    return selectedSlots.reduce((total, slotTime) => {
-      const slot = timeSlots.find((s) => s.time === slotTime);
+    return selectedSlots.reduce((total, timeSlotId) => {
+      const slot = timeSlots.find((s) => s.timeSlotId === timeSlotId);
       return total + (slot?.price ?? 0);
     }, 0);
   };
@@ -679,242 +760,22 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Dialog
-                  open={isBookingOpen}
-                  onOpenChange={(open) => {
-                    setIsBookingOpen(open);
-                    if (open) {
-                      // Refresh time slots when dialog opens for real-time data
-                      void refreshTimeSlots();
-                    }
-                  }}
+                <Button
+                  className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700 disabled:opacity-50"
+                  onClick={handleBookingButtonClick}
+                  disabled={sessionLoading}
                 >
-                  <DialogTrigger asChild>
-                    <Button className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700">
-                      Book This Venue
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-h-[90vh] min-w-6xl overflow-y-auto">
-                    <DialogHeader>
-                      <DialogTitle className="text-3xl">
-                        Book {venue.name}
-                      </DialogTitle>
-                    </DialogHeader>
-                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h3 className="mb-4 text-lg font-semibold">
-                            Select Date
-                          </h3>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <Button
-                                variant="outline"
-                                className={cn(
-                                  "w-full justify-start text-left font-normal",
-                                  !selectedDate && "text-muted-foreground",
-                                )}
-                              >
-                                <Calendar className="mr-2 h-4 w-4" />
-                                {selectedDate ? (
-                                  format(selectedDate, "PPP")
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0">
-                              <CalendarComponent
-                                mode="single"
-                                selected={selectedDate}
-                                onSelect={(date) =>
-                                  date && setSelectedDate(date)
-                                }
-                                disabled={(date) =>
-                                  date <
-                                  new Date(new Date().setHours(0, 0, 0, 0))
-                                }
-                                initialFocus
-                              />
-                            </PopoverContent>
-                          </Popover>
-                        </div>
-
-                        <div>
-                          <h3 className="mb-4 text-lg font-semibold">
-                            Select Sport
-                          </h3>
-                          <Select
-                            value={selectedSport}
-                            onValueChange={setSelectedSport}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a sport" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {venue.sports.map((sport) => (
-                                <SelectItem key={sport.name} value={sport.name}>
-                                  {sport.icon} {sport.name} ({sport.courts}{" "}
-                                  courts)
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <div>
-                          <h3 className="mb-4 text-lg font-semibold">
-                            Duration (Hours)
-                          </h3>
-                          <Select
-                            value={consecutiveHours.toString()}
-                            onValueChange={(value) => {
-                              setConsecutiveHours(parseInt(value));
-                              setSelectedSlots([]); // Clear selection when duration changes
-                            }}
-                          >
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="1">1 Hour</SelectItem>
-                              <SelectItem value="2">2 Hours</SelectItem>
-                              <SelectItem value="3">3 Hours</SelectItem>
-                              <SelectItem value="4">4 Hours</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="lg:col-span-2">
-                        <h3 className="mb-4 text-lg font-semibold">
-                          Available Time Slots
-                          {consecutiveHours > 1 && (
-                            <span className="ml-2 text-sm font-normal text-gray-600">
-                              (Select start time for {consecutiveHours}{" "}
-                              consecutive hours)
-                            </span>
-                          )}
-                        </h3>
-                        {timeSlotsLoading ? (
-                          <div className="flex h-40 items-center justify-center">
-                            <div className="text-center">
-                              <Loader2 className="mx-auto mb-2 h-6 w-6 animate-spin text-emerald-600" />
-                              <p className="text-sm text-gray-600">
-                                Loading time slots...
-                              </p>
-                            </div>
-                          </div>
-                        ) : timeSlots.length === 0 ? (
-                          <div className="flex h-40 items-center justify-center">
-                            <div className="text-center">
-                              <AlertCircle className="mx-auto mb-2 h-6 w-6 text-gray-400" />
-                              <p className="text-sm text-gray-600">
-                                No time slots available for this date
-                              </p>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="grid max-h-80 grid-cols-3 gap-3 overflow-y-auto pr-2 md:grid-cols-4">
-                            {timeSlots.map((slot, index) => {
-                              const canSelect = canSelectConsecutiveSlots(
-                                index,
-                                consecutiveHours,
-                              );
-                              const isSelected = isSlotPartOfSelection(
-                                slot.time,
-                              );
-
-                              return (
-                                <Button
-                                  key={`${slot.timeSlotId}-${slot.time}`}
-                                  variant={isSelected ? "default" : "outline"}
-                                  size="sm"
-                                  disabled={!slot.available || !canSelect}
-                                  onClick={() => toggleSlot(slot.time)}
-                                  className={`flex h-auto flex-col p-3 text-xs ${
-                                    isSelected
-                                      ? "bg-emerald-600 hover:bg-emerald-700"
-                                      : ""
-                                  } ${!canSelect && slot.available ? "opacity-50" : ""}`}
-                                >
-                                  <span className="text-center">
-                                    {slot.time}
-                                  </span>
-                                  <span className="font-bold">
-                                    ₹{slot.price}
-                                  </span>
-                                  {!canSelect && slot.available && (
-                                    <span className="text-xs text-red-500">
-                                      Not enough consecutive slots
-                                    </span>
-                                  )}
-                                </Button>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {selectedSlots.length > 0 && (
-                      <div className="mt-8 rounded-lg bg-gray-50 p-6">
-                        <div className="mb-4 flex items-center justify-between">
-                          <span className="text-lg font-semibold">
-                            Booking Summary:
-                          </span>
-                          <span className="text-3xl font-bold text-emerald-600">
-                            ₹{getTotalPrice()}
-                          </span>
-                        </div>
-                        <div className="mb-4 space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600">Date:</span>
-                            <span className="font-medium">
-                              {format(selectedDate, "PPP")}
-                            </span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600">Sport:</span>
-                            <span className="font-medium">{selectedSport}</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600">Duration:</span>
-                            <span className="font-medium">
-                              {consecutiveHours} hour
-                              {consecutiveHours > 1 ? "s" : ""}
-                            </span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600">Time Slots:</span>
-                            <span className="font-medium">
-                              {selectedSlots.join(", ")}
-                            </span>
-                          </div>
-                        </div>
-                        {paymentError && (
-                          <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">
-                            {paymentError}
-                          </div>
-                        )}
-                        <Button
-                          className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700 disabled:opacity-50"
-                          onClick={initializeRazorpayPayment}
-                          disabled={isProcessingPayment}
-                        >
-                          {isProcessingPayment ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Processing Payment...
-                            </>
-                          ) : (
-                            `Confirm Booking - ₹${getTotalPrice()}`
-                          )}
-                        </Button>
-                      </div>
-                    )}
-                  </DialogContent>
-                </Dialog>
+                  {sessionLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Loading...
+                    </>
+                  ) : !session ? (
+                    "Log In to Book"
+                  ) : (
+                    "Book This Venue"
+                  )}
+                </Button>
 
                 <Separator />
 
@@ -967,6 +828,264 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
             </Card>
           </div>
         </div>
+
+        {/* Booking Dialog - moved outside of the booking panel */}
+        <Dialog
+          open={isBookingOpen}
+          onOpenChange={(open) => {
+            setIsBookingOpen(open);
+            if (open) {
+              // Refresh time slots when dialog opens for real-time data
+              void refreshTimeSlots();
+            }
+          }}
+        >
+          <DialogContent className="max-h-[90vh] min-w-6xl overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-3xl">Book {venue.name}</DialogTitle>
+            </DialogHeader>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="mb-4 text-lg font-semibold">Select Date</h3>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !selectedDate && "text-muted-foreground",
+                        )}
+                      >
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {selectedDate ? (
+                          format(selectedDate, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <CalendarComponent
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={(date) => date && setSelectedDate(date)}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                <div>
+                  <h3 className="mb-4 text-lg font-semibold">Select Sport</h3>
+                  <Select
+                    value={selectedSport}
+                    onValueChange={setSelectedSport}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a sport" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {venue.sports.map((sport) => (
+                        <SelectItem key={sport.name} value={sport.name}>
+                          {sport.icon} {sport.name} ({sport.courts} courts)
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <h3 className="mb-4 text-lg font-semibold">
+                    Duration (Hours)
+                  </h3>
+                  <Select
+                    value={consecutiveHours.toString()}
+                    onValueChange={(value) => {
+                      setConsecutiveHours(parseInt(value));
+                      setSelectedSlots([]); // Clear selection when duration changes
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1 Hour</SelectItem>
+                      <SelectItem value="2">2 Hours</SelectItem>
+                      <SelectItem value="3">3 Hours</SelectItem>
+                      <SelectItem value="4">4 Hours</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="lg:col-span-2">
+                <h3 className="mb-4 text-lg font-semibold">
+                  Available Time Slots
+                  {consecutiveHours > 1 && (
+                    <span className="ml-2 text-sm font-normal text-gray-600">
+                      (Select start time for {consecutiveHours} consecutive
+                      hours)
+                    </span>
+                  )}
+                </h3>
+
+                {consecutiveHours > 1 && (
+                  <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-3">
+                    <div className="flex items-start space-x-2 text-sm text-blue-700">
+                      <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium">Consecutive Booking Mode</p>
+                        <p className="mt-1 text-xs">
+                          You&apos;re booking {consecutiveHours} consecutive
+                          hours. Only slots with {consecutiveHours} available
+                          hours following them can be selected. Grayed-out slots
+                          don&apos;t have enough consecutive availability.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {timeSlotsLoading ? (
+                  <div className="flex h-40 items-center justify-center">
+                    <div className="text-center">
+                      <Loader2 className="mx-auto mb-2 h-6 w-6 animate-spin text-emerald-600" />
+                      <p className="text-sm text-gray-600">
+                        Loading time slots...
+                      </p>
+                    </div>
+                  </div>
+                ) : timeSlots.length === 0 ? (
+                  <div className="flex h-40 items-center justify-center">
+                    <div className="text-center">
+                      <AlertCircle className="mx-auto mb-2 h-6 w-6 text-gray-400" />
+                      <p className="text-sm text-gray-600">
+                        No time slots available for this date
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid max-h-80 grid-cols-3 gap-3 overflow-y-auto pr-2 md:grid-cols-4">
+                    {timeSlots.map((slot, index) => {
+                      const canSelect = canSelectConsecutiveSlots(
+                        index,
+                        consecutiveHours,
+                      );
+                      const isSelected = isSlotPartOfSelection(slot.timeSlotId);
+
+                      // Determine slot state for better UX
+                      const isUnavailable = !slot.available;
+                      const isAvailableButNotSelectable =
+                        slot.available && !canSelect && consecutiveHours > 1;
+
+                      return (
+                        <Button
+                          key={`${slot.timeSlotId}-${slot.time}`}
+                          variant={isSelected ? "default" : "outline"}
+                          size="sm"
+                          disabled={!slot.available || !canSelect}
+                          onClick={() => toggleSlot(slot.timeSlotId)}
+                          className={`flex h-auto flex-col p-3 text-xs transition-all ${
+                            isSelected
+                              ? "border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-700"
+                              : isUnavailable
+                                ? "cursor-not-allowed border-gray-300 bg-gray-100 text-gray-400"
+                                : isAvailableButNotSelectable
+                                  ? "cursor-not-allowed border-orange-200 bg-orange-50 text-orange-600"
+                                  : "hover:border-emerald-300 hover:bg-emerald-50"
+                          }`}
+                        >
+                          <span className="text-center font-medium">
+                            {slot.time}
+                          </span>
+                          <span className="font-bold">₹{slot.price}</span>
+                          {isUnavailable && (
+                            <span className="mt-1 text-xs text-gray-500">
+                              Booked
+                            </span>
+                          )}
+                          {isAvailableButNotSelectable && (
+                            <span className="mt-1 text-center text-xs leading-tight text-orange-600">
+                              Need {consecutiveHours}h consecutive
+                            </span>
+                          )}
+                        </Button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {selectedSlots.length > 0 && (
+              <div className="mt-8 rounded-lg bg-gray-50 p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-lg font-semibold">
+                    Booking Summary:
+                  </span>
+                  <span className="text-3xl font-bold text-emerald-600">
+                    ₹{getTotalPrice()}
+                  </span>
+                </div>
+                <div className="mb-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Date:</span>
+                    <span className="font-medium">
+                      {format(selectedDate, "PPP")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Sport:</span>
+                    <span className="font-medium">{selectedSport}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Duration:</span>
+                    <span className="font-medium">
+                      {consecutiveHours} hour
+                      {consecutiveHours > 1 ? "s" : ""}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Time Slots:</span>
+                    <span className="font-medium">
+                      {selectedSlots
+                        .map((timeSlotId) => {
+                          const slot = timeSlots.find(
+                            (s) => s.timeSlotId === timeSlotId,
+                          );
+                          return slot?.time;
+                        })
+                        .filter(Boolean)
+                        .join(", ")}
+                    </span>
+                  </div>
+                </div>
+                {paymentError && (
+                  <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">
+                    {paymentError}
+                  </div>
+                )}
+                <Button
+                  className="h-12 w-full bg-emerald-600 text-lg hover:bg-emerald-700 disabled:opacity-50"
+                  onClick={initializeRazorpayPayment}
+                  disabled={isProcessingPayment}
+                >
+                  {isProcessingPayment ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing Payment...
+                    </>
+                  ) : (
+                    `Confirm Booking - ₹${getTotalPrice()}`
+                  )}
+                </Button>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
 
         {/* Content Tabs */}
         <Tabs defaultValue="overview" className="space-y-8">
