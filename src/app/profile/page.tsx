@@ -1129,25 +1129,63 @@ function ProfileContent() {
                               <div className="flex gap-2 sm:flex-col lg:flex-row">
                                 {/* Show cancel button for all users on confirmed or pending bookings */}
                                 {(booking.status === "CONFIRMED" ||
-                                  booking.status === "PENDING") && (
-                                  <Button
-                                    variant="destructive"
-                                    size="sm"
-                                    onClick={() =>
-                                      handleCancelBooking(booking.id)
-                                    }
-                                    className="h-9 px-4 text-sm font-medium"
-                                  >
-                                    Cancel
-                                  </Button>
-                                )}
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="h-9 px-4 text-sm font-medium"
-                                >
-                                  View Details
-                                </Button>
+                                  booking.status === "PENDING") &&
+                                  (() => {
+                                    // Check if booking time has passed
+                                    const now = new Date();
+                                    const bookingDateTime = new Date(
+                                      booking.date,
+                                    );
+
+                                    // Parse the start time (e.g., "06:00 AM") and set it on the booking date
+                                    const [time, period] =
+                                      booking.startTime.split(" ");
+                                    const [hours, minutes] = time
+                                      .split(":")
+                                      .map(Number);
+                                    let hour24 = hours;
+                                    if (period === "PM" && hours !== 12)
+                                      hour24 += 12;
+                                    if (period === "AM" && hours === 12)
+                                      hour24 = 0;
+
+                                    bookingDateTime.setHours(
+                                      hour24,
+                                      minutes,
+                                      0,
+                                      0,
+                                    );
+
+                                    const hasTimePassed =
+                                      bookingDateTime <= now;
+
+                                    return (
+                                      <Button
+                                        variant={
+                                          hasTimePassed
+                                            ? "outline"
+                                            : "destructive"
+                                        }
+                                        size="sm"
+                                        onClick={
+                                          hasTimePassed
+                                            ? undefined
+                                            : () =>
+                                                handleCancelBooking(booking.id)
+                                        }
+                                        disabled={hasTimePassed}
+                                        className={`h-9 px-4 text-sm font-medium ${
+                                          hasTimePassed
+                                            ? "cursor-not-allowed opacity-50"
+                                            : ""
+                                        }`}
+                                      >
+                                        {hasTimePassed
+                                          ? "Unable to cancel"
+                                          : "Cancel"}
+                                      </Button>
+                                    );
+                                  })()}
                               </div>
                             </div>
                           </CardContent>
