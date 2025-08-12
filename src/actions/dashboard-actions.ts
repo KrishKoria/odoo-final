@@ -104,6 +104,7 @@ export async function getFacilityOwnerStats(facilityId?: string) {
 
           if (booking.status === "CONFIRMED") {
             confirmedBookings++;
+            totalRevenue += booking.totalPrice;
           } else if (booking.status === "CANCELLED") {
             cancelledBookings++;
           } else if (booking.status === "COMPLETED") {
@@ -220,7 +221,10 @@ export async function getBookingTrends(facilityId?: string, days = 30) {
 
           dailyStats[dateKey].bookings++;
 
-          if (booking.status === "COMPLETED") {
+          if (
+            booking.status === "COMPLETED" ||
+            booking.status === "CONFIRMED"
+          ) {
             dailyStats[dateKey].revenue += booking.totalPrice;
           } else if (booking.status === "CANCELLED") {
             dailyStats[dateKey].cancelled++;
