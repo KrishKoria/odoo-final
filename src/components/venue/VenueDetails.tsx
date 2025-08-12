@@ -963,12 +963,6 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                     </div>
                   )}
                 </div>
-
-                <Separator />
-
-                <div className="flex h-32 items-center justify-center rounded-lg bg-gray-100">
-                  <span className="text-gray-500">Location Map</span>
-                </div>
               </CardContent>
             </Card>
           </div>
