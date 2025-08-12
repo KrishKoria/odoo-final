@@ -22,27 +22,29 @@ export function fileToDataUrl(file: File): Promise<string> {
 }
 
 /**
- * Save file to localStorage with a unique key
- * In a real app, you'd upload to a cloud storage service
+ * Upload file to the server's local filesystem
  */
 export async function uploadFileLocally(file: File): Promise<UploadedFile> {
   try {
-    const dataUrl = await fileToDataUrl(file);
-    const fileId = `avatar_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    // Create FormData to send the file
+    const formData = new FormData();
+    formData.append("file", file);
 
-    // Store the file data in localStorage
-    const fileData = {
-      url: dataUrl,
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      uploadedAt: new Date().toISOString(),
-    };
+    // Upload to the server API
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-    localStorage.setItem(`file_${fileId}`, JSON.stringify(fileData));
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to upload file");
+    }
+
+    const result = await response.json();
 
     return {
-      url: dataUrl, // Return the data URL directly for local usage
+      url: result.url, // Server returns public URL like /uploads/uuid.jpg
       name: file.name,
       size: file.size,
       type: file.type,
@@ -81,35 +83,26 @@ export function validateImageFile(file: File): {
 }
 
 /**
- * Get a stored file from localStorage
+ * Delete a file from the server
  */
-export function getStoredFile(fileId: string): UploadedFile | null {
+export async function deleteUploadedFile(filename: string): Promise<void> {
   try {
-    const stored = localStorage.getItem(`file_${fileId}`);
-    if (!stored) return null;
+    // Extract filename from URL if a full URL is provided
+    const fileToDelete = filename.startsWith("/uploads/")
+      ? filename.split("/uploads/")[1]
+      : filename;
 
-    const fileData = JSON.parse(stored) as {
-      url: string;
-      name: string;
-      size: number;
-      type: string;
-      uploadedAt: string;
-    };
+    const response = await fetch(
+      `/api/upload?filename=${encodeURIComponent(fileToDelete)}`,
+      {
+        method: "DELETE",
+      },
+    );
 
-    return {
-      url: fileData.url,
-      name: fileData.name,
-      size: fileData.size,
-      type: fileData.type,
-    };
-  } catch {
-    return null;
+    if (!response.ok) {
+      console.warn("Failed to delete file from server:", filename);
+    }
+  } catch (error) {
+    console.warn("Error deleting file:", error);
   }
-}
-
-/**
- * Remove a file from localStorage
- */
-export function removeStoredFile(fileId: string): void {
-  localStorage.removeItem(`file_${fileId}`);
 }
