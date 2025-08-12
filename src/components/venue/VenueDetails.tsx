@@ -335,10 +335,6 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
     setSelectedSlots(consecutiveSlots);
   };
 
-  const isSlotPartOfSelection = (timeSlotId: string) => {
-    return selectedSlots.includes(timeSlotId);
-  };
-
   // Authentication and booking handlers
   const handleBookingButtonClick = () => {
     if (!session) {
@@ -594,6 +590,100 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
       const slot = timeSlots.find((s) => s.timeSlotId === timeSlotId);
       return total + (slot?.price ?? 0);
     }, 0);
+  };
+
+  // Group slots by unique time periods to avoid showing duplicates
+  const getGroupedTimeSlots = () => {
+    const timeGroups = new Map<
+      string,
+      {
+        time: string;
+        price: number;
+        availableCourts: TimeSlot[];
+        totalSlots: number;
+        hasAvailability: boolean;
+      }
+    >();
+
+    // Group all slots by time
+    timeSlots.forEach((slot) => {
+      const existing = timeGroups.get(slot.time);
+      if (existing) {
+        existing.totalSlots++;
+        if (slot.available) {
+          existing.availableCourts.push(slot);
+          existing.hasAvailability = true;
+        }
+      } else {
+        timeGroups.set(slot.time, {
+          time: slot.time,
+          price: slot.price,
+          availableCourts: slot.available ? [slot] : [],
+          totalSlots: 1,
+          hasAvailability: slot.available,
+        });
+      }
+    });
+
+    return Array.from(timeGroups.values()).sort((a, b) => {
+      const timeA = new Date(`1970/01/01 ${a.time.split(" - ")[0]}`);
+      const timeB = new Date(`1970/01/01 ${b.time.split(" - ")[0]}`);
+      return timeA.getTime() - timeB.getTime();
+    });
+  };
+
+  // Handle clicking on a grouped time slot
+  const handleTimeSlotClick = (timeGroup: {
+    time: string;
+    price: number;
+    availableCourts: TimeSlot[];
+    totalSlots: number;
+    hasAvailability: boolean;
+  }) => {
+    // Check if this time is already selected
+    const isTimeSelected = selectedSlots.some((selectedId) => {
+      const selectedSlot = timeSlots.find(
+        (slot) => slot.timeSlotId === selectedId,
+      );
+      return selectedSlot?.time === timeGroup.time;
+    });
+
+    if (isTimeSelected) {
+      // Deselect all slots for this time
+      const slotsToRemove = selectedSlots.filter((selectedId) => {
+        const selectedSlot = timeSlots.find(
+          (slot) => slot.timeSlotId === selectedId,
+        );
+        return selectedSlot?.time === timeGroup.time;
+      });
+      setSelectedSlots((prev) =>
+        prev.filter((id) => !slotsToRemove.includes(id)),
+      );
+      return;
+    }
+
+    // Find the best available court for this time
+    let bestCourt: TimeSlot | null = null;
+
+    if (consecutiveHours === 1) {
+      // For single slot, just pick the first available court
+      bestCourt = timeGroup.availableCourts[0] || null;
+    } else {
+      // For consecutive slots, find a court that can accommodate the full duration
+      for (const court of timeGroup.availableCourts) {
+        const courtIndex = timeSlots.findIndex(
+          (s) => s.timeSlotId === court.timeSlotId,
+        );
+        if (canSelectConsecutiveSlots(courtIndex, consecutiveHours)) {
+          bestCourt = court;
+          break;
+        }
+      }
+    }
+
+    if (bestCourt) {
+      toggleSlot(bestCourt.timeSlotId);
+    }
   };
 
   // Loading state
@@ -891,7 +981,7 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                     <SelectContent>
                       {venue.sports.map((sport) => (
                         <SelectItem key={sport.name} value={sport.name}>
-                          {sport.icon} {sport.name} ({sport.courts} courts)
+                          {sport.icon} {sport.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -969,27 +1059,50 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                   </div>
                 ) : (
                   <div className="grid max-h-80 grid-cols-3 gap-3 overflow-y-auto pr-2 md:grid-cols-4">
-                    {timeSlots.map((slot, index) => {
-                      const canSelect = canSelectConsecutiveSlots(
-                        index,
-                        consecutiveHours,
+                    {getGroupedTimeSlots().map((timeGroup) => {
+                      const isTimeSelected = selectedSlots.some(
+                        (selectedId) => {
+                          const selectedSlot = timeSlots.find(
+                            (slot) => slot.timeSlotId === selectedId,
+                          );
+                          return selectedSlot?.time === timeGroup.time;
+                        },
                       );
-                      const isSelected = isSlotPartOfSelection(slot.timeSlotId);
+
+                      const canSelect = timeGroup.hasAvailability;
+
+                      // For consecutive hours, check if we can get consecutive slots starting from this time
+                      const canSelectConsecutive =
+                        consecutiveHours > 1
+                          ? timeGroup.availableCourts.some((slot) => {
+                              const slotIndex = timeSlots.findIndex(
+                                (s) => s.timeSlotId === slot.timeSlotId,
+                              );
+                              return canSelectConsecutiveSlots(
+                                slotIndex,
+                                consecutiveHours,
+                              );
+                            })
+                          : true;
+
+                      const finalCanSelect = canSelect && canSelectConsecutive;
 
                       // Determine slot state for better UX
-                      const isUnavailable = !slot.available;
+                      const isUnavailable = !timeGroup.hasAvailability;
                       const isAvailableButNotSelectable =
-                        slot.available && !canSelect && consecutiveHours > 1;
+                        timeGroup.hasAvailability &&
+                        !finalCanSelect &&
+                        consecutiveHours > 1;
 
                       return (
                         <Button
-                          key={`${slot.timeSlotId}-${slot.time}`}
-                          variant={isSelected ? "default" : "outline"}
+                          key={timeGroup.time}
+                          variant={isTimeSelected ? "default" : "outline"}
                           size="sm"
-                          disabled={!slot.available || !canSelect}
-                          onClick={() => toggleSlot(slot.timeSlotId)}
+                          disabled={!finalCanSelect}
+                          onClick={() => handleTimeSlotClick(timeGroup)}
                           className={`flex h-auto flex-col p-3 text-xs transition-all ${
-                            isSelected
+                            isTimeSelected
                               ? "border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-700"
                               : isUnavailable
                                 ? "cursor-not-allowed border-gray-300 bg-gray-100 text-gray-400"
@@ -999,9 +1112,9 @@ export default function VenueDetails({ id }: VenueDetailsProps) {
                           }`}
                         >
                           <span className="text-center font-medium">
-                            {slot.time}
+                            {timeGroup.time}
                           </span>
-                          <span className="font-bold">₹{slot.price}</span>
+                          <span className="font-bold">₹{timeGroup.price}</span>
                           {isUnavailable && (
                             <span className="mt-1 text-xs text-gray-500">
                               Booked
