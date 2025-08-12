@@ -414,14 +414,14 @@ export async function cancelPlayerBooking(bookingId: string): Promise<{
     // Check if booking is in the future (optional cancellation policy)
     const bookingDateTime = new Date(booking.timeSlot.startTime);
     const now = new Date();
-    const hoursDifference =
-      (bookingDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+    const minutesDifference =
+      (bookingDateTime.getTime() - now.getTime()) / (1000 * 60);
 
-    // Allow cancellation up to 2 hours before the booking
-    if (hoursDifference < 2) {
+    // Allow cancellation up to 30 minutes before the booking
+    if (minutesDifference < 30) {
       return {
         success: false,
-        error: "Cannot cancel booking less than 2 hours before start time",
+        error: "Cannot cancel booking less than 30 minutes before start time",
       };
     }
 

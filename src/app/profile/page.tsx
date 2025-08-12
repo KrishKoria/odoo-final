@@ -1127,19 +1127,20 @@ function ProfileContent() {
                               </div>
 
                               <div className="flex gap-2 sm:flex-col lg:flex-row">
-                                {booking.status === "CONFIRMED" &&
-                                  booking.date > new Date() && (
-                                    <Button
-                                      variant="destructive"
-                                      size="sm"
-                                      onClick={() =>
-                                        handleCancelBooking(booking.id)
-                                      }
-                                      className="h-9 px-4 text-sm font-medium"
-                                    >
-                                      Cancel
-                                    </Button>
-                                  )}
+                                {/* Show cancel button for all users on confirmed or pending bookings */}
+                                {(booking.status === "CONFIRMED" ||
+                                  booking.status === "PENDING") && (
+                                  <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    onClick={() =>
+                                      handleCancelBooking(booking.id)
+                                    }
+                                    className="h-9 px-4 text-sm font-medium"
+                                  >
+                                    Cancel
+                                  </Button>
+                                )}
                                 <Button
                                   variant="outline"
                                   size="sm"

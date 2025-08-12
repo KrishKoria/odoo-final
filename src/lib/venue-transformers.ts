@@ -331,12 +331,19 @@ export function transformTimeSlots(
   selectedDate: Date,
 ): TimeSlot[] {
   const timeSlots: TimeSlot[] = [];
+  const now = new Date();
+  const isToday = selectedDate.toDateString() === now.toDateString();
 
   for (const court of courts) {
     for (const slot of court.timeSlots) {
       // Check if slot is for the selected date
       const slotDate = new Date(slot.startTime);
       if (slotDate.toDateString() !== selectedDate.toDateString()) {
+        continue;
+      }
+
+      // Skip past time slots for today
+      if (isToday && slot.startTime <= now) {
         continue;
       }
 
