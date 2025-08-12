@@ -3,11 +3,53 @@ import { getSportsCategories } from "@/actions/venue-actions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Card } from "../ui/card";
+
 interface SportCategory {
   name: string;
   image: string;
   venues: number;
 }
+
+// Sports category image mapping
+const SPORT_IMAGE_MAP: Record<string, string> = {
+  Badminton: "/assets/sports/badminton.jpg",
+  Tennis: "/assets/sports/tennis.jpg",
+  Football: "/assets/sports/football.jpg",
+  Cricket: "/assets/sports/cricket.jpg",
+  Basketball: "/assets/sports/basketball.jpg",
+  Swimming: "/assets/sports/swimming.jpg",
+  "Table Tennis": "/assets/sports/tabletennis.jpg",
+  Volleyball: "/assets/sports/volleyball.jpg",
+  Squash: "/assets/sports/squash.jpg",
+};
+
+// Function to get sport image with fallback
+const getSportImage = (sportName: string, originalImage?: string): string => {
+  // If there's an original image and it's not placeholder, use it
+  if (originalImage && !originalImage.includes("placeholder")) {
+    return originalImage;
+  }
+
+  // Try to find exact match in the map
+  const exactMatch = SPORT_IMAGE_MAP[sportName];
+  if (exactMatch) {
+    return exactMatch;
+  }
+
+  // Try to find partial match (case insensitive)
+  const partialMatch = Object.keys(SPORT_IMAGE_MAP).find(
+    (key) =>
+      key.toLowerCase().includes(sportName.toLowerCase()) ||
+      sportName.toLowerCase().includes(key.toLowerCase()),
+  );
+
+  if (partialMatch) {
+    return SPORT_IMAGE_MAP[partialMatch];
+  }
+
+  // Default fallback
+  return "/assets/sports/badminton.jpg";
+};
 const SportsCategories = () => {
   const [sportsCategories, setSportsCategories] = useState<SportCategory[]>([]);
   const [sportsLoading, setSportsLoading] = useState(true);
@@ -69,15 +111,17 @@ const SportsCategories = () => {
               >
                 <div className={`relative h-32`}>
                   <Image
-                    src={sport.image || "/placeholder.svg"}
+                    src={getSportImage(sport.name, sport.image)}
                     alt={sport.name}
                     fill
-                    className="object-cover mix-blend-overlay transition-transform duration-300 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/10" />
+                  <div className="absolute inset-0 bg-black/30 transition-colors group-hover:bg-black/20" />
                   <div className="absolute bottom-3 left-3 text-white">
-                    <div className="text-lg font-bold">{sport.name}</div>
-                    <div className="text-xs opacity-90">
+                    <div className="text-lg font-bold drop-shadow-lg">
+                      {sport.name}
+                    </div>
+                    <div className="text-xs opacity-90 drop-shadow-md">
                       {sport.venues} venues
                     </div>
                   </div>
