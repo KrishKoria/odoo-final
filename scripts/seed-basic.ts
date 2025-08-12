@@ -10,7 +10,15 @@ function getRandomDateBetween(start: Date, end: Date): Date {
 async function main() {
   console.log("Creating comprehensive sample data...");
 
+  // Create dates for spreading user registrations over the past 60 days
+  const now = new Date();
+  const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000);
+
   // Create owner users
+  const owner1CreatedAt = getRandomDateBetween(
+    sixtyDaysAgo,
+    new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
+  );
   const owner1 = await prisma.user.upsert({
     where: { email: "rajesh@sbrbadminton.com" },
     update: {},
@@ -18,11 +26,15 @@ async function main() {
       name: "Rajesh Patel",
       email: "rajesh@sbrbadminton.com",
       emailVerified: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: owner1CreatedAt,
+      updatedAt: owner1CreatedAt,
     },
   });
 
+  const owner2CreatedAt = getRandomDateBetween(
+    sixtyDaysAgo,
+    new Date(now.getTime() - 25 * 24 * 60 * 60 * 1000),
+  );
   const owner2 = await prisma.user.upsert({
     where: { email: "priya@elitesports.com" },
     update: {},
@@ -30,8 +42,8 @@ async function main() {
       name: "Priya Shah",
       email: "priya@elitesports.com",
       emailVerified: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: owner2CreatedAt,
+      updatedAt: owner2CreatedAt,
     },
   });
 
@@ -76,6 +88,10 @@ async function main() {
 
   const ownerUsers = [];
   for (const ownerData of additionalOwners) {
+    const userCreatedAt = getRandomDateBetween(
+      sixtyDaysAgo,
+      new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000),
+    );
     const user = await prisma.user.upsert({
       where: { email: ownerData.email },
       update: {},
@@ -83,8 +99,8 @@ async function main() {
         name: ownerData.name,
         email: ownerData.email,
         emailVerified: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: userCreatedAt,
+        updatedAt: userCreatedAt,
       },
     });
     ownerUsers.push({ user, phone: ownerData.phone });
@@ -179,6 +195,10 @@ async function main() {
 
   const userProfiles = [];
   for (const userData of regularUsers) {
+    const userCreatedAt = getRandomDateBetween(
+      sixtyDaysAgo,
+      new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000),
+    );
     const user = await prisma.user.upsert({
       where: { email: userData.email },
       update: {},
@@ -186,8 +206,8 @@ async function main() {
         name: userData.name,
         email: userData.email,
         emailVerified: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: userCreatedAt,
+        updatedAt: userCreatedAt,
       },
     });
 
@@ -207,7 +227,7 @@ async function main() {
   console.log(`Created ${regularUsers.length} regular users`);
 
   // Create comprehensive facilities
-  // Create comprehensive facilities with proper typing
+  // Create comprehensive facilities with proper typing and spread creation dates
   const facilitiesData = [
     // Existing facilities (updated)
     {
@@ -226,7 +246,14 @@ async function main() {
       reviewCount: 124,
       ownerId: ownerProfile1.id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 45 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 40 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 35 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Elite Sports Arena",
@@ -244,7 +271,14 @@ async function main() {
       reviewCount: 89,
       ownerId: ownerProfile2.id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 40 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 35 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Champions Ground",
@@ -262,7 +296,14 @@ async function main() {
       reviewCount: 156,
       ownerId: ownerProfile1.id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 35 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 25 * 24 * 60 * 60 * 1000),
+      ),
     },
     // New facilities across different cities
     {
@@ -281,7 +322,14 @@ async function main() {
       reviewCount: 203,
       ownerId: additionalOwnerProfiles[0].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 25 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Delhi Sports Complex",
@@ -299,7 +347,14 @@ async function main() {
       reviewCount: 178,
       ownerId: additionalOwnerProfiles[1].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 25 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Bangalore Racquet Club",
@@ -317,7 +372,14 @@ async function main() {
       reviewCount: 156,
       ownerId: additionalOwnerProfiles[2].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Pune Football Academy",
@@ -335,7 +397,14 @@ async function main() {
       reviewCount: 142,
       ownerId: additionalOwnerProfiles[3].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 18 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 13 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 8 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Chennai Tennis Center",
@@ -356,7 +425,14 @@ async function main() {
       reviewCount: 189,
       ownerId: additionalOwnerProfiles[4].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Hyderabad Cricket Ground",
@@ -380,7 +456,14 @@ async function main() {
       reviewCount: 167,
       ownerId: additionalOwnerProfiles[5].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 12 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000),
+      ),
     },
     {
       name: "Kolkata Sports Arena",
@@ -398,7 +481,14 @@ async function main() {
       reviewCount: 134,
       ownerId: additionalOwnerProfiles[6].id,
       status: "APPROVED" as const,
-      approvedAt: new Date(),
+      createdAt: getRandomDateBetween(
+        sixtyDaysAgo,
+        new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000),
+      ),
+      approvedAt: getRandomDateBetween(
+        new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000),
+        new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000),
+      ),
     },
     // Some pending facilities for admin demo
     {
@@ -417,6 +507,10 @@ async function main() {
       reviewCount: 0,
       ownerId: additionalOwnerProfiles[0].id,
       status: "PENDING" as const,
+      createdAt: getRandomDateBetween(
+        new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000),
+        new Date(),
+      ),
     },
     {
       name: "City Basketball Court",
@@ -434,6 +528,10 @@ async function main() {
       reviewCount: 0,
       ownerId: additionalOwnerProfiles[1].id,
       status: "PENDING" as const,
+      createdAt: getRandomDateBetween(
+        new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000),
+        new Date(),
+      ),
     },
   ];
 
@@ -831,6 +929,12 @@ async function main() {
     if (!facility) continue;
 
     for (const courtData of config.courts) {
+      // Spread court creation over time - courts created after facility approval
+      const courtCreatedAt = getRandomDateBetween(
+        facility.approvedAt || facility.createdAt,
+        new Date(),
+      );
+
       await prisma.court.create({
         data: {
           name: courtData.name,
@@ -840,6 +944,8 @@ async function main() {
           operatingStartHour: courtData.startHour,
           operatingEndHour: courtData.endHour,
           isActive: true,
+          createdAt: courtCreatedAt,
+          updatedAt: courtCreatedAt,
         },
       });
       totalCourts++;
@@ -850,16 +956,16 @@ async function main() {
 
   console.log(`Created ${totalCourts} courts across all facilities`);
 
-  // Generate time slots for the next 30 days
+  // Generate time slots for the next 7 days
   const startDate = new Date();
   const endDate = new Date();
-  endDate.setDate(startDate.getDate() + 30);
+  endDate.setDate(startDate.getDate() + 7);
 
   const allCourts = await prisma.court.findMany({
     include: { facility: true },
   });
 
-  console.log("Generating time slots for next 30 days...");
+  console.log("Generating time slots for next 7 days...");
   let totalTimeSlots = 0;
 
   for (const court of allCourts) {
@@ -1121,153 +1227,6 @@ async function main() {
 
   console.log(`Created ${totalMatches} matches`);
 
-  // Create sample notifications
-  console.log("Creating sample notifications...");
-  const notificationTypes = [
-    {
-      type: "booking_confirmation",
-      title: "Booking Confirmed",
-      message: "Your booking has been confirmed successfully.",
-    },
-    {
-      type: "match_invitation",
-      title: "Match Invitation",
-      message: "You've been invited to join a match.",
-    },
-    {
-      type: "payment_success",
-      title: "Payment Successful",
-      message: "Your payment has been processed successfully.",
-    },
-    {
-      type: "booking_reminder",
-      title: "Booking Reminder",
-      message: "Your game starts in 1 hour.",
-    },
-    {
-      type: "facility_approved",
-      title: "Facility Approved",
-      message: "Your facility has been approved and is now live.",
-    },
-  ];
-
-  let totalNotifications = 0;
-  for (const userProfile of [...userProfiles, ...additionalOwnerProfiles]) {
-    // Each user gets 2-5 notifications
-    const notifCount = Math.floor(Math.random() * 4) + 2;
-
-    for (let i = 0; i < notifCount; i++) {
-      const notif =
-        notificationTypes[Math.floor(Math.random() * notificationTypes.length)];
-      const sentDate = getRandomDateBetween(
-        new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-        new Date(),
-      );
-
-      await prisma.notificationLog.create({
-        data: {
-          playerId: userProfile.id,
-          type: notif.type,
-          title: notif.title,
-          message: notif.message,
-          sentAt: sentDate,
-          readAt:
-            Math.random() < 0.6
-              ? getRandomDateBetween(sentDate, new Date())
-              : null, // 60% read
-        },
-      });
-      totalNotifications++;
-    }
-  }
-
-  console.log(`Created ${totalNotifications} notifications`);
-
-  // Create sample reports for admin demo
-  console.log("Creating sample reports...");
-  const reportTypes = [
-    "FACILITY_INAPPROPRIATE_CONTENT",
-    "USER_HARASSMENT",
-    "FACILITY_FALSE_INFORMATION",
-  ];
-  let totalReports = 0;
-
-  for (let i = 0; i < 5; i++) {
-    const randomReporter =
-      userProfiles[Math.floor(Math.random() * userProfiles.length)];
-    const randomFacility =
-      approvedFacilities[Math.floor(Math.random() * approvedFacilities.length)];
-    const reportType =
-      reportTypes[Math.floor(Math.random() * reportTypes.length)];
-
-    await prisma.report.create({
-      data: {
-        type: reportType as any,
-        status: Math.random() < 0.7 ? "PENDING" : "RESOLVED",
-        reason: "Inappropriate content/behavior reported",
-        description:
-          "User reported inappropriate content or behavior that needs review.",
-        evidence: [],
-        reporterId: randomReporter.id,
-        targetFacilityId: Math.random() < 0.8 ? randomFacility.id : null,
-        targetUserId:
-          Math.random() < 0.2
-            ? userProfiles[Math.floor(Math.random() * userProfiles.length)].id
-            : null,
-      },
-    });
-    totalReports++;
-  }
-
-  console.log(`Created ${totalReports} sample reports`);
-
-  // Generate occupancy stats for analytics
-  console.log("Generating occupancy statistics...");
-  let totalOccupancyStats = 0;
-
-  for (const court of allCourts) {
-    // Generate stats for each hour of the week (0-167)
-    for (let hourOfWeek = 0; hourOfWeek < 168; hourOfWeek++) {
-      // Simulate realistic occupancy patterns
-      const dayOfWeek = Math.floor(hourOfWeek / 24);
-      const hourOfDay = hourOfWeek % 24;
-
-      let baseOccupancy = 0.3; // Base 30% occupancy
-
-      // Weekend boost
-      if (dayOfWeek === 0 || dayOfWeek === 6) baseOccupancy += 0.2;
-
-      // Peak hours boost (6-9 AM and 6-9 PM)
-      if (
-        (hourOfDay >= 6 && hourOfDay <= 9) ||
-        (hourOfDay >= 18 && hourOfDay <= 21)
-      ) {
-        baseOccupancy += 0.3;
-      }
-
-      // Late night reduction
-      if (hourOfDay >= 22 || hourOfDay <= 5) baseOccupancy *= 0.2;
-
-      // Add some randomness
-      const occupancy = Math.min(
-        1.0,
-        Math.max(0.0, baseOccupancy + (Math.random() - 0.5) * 0.2),
-      );
-
-      await prisma.occupancyStats.create({
-        data: {
-          courtId: court.id,
-          hourOfWeek: hourOfWeek,
-          avgOccupancy: Math.round(occupancy * 100) / 100,
-          sampleCount: Math.floor(Math.random() * 50) + 10, // 10-60 samples
-        },
-      });
-      totalOccupancyStats++;
-    }
-  }
-
-  console.log(`Created ${totalOccupancyStats} occupancy statistics`);
-
   // Summary
   console.log("\n" + "=".repeat(50));
   console.log("🎉 COMPREHENSIVE SEED DATA CREATED SUCCESSFULLY!");
@@ -1280,13 +1239,10 @@ async function main() {
     `   • Facilities: ${facilitiesData.length} (${facilitiesData.filter((f) => f.status === "APPROVED").length} approved, ${facilitiesData.filter((f) => f.status === "PENDING").length} pending)`,
   );
   console.log(`   • Courts: ${totalCourts}`);
-  console.log(`   • Time Slots: ${totalTimeSlots} (next 30 days)`);
+  console.log(`   • Time Slots: ${totalTimeSlots} (next 7 days)`);
   console.log(`   • Bookings: ${totalBookings} (~45% occupancy)`);
   console.log(`   • Reviews: ${totalReviews}`);
   console.log(`   • Matches: ${totalMatches}`);
-  console.log(`   • Notifications: ${totalNotifications}`);
-  console.log(`   • Reports: ${totalReports}`);
-  console.log(`   • Occupancy Stats: ${totalOccupancyStats}`);
   console.log(
     "\n🚀 Your QuickCourt platform is now ready for comprehensive testing!",
   );

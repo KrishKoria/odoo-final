@@ -166,10 +166,7 @@ model PlayerProfile {
   bookings        Booking[]
   ownedFacilities Facility[]        @relation("FacilityOwner")
   waitlistEntries WaitlistEntry[]
-  notifications   NotificationLog[]
   facilityReviews FacilityReview[]
-  submittedReports Report[] @relation("ReportSubmitter")
-  receivedReports  Report[] @relation("ReportTarget")
   paymentOrders   PaymentOrder[]
   bookingReservations BookingReservation[]
 
@@ -203,7 +200,6 @@ model Facility {
   owner   PlayerProfile    @relation("FacilityOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   courts  Court[]
   reviews FacilityReview[]
-  reports Report[] @relation("ReportedFacility")
 
   @@index([status])
   @@index([ownerId])
@@ -248,7 +244,6 @@ model Court {
   facility       Facility         @relation(fields: [facilityId], references: [id], onDelete: Cascade)
   timeSlots      TimeSlot[]
   bookings       Booking[]
-  occupancyStats OccupancyStats[]
 
   @@index([facilityId])
   @@index([sportType])
@@ -353,76 +348,6 @@ model WaitlistEntry {
   @@index([status])
   @@map("waitlist_entry")
 }
-
-model OccupancyStats {
-  id           String   @id @default(cuid())
-  courtId      String
-  hourOfWeek   Int // 0-167 (24*7, represents hour of week)
-  avgOccupancy Float    @default(0.0) // 0.0 to 1.0
-  sampleCount  Int      @default(0)
-  lastUpdated  DateTime @default(now())
-
-  // Relations
-  court Court @relation(fields: [courtId], references: [id], onDelete: Cascade)
-
-  @@unique([courtId, hourOfWeek])
-  @@map("occupancy_stats")
-}
-
-model NotificationLog {
-  id       String    @id @default(cuid())
-  playerId String
-  type     String // "waitlist_promotion", "booking_reminder", etc.
-  title    String
-  message  String
-  sentAt   DateTime  @default(now())
-  readAt   DateTime?
-
-  // Relations
-  player PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
-
-  @@index([playerId])
-  @@index([sentAt])
-  @@map("notification_log")
-}
-
-model Report {
-  id           String       @id @default(cuid())
-  type         ReportType
-  status       ReportStatus @default(PENDING)
-  reason       String
-  description  String?
-  evidence     String[] // URLs to screenshots or files
-  
-  // Who submitted the report
-  reporterId   String
-  reporter     PlayerProfile @relation("ReportSubmitter", fields: [reporterId], references: [id], onDelete: Cascade)
-  
-  // What/who is being reported (nullable - only one should be set)
-  targetUserId   String?
-  targetUser     PlayerProfile? @relation("ReportTarget", fields: [targetUserId], references: [id], onDelete: Cascade)
-  
-  targetFacilityId String?
-  targetFacility   Facility? @relation("ReportedFacility", fields: [targetFacilityId], references: [id], onDelete: Cascade)
-  
-  // Admin actions
-  reviewedById   String?
-  reviewedAt     DateTime?
-  reviewNotes    String?
-  actionTaken    String? // Description of what action was taken
-  
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  
-  @@index([status])
-  @@index([type])
-  @@index([reporterId])
-  @@index([targetUserId])
-  @@index([targetFacilityId])
-  @@map("report")
-}
-
-// Payment and Booking Enhancement Models
 
 enum PaymentStatus {
   PENDING
